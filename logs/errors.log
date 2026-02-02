@@ -1,0 +1,4 @@
+2026-02-01 17:50:02 - errors - ERROR - COMMAND_ERROR: threat_type is a required argument that is missing. | Context: Command: generate_playbook
+2026-02-01 17:51:10 - errors - ERROR - COMMAND_ERROR: Command raised an exception: UnicodeEncodeError: 'charmap' codec can't encode character '\u2705' in position 2805: character maps to <undefined> | Context: Command: generate_playbook
+2026-02-01 17:51:27 - errors - ERROR - COMMAND_ERROR: Command raised an exception: UnicodeEncodeError: 'charmap' codec can't encode character '\u2705' in position 2817: character maps to <undefined> | Context: Command: generate_playbook
+2026-02-01 17:53:05 - errors - ERROR - COMMAND_ERROR: policy_type is a required argument that is missing. | Context: Command: generate_policy

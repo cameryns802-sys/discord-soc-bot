@@ -1,0 +1,11 @@
+2026-02-01 17:50:02 - soc_bot - DEBUG - [MESSAGE] 2.3cam in member-logs: !generate_playbook
+2026-02-01 17:50:02 - soc_bot - INFO - [COMMAND] 2.3cam -> generate_playbook in 2.3cam's server
+2026-02-01 17:51:10 - soc_bot - DEBUG - [MESSAGE] 2.3cam in member-logs: !generate_playbook alerts
+2026-02-01 17:51:10 - soc_bot - INFO - [COMMAND] 2.3cam -> generate_playbook in 2.3cam's server
+2026-02-01 17:51:27 - soc_bot - DEBUG - [MESSAGE] 2.3cam in member-logs: !generate_playbook detection
+2026-02-01 17:51:27 - soc_bot - INFO - [COMMAND] 2.3cam -> generate_playbook in 2.3cam's server
+2026-02-01 17:53:05 - soc_bot - DEBUG - [MESSAGE] 2.3cam in message-logs: !generate_policy
+2026-02-01 17:53:05 - soc_bot - INFO - [COMMAND] 2.3cam -> generate_policy in 2.3cam's server
+2026-02-01 17:54:16 - soc_bot - DEBUG - [MESSAGE] 2.3cam in message-logs: !generate_policy scope
+2026-02-01 17:54:16 - soc_bot - INFO - [COMMAND] 2.3cam -> generate_policy in 2.3cam's server
+2026-02-01 17:55:01 - soc_bot - DEBUG - [MESSAGE] 2.3cam in scope: 

@@ -1,0 +1,42 @@
+{
+  "reports": {},
+  "report_counter": 0,
+  "templates": {
+    "security_incident": {
+      "name": "Security Incident Report",
+      "sections": [
+        "summary",
+        "timeline",
+        "impact",
+        "recommendations"
+      ]
+    },
+    "audit": {
+      "name": "Audit Report",
+      "sections": [
+        "overview",
+        "findings",
+        "risks",
+        "compliance_status"
+      ]
+    },
+    "threat_intel": {
+      "name": "Threat Intelligence Report",
+      "sections": [
+        "executive_summary",
+        "indicators",
+        "ttps",
+        "recommendations"
+      ]
+    },
+    "compliance": {
+      "name": "Compliance Report",
+      "sections": [
+        "controls_status",
+        "violations",
+        "remediation",
+        "attestation"
+      ]
+    }
+  }
+}

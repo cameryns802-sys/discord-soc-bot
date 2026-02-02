@@ -1,0 +1,14 @@
+2026-02-01 16:38:34 - events - INFO - MESSAGE_CREATED: {"user": "2.3cam", "user_id": 960995456488448080, "channel": "\ud83d\udc65\uff5cchatting", "content_length": 60}
+2026-02-01 16:38:34 - events - INFO - MESSAGE: {"user": "2.3cam", "user_id": 960995456488448080, "channel": "\ud83d\udc65\uff5cchatting", "content_length": 60}
+2026-02-01 17:50:02 - events - INFO - MESSAGE_CREATED: {"user": "2.3cam", "user_id": 960995456488448080, "channel": "member-logs", "content_length": 18}
+2026-02-01 17:50:02 - events - INFO - MESSAGE: {"user": "2.3cam", "user_id": 960995456488448080, "channel": "member-logs", "content_length": 18}
+2026-02-01 17:51:10 - events - INFO - MESSAGE_CREATED: {"user": "2.3cam", "user_id": 960995456488448080, "channel": "member-logs", "content_length": 25}
+2026-02-01 17:51:10 - events - INFO - MESSAGE: {"user": "2.3cam", "user_id": 960995456488448080, "channel": "member-logs", "content_length": 25}
+2026-02-01 17:51:27 - events - INFO - MESSAGE_CREATED: {"user": "2.3cam", "user_id": 960995456488448080, "channel": "member-logs", "content_length": 28}
+2026-02-01 17:51:27 - events - INFO - MESSAGE: {"user": "2.3cam", "user_id": 960995456488448080, "channel": "member-logs", "content_length": 28}
+2026-02-01 17:53:05 - events - INFO - MESSAGE_CREATED: {"user": "2.3cam", "user_id": 960995456488448080, "channel": "message-logs", "content_length": 16}
+2026-02-01 17:53:05 - events - INFO - MESSAGE: {"user": "2.3cam", "user_id": 960995456488448080, "channel": "message-logs", "content_length": 16}
+2026-02-01 17:54:16 - events - INFO - MESSAGE_CREATED: {"user": "2.3cam", "user_id": 960995456488448080, "channel": "message-logs", "content_length": 22}
+2026-02-01 17:54:16 - events - INFO - MESSAGE: {"user": "2.3cam", "user_id": 960995456488448080, "channel": "message-logs", "content_length": 22}
+2026-02-01 17:55:01 - events - INFO - MESSAGE_CREATED: {"user": "2.3cam", "user_id": 960995456488448080, "channel": "scope", "content_length": 0}
+2026-02-01 17:55:01 - events - INFO - MESSAGE: {"user": "2.3cam", "user_id": 960995456488448080, "channel": "scope", "content_length": 0}

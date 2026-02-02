@@ -1,0 +1,224 @@
+"""
+SETUP INSTRUCTION GUIDE - Sentinel SOC Bot Quick Start
+======================================================
+
+BOT NAME: Sentinel 🛡️
+TYPE: Security Operations Center (SOC) Bot
+PURPOSE: Comprehensive security threat detection and incident response automation
+
+## STEP 1: RUN THE SETUP COMMAND
+
+Admin User in Server:
+    !setup_soc
+
+This creates EVERYTHING automatically:
+
+### ROLES CREATED (7 total):
+
+1. 🛡️ **Sentinel Admin**
+   - Color: Red
+   - Permissions: FULL ADMIN (manage roles, ban, kick, manage messages, audit logs)
+   - For: SOC Leadership
+
+2. 🎯 **Incident Commander**
+   - Color: Orange  
+   - Permissions: Manage channels, mention everyone, manage messages, audit logs
+   - For: Incident response leaders
+
+3. 🔍 **Security Analyst**
+   - Color: Blue
+   - Permissions: Read/write, manage messages, view audit logs
+   - For: Threat investigators
+
+4. 🛡️ **Defender**
+   - Color: Green
+   - Permissions: Read/write, manage messages
+   - For: Incident response responders
+
+5. 👁️ **Monitor**
+   - Color: Gold
+   - Permissions: Read/write/view history
+   - For: Metrics and alert monitoring
+
+6. 📊 **Analyst**
+   - Color: Blurple
+   - Permissions: Read/write/view history
+   - For: Data and threat analysis
+
+7. 🔐 **Compliance Officer**
+   - Color: Purple
+   - Permissions: Read/write, view audit logs
+   - For: Compliance and governance
+
+### CHANNELS CREATED (11 total):
+
+All created in: **🔒 Sentinel SOC** category
+
+1. 💬 **#soc-command-center** - Incident coordination hub
+2. 📡 **#threat-intelligence** - Threat feeds and IOC tracking
+3. 🚨 **#incident-alerts** - Critical security incidents
+4. 🔍 **#threat-hunting** - Proactive hunting campaigns
+5. 🔧 **#vulnerability-management** - Vuln tracking and SLA
+6. 📋 **#compliance-tracking** - Framework compliance status
+7. 📊 **#security-metrics** - Real-time KPI dashboards
+8. 🛡️ **#incident-response** - General IR discussion
+9. ✅ **#false-positives** - FP triage and tuning
+10. 📜 **#audit-logs** - Security log analysis
+11. 🔊 **#soc-voice** - Voice calls for incidents
+
+## STEP 2: ASSIGN ROLES TO TEAM
+
+Manually assign roles based on job function:
+- Admins → 🛡️ Sentinel Admin role
+- Team Leads → 🎯 Incident Commander role
+- Investigators → 🔍 Security Analyst role
+- Responders → 🛡️ Defender role
+- Monitoring → 👁️ Monitor role
+- Data Team → 📊 Analyst role
+- Compliance → 🔐 Compliance Officer role
+
+## STEP 3: START USING COMMANDS
+
+### User Commands (Everyone):
+```
+!helpme                  - Get command help
+!welcome_dm              - See bot capabilities
+!botstatus               - Check bot health
+!commands                - List all commands
+!docs [category]         - Get documentation
+!quicktest               - Run diagnostics
+!sysinfo                 - System info
+```
+
+### Admin Commands (Admins only):
+```
+!setup_soc                        - Setup infrastructure (Run once!)
+!listroles_sentinel               - List all SOC roles
+!listchannels_sentinel            - List all SOC channels
+!dm_user <id> <message>           - Send DM to user
+!alert_user <id> <message>        - Queue alert DM
+!notify_user <id> <message>       - Queue notification DM
+!broadcast_dm <message>           - Send DM to all members
+```
+
+### Security Commands (In channels):
+```
+!security                - Security operations
+!antinuke                - Anti-nuke protection
+!anti_phishing           - Phishing detection
+!security_dashboard      - Live security metrics
+!executive_risk_dashboard- Executive reporting
+!threatintel             - Threat intelligence
+!analyzethreatscape      - Threat landscape
+!quantified_risk_dashboard- Financial risk metrics
+```
+
+## STEP 4: CONFIGURE CHANNEL PERMISSIONS (Optional)
+
+After setup, you can further restrict channels:
+- 📡 threat-intelligence: Read-only for Monitor role
+- 🚨 incident-alerts: Mention-only channel
+- 📜 audit-logs: View-only for Compliance Officer
+- 🔒 soc-voice: Voice-only channel
+
+## DM NOTIFICATION SYSTEM
+
+The bot can send Direct Messages to users:
+
+### Automatic DMs:
+- New member joins → Automatic welcome DM
+- Every new member gets introduction
+
+### Admin-Triggered DMs:
+
+1. **Immediate DM:**
+   ```
+   !dm_user 123456789 "Important security update"
+   ```
+
+2. **Alert DM (Queued):**
+   ```
+   !alert_user 123456789 "Potential breach detected"
+   ```
+
+3. **Notify DM (Queued):**
+   ```
+   !notify_user 123456789 "New policy deployed"
+   ```
+
+4. **Broadcast to All:**
+   ```
+   !broadcast_dm "Security meeting in 1 hour"
+   ```
+
+## BOT NAME & DESCRIPTION
+
+**Name:** Sentinel 🛡️
+**Tags:** Security, SOC, Threat Detection, Incident Response
+**Description:** Advanced Discord SOC with 60+ specialized security AI modules
+
+The bot automatically creates roles and channels matching its SOC purpose.
+
+## DATA STORAGE
+
+All data stored locally:
+```
+/data/
+  ├── server_setups.json       - Guild setup config
+  ├── dm_queue.json            - Pending DM messages
+  ├── dm_log.json              - DM send history
+  └── [other SOC data files]
+```
+
+## QUICK TROUBLESHOOTING
+
+**Problem: "Unknown command" for !helpme**
+- Solution: Run bot with proper DISCORD_TOKEN in .env
+- Solution: Make sure dm_command_handler cog is loaded
+
+**Problem: Setup fails with permission error**
+- Solution: Make sure bot has admin permissions
+- Solution: Make sure the user has admin permissions
+
+**Problem: DMs not arriving**
+- Solution: User may have DMs disabled
+- Solution: Check data/dm_log.json for status
+- Solution: Use !broadcast_dm to see which users failed
+
+**Problem: Channels not created**
+- Solution: Bot needs Manage Channels permission
+- Solution: Check server channel limit not reached
+- Solution: Category may already exist (it will reuse)
+
+## WHAT'S INCLUDED
+
+✅ 7 Security-focused roles with proper permissions
+✅ 11 SOC operation channels organized by function
+✅ Automatic welcome DMs for new members
+✅ Admin broadcast DM system
+✅ Queued DM processor (automatic, every minute)
+✅ Complete help and documentation system
+✅ Health check and diagnostic commands
+✅ 60+ security operations commands
+✅ Per-guild data isolation
+✅ Threat intelligence integration
+✅ Compliance tracking
+✅ Incident response automation
+
+## NEXT STEPS
+
+1. ✅ Server owner: Run `!setup_soc`
+2. ✅ Assign roles to team members
+3. ✅ Configure channel permissions as needed
+4. ✅ Team members: Run `!helpme` to learn commands
+5. ✅ Start using security commands in channels
+
+## SUPPORT
+
+- Type `!helpme` for command help
+- Type `!docs` for detailed documentation
+- Type `!commands` to list all available commands
+- DM the bot for quick reference
+
+---
+Created: 2024 | Sentinel SOC v10

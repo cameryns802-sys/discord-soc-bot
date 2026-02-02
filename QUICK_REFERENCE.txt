@@ -1,0 +1,187 @@
+SENTINEL SOC BOT - QUICK REFERENCE CARD
+═══════════════════════════════════════════════════════════════
+
+🤖 BOT NAME: Sentinel
+🎯 PURPOSE: Security Operations Center (SOC) Bot
+🏢 TYPE: Threat Detection & Incident Response
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🚀 QUICK START FOR SERVER ADMIN
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Run this command (admin only):
+   !setup_soc
+
+   ↓ Automatically creates:
+     • 7 Security Roles
+     • 11 SOC Operation Channels
+     • Organized infrastructure
+
+2. Assign roles to team members based on function
+
+3. That's it! Start using commands!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📋 ROLES CREATED BY !setup_soc
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🛡️  Sentinel Admin          (Red)      - SOC Leadership
+🎯  Incident Commander      (Orange)   - Incident Leaders
+🔍  Security Analyst        (Blue)     - Investigators
+🛡️  Defender                (Green)    - Responders
+👁️  Monitor                 (Gold)     - Metrics Team
+📊  Analyst                 (Blurple)  - Data Analysis
+🔐  Compliance Officer      (Purple)   - Governance
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📡 CHANNELS CREATED BY !setup_soc
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💬  #soc-command-center         - Incident Command Center
+📡  #threat-intelligence        - Threat Intelligence Feeds
+🚨  #incident-alerts            - Critical Alerts
+🔍  #threat-hunting             - Proactive Hunting
+🔧  #vulnerability-management   - Vulnerability Tracking
+📋  #compliance-tracking        - Compliance Status
+📊  #security-metrics           - KPI Dashboard
+🛡️  #incident-response          - General IR
+✅  #false-positives            - FP Triage
+📜  #audit-logs                 - Log Analysis
+🔊  #soc-voice                  - Voice Calls
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎮 USER COMMANDS (Everyone can use)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+!helpme                - Get full help & command list
+!welcome_dm            - Send yourself welcome message
+!botstatus             - Check bot health status
+!quicktest             - Run diagnostics
+!commands              - List all available commands
+!docs [category]       - Get detailed documentation
+!sysinfo               - System information
+!serverinfo            - Server security info
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+👑 ADMIN COMMANDS (Admins only)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+!setup_soc                    - Setup SOC infrastructure
+!listroles_sentinel           - Show all SOC roles
+!listchannels_sentinel        - Show all SOC channels
+
+SEND DMs TO USERS:
+!dm_user <id> <message>       - Send immediate DM
+!alert_user <id> <message>    - Queue alert DM (red)
+!notify_user <id> <message>   - Queue notify DM (blue)
+!broadcast_dm <message>       - Send DM to all members
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔒 SECURITY COMMANDS (In channels)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Core Security:
+!security               - Security operations
+!antinuke               - Anti-nuke protection
+!anti_phishing          - Phishing detection
+
+Analytics:
+!security_dashboard     - Live security metrics
+!executive_risk_dashboard - Executive reporting
+!botstatus              - Bot operational status
+
+Intelligence:
+!threatintel            - Threat intelligence
+!analyzethreatscape     - Threat landscape analysis
+!quantified_risk_dashboard - Financial risk metrics
+
++ 50+ more security commands available!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📧 DM NOTIFICATION SYSTEM
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Automatic:
+✓ New members get welcome DM
+✓ Shows bot capabilities
+✓ Explains how to get started
+
+Admin-Triggered:
+!dm_user 123456789 "Message"
+  └─ Sends DM immediately
+
+!alert_user 123456789 "Alert message"
+  └─ Queues red alert DM (within 1 min)
+
+!notify_user 123456789 "Notification"
+  └─ Queues blue notification (within 1 min)
+
+!broadcast_dm "Important message"
+  └─ Sends to all server members
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✨ WHAT'S INCLUDED
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ 7 Security Roles (pre-configured permissions)
+✅ 11 SOC Operation Channels (organized by function)
+✅ 60+ Security Commands (threat detection, IR, compliance)
+✅ DM Notification System (automatic & admin-triggered)
+✅ Help & Documentation System (built-in guides)
+✅ Health & Diagnostics Commands (status monitoring)
+✅ Threat Intelligence Integration (real-time feeds)
+✅ Incident Response Automation (playbooks)
+✅ Compliance Tracking (multi-framework)
+✅ Per-Guild Data Isolation (separate per server)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📊 SETUP TAKES 10 SECONDS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Before:                        After:
+(Empty server)          →      (Complete SOC Setup)
+                                • 7 Roles
+                                • 11 Channels
+                                • Category Organized
+                                • Ready to use!
+
+Command: !setup_soc
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💡 TIPS & TRICKS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+• DM the bot anytime for help: !helpme
+• All commands work in DMs and servers
+• Admin prefix is "!" (others use @mentions)
+• Role names have emoji for easy recognition
+• Channels auto-organized in category
+• All data saved per-guild (separate per server)
+• DMs queued and retry if member offline
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🆘 SUPPORT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Type one of these for help:
+
+!helpme          - Full command reference
+!commands        - List all commands
+!docs            - Detailed documentation
+!botstatus       - Check bot health
+!quicktest       - Run diagnostics
+
+═══════════════════════════════════════════════════════════════════
+Sentinel SOC Bot v10 | Security Operations Center
+═══════════════════════════════════════════════════════════════════
