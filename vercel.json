@@ -1,7 +1,6 @@
 {
   "buildCommand": "",
   "outputDirectory": "api/static",
-  "framework": "static",
   "rewrites": [
     {
       "source": "/(.*)",
