@@ -5,7 +5,7 @@
       "errors": 0,
       "last_run": null,
       "status": "running",
-      "next_iteration": "2026-02-04T04:51:25.187691+00:00"
+      "next_iteration": "2026-02-04T05:31:25.187691+00:00"
     },
     "AutoBackupSystem.hourly_backup": {
       "runs": 0,
@@ -19,7 +19,7 @@
       "errors": 0,
       "last_run": null,
       "status": "running",
-      "next_iteration": "2026-02-04T04:46:51.345579+00:00"
+      "next_iteration": "2026-02-04T05:26:51.345579+00:00"
     },
     "IOCManager.cleanup_expired_iocs": {
       "runs": 0,
@@ -40,35 +40,35 @@
       "errors": 0,
       "last_run": null,
       "status": "running",
-      "next_iteration": "2026-02-04T04:51:25.187734+00:00"
+      "next_iteration": "2026-02-04T05:31:25.187734+00:00"
     },
     "ScheduledTasksDashboard.monitor_tasks": {
       "runs": 0,
       "errors": 0,
       "last_run": null,
       "status": "running",
-      "next_iteration": "2026-02-04T04:56:25.187856+00:00"
+      "next_iteration": "2026-02-04T05:36:25.187856+00:00"
     },
     "LiveThreatStatus.update_bot_status": {
       "runs": 0,
       "errors": 0,
       "last_run": null,
       "status": "running",
-      "next_iteration": "2026-02-04T04:48:25.187866+00:00"
+      "next_iteration": "2026-02-04T05:28:25.187866+00:00"
     },
     "SimulationSystem.run_simulations": {
       "runs": 0,
       "errors": 0,
       "last_run": null,
       "status": "running",
-      "next_iteration": "2026-02-04T04:51:21.346087+00:00"
+      "next_iteration": "2026-02-04T05:31:21.346087+00:00"
     },
     "RealTimeThreatFeed.feed_update_task": {
       "runs": 0,
       "errors": 0,
       "last_run": null,
       "status": "running",
-      "next_iteration": "2026-02-04T05:06:25.187875+00:00"
+      "next_iteration": "2026-02-04T05:36:25.187875+00:00"
     },
     "ServerAnalytics.collect_metrics": {
       "runs": 0,
@@ -82,7 +82,7 @@
       "errors": 0,
       "last_run": null,
       "status": "running",
-      "next_iteration": "2026-02-04T04:47:21.346311+00:00"
+      "next_iteration": "2026-02-04T05:27:21.346311+00:00"
     },
     "HealthCheckSystem.health_check_task": {
       "runs": 0,
@@ -96,7 +96,7 @@
       "errors": 0,
       "last_run": null,
       "status": "running",
-      "next_iteration": "2026-02-04T05:06:21.346178+00:00"
+      "next_iteration": "2026-02-04T05:36:21.346178+00:00"
     },
     "MemoryLifecycleManager.lifecycle_management": {
       "runs": 0,
@@ -124,42 +124,42 @@
       "errors": 0,
       "last_run": null,
       "status": "running",
-      "next_iteration": "2026-02-04T04:47:21.345657+00:00"
+      "next_iteration": "2026-02-04T05:27:21.345657+00:00"
     },
     "PostMortemWorkflow.monitor_incidents": {
       "runs": 0,
       "errors": 0,
       "last_run": null,
       "status": "running",
-      "next_iteration": "2026-02-04T04:51:21.345697+00:00"
+      "next_iteration": "2026-02-04T05:31:21.345697+00:00"
     },
     "BotOfBotsHealthMonitor.heartbeat_task": {
       "runs": 0,
       "errors": 0,
       "last_run": null,
       "status": "running",
-      "next_iteration": "2026-02-04T04:46:51.345730+00:00"
+      "next_iteration": "2026-02-04T05:26:51.345730+00:00"
     },
     "RateLimitLoadBalancer.evaluate_load": {
       "runs": 0,
       "errors": 0,
       "last_run": null,
       "status": "running",
-      "next_iteration": "2026-02-04T04:47:21.346006+00:00"
+      "next_iteration": "2026-02-04T05:27:21.346006+00:00"
     },
     "RateLimitLoadBalancer.process_deferred": {
       "runs": 0,
       "errors": 0,
       "last_run": null,
       "status": "running",
-      "next_iteration": "2026-02-04T04:46:51.346037+00:00"
+      "next_iteration": "2026-02-04T05:26:51.346037+00:00"
     },
     "RateLimitLoadBalancer.reset_counters": {
       "runs": 0,
       "errors": 0,
       "last_run": null,
       "status": "running",
-      "next_iteration": "2026-02-04T04:47:21.345976+00:00"
+      "next_iteration": "2026-02-04T05:27:21.345976+00:00"
     },
     "SentimentTrendAnalysis.trend_task": {
       "runs": 0,
@@ -173,21 +173,21 @@
       "errors": 0,
       "last_run": null,
       "status": "running",
-      "next_iteration": "2026-02-04T04:47:25.187724+00:00"
+      "next_iteration": "2026-02-04T05:27:25.187724+00:00"
     },
     "NightwatchCog.nightwatch_monitor": {
       "runs": 0,
       "errors": 0,
       "last_run": null,
       "status": "running",
-      "next_iteration": "2026-02-04T04:47:25.187819+00:00"
+      "next_iteration": "2026-02-04T05:27:25.187819+00:00"
     },
     "AnnouncementSystem.process_scheduled": {
       "runs": 0,
       "errors": 0,
       "last_run": null,
       "status": "running",
-      "next_iteration": "2026-02-04T04:46:25.187884+00:00"
+      "next_iteration": "2026-02-04T05:27:25.187884+00:00"
     }
   },
   "total_runs": 0,

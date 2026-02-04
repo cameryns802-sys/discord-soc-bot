@@ -1,15 +1,5 @@
 [
   {
-    "id": "TF-20260203-2581",
-    "name": "C2 Campaign 782",
-    "type": "C2",
-    "severity": "high",
-    "description": "New threat detected by intelligence sources",
-    "discovered_at": "2026-02-03T18:41:55.203539",
-    "confidence": "low",
-    "source": "OSINT"
-  },
-  {
     "id": "TF-20260203-7141",
     "name": "APT Campaign 229",
     "type": "Ransomware",
@@ -497,6 +487,16 @@
     "description": "New threat detected by intelligence sources",
     "discovered_at": "2026-02-03T20:36:25.233808-08:00",
     "confidence": "high",
+    "source": "Internal"
+  },
+  {
+    "id": "TF-20260203-9224",
+    "name": "Malware Campaign 549",
+    "type": "Ransomware",
+    "severity": "critical",
+    "description": "New threat detected by intelligence sources",
+    "discovered_at": "2026-02-03T21:06:25.248575-08:00",
+    "confidence": "medium",
     "source": "Internal"
   }
 ]

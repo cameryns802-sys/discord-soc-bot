@@ -1,7 +1,7 @@
 {
-  "timestamp": "2026-02-03T20:47:51.351651-08:00",
+  "timestamp": "2026-02-03T21:35:21.352613-08:00",
   "guilds": 2,
-  "uptime_seconds": 686,
+  "uptime_seconds": 3536,
   "signal_bus_ok": true,
   "signal_stats": {
     "total_signals": 0,

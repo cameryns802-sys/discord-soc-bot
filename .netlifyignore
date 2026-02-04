@@ -1,5 +1,0 @@
-# Exclude everything except api/static
-**
-!api/
-!api/static/
-!api/static/**
