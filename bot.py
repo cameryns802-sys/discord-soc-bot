@@ -49,7 +49,7 @@ FEATURE_THREAT_INTEL = os.getenv('FEATURE_THREAT_INTEL_HUB', 'true').lower() == 
 FEATURE_SECURITY_DASHBOARD = os.getenv('FEATURE_SECURITY_DASHBOARD', 'true').lower() == 'true'
 
 # Dashboard Configuration
-DASHBOARD_URL = os.getenv('DASHBOARD_URL', 'https://inspiring-starlight-112e7b.netlify.app/')
+DASHBOARD_URL = os.getenv('DASHBOARD_URL', 'https://sentinel-soc-bot.netlify.app/')
 
 # System Behavior
 SAFE_MODE = os.getenv('SAFE_MODE', 'false').lower() == 'true'

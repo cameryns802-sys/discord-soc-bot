@@ -20,12 +20,12 @@
     "accent": "#3498DB"
   },
   "links": {
-    "dashboard_url": "https://inspiring-starlight-112e7b.netlify.app",
+    "dashboard_url": "https://sentinel-soc-bot.netlify.app",
     "discord_invite": "https://discord.gg/DyEKp6puBC",
     "support_server": "https://discord.gg/support",
     "github": "https://github.com/cameryns802-sys/discord-soc-bot",
     "documentation": "https://github.com/cameryns802-sys/discord-soc-bot#readme",
-    "api_reference": "https://inspiring-starlight-112e7b.netlify.app/admin.html",
+    "api_reference": "https://sentinel-soc-bot.netlify.app/admin.html",
     "terms": "https://github.com/cameryns802-sys/discord-soc-bot",
     "privacy": "https://github.com/cameryns802-sys/discord-soc-bot"
   },
