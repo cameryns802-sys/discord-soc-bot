@@ -48,6 +48,9 @@ FEATURE_SIGNAL_BUS = os.getenv('FEATURE_SIGNAL_BUS', 'true').lower() == 'true'
 FEATURE_THREAT_INTEL = os.getenv('FEATURE_THREAT_INTEL_HUB', 'true').lower() == 'true'
 FEATURE_SECURITY_DASHBOARD = os.getenv('FEATURE_SECURITY_DASHBOARD', 'true').lower() == 'true'
 
+# Dashboard Configuration
+DASHBOARD_URL = os.getenv('DASHBOARD_URL', 'https://inspiring-starlight-112e7b.netlify.app/')
+
 # System Behavior
 SAFE_MODE = os.getenv('SAFE_MODE', 'false').lower() == 'true'
 AUTO_SYNC_ENABLED = os.getenv('AUTO_SYNC_ENABLED', 'false').lower() == 'true'
@@ -109,6 +112,34 @@ bot = CustomBot(
 )
 
 # ==================== SLASH COMMAND SYNC ====================
+
+@bot.tree.command(name="dashboard", description="View the security dashboard")
+async def dashboard_command(interaction: discord.Interaction):
+    """View the security dashboard link"""
+    embed = discord.Embed(
+        title="🛡️ Sentinel SOC Dashboard",
+        description="Real-time security monitoring and threat detection",
+        color=discord.Color.blue(),
+        url=DASHBOARD_URL
+    )
+    embed.add_field(
+        name="Dashboard URL",
+        value=f"[Open Dashboard]({DASHBOARD_URL})",
+        inline=False
+    )
+    embed.add_field(
+        name="Admin Panel",
+        value=f"[Configuration & Settings]({DASHBOARD_URL}admin.html)",
+        inline=False
+    )
+    embed.add_field(
+        name="Features",
+        value="📊 Real-time metrics\n🔐 Security alerts\n📈 Threat analytics\n⚙️ System configuration",
+        inline=False
+    )
+    embed.set_footer(text="Powered by Sentinel SOC Bot")
+    
+    await interaction.response.send_message(embed=embed, ephemeral=False)
 
 @bot.tree.command(name="sync", description="[Owner] Sync slash commands to Discord")
 async def sync_commands(interaction: discord.Interaction):
@@ -523,9 +554,20 @@ async def on_ready():
     if not hasattr(bot, 'uptime'):
         bot.uptime = PST.localize(datetime.datetime.now())
     
+    # Update bot presence with dashboard link
+    try:
+        activity = discord.Activity(
+            type=discord.ActivityType.custom,
+            name=f"🛡️ Sentinel SOC Dashboard"
+        )
+        await bot.change_presence(activity=activity)
+    except Exception as e:
+        print(f"[Presence] ⚠️ Failed to set presence: {e}")
+    
     print(f"\n✅ Logged in as {bot.user} (ID: {bot.user.id})")
     print(f"📊 Connected to {len(bot.guilds)} guild(s)")
     print(f"👥 Watching {sum(g.member_count for g in bot.guilds)} users")
+    print(f"🛡️ Dashboard: {DASHBOARD_URL}")
     
     # Log ready state
     logger = logging.getLogger('soc_bot')
