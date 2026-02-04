@@ -14,8 +14,6 @@ from dotenv import load_dotenv
 import datetime
 from datetime import timezone
 import logging
-import uvicorn
-from threading import Thread
 import pytz
 # Set PST timezone globally
 PST = pytz.timezone('America/Los_Angeles')
@@ -48,15 +46,9 @@ FEATURE_SIGNAL_BUS = os.getenv('FEATURE_SIGNAL_BUS', 'true').lower() == 'true'
 FEATURE_THREAT_INTEL = os.getenv('FEATURE_THREAT_INTEL_HUB', 'true').lower() == 'true'
 FEATURE_SECURITY_DASHBOARD = os.getenv('FEATURE_SECURITY_DASHBOARD', 'true').lower() == 'true'
 
-# Dashboard Configuration
-DASHBOARD_URL = os.getenv('DASHBOARD_URL', 'https://sentinel-soc-bot.netlify.app/')
-
 # System Behavior
 SAFE_MODE = os.getenv('SAFE_MODE', 'false').lower() == 'true'
 AUTO_SYNC_ENABLED = os.getenv('AUTO_SYNC_ENABLED', 'false').lower() == 'true'
-
-api_server = None
-api_thread = None
 
 # Track bot start time for uptime
 bot_start_time = PST.localize(datetime.datetime.now())
@@ -69,33 +61,6 @@ intents = discord.Intents.all()
 class CustomBot(commands.Bot):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-
-def start_api_server():
-    """Start FastAPI server in background thread"""
-    global api_server, api_thread
-    try:
-        # Import here to avoid circular imports
-        from api.main import app as fastapi_app
-        
-        config = uvicorn.Config(
-            app=fastapi_app,
-            host=API_HOST,
-            port=API_PORT,
-            log_level='info' if API_DEBUG else 'warning',
-            access_log=API_DEBUG
-        )
-        api_server = uvicorn.Server(config)
-        
-        # Run in background thread
-        api_thread = Thread(target=api_server.run, daemon=True)
-        api_thread.start()
-        
-        print(f"[API] ✅ FastAPI server started at http://{API_HOST}:{API_PORT}")
-        print(f"[API] 📚 Swagger docs available at http://{API_HOST}:{API_PORT}/docs")
-        return True
-    except Exception as e:
-        print(f"[API] ❌ Failed to start API server: {e}")
-        return False
 
 def get_prefix(bot, msg):
     """Dynamic prefix: ! for owner/DMs, mentions for others"""
@@ -110,57 +75,6 @@ bot = CustomBot(
     intents=intents,
     help_command=None  # Disable default help, we'll load custom one
 )
-
-# ==================== SLASH COMMAND SYNC ====================
-
-@bot.tree.command(name="dashboard", description="View the security dashboard")
-async def dashboard_command(interaction: discord.Interaction):
-    """View the security dashboard link"""
-    embed = discord.Embed(
-        title="🛡️ Sentinel SOC Dashboard",
-        description="Real-time security monitoring and threat detection",
-        color=discord.Color.blue(),
-        url=DASHBOARD_URL
-    )
-    embed.add_field(
-        name="Dashboard URL",
-        value=f"[Open Dashboard]({DASHBOARD_URL})",
-        inline=False
-    )
-    embed.add_field(
-        name="Admin Panel",
-        value=f"[Configuration & Settings]({DASHBOARD_URL}admin.html)",
-        inline=False
-    )
-    embed.add_field(
-        name="Features",
-        value="📊 Real-time metrics\n🔐 Security alerts\n📈 Threat analytics\n⚙️ System configuration",
-        inline=False
-    )
-    embed.set_footer(text="Powered by Sentinel SOC Bot")
-    
-    await interaction.response.send_message(embed=embed, ephemeral=False)
-
-@bot.tree.command(name="sync", description="[Owner] Sync slash commands to Discord")
-async def sync_commands(interaction: discord.Interaction):
-    """Sync slash commands to Discord (Owner only)"""
-    if interaction.user.id != OWNER_ID:
-        await interaction.response.send_message("❌ Owner only command", ephemeral=True)
-        return
-    
-    await interaction.response.defer(ephemeral=True)
-    
-    try:
-        synced = await bot.tree.sync()
-        await interaction.followup.send(
-            f"✅ Successfully synced {len(synced)} slash commands to Discord!\n"
-            f"Commands should appear in 1-5 minutes.",
-            ephemeral=True
-        )
-        print(f"[Sync] ✅ Synced {len(synced)} slash commands")
-    except Exception as e:
-        await interaction.followup.send(f"❌ Sync failed: {e}", ephemeral=True)
-        print(f"[Sync] ❌ Sync failed: {e}")
 
 # ==================== COG LOADING STRATEGY ====================
 # 
@@ -542,10 +456,6 @@ async def load_cogs():
     print(f"  - Safe Mode: {'⚠️ ACTIVE' if SAFE_MODE else '🟢 NORMAL'}")
     
     print(f"\n✅ All essential modules loaded. Connecting to Discord...")
-    
-    print("╔════════════════════════════════════════════════════════════════╗")
-    print("║                   ✨ BOT READY FOR OPERATIONS ✨               ║")
-    print("╚════════════════════════════════════════════════════════════════╝\n")
 
 @bot.event
 async def on_ready():
@@ -554,11 +464,11 @@ async def on_ready():
     if not hasattr(bot, 'uptime'):
         bot.uptime = PST.localize(datetime.datetime.now())
     
-    # Update bot presence with dashboard link
+    # Update bot presence
     try:
         activity = discord.Activity(
             type=discord.ActivityType.custom,
-            name=f"🛡️ Sentinel SOC Dashboard"
+            name=f"🛡️ Sentinel SOC Bot"
         )
         await bot.change_presence(activity=activity)
     except Exception as e:
@@ -567,7 +477,6 @@ async def on_ready():
     print(f"\n✅ Logged in as {bot.user} (ID: {bot.user.id})")
     print(f"📊 Connected to {len(bot.guilds)} guild(s)")
     print(f"👥 Watching {sum(g.member_count for g in bot.guilds)} users")
-    print(f"🛡️ Dashboard: {DASHBOARD_URL}")
     
     # Log ready state
     logger = logging.getLogger('soc_bot')
@@ -706,14 +615,6 @@ if __name__ == '__main__':
         print("✅ All modules loaded.")
         print()
         
-        # Start API server
-        print("🌐 Starting API server...")
-        if start_api_server():
-            print("✅ API server initialized.")
-        else:
-            print("⚠️ API server failed to start, continuing with Discord bot only.")
-        print()
-        
         print("🔗 Connecting to Discord...")
         print()
         try:
@@ -728,15 +629,6 @@ if __name__ == '__main__':
             print("╔════════════════════════════════════════════════════════════════╗")
             print("║                    💤 SOC BOT SHUTTING DOWN                    ║")
             print("╚════════════════════════════════════════════════════════════════╝")
-            
-            # Shutdown API server
-            if api_server:
-                print("🌐 Shutting down API server...")
-                try:
-                    api_server.should_exit = True
-                    print("🌐 API server stopped.")
-                except Exception as e:
-                    print(f"⚠️ Error stopping API server: {e}")
             
             print("🛑 Terminating bot process...")
             
