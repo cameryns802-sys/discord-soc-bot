@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
 </head>
 <body>
     <!-- Header -->
@@ -23,6 +24,7 @@
                     <a href="#systems" class="nav-link">Systems</a>
                     <a href="#stats" class="nav-link">Statistics</a>
                     <a href="#team" class="nav-link">Team</a>
+                    <a href="/static/admin.html" class="nav-link admin-link">Admin Portal</a>
                     <a href="https://discord.gg/your-invite" class="btn-primary">Add to Discord</a>
                 </nav>
             </div>
@@ -33,54 +35,83 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <div class="hero-badge">✨ Enterprise-Grade Security Platform</div>
-                <h1 class="hero-title">
-                    Sentinel SOC Bot
-                </h1>
+                <div class="hero-tech-icons">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" class="tech-icon-large">
+                </div>
+                <h1 class="hero-title">Sentinel SOC Bot</h1>
                 <p class="hero-subtitle">
                     Advanced Security Operations Center for Discord<br>
-                    100+ Security Modules | Real-Time Threat Detection | Automated Response
+                    Enterprise-Grade Protection | Real-Time Threat Detection | Automated Response
                 </p>
-                <div class="hero-stats">
-                    <div class="stat-item">
-                        <div class="stat-icon">🏛️</div>
-                        <div class="stat-value" id="serverCount">2</div>
-                        <div class="stat-label">Servers</div>
+                <div class="hero-stats-inline">
+                    <div class="stat-inline">
+                        <span class="stat-icon-inline">👥</span>
+                        <span class="stat-value-inline" id="userCount">13</span>
+                        <span class="stat-label-inline">Users</span>
                     </div>
-                    <div class="stat-item">
-                        <div class="stat-icon">👥</div>
-                        <div class="stat-value" id="userCount">13</div>
-                        <div class="stat-label">Users Protected</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-icon">🔒</div>
-                        <div class="stat-value">172</div>
-                        <div class="stat-label">Security Cogs</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-icon">⚡</div>
-                        <div class="stat-value">100</div>
-                        <div class="stat-label">Slash Commands</div>
+                    <div class="stat-inline">
+                        <span class="stat-icon-inline">🏛️</span>
+                        <span class="stat-value-inline" id="serverCount">2</span>
+                        <span class="stat-label-inline">Servers</span>
                     </div>
                 </div>
-                <div class="hero-actions">
-                    <a href="https://discord.gg/your-invite" class="btn-large btn-primary">
-                        Add to Server
-                    </a>
-                    <a href="#features" class="btn-large btn-secondary">
-                        View Features
-                    </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bot Card Section -->
+    <section class="section" id="bot-showcase">
+        <div class="container">
+            <h2 class="section-title">Security Platform</h2>
+            <p class="section-subtitle">Enterprise-grade Discord security bot</p>
+
+            <div class="bot-cards-grid">
+                <div class="bot-card">
+                    <div class="bot-card-header">
+                        <div class="bot-avatar">
+                            <img src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Sentinel SOC Bot">
+                        </div>
+                        <div class="bot-info">
+                            <h3 class="bot-name">Sentinel SOC Bot</h3>
+                            <div class="bot-tags">
+                                <span class="lang-tag python">Python</span>
+                                <span class="lang-tag discord">Discord.py</span>
+                            </div>
+                        </div>
+                        <div class="status-indicator online"></div>
+                    </div>
+                    <p class="bot-description">
+                        Advanced Security Operations Center bot featuring 172 specialized cogs, real-time threat detection, AI-powered analysis, and comprehensive compliance monitoring.
+                    </p>
+                    <div class="bot-stats-row">
+                        <div class="bot-stat">
+                            <span class="bot-stat-value">172</span>
+                            <span class="bot-stat-label">Security Cogs</span>
+                        </div>
+                        <div class="bot-stat">
+                            <span class="bot-stat-value">100+</span>
+                            <span class="bot-stat-label">Commands</span>
+                        </div>
+                        <div class="bot-stat">
+                            <span class="bot-stat-value">24/7</span>
+                            <span class="bot-stat-label">Monitoring</span>
+                        </div>
+                    </div>
+                    <div class="bot-card-actions">
+                        <a href="https://discord.gg/your-invite" class="btn-primary">Add to Server</a>
+                        <a href="#features" class="btn-secondary">View Features</a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Features Grid -->
-    <section id="features" class="section">
+    <section id="features" class="section section-dark">
         <div class="container">
             <h2 class="section-title">Core Security Systems</h2>
             <p class="section-subtitle">Comprehensive protection for your Discord server</p>
-            
+
             <div class="features-grid">
                 <!-- Feature 1 -->
                 <div class="feature-card">
@@ -174,11 +205,11 @@
     </section>
 
     <!-- Systems Showcase -->
-    <section id="systems" class="section section-dark">
+    <section id="systems" class="section">
         <div class="container">
             <h2 class="section-title">Advanced Security Modules</h2>
             <p class="section-subtitle">172 specialized cogs for comprehensive protection</p>
-            
+
             <div class="systems-grid">
                 <div class="system-category">
                     <h3 class="category-title">
@@ -286,11 +317,11 @@
     </section>
 
     <!-- Statistics Section -->
-    <section id="stats" class="section">
+    <section id="stats" class="section section-dark">
         <div class="container">
             <h2 class="section-title">Live Statistics</h2>
             <p class="section-subtitle">Real-time security metrics and performance data</p>
-            
+
             <div class="stats-container">
                 <div class="stats-row">
                     <div class="stat-card">
@@ -392,11 +423,11 @@
     </section>
 
     <!-- Team Section -->
-    <section id="team" class="section section-dark">
+    <section id="team" class="section">
         <div class="container">
             <h2 class="section-title">The Team</h2>
             <p class="section-subtitle">Built and maintained by security professionals</p>
-            
+
             <div class="team-grid">
                 <div class="team-card">
                     <div class="team-avatar">
