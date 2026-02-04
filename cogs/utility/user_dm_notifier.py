@@ -9,6 +9,7 @@ from discord.ext import commands, tasks
 from datetime import datetime
 import json
 import os
+from cogs.core.pst_timezone import get_now_pst
 
 class UserDMNotifier(commands.Cog):
     """Send DMs to users for notifications and alerts"""
@@ -36,13 +37,13 @@ class UserDMNotifier(commands.Cog):
         except:
             queue = {}
         
-        dm_id = f"{user_id}_{datetime.utcnow().timestamp()}"
+        dm_id = f"{user_id}_{get_now_pst().timestamp()}"
         queue[dm_id] = {
             "user_id": user_id,
             "title": title,
             "message": message,
             "type": dm_type,
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": get_now_pst().isoformat(),
             "sent": False
         }
         
@@ -87,7 +88,7 @@ class UserDMNotifier(commands.Cog):
                     title=f"{icon} {dm_data['title']}",
                     description=dm_data['message'],
                     color=color,
-                    timestamp=datetime.utcnow()
+                    timestamp=get_now_pst()
                 )
                 embed.set_footer(text="Sentinel SOC Bot")
                 
@@ -95,7 +96,7 @@ class UserDMNotifier(commands.Cog):
                 
                 # Mark as sent
                 updated_queue[dm_id]["sent"] = True
-                updated_queue[dm_id]["sent_at"] = datetime.utcnow().isoformat()
+                updated_queue[dm_id]["sent_at"] = get_now_pst().isoformat()
                 
                 # Log the DM
                 self._log_dm(dm_data["user_id"], dm_data["title"], "sent")
@@ -125,10 +126,10 @@ class UserDMNotifier(commands.Cog):
             "user_id": user_id,
             "title": title,
             "status": status,
-            "timestamp": datetime.utcnow().isoformat()
+            "timestamp": get_now_pst().isoformat()
         }
         
-        log_id = f"{user_id}_{datetime.utcnow().timestamp()}"
+        log_id = f"{user_id}_{get_now_pst().timestamp()}"
         log[log_id] = log_entry
         
         with open(self.dm_log_file, 'w') as f:
@@ -145,7 +146,7 @@ class UserDMNotifier(commands.Cog):
                 title="📧 Message from Security Team",
                 description=message,
                 color=discord.Color.blue(),
-                timestamp=datetime.utcnow()
+                timestamp=get_now_pst()
             )
             embed.set_footer(text="Sentinel SOC Bot")
             
@@ -210,7 +211,7 @@ class UserDMNotifier(commands.Cog):
                         title="📢 Broadcast Message",
                         description=message,
                         color=discord.Color.blue(),
-                        timestamp=datetime.utcnow()
+                        timestamp=get_now_pst()
                     )
                     dm_embed.add_field(name="From", value=f"{guild.name}", inline=False)
                     dm_embed.set_footer(text="Sentinel SOC Bot")
@@ -234,7 +235,7 @@ class UserDMNotifier(commands.Cog):
             title="👋 Welcome to Sentinel SOC",
             description="Security Operations Center Bot",
             color=discord.Color.green(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="🤖 Bot Name", value="Sentinel", inline=True)
@@ -274,7 +275,7 @@ class UserDMNotifier(commands.Cog):
             title=f"👋 Welcome to {member.guild.name}!",
             description="You're now part of our security operations team",
             color=discord.Color.green(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="🛡️ Sentinel SOC Bot", value="Security Operations Center", inline=False)

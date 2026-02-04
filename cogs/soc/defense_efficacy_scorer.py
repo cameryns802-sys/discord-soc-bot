@@ -9,6 +9,7 @@ import json
 import os
 from datetime import datetime, timedelta
 from typing import Dict, List
+from cogs.core.pst_timezone import get_now_pst
 
 class DefenseEfficacyScorerCog(commands.Cog):
     """Defense Efficacy Scorer - Measures defense effectiveness and response metrics"""
@@ -58,7 +59,7 @@ class DefenseEfficacyScorerCog(commands.Cog):
             "detection_score": detection_score,
             "response_score": response_score,
             "overall_score": overall_score,
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": get_now_pst().isoformat(),
             "scored_by": str(ctx.author.id)
         }
         
@@ -69,7 +70,7 @@ class DefenseEfficacyScorerCog(commands.Cog):
         self.save_metrics()
         
         color = discord.Color.green() if overall_score >= 80 else discord.Color.gold() if overall_score >= 60 else discord.Color.red()
-        embed = discord.Embed(title="✅ Defense Efficacy Score", color=color, timestamp=datetime.utcnow())
+        embed = discord.Embed(title="✅ Defense Efficacy Score", color=color, timestamp=get_now_pst())
         embed.add_field(name="Incident ID", value=f"#{incident_id}", inline=True)
         embed.add_field(name="Overall Score", value=f"**{overall_score:.1f}/100**", inline=True)
         embed.add_field(name="Detection Score", value=f"{detection_score:.1f}/100", inline=True)
@@ -90,7 +91,7 @@ class DefenseEfficacyScorerCog(commands.Cog):
         avg_mttr = sum(self.metrics["mttr"]) / len(self.metrics["mttr"])
         avg_score = sum(s["overall_score"] for s in self.scores) / len(self.scores) if self.scores else 0
         
-        embed = discord.Embed(title="📊 Defense Efficacy Metrics", color=discord.Color.blue(), timestamp=datetime.utcnow())
+        embed = discord.Embed(title="📊 Defense Efficacy Metrics", color=discord.Color.blue(), timestamp=get_now_pst())
         embed.add_field(name="📈 Avg MTTD", value=f"{avg_mttd:.1f} min (Target: {self.metrics['mttd_target']} min)", inline=True)
         embed.add_field(name="⏱️ Avg MTTR", value=f"{avg_mttr:.1f} min (Target: {self.metrics['mttr_target']} min)", inline=True)
         embed.add_field(name="🎯 Avg Score", value=f"{avg_score:.1f}/100", inline=True)
@@ -106,7 +107,7 @@ class DefenseEfficacyScorerCog(commands.Cog):
             return
         
         top_scores = sorted(self.scores, key=lambda x: x["overall_score"], reverse=True)[:10]
-        embed = discord.Embed(title="🏆 Defense Efficacy Leaderboard", color=discord.Color.gold(), timestamp=datetime.utcnow())
+        embed = discord.Embed(title="🏆 Defense Efficacy Leaderboard", color=discord.Color.gold(), timestamp=get_now_pst())
         
         for i, score in enumerate(top_scores[:5], 1):
             medal = "🥇" if i == 1 else "🥈" if i == 2 else "🥉" if i == 3 else f"**{i}.**"
@@ -128,7 +129,7 @@ class DefenseEfficacyScorerCog(commands.Cog):
         needs_improvement = len([s for s in self.scores if s["overall_score"] < 70])
         avg_score = sum(s["overall_score"] for s in self.scores) / total_scored
         
-        embed = discord.Embed(title="🛡️ Defense Efficacy Dashboard", color=discord.Color.blue(), timestamp=datetime.utcnow())
+        embed = discord.Embed(title="🛡️ Defense Efficacy Dashboard", color=discord.Color.blue(), timestamp=get_now_pst())
         embed.add_field(name="📊 Total Incidents", value=total_scored, inline=True)
         embed.add_field(name="📈 Average Score", value=f"{avg_score:.1f}/100", inline=True)
         embed.add_field(name="🟢 Excellent (90+)", value=excellent, inline=True)

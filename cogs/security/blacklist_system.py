@@ -1,8 +1,9 @@
 import discord
 from discord.ext import commands
 import json
-import datetime
+from datetime import timedelta
 from pathlib import Path
+from cogs.core.pst_timezone import get_now_pst
 
 class BlacklistSystem(commands.Cog):
     """User and guild blacklist system"""
@@ -44,7 +45,7 @@ class BlacklistSystem(commands.Cog):
             # Check if blacklist expired
             if entry.get('expires_at'):
                 expires = datetime.datetime.fromisoformat(entry['expires_at'])
-                if datetime.datetime.now() > expires:
+                if get_now_pst() > expires:
                     # Remove expired blacklist
                     del self.blacklist['users'][user_id]
                     self.save_blacklist()
@@ -77,7 +78,7 @@ class BlacklistSystem(commands.Cog):
                 # Check if blacklist expired
                 if entry.get('expires_at'):
                     expires = datetime.datetime.fromisoformat(entry['expires_at'])
-                    if datetime.datetime.now() > expires:
+                    if get_now_pst() > expires:
                         del self.blacklist['guilds'][guild_id]
                         self.save_blacklist()
                         return True
@@ -98,12 +99,12 @@ class BlacklistSystem(commands.Cog):
     async def add_to_blacklist(self, target_id: int, target_type: str, reason: str, duration: int = None):
         """Add user or guild to blacklist (can be called by other cogs)"""
         target_id = str(target_id)
-        now = datetime.datetime.now()
+        now = get_now_pst()
         
         entry = {
             'reason': reason,
             'added_at': now.isoformat(),
-            'expires_at': (now + datetime.timedelta(seconds=duration)).isoformat() if duration else None
+            'expires_at': (now + timedelta(seconds=duration)).isoformat() if duration else None
         }
         
         if target_type == 'user':
@@ -134,7 +135,7 @@ class BlacklistSystem(commands.Cog):
             title="✅ Added to Blacklist",
             description=f"{target_type.capitalize()} {target_id} has been blacklisted",
             color=discord.Color.green(),
-            timestamp=datetime.datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         embed.add_field(name="Type", value=target_type.capitalize(), inline=True)
         embed.add_field(name="ID", value=target_id, inline=True)
@@ -164,14 +165,14 @@ class BlacklistSystem(commands.Cog):
             title="✅ Temporarily Blacklisted",
             description=f"{target_type.capitalize()} {target_id} has been temporarily blacklisted",
             color=discord.Color.orange(),
-            timestamp=datetime.datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         embed.add_field(name="Type", value=target_type.capitalize(), inline=True)
         embed.add_field(name="ID", value=target_id, inline=True)
         embed.add_field(name="Duration", value=f"{hours} hours", inline=True)
         embed.add_field(name="Reason", value=reason, inline=False)
         
-        expires = datetime.datetime.now() + datetime.timedelta(hours=hours)
+        expires = get_now_pst() + timedelta(hours=hours)
         embed.add_field(name="Expires", value=expires.strftime('%Y-%m-%d %H:%M:%S'), inline=True)
         
         await ctx.send(embed=embed)
@@ -204,7 +205,7 @@ class BlacklistSystem(commands.Cog):
         embed = discord.Embed(
             title="🚫 Blacklist",
             color=discord.Color.red(),
-            timestamp=datetime.datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         
         if not target_type or target_type == 'user':
@@ -258,7 +259,7 @@ class BlacklistSystem(commands.Cog):
             embed.add_field(name="Expires", value=entry['expires_at'][:19], inline=True)
             
             expires = datetime.datetime.fromisoformat(entry['expires_at'])
-            remaining = expires - datetime.datetime.now()
+            remaining = expires - get_now_pst()
             embed.add_field(name="Remaining", value=str(remaining).split('.')[0], inline=True)
         else:
             embed.add_field(name="Duration", value="Permanent", inline=True)
@@ -270,7 +271,7 @@ class BlacklistSystem(commands.Cog):
     async def blacklist_stats(self, ctx):
         """View blacklist statistics (owner only)"""
         # Count active vs expired
-        now = datetime.datetime.now()
+        now = get_now_pst()
         active_users = sum(
             1 for entry in self.blacklist['users'].values()
             if not entry.get('expires_at') or datetime.datetime.fromisoformat(entry['expires_at']) > now
@@ -283,7 +284,7 @@ class BlacklistSystem(commands.Cog):
         embed = discord.Embed(
             title="📊 Blacklist Statistics",
             color=discord.Color.blue(),
-            timestamp=datetime.datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Active Users", value=str(active_users), inline=True)
@@ -297,3 +298,4 @@ class BlacklistSystem(commands.Cog):
 
 async def setup(bot):
     await bot.add_cog(BlacklistSystem(bot))
+

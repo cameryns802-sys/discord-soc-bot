@@ -8,6 +8,7 @@ from discord import app_commands
 import json
 import os
 from datetime import datetime, timedelta
+from cogs.core.pst_timezone import get_now_pst
 
 class WellnessCog(commands.Cog):
     """Analyst health, burnout detection, and workload management"""
@@ -71,7 +72,7 @@ class WellnessCog(commands.Cog):
             "normal_workload": 10,
             "after_hours_limit": 3,
             "target_response_time": 30,
-            "set_date": datetime.utcnow().isoformat()
+            "set_date": get_now_pst().isoformat()
         }
         self.save_data()
         

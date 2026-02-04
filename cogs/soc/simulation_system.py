@@ -10,6 +10,7 @@ import json
 import os
 from datetime import datetime, timedelta
 from enum import Enum
+from cogs.core.pst_timezone import get_now_pst
 
 class SimulationType(Enum):
     TABLETOP = "Tabletop Exercise"
@@ -98,7 +99,7 @@ class SimulationSystem(commands.Cog):
             "level": level.value,
             "status": "RUNNING",
             "started_by": str(ctx.author),
-            "started_at": datetime.utcnow().isoformat(),
+            "started_at": get_now_pst().isoformat(),
             "events": [],
             "participant_count": 0,
             "score": 0,
@@ -124,7 +125,7 @@ class SimulationSystem(commands.Cog):
         embed.add_field(name="📋 Type", value=sim_type.value, inline=True)
         embed.add_field(name="📊 Difficulty", value=level.value, inline=True)
         
-        embed.add_field(name="⏰ Started", value=datetime.utcnow().strftime('%H:%M:%S'), inline=True)
+        embed.add_field(name="⏰ Started", value=get_now_pst().strftime('%H:%M:%S'), inline=True)
         embed.add_field(name="👤 Started By", value=ctx.author.mention, inline=True)
         embed.add_field(name="📍 Status", value="✅ RUNNING", inline=True)
         
@@ -185,7 +186,7 @@ class SimulationSystem(commands.Cog):
         event_log = {
             "reporter": str(ctx.author),
             "event": event,
-            "timestamp": datetime.utcnow().isoformat()
+            "timestamp": get_now_pst().isoformat()
         }
         
         if "events" not in sim:
@@ -201,7 +202,7 @@ class SimulationSystem(commands.Cog):
         
         embed.add_field(name="Reporter", value=ctx.author.mention, inline=True)
         embed.add_field(name="Event", value=event, inline=False)
-        embed.add_field(name="Time", value=datetime.utcnow().strftime('%H:%M:%S'), inline=True)
+        embed.add_field(name="Time", value=get_now_pst().strftime('%H:%M:%S'), inline=True)
         
         await ctx.send(embed=embed)
     
@@ -263,7 +264,7 @@ class SimulationSystem(commands.Cog):
         
         sim = self.active_simulations[guild.id]
         sim["status"] = "COMPLETED"
-        sim["ended_at"] = datetime.utcnow().isoformat()
+        sim["ended_at"] = get_now_pst().isoformat()
         sim["ended_by"] = str(ctx.author)
         
         # Calculate duration

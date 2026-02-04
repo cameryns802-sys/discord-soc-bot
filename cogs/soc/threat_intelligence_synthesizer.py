@@ -10,6 +10,7 @@ import json
 import os
 from datetime import datetime, timedelta
 from collections import Counter
+from cogs.core.pst_timezone import get_now_pst
 
 class ThreatIntelligenceSynthesizer(commands.Cog):
     """Synthesize threat data into actionable intelligence"""
@@ -34,7 +35,7 @@ class ThreatIntelligenceSynthesizer(commands.Cog):
         if not guild_threats:
             return None
         
-        now = datetime.utcnow()
+        now = get_now_pst()
         recent = [t for t in guild_threats if datetime.fromisoformat(t.get('timestamp', now.isoformat())) > (now - timedelta(hours=24))]
         
         return {
@@ -84,8 +85,8 @@ class ThreatIntelligenceSynthesizer(commands.Cog):
             time_diffs = []
             sorted_threats = sorted(threats, key=lambda x: x.get('timestamp', ''))
             for i in range(1, len(sorted_threats)):
-                t1 = datetime.fromisoformat(sorted_threats[i-1].get('timestamp', datetime.utcnow().isoformat()))
-                t2 = datetime.fromisoformat(sorted_threats[i].get('timestamp', datetime.utcnow().isoformat()))
+                t1 = datetime.fromisoformat(sorted_threats[i-1].get('timestamp', get_now_pst().isoformat()))
+                t2 = datetime.fromisoformat(sorted_threats[i].get('timestamp', get_now_pst().isoformat()))
                 diff = (t2 - t1).total_seconds() / 60
                 if diff < 30 and diff > 0:
                     time_diffs.append(diff)
@@ -146,7 +147,7 @@ class ThreatIntelligenceSynthesizer(commands.Cog):
                 title="🟢 Threat Intelligence Summary",
                 description="**Status: ALL CLEAR**",
                 color=discord.Color.green(),
-                timestamp=datetime.utcnow()
+                timestamp=get_now_pst()
             )
             embed.add_field(name="Detected Threats", value="0", inline=True)
             embed.add_field(name="Last 24 Hours", value="0", inline=True)
@@ -158,7 +159,7 @@ class ThreatIntelligenceSynthesizer(commands.Cog):
         # Generate analysis
         recent = synthesis['recent_24h']
         all_threats = synthesis['all_threats']
-        recent_threat_objs = [t for t in all_threats if datetime.fromisoformat(t.get('timestamp', datetime.utcnow().isoformat())) > (datetime.utcnow() - timedelta(hours=24))]
+        recent_threat_objs = [t for t in all_threats if datetime.fromisoformat(t.get('timestamp', get_now_pst().isoformat())) > (get_now_pst() - timedelta(hours=24))]
         
         trends = self.generate_trend_analysis(recent_threat_objs)
         recs = self.generate_recommendations(recent_threat_objs, ctx.guild)
@@ -182,7 +183,7 @@ class ThreatIntelligenceSynthesizer(commands.Cog):
             title=f"{status} Threat Intelligence Summary",
             description="Synthesized threat analysis and recommendations",
             color=color,
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Total Threats (All Time)", value=f"`{synthesis['total']}`", inline=True)
@@ -221,7 +222,7 @@ class ThreatIntelligenceSynthesizer(commands.Cog):
         
         recent = synthesis['recent_24h']
         all_threats = synthesis['all_threats']
-        recent_threat_objs = [t for t in all_threats if datetime.fromisoformat(t.get('timestamp', datetime.utcnow().isoformat())) > (datetime.utcnow() - timedelta(hours=24))]
+        recent_threat_objs = [t for t in all_threats if datetime.fromisoformat(t.get('timestamp', get_now_pst().isoformat())) > (get_now_pst() - timedelta(hours=24))]
         
         severity_dist = self.get_threat_severity_distribution(recent_threat_objs)
         recs = self.generate_recommendations(recent_threat_objs, ctx.guild)
@@ -229,7 +230,7 @@ class ThreatIntelligenceSynthesizer(commands.Cog):
         # Executive briefing format
         brief = f"""
 **📋 EXECUTIVE THREAT BRIEFING**
-*Generated: {datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S UTC')}*
+*Generated: {get_now_pst().strftime('%Y-%m-%d %H:%M:%S UTC')}*
 
 **Overview**
 Total Threats: `{synthesis['total']}`

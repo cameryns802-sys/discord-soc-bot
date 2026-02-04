@@ -6,6 +6,7 @@ import datetime
 import re
 import json
 import os
+from cogs.core.pst_timezone import get_now_pst
 
 class SecretScanGroup(app_commands.Group):
     def __init__(self, cog):
@@ -104,7 +105,7 @@ class VerifyGroup(app_commands.Group):
         verified_role = interaction.guild.get_role(self.cog.verified_roles[guild_id])
         if verified_role:
             await member.add_roles(verified_role)
-        self.cog.verification_log.append({"user_id": member.id, "verified_by": interaction.user.id, "timestamp": datetime.datetime.utcnow().isoformat(), "method": "manual"})
+        self.cog.verification_log.append({"user_id": member.id, "verified_by": interaction.user.id, "timestamp": datetime.get_now_pst().isoformat(), "method": "manual"})
         self.cog.save_data()
         await interaction.response.send_message(f"✅ {member.mention} verified")
 
@@ -210,7 +211,7 @@ class SecretScannerVerificationCog(commands.Cog):
             for match in matches:
                 secret_value = match.group()
                 if secret_value not in self.whitelist:
-                    detected.append({"type": secret_type, "value": secret_value[:10] + "***", "timestamp": datetime.datetime.utcnow().isoformat()})
+                    detected.append({"type": secret_type, "value": secret_value[:10] + "***", "timestamp": datetime.get_now_pst().isoformat()})
         if detected:
             for secret in detected:
                 self.detected_secrets.append(secret)

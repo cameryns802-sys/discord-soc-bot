@@ -9,6 +9,7 @@ from datetime import datetime
 import json
 import os
 import uuid
+from cogs.core.pst_timezone import get_now_pst
 
 class IncidentManagement(commands.Cog):
     """Security incident case management"""
@@ -87,7 +88,7 @@ class IncidentManagement(commands.Cog):
             'title': title,
             'severity': severity,
             'status': 'open',
-            'created_at': datetime.now(datetime.UTC).isoformat(),
+            'created_at': get_now_pst().isoformat(),
             'created_by': str(ctx.author.id),
             'notes': [],
             'evidence': []
@@ -100,7 +101,7 @@ class IncidentManagement(commands.Cog):
             title="✅ Incident Created",
             description=f"**{title}**",
             color=discord.Color.orange(),
-            timestamp=datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         
         severity_emoji = {
@@ -166,7 +167,7 @@ class IncidentManagement(commands.Cog):
             title=f"📋 {status.upper()} Incidents",
             description=f"Total: {len(filtered)}",
             color=discord.Color.blue(),
-            timestamp=datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         
         severity_emoji = {
@@ -180,7 +181,7 @@ class IncidentManagement(commands.Cog):
             emoji = severity_emoji.get(incident.get('severity'), '?')
             
             created = datetime.fromisoformat(incident['created_at'])
-            age = (datetime.now(datetime.UTC) - created).total_seconds() / 3600
+            age = (get_now_pst() - created).total_seconds() / 3600
             age_text = f"{int(age)}h ago" if age < 24 else f"{int(age/24)}d ago"
             
             embed.add_field(
@@ -234,7 +235,7 @@ class IncidentManagement(commands.Cog):
         incident = incidents[guild_id][incident_id]
         
         note_entry = {
-            'timestamp': datetime.now(datetime.UTC).isoformat(),
+            'timestamp': get_now_pst().isoformat(),
             'author': str(ctx.author.id),
             'text': note
         }
@@ -249,7 +250,7 @@ class IncidentManagement(commands.Cog):
             title="✅ Note Added",
             description=note,
             color=discord.Color.green(),
-            timestamp=datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Incident", value=f"`{incident_id}`", inline=True)
@@ -298,7 +299,7 @@ class IncidentManagement(commands.Cog):
         
         incident = incidents[guild_id][incident_id]
         incident['status'] = 'closed'
-        incident['closed_at'] = datetime.now(datetime.UTC).isoformat()
+        incident['closed_at'] = get_now_pst().isoformat()
         incident['closed_by'] = str(ctx.author.id)
         
         self._save_incidents(incidents)
@@ -307,7 +308,7 @@ class IncidentManagement(commands.Cog):
             title="✅ Incident Closed",
             description=incident['title'],
             color=discord.Color.green(),
-            timestamp=datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="ID", value=f"`{incident_id}`", inline=True)
@@ -374,7 +375,7 @@ class IncidentManagement(commands.Cog):
         embed = discord.Embed(
             title=f"{severity_emoji.get(incident['severity'], '?')} {incident['title']}",
             color=severity_color.get(incident['severity'], discord.Color.blue()),
-            timestamp=datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         
         # Status
@@ -417,3 +418,4 @@ class IncidentManagement(commands.Cog):
 
 async def setup(bot):
     await bot.add_cog(IncidentManagement(bot))
+

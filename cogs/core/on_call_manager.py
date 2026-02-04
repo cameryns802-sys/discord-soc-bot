@@ -19,6 +19,7 @@ from typing import Dict, List, Optional
 from enum import Enum
 
 from cogs.core.signal_bus import signal_bus, Signal, SignalType
+from cogs.core.pst_timezone import get_now_pst
 
 class EscalationLevel(Enum):
     """Escalation severity levels"""
@@ -107,7 +108,7 @@ class OnCallManager(commands.Cog):
         # Create escalation record
         escalation = {
             'id': f"ESC-{len(self.escalations) + 1:04d}",
-            'timestamp': datetime.utcnow().isoformat(),
+            'timestamp': get_now_pst().isoformat(),
             'signal_type': str(signal.signal_type),
             'severity': signal.severity,
             'escalation_level': level,
@@ -167,7 +168,7 @@ class OnCallManager(commands.Cog):
                 title=f"🚨 {level} Escalation - {escalation['id']}",
                 description=f"Signal: {escalation['signal_type']}\nSeverity: {escalation['severity']}",
                 color=self.get_severity_color(escalation['severity']),
-                timestamp=datetime.utcnow()
+                timestamp=get_now_pst()
             )
             
             embed.add_field(
@@ -243,7 +244,7 @@ class OnCallManager(commands.Cog):
         for role, role_data in self.on_call_schedule.items():
             if role_data['user_ids']:
                 # Simple round-robin based on timestamp
-                index = int(datetime.utcnow().timestamp() / (role_data['rotation_minutes'] * 60)) % len(role_data['user_ids'])
+                index = int(get_now_pst().timestamp() / (role_data['rotation_minutes'] * 60)) % len(role_data['user_ids'])
                 current[role] = {
                     'user_id': role_data['user_ids'][index],
                     'rotation_name': role_data['name'],
@@ -254,7 +255,7 @@ class OnCallManager(commands.Cog):
     
     def get_escalation_stats(self, hours: int = 24) -> Dict:
         """Get escalation statistics"""
-        cutoff = datetime.utcnow() - timedelta(hours=hours)
+        cutoff = get_now_pst() - timedelta(hours=hours)
         
         recent = []
         for esc in self.escalations:
@@ -313,7 +314,7 @@ class OnCallManager(commands.Cog):
             title="👥 Current On-Call Roster",
             description="Active on-call personnel by escalation level",
             color=discord.Color.blurple(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         for role, data in current.items():
@@ -350,7 +351,7 @@ class OnCallManager(commands.Cog):
             title="📊 Escalation History",
             description=f"Analysis over last {hours} hours",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(

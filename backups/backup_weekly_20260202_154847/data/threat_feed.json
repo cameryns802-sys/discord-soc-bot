@@ -1,0 +1,102 @@
+[
+  {
+    "id": "TF-20260202-3437",
+    "name": "Botnet Campaign 491",
+    "type": "Malware",
+    "severity": "high",
+    "description": "New threat detected by intelligence sources",
+    "discovered_at": "2026-02-02T20:06:20.014247",
+    "confidence": "low",
+    "source": "OSINT"
+  },
+  {
+    "id": "TF-20260202-2197",
+    "name": "Phishing Campaign 276",
+    "type": "Malware",
+    "severity": "medium",
+    "description": "New threat detected by intelligence sources",
+    "discovered_at": "2026-02-02T20:07:20.611818",
+    "confidence": "high",
+    "source": "Commercial Feed"
+  },
+  {
+    "id": "TF-20260202-4510",
+    "name": "C2 Campaign 929",
+    "type": "C2",
+    "severity": "medium",
+    "description": "New threat detected by intelligence sources",
+    "discovered_at": "2026-02-02T20:15:20.053724",
+    "confidence": "high",
+    "source": "OSINT"
+  },
+  {
+    "id": "TF-20260202-8821",
+    "name": "Botnet Campaign 319",
+    "type": "Phishing",
+    "severity": "low",
+    "description": "New threat detected by intelligence sources",
+    "discovered_at": "2026-02-02T20:25:04.957336",
+    "confidence": "medium",
+    "source": "OSINT"
+  },
+  {
+    "id": "TF-20260202-7454",
+    "name": "Malware Campaign 912",
+    "type": "Botnet",
+    "severity": "low",
+    "description": "New threat detected by intelligence sources",
+    "discovered_at": "2026-02-02T20:31:53.755561",
+    "confidence": "low",
+    "source": "OSINT"
+  },
+  {
+    "id": "TF-20260202-9607",
+    "name": "C2 Campaign 660",
+    "type": "Ransomware",
+    "severity": "high",
+    "description": "New threat detected by intelligence sources",
+    "discovered_at": "2026-02-02T21:11:53.191657",
+    "confidence": "medium",
+    "source": "OSINT"
+  },
+  {
+    "id": "TF-20260202-1798",
+    "name": "APT Campaign 911",
+    "type": "C2",
+    "severity": "medium",
+    "description": "New threat detected by intelligence sources",
+    "discovered_at": "2026-02-02T21:27:32.316419",
+    "confidence": "low",
+    "source": "ISAC"
+  },
+  {
+    "id": "TF-20260202-3867",
+    "name": "Phishing Campaign 856",
+    "type": "Ransomware",
+    "severity": "low",
+    "description": "New threat detected by intelligence sources",
+    "discovered_at": "2026-02-02T21:32:51.504433",
+    "confidence": "low",
+    "source": "ISAC"
+  },
+  {
+    "id": "TF-20260202-5710",
+    "name": "Ransomware Campaign 888",
+    "type": "APT",
+    "severity": "medium",
+    "description": "New threat detected by intelligence sources",
+    "discovered_at": "2026-02-02T21:41:30.518029",
+    "confidence": "medium",
+    "source": "Internal"
+  },
+  {
+    "id": "TF-20260202-7551",
+    "name": "Phishing Campaign 624",
+    "type": "Malware",
+    "severity": "high",
+    "description": "New threat detected by intelligence sources",
+    "discovered_at": "2026-02-02T22:10:25.378393",
+    "confidence": "medium",
+    "source": "ISAC"
+  }
+]

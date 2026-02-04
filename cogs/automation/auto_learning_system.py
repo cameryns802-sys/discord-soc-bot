@@ -4,6 +4,7 @@ from discord.ext import commands
 from datetime import datetime
 import json
 import os
+from cogs.core.pst_timezone import get_now_pst
 
 class AutoLearningSystemCog(commands.Cog):
     def __init__(self, bot):
@@ -60,7 +61,7 @@ class AutoLearningSystemCog(commands.Cog):
             "description": description,
             "enabled": True,
             "created_by": ctx.author.id,
-            "created_at": datetime.utcnow().isoformat(),
+            "created_at": get_now_pst().isoformat(),
             "accuracy": 0.0,
             "training_samples": 0,
             "predictions_made": 0,
@@ -99,7 +100,7 @@ class AutoLearningSystemCog(commands.Cog):
         model = self.learning_models[model_key]
         model["training_samples"] += sample_count
         model["accuracy"] = accuracy / 100.0
-        model["last_trained"] = datetime.utcnow().isoformat()
+        model["last_trained"] = get_now_pst().isoformat()
         
         self.save_learning()
         
@@ -143,7 +144,7 @@ class AutoLearningSystemCog(commands.Cog):
             "input": input_data,
             "prediction": f"Predicted {model['type']} action based on training",
             "confidence": prediction_confidence,
-            "created_at": datetime.utcnow().isoformat(),
+            "created_at": get_now_pst().isoformat(),
             "created_by": ctx.author.id,
             "accepted": False,
             "feedback": None
@@ -192,7 +193,7 @@ class AutoLearningSystemCog(commands.Cog):
         )
         embed.add_field(name="Model Type", value=recommendation["model_type"].upper(), inline=True)
         embed.add_field(name="Confidence", value=f"{recommendation['confidence']*100:.1f}%", inline=True)
-        embed.add_field(name="Timestamp", value=datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S"), inline=True)
+        embed.add_field(name="Timestamp", value=get_now_pst().strftime("%Y-%m-%d %H:%M:%S"), inline=True)
         
         await ctx.send(embed=embed)
 

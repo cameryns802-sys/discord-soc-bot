@@ -2,6 +2,7 @@
 import discord
 from discord.ext import commands
 import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 class InsiderThreatCog(commands.Cog):
     def __init__(self, bot):
@@ -37,7 +38,7 @@ class InsiderThreatCog(commands.Cog):
         user = user or ctx.author
         if user.id not in self.user_profiles:
             self.user_profiles[user.id] = {
-                "first_seen": datetime.datetime.utcnow(),
+                "first_seen": datetime.get_now_pst(),
                 "late_night_logins": 0,
                 "rapid_permission_changes": 0,
                 "access_sensitive_channels": 0,
@@ -66,7 +67,7 @@ class InsiderThreatCog(commands.Cog):
             "typical_active_hours": "09:00-18:00",
             "usual_channels": [],
             "typical_role_count": len(user.roles),
-            "baseline_set_at": datetime.datetime.utcnow()
+            "baseline_set_at": datetime.get_now_pst()
         }
         embed = discord.Embed(title="Baseline Set", description=f"Behavioral baseline established for {user.mention}", color=discord.Color.green())
         embed.add_field(name="Typical Active Hours", value="09:00-18:00", inline=True)
@@ -87,7 +88,7 @@ class InsiderThreatCog(commands.Cog):
             "user": user.mention,
             "anomaly_type": anomaly_type,
             "reported_by": ctx.author.mention,
-            "time": datetime.datetime.utcnow()
+            "time": datetime.get_now_pst()
         })
         # Update risk score
         profile = self.user_profiles.get(user.id, {})

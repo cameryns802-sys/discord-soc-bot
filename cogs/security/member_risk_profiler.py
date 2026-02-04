@@ -10,6 +10,7 @@ import json
 import os
 from datetime import datetime, timedelta
 import uuid
+from cogs.core.pst_timezone import get_now_pst
 
 class MemberRiskProfiler(commands.Cog):
     """User risk assessment and insider threat detection"""
@@ -91,12 +92,12 @@ class MemberRiskProfiler(commands.Cog):
             'id': profile_id,
             'user_id': user.id,
             'user': str(user),
-            'created_at': datetime.utcnow().isoformat(),
+            'created_at': get_now_pst().isoformat(),
             'risk_score': risk_score,
             'risk_level': 'medium' if risk_score >= 50 else 'low',
             'factors': factors,
             'baseline_activities': 156,  # Commands executed
-            'last_activity': datetime.utcnow().isoformat(),
+            'last_activity': get_now_pst().isoformat(),
             'days_active': 45,
             'role_changes': 0,
             'permission_escalations': 0,
@@ -113,7 +114,7 @@ class MemberRiskProfiler(commands.Cog):
             title="👤 Member Risk Profile",
             description=f"{user.mention}",
             color=color,
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Profile ID", value=f"`{profile_id}`", inline=True)
@@ -158,7 +159,7 @@ class MemberRiskProfiler(commands.Cog):
             title=f"👤 {profile['user']}",
             description=f"Risk Assessment",
             color=color,
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Risk Score", value=f"{profile['risk_score']}/100", inline=True)
@@ -206,7 +207,7 @@ class MemberRiskProfiler(commands.Cog):
             title="📊 Member Risk Analytics",
             description=f"{len(profiles)} member(s) analyzed",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Risk Distribution", value="━" * 25, inline=False)

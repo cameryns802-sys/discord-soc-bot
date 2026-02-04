@@ -6,6 +6,7 @@ from discord.ext import commands
 import json
 import os
 from datetime import datetime, timedelta
+from cogs.core.pst_timezone import get_now_pst
 
 class IRWarRoomManagerCog(commands.Cog):
     def __init__(self, bot):
@@ -59,19 +60,19 @@ class IRWarRoomManagerCog(commands.Cog):
             "channel_name": channel_name,
             "channel_id": None,  # Would store actual Discord channel ID
             "created_by": str(ctx.author.id),
-            "created_at": datetime.utcnow().isoformat(),
+            "created_at": get_now_pst().isoformat(),
             "status": "ACTIVE",
             "participants": [str(ctx.author.id)],
             "timeline": [
                 {
-                    "timestamp": datetime.utcnow().isoformat(),
+                    "timestamp": get_now_pst().isoformat(),
                     "action": "war_room_created",
                     "user": str(ctx.author.id),
                     "details": f"War room created for: {incident_title}"
                 }
             ],
             "linked_case": None,
-            "auto_cleanup": datetime.utcnow() + timedelta(hours=48)  # Auto-archive after 48h
+            "auto_cleanup": get_now_pst() + timedelta(hours=48)  # Auto-archive after 48h
         }
         
         # Attempt to create actual Discord channel
@@ -151,7 +152,7 @@ class IRWarRoomManagerCog(commands.Cog):
             
             # Add timeline entry
             war_room["timeline"].append({
-                "timestamp": datetime.utcnow().isoformat(),
+                "timestamp": get_now_pst().isoformat(),
                 "action": "participant_added",
                 "user": str(ctx.author.id),
                 "details": f"Added {member.name} to war room"
@@ -205,10 +206,10 @@ class IRWarRoomManagerCog(commands.Cog):
         
         war_room["status"] = "CLOSED"
         war_room["closed_by"] = str(ctx.author.id)
-        war_room["closed_at"] = datetime.utcnow().isoformat()
+        war_room["closed_at"] = get_now_pst().isoformat()
         
         war_room["timeline"].append({
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": get_now_pst().isoformat(),
             "action": "war_room_closed",
             "user": str(ctx.author.id),
             "details": "War room closed and archived"
@@ -230,7 +231,7 @@ class IRWarRoomManagerCog(commands.Cog):
                         color=discord.Color.green()
                     )
                     embed.add_field(name="Closed By", value=ctx.author.mention, inline=True)
-                    embed.add_field(name="Duration", value=f"{(datetime.utcnow() - datetime.fromisoformat(war_room['created_at'])).total_seconds() / 3600:.1f} hours", inline=True)
+                    embed.add_field(name="Duration", value=f"{(get_now_pst() - datetime.fromisoformat(war_room['created_at'])).total_seconds() / 3600:.1f} hours", inline=True)
                     await channel.send(embed=embed)
                     
                     # Move to archive category

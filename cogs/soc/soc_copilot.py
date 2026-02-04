@@ -6,6 +6,7 @@ from discord.ext import commands
 import json
 import os
 from datetime import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 class SOCCopilotCog(commands.Cog):
     def __init__(self, bot):
@@ -126,7 +127,7 @@ class SOCCopilotCog(commands.Cog):
             "query": query,
             "response": ai_response["response"],
             "confidence": ai_response["confidence"],
-            "timestamp": datetime.utcnow().isoformat()
+            "timestamp": get_now_pst().isoformat()
         }
         
         self.data["conversations"].append(conversation)

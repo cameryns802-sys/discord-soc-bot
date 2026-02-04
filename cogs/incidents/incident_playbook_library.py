@@ -9,6 +9,7 @@ from discord.ext import commands
 import json
 import os
 from datetime import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 class IncidentPlaybookLibrary(commands.Cog):
     """Incident response playbook management"""
@@ -402,7 +403,7 @@ class IncidentPlaybookLibrary(commands.Cog):
             title="📚 Incident Response Playbook Library",
             description=f"{len(playbooks)} playbook(s) available",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         # Group by severity
@@ -449,7 +450,7 @@ class IncidentPlaybookLibrary(commands.Cog):
             title=f"{severity_emoji} {playbook['name']}",
             description=playbook['description'],
             color=severity_color,
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Category", value=playbook['category'].replace('_', ' ').title(), inline=True)
@@ -495,7 +496,7 @@ class IncidentPlaybookLibrary(commands.Cog):
             title="📂 Playbook Categories",
             description=f"{len(by_category)} category(ies)",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         for category, count in sorted(by_category.items()):

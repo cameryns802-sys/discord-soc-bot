@@ -4,6 +4,7 @@ from discord.ext import commands, tasks
 from datetime import datetime
 import json
 import os
+from cogs.core.pst_timezone import get_now_pst
 
 class SlackIntegrationCog(commands.Cog):
     def __init__(self, bot):
@@ -48,7 +49,7 @@ class SlackIntegrationCog(commands.Cog):
             "webhook_url": webhook_url,
             "enabled": True,
             "configured_by": ctx.author.id,
-            "configured_at": datetime.utcnow().isoformat(),
+            "configured_at": get_now_pst().isoformat(),
             "notifications_sent": 0,
             "last_sent": None
         }
@@ -75,7 +76,7 @@ class SlackIntegrationCog(commands.Cog):
         
         self.slack_channels[notification_type.lower()] = {
             "slack_channel": slack_channel,
-            "mapped_at": datetime.utcnow().isoformat(),
+            "mapped_at": get_now_pst().isoformat(),
             "mapped_by": ctx.author.id,
             "enabled": True,
             "message_count": 0
@@ -105,7 +106,7 @@ class SlackIntegrationCog(commands.Cog):
         notification = {
             "type": notification_type.lower(),
             "message": message,
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": get_now_pst().isoformat(),
             "sent_by": ctx.author.id,
             "status": "queued"
         }
@@ -199,7 +200,7 @@ class SlackIntegrationCog(commands.Cog):
         
         if self.notification_queue:
             self.slack_config['notifications_sent'] = self.slack_config.get('notifications_sent', 0) + 5
-            self.slack_config['last_sent'] = datetime.utcnow().isoformat()
+            self.slack_config['last_sent'] = get_now_pst().isoformat()
             self.save_slack_config()
 
     @slack_sender.before_loop

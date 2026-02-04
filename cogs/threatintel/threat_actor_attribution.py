@@ -10,6 +10,7 @@ import json
 import os
 from datetime import datetime, timedelta
 import uuid
+from cogs.core.pst_timezone import get_now_pst
 
 class ThreatActorAttribution(commands.Cog):
     """Threat actor profiling and attribution"""
@@ -100,10 +101,10 @@ class ThreatActorAttribution(commands.Cog):
             'name': actor_name,
             'nation_state': nation_state.lower(),
             'threat_level': threat_level.lower(),
-            'registered_at': datetime.utcnow().isoformat(),
+            'registered_at': get_now_pst().isoformat(),
             'known_aliases': [actor_name],
-            'first_seen': (datetime.utcnow() - timedelta(days=365)).isoformat(),
-            'last_seen': datetime.utcnow().isoformat(),
+            'first_seen': (get_now_pst() - timedelta(days=365)).isoformat(),
+            'last_seen': get_now_pst().isoformat(),
             'threat_score': 75,
             'ttp_count': 8,
             'ttps': ttps,
@@ -127,7 +128,7 @@ class ThreatActorAttribution(commands.Cog):
             title="🎯 Threat Actor Registered",
             description=f"**{actor_name}**",
             color=discord.Color.red(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Actor ID", value=f"`{actor_id}`", inline=True)
@@ -166,7 +167,7 @@ class ThreatActorAttribution(commands.Cog):
             title=f"🎯 {actor['name']}",
             description=f"Nation State: {actor['nation_state'].title()}",
             color=color,
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Actor ID", value=f"`{actor['id']}`", inline=True)
@@ -231,7 +232,7 @@ class ThreatActorAttribution(commands.Cog):
             'actor_id': actor_id,
             'actor_name': actor['name'],
             'incident_description': incident_desc,
-            'attributed_at': datetime.utcnow().isoformat(),
+            'attributed_at': get_now_pst().isoformat(),
             'confidence': confidence,
             'ttps_matched': ttps_matched,
             'infrastructure_match': True,
@@ -250,7 +251,7 @@ class ThreatActorAttribution(commands.Cog):
             title="✅ Incident Attributed",
             description=f"Linked to **{actor['name']}**",
             color=discord.Color.orange(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Attribution ID", value=f"`{attribution_id}`", inline=True)
@@ -283,7 +284,7 @@ class ThreatActorAttribution(commands.Cog):
             title="🎯 Threat Actor Tracking",
             description=f"{len(actors)} actor(s) monitored",
             color=discord.Color.red(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         # Summary
@@ -306,7 +307,7 @@ class ThreatActorAttribution(commands.Cog):
             activity_emoji = "🔴" if actor['active_campaigns'] > 0 else "⚫"
             embed.add_field(
                 name=f"{activity_emoji} {actor['name']} ({actor['id']})",
-                value=f"Threat: {actor['threat_level'].upper()} | Campaigns: {actor['active_campaigns']}/active | Last Seen: {(datetime.utcnow() - datetime.fromisoformat(actor['last_seen'])).days}d ago",
+                value=f"Threat: {actor['threat_level'].upper()} | Campaigns: {actor['active_campaigns']}/active | Last Seen: {(get_now_pst() - datetime.fromisoformat(actor['last_seen'])).days}d ago",
                 inline=False
             )
         

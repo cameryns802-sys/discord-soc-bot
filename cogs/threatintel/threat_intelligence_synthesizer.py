@@ -10,6 +10,7 @@ import json
 import os
 from datetime import datetime, timedelta
 import uuid
+from cogs.core.pst_timezone import get_now_pst
 
 class ThreatIntelligenceSynthesizer(commands.Cog):
     """Threat intelligence aggregation and synthesis"""
@@ -72,7 +73,7 @@ class ThreatIntelligenceSynthesizer(commands.Cog):
             'content': content,
             'severity': severity.lower(),
             'source': 'manual',
-            'added_at': datetime.utcnow().isoformat(),
+            'added_at': get_now_pst().isoformat(),
             'confidence': 75,
             'related_iocs': 3,
             'actionable': True
@@ -87,7 +88,7 @@ class ThreatIntelligenceSynthesizer(commands.Cog):
             title="📡 Intelligence Added",
             description=f"**{intelligence_type.title()}**",
             color=color,
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Intel ID", value=f"`{intel_id}`", inline=True)
@@ -129,7 +130,7 @@ class ThreatIntelligenceSynthesizer(commands.Cog):
             title="📡 Threat Intelligence Synthesis",
             description="Aggregated threat intelligence report",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Intelligence Summary", value="━" * 25, inline=False)
@@ -172,14 +173,14 @@ class ThreatIntelligenceSynthesizer(commands.Cog):
             return
         
         # Filter by days
-        cutoff = (datetime.utcnow() - timedelta(days=days)).isoformat()
+        cutoff = (get_now_pst() - timedelta(days=days)).isoformat()
         recent = [i for i in intel.values() if i['added_at'] >= cutoff]
         
         embed = discord.Embed(
             title=f"📈 Threat Intelligence Trends ({days}d)",
             description="Threat landscape analysis",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         # Trend by type
@@ -208,7 +209,7 @@ class ThreatIntelligenceSynthesizer(commands.Cog):
             title="📋 Threat Intelligence Report",
             description="Executive summary for leadership",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Report Period", value="Last 30 Days", inline=False)

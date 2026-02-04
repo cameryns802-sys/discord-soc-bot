@@ -1,10 +1,11 @@
 import discord
 from discord.ext import commands
 import json
-import datetime
+from datetime import datetime
 from pathlib import Path
 from collections import defaultdict
 import time
+from cogs.core.pst_timezone import get_now_pst
 
 class CommandAnalytics(commands.Cog):
     """Command usage analytics and telemetry"""
@@ -138,7 +139,7 @@ class CommandAnalytics(commands.Cog):
         embed = discord.Embed(
             title="📊 Command Analytics Dashboard",
             color=discord.Color.blue(),
-            timestamp=datetime.datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         
         # Overview
@@ -180,7 +181,7 @@ class CommandAnalytics(commands.Cog):
         embed = discord.Embed(
             title=f"📊 Command Stats: {command_name}",
             color=discord.Color.blue(),
-            timestamp=datetime.datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Total Uses", value=f"{cmd_data['count']:,}", inline=True)
@@ -218,7 +219,7 @@ class CommandAnalytics(commands.Cog):
         embed = discord.Embed(
             title=f"📊 User Stats: {user.name}",
             color=discord.Color.blue(),
-            timestamp=datetime.datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         
         embed.set_thumbnail(url=user.display_avatar.url)
@@ -261,7 +262,7 @@ class CommandAnalytics(commands.Cog):
         embed = discord.Embed(
             title=f"📊 Guild Stats: {ctx.guild.name}",
             color=discord.Color.blue(),
-            timestamp=datetime.datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         
         if ctx.guild:
@@ -292,7 +293,7 @@ class CommandAnalytics(commands.Cog):
             title="📊 Command Usage Heatmap",
             description=f"Last {days} days",
             color=discord.Color.blue(),
-            timestamp=datetime.datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         
         for date in dates:
@@ -378,3 +379,4 @@ class CommandAnalytics(commands.Cog):
 
 async def setup(bot):
     await bot.add_cog(CommandAnalytics(bot))
+

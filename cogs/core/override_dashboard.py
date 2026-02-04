@@ -7,6 +7,7 @@ from datetime import datetime, timedelta
 from typing import Dict, List
 import json
 import os
+from cogs.core.pst_timezone import get_now_pst
 
 class OverrideDashboard(commands.Cog):
     """Comprehensive dashboard for tracking human overrides of AI decisions"""
@@ -70,7 +71,7 @@ class OverrideDashboard(commands.Cog):
         return {
             'total_overrides': len(tracker.overrides),
             'systems': bias_report,
-            'timestamp': datetime.utcnow().isoformat()
+            'timestamp': get_now_pst().isoformat()
         }
     
     def _get_risk_level(self, bias_score: float) -> str:
@@ -142,7 +143,7 @@ class OverrideDashboard(commands.Cog):
         embed = discord.Embed(
             title="📊 Human Override Analytics Dashboard",
             color=discord.Color.blurple(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         # Summary statistics
@@ -237,7 +238,7 @@ class OverrideDashboard(commands.Cog):
             embed = discord.Embed(
                 title=f"🔬 Bias Analysis - {system}",
                 color=discord.Color.red() if data['risk_level'] == 'CRITICAL' else discord.Color.orange() if data['risk_level'] == 'HIGH' else discord.Color.blue(),
-                timestamp=datetime.utcnow()
+                timestamp=get_now_pst()
             )
             
             embed.add_field(name="Risk Level", value=f"🔴 {data['risk_level']}" if data['risk_level'] == 'CRITICAL' else f"🟠 {data['risk_level']}" if data['risk_level'] == 'HIGH' else f"🟡 {data['risk_level']}", inline=True)
@@ -261,7 +262,7 @@ class OverrideDashboard(commands.Cog):
                 title="🔬 Comprehensive Bias Analysis",
                 description="Bias analysis across all AI systems",
                 color=discord.Color.blurple(),
-                timestamp=datetime.utcnow()
+                timestamp=get_now_pst()
             )
             
             all_systems_str = ""
@@ -292,7 +293,7 @@ class OverrideDashboard(commands.Cog):
         embed = discord.Embed(
             title="📉 Human-AI Agreement Trends",
             color=discord.Color.blurple(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         if confidence_trends.get('trend') != 'insufficient_data':
@@ -352,7 +353,7 @@ class OverrideDashboard(commands.Cog):
         embed = discord.Embed(
             title="📋 Override Activity Report",
             color=discord.Color.blurple(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(

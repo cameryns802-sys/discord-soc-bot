@@ -10,6 +10,7 @@ import json
 import os
 from datetime import datetime, timedelta
 import uuid
+from cogs.core.pst_timezone import get_now_pst
 
 class VendorRiskManagement(commands.Cog):
     """Third-party vendor security assessment and management"""
@@ -91,7 +92,7 @@ class VendorRiskManagement(commands.Cog):
         # Last assessment
         if vendor.get('last_assessment'):
             last = datetime.fromisoformat(vendor['last_assessment'])
-            days_since = (datetime.utcnow() - last).days
+            days_since = (get_now_pst() - last).days
             if days_since > 365:
                 score += 25
             elif days_since > 180:
@@ -117,7 +118,7 @@ class VendorRiskManagement(commands.Cog):
             'id': vendor_id,
             'name': name,
             'category': category,
-            'added_at': datetime.utcnow().isoformat(),
+            'added_at': get_now_pst().isoformat(),
             'status': 'active',
             'data_access': 'minimal',
             'certifications': [],
@@ -136,7 +137,7 @@ class VendorRiskManagement(commands.Cog):
             title="🏢 Vendor Added",
             description=f"**{name}**",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Vendor ID", value=f"`{vendor_id}`", inline=True)
@@ -168,7 +169,7 @@ class VendorRiskManagement(commands.Cog):
             title="🏢 Vendor Registry",
             description=f"{len(sorted_vendors)} vendor(s) tracked",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         for vendor in sorted_vendors[:10]:
@@ -210,7 +211,7 @@ class VendorRiskManagement(commands.Cog):
             title=f"{risk_emoji} {vendor['name']}",
             description=vendor['notes'] if vendor['notes'] else "No notes",
             color=color,
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Vendor ID", value=f"`{vendor['id']}`", inline=True)
@@ -253,7 +254,7 @@ class VendorRiskManagement(commands.Cog):
             title="⚠️ High-Risk Vendors",
             description=f"{len(high_risk)} vendor(s) require attention",
             color=discord.Color.red(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         if not high_risk:

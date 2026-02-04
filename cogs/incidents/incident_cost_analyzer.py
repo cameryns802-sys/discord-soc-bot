@@ -3,6 +3,7 @@ from discord.ext import commands
 import json
 import os
 from datetime import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 class IncidentCostAnalyzerCog(commands.Cog):
     def __init__(self, bot):
@@ -60,7 +61,7 @@ class IncidentCostAnalyzerCog(commands.Cog):
             "downtime_cost": downtime_cost,
             "compliance_cost": compliance_cost,
             "total_cost": total,
-            "timestamp": datetime.utcnow().isoformat()
+            "timestamp": get_now_pst().isoformat()
         }
         
         self.costs["incidents"].append(incident_cost)

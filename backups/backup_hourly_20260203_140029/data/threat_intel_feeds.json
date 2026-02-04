@@ -1,0 +1,42 @@
+{
+  "abuse_ch": {
+    "name": "abuse.ch URLhaus",
+    "type": "url_malware",
+    "enabled": true,
+    "last_updated": "2026-02-02T23:59:52.947589",
+    "ioc_count": 15,
+    "update_frequency_hours": 6
+  },
+  "malware_bazaar": {
+    "name": "Malware Bazaar",
+    "type": "file_hash",
+    "enabled": true,
+    "last_updated": "2026-02-02T23:59:53.053549",
+    "ioc_count": 10,
+    "update_frequency_hours": 12
+  },
+  "phishtank": {
+    "name": "PhishTank",
+    "type": "phishing_url",
+    "enabled": true,
+    "last_updated": "2026-02-02T23:59:53.081343",
+    "ioc_count": 25,
+    "update_frequency_hours": 6
+  },
+  "abuse_ipbl": {
+    "name": "Abuse.ch IP Blocklist",
+    "type": "ip_address",
+    "enabled": true,
+    "last_updated": "2026-02-02T23:59:53.243322",
+    "ioc_count": 10,
+    "update_frequency_hours": 24
+  },
+  "cybercriminals": {
+    "name": "Cybercriminals Feed",
+    "type": "c2_server",
+    "enabled": true,
+    "last_updated": "2026-02-02T23:59:53.248207",
+    "ioc_count": 8,
+    "update_frequency_hours": 12
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "thresholds": {
+    "LOW": 0.3,
+    "MEDIUM": 0.6,
+    "HIGH": 0.8
+  },
+  "accuracy": 94.2,
+  "feedback_count": 0
+}

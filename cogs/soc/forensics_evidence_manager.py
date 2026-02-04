@@ -11,6 +11,7 @@ import os
 from datetime import datetime
 import uuid
 import hashlib
+from cogs.core.pst_timezone import get_now_pst
 
 class ForensicsEvidenceManager(commands.Cog):
     """Forensic evidence management and chain of custody"""
@@ -58,13 +59,13 @@ class ForensicsEvidenceManager(commands.Cog):
             'description': description,
             'content_hash': self.create_evidence_hash(content),
             'content_preview': str(content)[:200],
-            'collected_at': datetime.utcnow().isoformat(),
+            'collected_at': get_now_pst().isoformat(),
             'collected_by': collector,
             'chain_of_custody': [
                 {
                     'action': 'collected',
                     'user': collector,
-                    'timestamp': datetime.utcnow().isoformat()
+                    'timestamp': get_now_pst().isoformat()
                 }
             ]
         }
@@ -110,7 +111,7 @@ class ForensicsEvidenceManager(commands.Cog):
             title=f"{emoji} Evidence Collected",
             description=f"Incident: `{incident_id}`",
             color=discord.Color.blurple(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         embed.add_field(name="Evidence ID", value=f"`{evidence['id']}`", inline=True)
         embed.add_field(name="Type", value=evidence_type.upper(), inline=True)
@@ -136,7 +137,7 @@ class ForensicsEvidenceManager(commands.Cog):
             title="📋 Incident Evidence Chain",
             description=f"Incident: `{incident_id}` | {len(evidence_list)} item(s)",
             color=discord.Color.blurple(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         for evidence in evidence_list[:8]:
@@ -175,7 +176,7 @@ class ForensicsEvidenceManager(commands.Cog):
             title=f"{emoji} Evidence Details",
             description=evidence['description'],
             color=discord.Color.blurple(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Evidence ID", value=f"`{evidence['id']}`", inline=True)
@@ -214,7 +215,7 @@ class ForensicsEvidenceManager(commands.Cog):
             title="🕐 Forensic Timeline",
             description=f"Incident: `{incident_id}` | {len(evidence_list)} events",
             color=discord.Color.blurple(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         timeline_str = ""

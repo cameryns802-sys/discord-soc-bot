@@ -8,6 +8,7 @@ from discord import app_commands
 from datetime import datetime, timedelta
 import json
 import os
+from cogs.core.pst_timezone import get_now_pst
 
 class SecurityReports(commands.Cog):
     """Generate comprehensive security reports"""
@@ -73,7 +74,7 @@ class SecurityReports(commands.Cog):
             hours = 24 * 30
             period_name = "Last 30 Days"
         
-        time_filter = datetime.now(datetime.UTC) - timedelta(hours=hours)
+        time_filter = get_now_pst() - timedelta(hours=hours)
         
         # Load threat data
         threat_data = self._load_report_data()
@@ -104,7 +105,7 @@ class SecurityReports(commands.Cog):
             title=f"📈 Security Report - {period_name}",
             description=f"Comprehensive security metrics for {ctx.guild.name}",
             color=discord.Color.blue(),
-            timestamp=datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         
         # Overview
@@ -242,13 +243,13 @@ class SecurityReports(commands.Cog):
         guild_threats = [t for t in threat_data if t.get('guild_id') == guild_id]
         
         # Today's threats
-        today_filter = datetime.now(datetime.UTC) - timedelta(hours=24)
+        today_filter = get_now_pst() - timedelta(hours=24)
         today_threats = [t for t in guild_threats if datetime.fromisoformat(t['detected_at']) > today_filter]
         
         embed = discord.Embed(
             title="🚨 Threat Summary",
             color=discord.Color.red() if len(today_threats) > 0 else discord.Color.green(),
-            timestamp=datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         
         embed.add_field(
@@ -279,3 +280,4 @@ class SecurityReports(commands.Cog):
 
 async def setup(bot):
     await bot.add_cog(SecurityReports(bot))
+

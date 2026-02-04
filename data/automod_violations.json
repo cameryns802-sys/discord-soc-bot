@@ -1,1 +1,22 @@
-{}
+{
+  "1451439611766112319": [
+    {
+      "timestamp": "2026-02-03T21:19:05.962210",
+      "user_id": 960995456488448080,
+      "type": "excessive_caps_lock",
+      "severity": "low",
+      "details": {
+        "message": "IM TESTING DAMNIT"
+      }
+    },
+    {
+      "timestamp": "2026-02-03T19:03:47.848371-08:00",
+      "user_id": 862083132735225858,
+      "type": "excessive_caps_lock",
+      "severity": "low",
+      "details": {
+        "message": "NIGGERRSSSS"
+      }
+    }
+  ]
+}

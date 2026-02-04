@@ -10,6 +10,7 @@ import json
 import os
 from datetime import datetime, timedelta
 import uuid
+from cogs.core.pst_timezone import get_now_pst
 
 class IncidentForecasting(commands.Cog):
     """Incident forecasting and predictive modeling"""
@@ -73,7 +74,7 @@ class IncidentForecasting(commands.Cog):
         """Generate incident forecast"""
         forecasts = self.get_forecasts(ctx.guild.id)
         
-        forecast_id = f"FCT-{datetime.utcnow().strftime('%Y%m%d%H%M%S')}"
+        forecast_id = f"FCT-{get_now_pst().strftime('%Y%m%d%H%M%S')}"
         
         # Simulate forecast data
         period_days = 30 if period == '30days' else 90 if period == '90days' else 7
@@ -81,9 +82,9 @@ class IncidentForecasting(commands.Cog):
         forecast = {
             'id': forecast_id,
             'period_days': period_days,
-            'created_at': datetime.utcnow().isoformat(),
-            'forecast_start': datetime.utcnow().isoformat(),
-            'forecast_end': (datetime.utcnow() + timedelta(days=period_days)).isoformat(),
+            'created_at': get_now_pst().isoformat(),
+            'forecast_start': get_now_pst().isoformat(),
+            'forecast_end': (get_now_pst() + timedelta(days=period_days)).isoformat(),
             'predicted_incidents': max(0, int(3 - (period_days // 30))),
             'confidence_score': 78,
             'pattern_strength': 82,
@@ -102,7 +103,7 @@ class IncidentForecasting(commands.Cog):
             title=f"🔮 Incident Forecast ({period_days} Days)",
             description=f"Predictive incident modeling for next {period_days} days",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Forecast ID", value=f"`{forecast_id}`", inline=True)
@@ -145,7 +146,7 @@ class IncidentForecasting(commands.Cog):
             title=f"📊 Detailed Forecast Analysis",
             description=f"Forecast ID: {forecast['id']}",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Forecast Metrics", value="━" * 25, inline=False)
@@ -193,7 +194,7 @@ class IncidentForecasting(commands.Cog):
             title="📈 Forecast Accuracy Analysis",
             description="Historical accuracy of incident predictions",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Overall Accuracy Metrics", value="━" * 25, inline=False)
@@ -210,7 +211,7 @@ class IncidentForecasting(commands.Cog):
         embed.add_field(name="Model Performance", value="━" * 25, inline=False)
         embed.add_field(name="False Positives", value="12% (predictions that didn't occur)", inline=False)
         embed.add_field(name="False Negatives", value="8% (incidents not predicted)", inline=False)
-        embed.add_field(name="Last Updated", value=datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S UTC'), inline=False)
+        embed.add_field(name="Last Updated", value=get_now_pst().strftime('%Y-%m-%d %H:%M:%S UTC'), inline=False)
         
         embed.set_footer(text="Model improves with additional historical incident data")
         
@@ -222,7 +223,7 @@ class IncidentForecasting(commands.Cog):
             title="⚠️ Current Risk Factors",
             description="Factors influencing incident probability",
             color=discord.Color.orange(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="High-Impact Risk Factors", value="━" * 25, inline=False)

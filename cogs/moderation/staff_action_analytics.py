@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 class StaffActionAnalytics(commands.Cog):
     def __init__(self, bot):
@@ -9,11 +10,11 @@ class StaffActionAnalytics(commands.Cog):
 
     @commands.Cog.listener()
     async def on_member_ban(self, guild, user):
-        self.action_log.append({"action": "ban", "user": user.id, "guild": guild.id, "timestamp": datetime.datetime.utcnow().isoformat()})
+        self.action_log.append({"action": "ban", "user": user.id, "guild": guild.id, "timestamp": datetime.get_now_pst().isoformat()})
 
     @commands.Cog.listener()
     async def on_member_kick(self, member):
-        self.action_log.append({"action": "kick", "user": member.id, "guild": member.guild.id, "timestamp": datetime.datetime.utcnow().isoformat()})
+        self.action_log.append({"action": "kick", "user": member.id, "guild": member.guild.id, "timestamp": datetime.get_now_pst().isoformat()})
 
     @commands.command()
     @commands.has_permissions(administrator=True)

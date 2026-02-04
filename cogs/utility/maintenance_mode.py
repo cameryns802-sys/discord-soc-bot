@@ -9,6 +9,7 @@ from discord.ext import commands
 import json
 import os
 from datetime import datetime, timedelta
+from cogs.core.pst_timezone import get_now_pst
 
 class MaintenanceMode(commands.Cog):
     """Manage maintenance mode and service status"""
@@ -42,7 +43,7 @@ class MaintenanceMode(commands.Cog):
         
         data["active"] = active
         data["reason"] = reason
-        data["timestamp"] = datetime.utcnow().isoformat()
+        data["timestamp"] = get_now_pst().isoformat()
         
         with open(self.maintenance_file, 'w') as f:
             json.dump(data, f, indent=2)
@@ -62,7 +63,7 @@ class MaintenanceMode(commands.Cog):
         
         embed.add_field(name="Status", value="🟠 MAINTENANCE", inline=True)
         embed.add_field(name="Enabled By", value=ctx.author.mention, inline=True)
-        embed.add_field(name="Time", value=datetime.utcnow().strftime('%H:%M:%S'), inline=True)
+        embed.add_field(name="Time", value=get_now_pst().strftime('%H:%M:%S'), inline=True)
         
         embed.add_field(name="Reason", value=reason, inline=False)
         embed.add_field(name="Impact", value="━" * 25, inline=False)
@@ -96,7 +97,7 @@ class MaintenanceMode(commands.Cog):
         
         embed.add_field(name="Status", value="🟢 ONLINE", inline=True)
         embed.add_field(name="Resumed By", value=ctx.author.mention, inline=True)
-        embed.add_field(name="Time", value=datetime.utcnow().strftime('%H:%M:%S'), inline=True)
+        embed.add_field(name="Time", value=get_now_pst().strftime('%H:%M:%S'), inline=True)
         
         embed.add_field(name="Services", value="━" * 25, inline=False)
         embed.add_field(name="→", value="✅ Security systems active", inline=False)
@@ -153,7 +154,7 @@ class MaintenanceMode(commands.Cog):
     @commands.has_permissions(administrator=True)
     async def scheduled_maintenance(self, ctx, hours_from_now: int = 1, *, reason: str = "Scheduled maintenance"):
         """Schedule maintenance for later"""
-        scheduled_time = datetime.utcnow() + timedelta(hours=hours_from_now)
+        scheduled_time = get_now_pst() + timedelta(hours=hours_from_now)
         
         embed = discord.Embed(
             title="📅 Maintenance Scheduled",

@@ -6,6 +6,7 @@ from discord.ext import commands, tasks
 import json
 import os
 from datetime import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 class ContinuousComplianceMonitorCog(commands.Cog):
     def __init__(self, bot):
@@ -50,7 +51,7 @@ class ContinuousComplianceMonitorCog(commands.Cog):
             # Record scan
             self.data["scan_history"].append({
                 "scan_id": f"SCAN-{len(self.data['scan_history']) + 1:05d}",
-                "timestamp": datetime.utcnow().isoformat(),
+                "timestamp": get_now_pst().isoformat(),
                 "violations_found": scan_result["total_violations"],
                 "frameworks_checked": list(scan_result["frameworks"].keys())
             })
@@ -184,7 +185,7 @@ class ContinuousComplianceMonitorCog(commands.Cog):
         # Save scan
         scan_record = {
             "scan_id": f"SCAN-{len(self.data['scan_history']) + 1:05d}",
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": get_now_pst().isoformat(),
             "violations_found": scan_result["total_violations"],
             "frameworks_checked": list(scan_result["frameworks"].keys()),
             "triggered_by": str(ctx.author.id)
@@ -268,7 +269,7 @@ class ContinuousComplianceMonitorCog(commands.Cog):
             "name": policy_name,
             "description": policy_description,
             "created_by": str(ctx.author.id),
-            "created_at": datetime.utcnow().isoformat(),
+            "created_at": get_now_pst().isoformat(),
             "active": True
         }
         
@@ -320,7 +321,7 @@ class ContinuousComplianceMonitorCog(commands.Cog):
         
         drift_record = {
             "drift_id": f"DRIFT-{len(self.data['drift_detections']) + 1:05d}",
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": get_now_pst().isoformat(),
             "drifts_found": len(drift_found),
             "details": drift_found
         }

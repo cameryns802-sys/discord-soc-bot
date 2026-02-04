@@ -1,0 +1,17 @@
+{
+  "mode": "normal",
+  "msg_count": 0,
+  "cmd_count": 0,
+  "thresholds": {
+    "messages_high": 120,
+    "commands_high": 30,
+    "messages_critical": 240,
+    "commands_critical": 60
+  },
+  "degrade_features": [
+    "ml_anomaly_detection",
+    "generative_responses"
+  ],
+  "use_safe_mode": false,
+  "deferred_messages": []
+}

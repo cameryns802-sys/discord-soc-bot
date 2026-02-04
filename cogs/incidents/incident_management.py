@@ -12,6 +12,7 @@ import json
 import os
 from cogs.core.signal_bus import signal_bus, Signal, SignalType
 from cogs.core.feature_flags import flags
+from cogs.core.pst_timezone import get_now_pst
 
 class IncidentManagementCog(commands.Cog):
     def __init__(self, bot):
@@ -57,8 +58,8 @@ class IncidentManagementCog(commands.Cog):
         self.incidents[inc_id] = {
             "id": inc_id, "title": title, "description": description, "severity": severity.lower(),
             "status": "open", "assigned_to": None, "created_by": interaction.user.id,
-            "created_at": datetime.datetime.utcnow().isoformat(),
-            "timeline": [{"action": "created", "user_id": interaction.user.id, "timestamp": datetime.datetime.utcnow().isoformat()}]
+            "created_at": datetime.get_now_pst().isoformat(),
+            "timeline": [{"action": "created", "user_id": interaction.user.id, "timestamp": datetime.get_now_pst().isoformat()}]
         }
         self.save_data()
         
@@ -121,7 +122,7 @@ class IncidentManagementCog(commands.Cog):
         self.incidents[incident_id]["notes"].append({
             "user_id": interaction.user.id,
             "text": note,
-            "timestamp": datetime.datetime.utcnow().isoformat()
+            "timestamp": datetime.get_now_pst().isoformat()
         })
         self.save_data()
         await interaction.response.send_message(f"📝 Note added to incident #{incident_id}")

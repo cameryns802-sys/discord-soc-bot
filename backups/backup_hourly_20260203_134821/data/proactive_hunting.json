@@ -1,0 +1,65 @@
+{
+  "patterns": {
+    "1": {
+      "id": "1",
+      "name": "Credential Access",
+      "technique_id": "T1003",
+      "keywords": [
+        "dump lsass",
+        "mimikatz",
+        "creds",
+        "passwords.txt",
+        "shadow copy"
+      ],
+      "regex": [],
+      "created_at": "2026-02-03T21:20:27.624291",
+      "created_by": "system"
+    },
+    "2": {
+      "id": "2",
+      "name": "Valid Accounts",
+      "technique_id": "T1078",
+      "keywords": [
+        "account takeover",
+        "credential stuffing",
+        "stolen login",
+        "password reuse"
+      ],
+      "regex": [],
+      "created_at": "2026-02-03T21:20:27.624324",
+      "created_by": "system"
+    },
+    "3": {
+      "id": "3",
+      "name": "Exfiltration Over Web Services",
+      "technique_id": "T1567",
+      "keywords": [
+        "pastebin",
+        "dropbox",
+        "drive.google.com",
+        "mega.nz",
+        "file.io"
+      ],
+      "regex": [],
+      "created_at": "2026-02-03T21:20:27.624336",
+      "created_by": "system"
+    },
+    "4": {
+      "id": "4",
+      "name": "Phishing",
+      "technique_id": "T1566",
+      "keywords": [
+        "verify your account",
+        "reset password",
+        "suspicious login",
+        "urgent action"
+      ],
+      "regex": [],
+      "created_at": "2026-02-03T21:20:27.624344",
+      "created_by": "system"
+    }
+  },
+  "pattern_counter": 4,
+  "hunts": {},
+  "hunt_counter": 0
+}

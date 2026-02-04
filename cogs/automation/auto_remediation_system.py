@@ -5,6 +5,7 @@ from datetime import datetime
 import json
 import os
 import asyncio
+from cogs.core.pst_timezone import get_now_pst
 
 class AutoRemediationSystemCog(commands.Cog):
     def __init__(self, bot):
@@ -52,7 +53,7 @@ class AutoRemediationSystemCog(commands.Cog):
             "steps": [],
             "auto_execute": False,
             "created_by": ctx.author.id,
-            "created_at": datetime.utcnow().isoformat(),
+            "created_at": get_now_pst().isoformat(),
             "execution_count": 0,
             "last_executed": None
         }
@@ -84,7 +85,7 @@ class AutoRemediationSystemCog(commands.Cog):
         step_data = {
             "step": step_num,
             "action": action,
-            "created_at": datetime.utcnow().isoformat()
+            "created_at": get_now_pst().isoformat()
         }
         
         plan["steps"].append(step_data)
@@ -108,7 +109,7 @@ class AutoRemediationSystemCog(commands.Cog):
             return
         
         plan["status"] = "published"
-        plan["published_at"] = datetime.utcnow().isoformat()
+        plan["published_at"] = get_now_pst().isoformat()
         self.save_plans()
         
         embed = discord.Embed(
@@ -135,10 +136,10 @@ class AutoRemediationSystemCog(commands.Cog):
             return
         
         # Log execution
-        exec_id = f"exec_{plan_id}_{datetime.utcnow().timestamp()}"
+        exec_id = f"exec_{plan_id}_{get_now_pst().timestamp()}"
         self.execution_history[exec_id] = {
             "plan_id": plan_id,
-            "started_at": datetime.utcnow().isoformat(),
+            "started_at": get_now_pst().isoformat(),
             "started_by": ctx.author.id,
             "status": "running",
             "steps_executed": 0
@@ -161,9 +162,9 @@ class AutoRemediationSystemCog(commands.Cog):
             await asyncio.sleep(1)  # Simulate execution time
         
         plan["execution_count"] += 1
-        plan["last_executed"] = datetime.utcnow().isoformat()
+        plan["last_executed"] = get_now_pst().isoformat()
         self.execution_history[exec_id]["status"] = "completed"
-        self.execution_history[exec_id]["completed_at"] = datetime.utcnow().isoformat()
+        self.execution_history[exec_id]["completed_at"] = get_now_pst().isoformat()
         self.save_plans()
         
         embed = discord.Embed(

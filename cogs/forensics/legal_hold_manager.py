@@ -9,6 +9,7 @@ import json
 import os
 from datetime import datetime
 import hashlib
+from cogs.core.pst_timezone import get_now_pst
 
 class LegalHoldManagerCog(commands.Cog):
     """Legal Hold Manager - Evidence preservation for legal proceedings"""
@@ -53,7 +54,7 @@ class LegalHoldManagerCog(commands.Cog):
             "id": len(self.holds) + 1,
             "case_number": case_number,
             "description": description,
-            "created_at": datetime.utcnow().isoformat(),
+            "created_at": get_now_pst().isoformat(),
             "created_by": str(ctx.author.id),
             "status": "active",
             "evidence_count": 0,
@@ -63,7 +64,7 @@ class LegalHoldManagerCog(commands.Cog):
         self.holds.append(hold)
         self.save_holds()
         
-        embed = discord.Embed(title="⚖️ Legal Hold Created", color=discord.Color.blue(), timestamp=datetime.utcnow())
+        embed = discord.Embed(title="⚖️ Legal Hold Created", color=discord.Color.blue(), timestamp=get_now_pst())
         embed.add_field(name="Hold ID", value=f"#{hold['id']}", inline=True)
         embed.add_field(name="Case Number", value=case_number, inline=True)
         embed.add_field(name="Status", value="🔒 ACTIVE", inline=True)
@@ -88,9 +89,9 @@ class LegalHoldManagerCog(commands.Cog):
             "type": evidence_type,
             "content": content,
             "hash": evidence_hash,
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": get_now_pst().isoformat(),
             "added_by": str(ctx.author.id),
-            "chain_of_custody": [{"action": "created", "by": str(ctx.author.id), "at": datetime.utcnow().isoformat()}],
+            "chain_of_custody": [{"action": "created", "by": str(ctx.author.id), "at": get_now_pst().isoformat()}],
             "immutable": True,
             "court_admissible": True
         }
@@ -100,7 +101,7 @@ class LegalHoldManagerCog(commands.Cog):
         self.save_evidence()
         self.save_holds()
         
-        embed = discord.Embed(title="✅ Evidence Added to Legal Hold", color=discord.Color.green(), timestamp=datetime.utcnow())
+        embed = discord.Embed(title="✅ Evidence Added to Legal Hold", color=discord.Color.green(), timestamp=get_now_pst())
         embed.add_field(name="Evidence ID", value=f"#{evidence['id']}", inline=True)
         embed.add_field(name="Hold ID", value=f"#{hold_id}", inline=True)
         embed.add_field(name="Type", value=evidence_type, inline=True)
@@ -121,7 +122,7 @@ class LegalHoldManagerCog(commands.Cog):
         integrity_verified = (current_hash == evidence["hash"])
         
         color = discord.Color.green() if integrity_verified else discord.Color.red()
-        embed = discord.Embed(title="🔍 Evidence Integrity Verification", color=color, timestamp=datetime.utcnow())
+        embed = discord.Embed(title="🔍 Evidence Integrity Verification", color=color, timestamp=get_now_pst())
         embed.add_field(name="Evidence ID", value=f"#{evidence_id}", inline=True)
         embed.add_field(name="Case Number", value=evidence["case_number"], inline=True)
         embed.add_field(name="Integrity", value="✅ VERIFIED" if integrity_verified else "❌ COMPROMISED", inline=True)
@@ -139,7 +140,7 @@ class LegalHoldManagerCog(commands.Cog):
             return
         
         active_holds = [h for h in self.holds if h["status"] == "active"]
-        embed = discord.Embed(title="⚖️ Legal Holds", description=f"{len(active_holds)} active holds", color=discord.Color.blue(), timestamp=datetime.utcnow())
+        embed = discord.Embed(title="⚖️ Legal Holds", description=f"{len(active_holds)} active holds", color=discord.Color.blue(), timestamp=get_now_pst())
         
         for hold in active_holds[:10]:
             embed.add_field(name=f"🔒 Hold #{hold['id']} - {hold['case_number']}", value=f"Evidence: {hold['evidence_count']} items\nCreated: {hold['created_at'][:10]}", inline=False)
@@ -154,7 +155,7 @@ class LegalHoldManagerCog(commands.Cog):
         active_holds = len([h for h in self.holds if h["status"] == "active"])
         total_evidence = len(self.evidence)
         
-        embed = discord.Embed(title="⚖️ Legal Hold Dashboard", color=discord.Color.blue(), timestamp=datetime.utcnow())
+        embed = discord.Embed(title="⚖️ Legal Hold Dashboard", color=discord.Color.blue(), timestamp=get_now_pst())
         embed.add_field(name="📊 Total Holds", value=total_holds, inline=True)
         embed.add_field(name="🔒 Active Holds", value=active_holds, inline=True)
         embed.add_field(name="📝 Evidence Items", value=total_evidence, inline=True)

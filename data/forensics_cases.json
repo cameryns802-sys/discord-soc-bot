@@ -1,0 +1,269 @@
+{
+  "cases": {},
+  "evidence": {
+    "1": {
+      "id": "1",
+      "guild_id": 1451439611766112319,
+      "source": "deleted_message",
+      "collected_by": 1449154555479851228,
+      "collected_at": "2026-02-03T21:22:09.586795",
+      "payload": {
+        "message_id": 1468355893698756608,
+        "channel_id": 1451439612869218478,
+        "author_id": 960995456488448080,
+        "content_hash": "719aa6edab33723024e74851240821015cf0b73f724657c4580b1528b0efbf9b",
+        "content_preview": "!timeout <@862083132735225858> 10m test",
+        "created_at": "2026-02-03T21:22:05.791000",
+        "deleted_at": "2026-02-03T21:22:09.586579",
+        "attachments": []
+      },
+      "custody": [
+        {
+          "action": "collected",
+          "timestamp": "2026-02-03T21:22:09.586807",
+          "user_id": 1449154555479851228,
+          "notes": "deleted_message"
+        }
+      ]
+    },
+    "2": {
+      "id": "2",
+      "guild_id": 1451439611766112319,
+      "source": "deleted_message",
+      "collected_by": 1449154555479851228,
+      "collected_at": "2026-02-03T21:22:25.631386",
+      "payload": {
+        "message_id": 1468355965626880144,
+        "channel_id": 1451439612869218478,
+        "author_id": 862083132735225858,
+        "content_hash": "2e70784bca016eefb08728b0fed1531c357c0d78361808ef86013bbd91723f4a",
+        "content_preview": "Nigger nigger nigger nigger nigger",
+        "created_at": "2026-02-03T21:22:22.940000",
+        "deleted_at": "2026-02-03T21:22:25.631355",
+        "attachments": []
+      },
+      "custody": [
+        {
+          "action": "collected",
+          "timestamp": "2026-02-03T21:22:25.631394",
+          "user_id": 1449154555479851228,
+          "notes": "deleted_message"
+        }
+      ]
+    },
+    "3": {
+      "id": "3",
+      "guild_id": 1466863901449785497,
+      "source": "deleted_message",
+      "collected_by": 1449154555479851228,
+      "collected_at": "2026-02-03T14:41:21.970339-08:00",
+      "payload": {
+        "message_id": 1468375845386326047,
+        "channel_id": 1466863903450599562,
+        "author_id": 960995456488448080,
+        "content_hash": "d72727c845e24c73567d470c261d6b030c424515e97704be0be33872d4ddca21",
+        "content_preview": "!say @here Please react once you agree to these",
+        "created_at": "2026-02-03T22:41:22.644000",
+        "deleted_at": "2026-02-03T14:41:21.970095-08:00",
+        "attachments": []
+      },
+      "custody": [
+        {
+          "action": "collected",
+          "timestamp": "2026-02-03T14:41:21.970382-08:00",
+          "user_id": 1449154555479851228,
+          "notes": "deleted_message"
+        }
+      ]
+    },
+    "4": {
+      "id": "4",
+      "guild_id": 1466863901449785497,
+      "source": "deleted_message",
+      "collected_by": 1449154555479851228,
+      "collected_at": "2026-02-03T14:41:33.521282-08:00",
+      "payload": {
+        "message_id": 1468375896489595033,
+        "channel_id": 1468374008805462036,
+        "author_id": 960995456488448080,
+        "content_hash": "d72727c845e24c73567d470c261d6b030c424515e97704be0be33872d4ddca21",
+        "content_preview": "!say @here Please react once you agree to these",
+        "created_at": "2026-02-03T22:41:34.828000",
+        "deleted_at": "2026-02-03T14:41:33.521176-08:00",
+        "attachments": []
+      },
+      "custody": [
+        {
+          "action": "collected",
+          "timestamp": "2026-02-03T14:41:33.521321-08:00",
+          "user_id": 1449154555479851228,
+          "notes": "deleted_message"
+        }
+      ]
+    },
+    "5": {
+      "id": "5",
+      "guild_id": 1466863901449785497,
+      "source": "deleted_message",
+      "collected_by": 1449154555479851228,
+      "collected_at": "2026-02-03T14:41:37.040533-08:00",
+      "payload": {
+        "message_id": 1468375911522111541,
+        "channel_id": 1468374066347114742,
+        "author_id": 960995456488448080,
+        "content_hash": "d72727c845e24c73567d470c261d6b030c424515e97704be0be33872d4ddca21",
+        "content_preview": "!say @here Please react once you agree to these",
+        "created_at": "2026-02-03T22:41:38.412000",
+        "deleted_at": "2026-02-03T14:41:37.040446-08:00",
+        "attachments": []
+      },
+      "custody": [
+        {
+          "action": "collected",
+          "timestamp": "2026-02-03T14:41:37.040571-08:00",
+          "user_id": 1449154555479851228,
+          "notes": "deleted_message"
+        }
+      ]
+    },
+    "6": {
+      "id": "6",
+      "guild_id": 1466863901449785497,
+      "source": "deleted_message",
+      "collected_by": 1449154555479851228,
+      "collected_at": "2026-02-03T14:46:27.519928-08:00",
+      "payload": {
+        "message_id": 1468376944004300810,
+        "channel_id": 1467646649232003339,
+        "author_id": 960995456488448080,
+        "content_hash": "e1445f7d64ce632806231d8fabb1681902afff1efb69b3913c5ec766b6520d32",
+        "content_preview": "/reaction set 1468376820272599203 \ud83d\ude4b\u200d\u2640\ufe0f <@&1466863901449785502>",
+        "created_at": "2026-02-03T22:45:44.575000",
+        "deleted_at": "2026-02-03T14:46:27.519320-08:00",
+        "attachments": []
+      },
+      "custody": [
+        {
+          "action": "collected",
+          "timestamp": "2026-02-03T14:46:27.519977-08:00",
+          "user_id": 1449154555479851228,
+          "notes": "deleted_message"
+        }
+      ]
+    },
+    "7": {
+      "id": "7",
+      "guild_id": 1466863901449785497,
+      "source": "deleted_message",
+      "collected_by": 1449154555479851228,
+      "collected_at": "2026-02-03T14:58:25.582650-08:00",
+      "payload": {
+        "message_id": 1468380107340251199,
+        "channel_id": 1466863904167694497,
+        "author_id": 960995456488448080,
+        "content_hash": "48cbaabf8cae4b4ae12cb9f31943602ed496ef949b5abc21c0cfbe50ae590ed3",
+        "content_preview": "!help",
+        "created_at": "2026-02-03T22:58:18.773000",
+        "deleted_at": "2026-02-03T14:58:25.582358-08:00",
+        "attachments": []
+      },
+      "custody": [
+        {
+          "action": "collected",
+          "timestamp": "2026-02-03T14:58:25.582718-08:00",
+          "user_id": 1449154555479851228,
+          "notes": "deleted_message"
+        }
+      ]
+    },
+    "8": {
+      "id": "8",
+      "guild_id": 1466863901449785497,
+      "source": "deleted_message",
+      "collected_by": 1449154555479851228,
+      "collected_at": "2026-02-03T15:02:19.762797-08:00",
+      "payload": {
+        "message_id": 1468381106037325944,
+        "channel_id": 1466863904167694497,
+        "author_id": 960995456488448080,
+        "content_hash": "b92f72e0a1c7fb1b5f3649af4e9d0b30b15e4246c145e51c814c5f97983047a9",
+        "content_preview": "where can i find the rules",
+        "created_at": "2026-02-03T23:02:16.881000",
+        "deleted_at": "2026-02-03T15:02:19.762445-08:00",
+        "attachments": []
+      },
+      "custody": [
+        {
+          "action": "collected",
+          "timestamp": "2026-02-03T15:02:19.762878-08:00",
+          "user_id": 1449154555479851228,
+          "notes": "deleted_message"
+        }
+      ]
+    },
+    "9": {
+      "id": "9",
+      "guild_id": 1451439611766112319,
+      "source": "deleted_message",
+      "collected_by": 1449154555479851228,
+      "collected_at": "2026-02-03T15:11:29.162166-08:00",
+      "payload": {
+        "message_id": 1468383343891714383,
+        "channel_id": 1451439612869218478,
+        "author_id": 960995456488448080,
+        "content_hash": "e148932cbba7c1495aa79f020f9c80cbdb1449901946f5d7fcf87ad513b3be20",
+        "content_preview": "!warn <@862083132735225858> hi",
+        "created_at": "2026-02-03T23:11:10.427000",
+        "deleted_at": "2026-02-03T15:11:29.161852-08:00",
+        "attachments": []
+      },
+      "custody": [
+        {
+          "action": "collected",
+          "timestamp": "2026-02-03T15:11:29.162215-08:00",
+          "user_id": 1449154555479851228,
+          "notes": "deleted_message"
+        }
+      ]
+    },
+    "10": {
+      "id": "10",
+      "guild_id": 1451439611766112319,
+      "source": "deleted_message",
+      "collected_by": 1449154555479851228,
+      "collected_at": "2026-02-03T19:03:52.005510-08:00",
+      "payload": {
+        "message_id": 1468441885218701413,
+        "channel_id": 1451439612869218478,
+        "author_id": 862083132735225858,
+        "content_hash": "4b99340282c5acfc1272896eaf2d2d4abdfb06fe13d6989408cc2077aab7a643",
+        "content_preview": "NIGGERRSSSS",
+        "created_at": "2026-02-04T03:03:47.767000",
+        "deleted_at": "2026-02-03T19:03:52.000673-08:00",
+        "attachments": []
+      },
+      "custody": [
+        {
+          "action": "collected",
+          "timestamp": "2026-02-03T19:03:52.005608-08:00",
+          "user_id": 1449154555479851228,
+          "notes": "deleted_message"
+        }
+      ]
+    }
+  },
+  "case_counter": 0,
+  "evidence_counter": 10,
+  "unassigned_deleted": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10"
+  ]
+}

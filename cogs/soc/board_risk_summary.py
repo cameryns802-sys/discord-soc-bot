@@ -9,6 +9,7 @@ import json
 import os
 from datetime import datetime, timedelta
 from typing import Dict, List, Optional
+from cogs.core.pst_timezone import get_now_pst
 
 class BoardRiskSummaryCog(commands.Cog):
     """
@@ -133,8 +134,8 @@ class BoardRiskSummaryCog(commands.Cog):
         
         # Generate summary
         summary = {
-            "timestamp": datetime.utcnow().isoformat(),
-            "quarter": f"Q{(datetime.utcnow().month - 1) // 3 + 1} {datetime.utcnow().year}",
+            "timestamp": get_now_pst().isoformat(),
+            "quarter": f"Q{(get_now_pst().month - 1) // 3 + 1} {get_now_pst().year}",
             "risk_data": risk_data,
             "generated_by": str(ctx.author.id)
         }
@@ -147,7 +148,7 @@ class BoardRiskSummaryCog(commands.Cog):
             title="📊 Board Risk Summary",
             description=f"Executive Risk Assessment - {summary['quarter']}",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         # Risk Overview
@@ -234,7 +235,7 @@ class BoardRiskSummaryCog(commands.Cog):
             title="📊 SLA Performance Metrics",
             description="Incident Response Service Level Agreements",
             color=discord.Color.green() if mttr_compliance and mttd_compliance else discord.Color.red(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(
@@ -273,7 +274,7 @@ class BoardRiskSummaryCog(commands.Cog):
         
         Usage: !board_trends
         """
-        current_quarter = f"Q{(datetime.utcnow().month - 1) // 3 + 1} {datetime.utcnow().year}"
+        current_quarter = f"Q{(get_now_pst().month - 1) // 3 + 1} {get_now_pst().year}"
         
         # Calculate trends from historical data
         if not self.summaries:
@@ -292,7 +293,7 @@ class BoardRiskSummaryCog(commands.Cog):
             title="📈 Quarterly Security Trends",
             description=f"Risk trend analysis through {current_quarter}",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         if recent_summaries:
@@ -356,7 +357,7 @@ class BoardRiskSummaryCog(commands.Cog):
             title="✅ SLA Metric Recorded",
             description=f"Recorded {metric_type.upper()} metric",
             color=discord.Color.green(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Metric Type", value=metric_type.upper(), inline=True)
@@ -378,8 +379,8 @@ class BoardRiskSummaryCog(commands.Cog):
         
         # Generate complete report
         report = {
-            "generated_at": datetime.utcnow().isoformat(),
-            "quarter": f"Q{(datetime.utcnow().month - 1) // 3 + 1} {datetime.utcnow().year}",
+            "generated_at": get_now_pst().isoformat(),
+            "quarter": f"Q{(get_now_pst().month - 1) // 3 + 1} {get_now_pst().year}",
             "risk_summaries": self.summaries[-4:] if len(self.summaries) >= 4 else self.summaries,
             "sla_metrics": {
                 "mttr_avg": sum(self.metrics["mttr"]) / len(self.metrics["mttr"]) if self.metrics["mttr"] else 0,
@@ -391,7 +392,7 @@ class BoardRiskSummaryCog(commands.Cog):
         }
         
         # Save to file
-        report_file = os.path.join(self.data_dir, f"board_report_{datetime.utcnow().strftime('%Y%m%d')}.json")
+        report_file = os.path.join(self.data_dir, f"board_report_{get_now_pst().strftime('%Y%m%d')}.json")
         with open(report_file, 'w') as f:
             json.dump(report, f, indent=4)
         
@@ -399,7 +400,7 @@ class BoardRiskSummaryCog(commands.Cog):
             title="✅ Board Report Exported",
             description="Comprehensive report generated",
             color=discord.Color.green(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Report File", value=os.path.basename(report_file), inline=False)

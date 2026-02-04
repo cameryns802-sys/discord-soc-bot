@@ -1,0 +1,18 @@
+{
+  "drills": {
+    "1": {
+      "id": 1,
+      "type": "phishing",
+      "status": "running",
+      "started_by": 960995456488448080,
+      "started_at": "2026-02-01T22:40:31.466720",
+      "duration_minutes": 5,
+      "end_time": "2026-02-01T22:45:31.466823",
+      "events": [],
+      "responses": [],
+      "affected_channels": [],
+      "affected_members": []
+    }
+  },
+  "counter": 1
+}

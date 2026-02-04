@@ -1,0 +1,16 @@
+{
+  "daywatch_active": true,
+  "last_activation": "2026-02-03T14:29:59.475451",
+  "last_deactivation": null,
+  "sessions": [],
+  "activity_count": 0,
+  "peak_hours": {},
+  "config": {
+    "enabled": true,
+    "start_hour": 7,
+    "end_hour": 19,
+    "track_engagement": true,
+    "peak_detection": true,
+    "activity_alerts": false
+  }
+}

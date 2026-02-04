@@ -8,6 +8,7 @@ from discord import app_commands
 from datetime import datetime, timedelta
 import json
 import os
+from cogs.core.pst_timezone import get_now_pst
 
 class LiveThreatStatus(commands.Cog):
     """Real-time threat level tracking and bot status"""
@@ -31,7 +32,7 @@ class LiveThreatStatus(commands.Cog):
             return 'green', 0, 0
         
         # Filter to last 24 hours
-        now = datetime.now(datetime.UTC)
+        now = get_now_pst()
         cutoff = now - timedelta(hours=24)
         
         active_threats = []
@@ -145,7 +146,7 @@ class LiveThreatStatus(commands.Cog):
         
         # Filter to guild
         guild_id = str(ctx.guild.id)
-        now = datetime.now(datetime.UTC)
+        now = get_now_pst()
         cutoff = now - timedelta(hours=24)
         
         threats = [
@@ -174,7 +175,7 @@ class LiveThreatStatus(commands.Cog):
             title=f"{emoji_map[level]} Threat Status",
             description=self._get_threat_description(level),
             color=color_map[level],
-            timestamp=datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         
         # Summary
@@ -304,3 +305,4 @@ class LiveThreatStatus(commands.Cog):
 
 async def setup(bot):
     await bot.add_cog(LiveThreatStatus(bot))
+

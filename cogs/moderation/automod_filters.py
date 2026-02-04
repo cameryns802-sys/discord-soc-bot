@@ -10,6 +10,7 @@ from typing import Optional
 import re
 from collections import defaultdict
 import asyncio
+from cogs.core.pst_timezone import get_now_pst
 
 class AutoModFilters(commands.Cog):
     """Advanced auto-moderation filters"""
@@ -78,7 +79,7 @@ class AutoModFilters(commands.Cog):
             embed = discord.Embed(
                 title=f"✅ {filter_type.title()} Filter Enabled",
                 color=discord.Color.green(),
-                timestamp=datetime.now(datetime.UTC)
+                timestamp=get_now_pst()
             )
             embed.add_field(name="Filter", value=filter_type.title(), inline=True)
             embed.add_field(name="Status", value="🟢 Enabled", inline=True)
@@ -92,7 +93,7 @@ class AutoModFilters(commands.Cog):
             embed = discord.Embed(
                 title=f"❌ {filter_type.title()} Filter Disabled",
                 color=discord.Color.red(),
-                timestamp=datetime.now(datetime.UTC)
+                timestamp=get_now_pst()
             )
             embed.add_field(name="Filter", value=filter_type.title(), inline=True)
             embed.add_field(name="Status", value="🔴 Disabled", inline=True)
@@ -104,7 +105,7 @@ class AutoModFilters(commands.Cog):
             embed = discord.Embed(
                 title="🛡️ AutoMod Filter Configuration",
                 color=discord.Color.blue(),
-                timestamp=datetime.now(datetime.UTC)
+                timestamp=get_now_pst()
             )
             
             for f_type, enabled in settings.items():
@@ -172,7 +173,7 @@ class AutoModFilters(commands.Cog):
                 title="✅ Domain Whitelisted",
                 description=f"Links from `{domain}` will not be filtered",
                 color=discord.Color.green(),
-                timestamp=datetime.now(datetime.UTC)
+                timestamp=get_now_pst()
             )
             embed.add_field(name="Domain", value=domain, inline=True)
             embed.add_field(name="Added by", value=ctx.author.mention, inline=True)
@@ -196,7 +197,7 @@ class AutoModFilters(commands.Cog):
                 title="❌ Domain Removed from Whitelist",
                 description=f"Links from `{domain}` will now be filtered",
                 color=discord.Color.orange(),
-                timestamp=datetime.now(datetime.UTC)
+                timestamp=get_now_pst()
             )
             embed.add_field(name="Domain", value=domain, inline=True)
             embed.add_field(name="Removed by", value=ctx.author.mention, inline=True)
@@ -212,7 +213,7 @@ class AutoModFilters(commands.Cog):
                 title="📋 Link Whitelist",
                 description=f"The following domains are allowed:",
                 color=discord.Color.blue(),
-                timestamp=datetime.now(datetime.UTC)
+                timestamp=get_now_pst()
             )
             embed.add_field(
                 name=f"Whitelisted Domains ({len(whitelist)})",
@@ -272,7 +273,7 @@ class AutoModFilters(commands.Cog):
     async def _check_spam(self, message):
         """Check for spam (5+ messages in 5 seconds)"""
         user_id = message.author.id
-        now = datetime.now(datetime.UTC).timestamp()
+        now = get_now_pst().timestamp()
         
         # Clean old timestamps
         self.spam_tracker[user_id] = [ts for ts in self.spam_tracker[user_id] if now - ts < 5]
@@ -385,3 +386,4 @@ class AutoModFilters(commands.Cog):
 
 async def setup(bot):
     await bot.add_cog(AutoModFilters(bot))
+

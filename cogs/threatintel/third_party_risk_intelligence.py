@@ -10,6 +10,7 @@ import json
 import os
 from datetime import datetime, timedelta
 import uuid
+from cogs.core.pst_timezone import get_now_pst
 
 class ThirdPartyRiskIntelligence(commands.Cog):
     """Third-party risk intelligence and supply chain monitoring"""
@@ -96,7 +97,7 @@ class ThirdPartyRiskIntelligence(commands.Cog):
         # Last security audit
         if supplier.get('last_security_audit'):
             last = datetime.fromisoformat(supplier['last_security_audit'])
-            days_since = (datetime.utcnow() - last).days
+            days_since = (get_now_pst() - last).days
             if days_since > 365:
                 score += 20
         else:
@@ -119,7 +120,7 @@ class ThirdPartyRiskIntelligence(commands.Cog):
             'name': supplier_name,
             'type': supplier_type.lower(),
             'criticality': criticality.lower(),
-            'added_at': datetime.utcnow().isoformat(),
+            'added_at': get_now_pst().isoformat(),
             'status': 'active',
             'security_incidents': 0,
             'industry_reputation': 'good',
@@ -130,7 +131,7 @@ class ThirdPartyRiskIntelligence(commands.Cog):
             'last_security_audit': None,
             'has_security_requirements': True,
             'risk_score': 0,
-            'contract_end_date': (datetime.utcnow() + timedelta(days=365)).isoformat(),
+            'contract_end_date': (get_now_pst() + timedelta(days=365)).isoformat(),
             'incident_history': []
         }
         
@@ -142,7 +143,7 @@ class ThirdPartyRiskIntelligence(commands.Cog):
             title="🏭 Third-Party Supplier Added",
             description=f"**{supplier_name}**",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Supplier ID", value=f"`{supplier_id}`", inline=True)
@@ -171,7 +172,7 @@ class ThirdPartyRiskIntelligence(commands.Cog):
             title="🏭 Third-Party Supplier Index",
             description=f"{len(sorted_suppliers)} supplier(s) tracked",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         # Risk distribution
@@ -216,7 +217,7 @@ class ThirdPartyRiskIntelligence(commands.Cog):
             title=f"🏭 {supplier['name']} - Supply Chain Risk Profile",
             description=f"Risk Score: **{risk_score}/100**",
             color=color,
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Supplier ID", value=f"`{supplier['id']}`", inline=True)
@@ -262,13 +263,13 @@ class ThirdPartyRiskIntelligence(commands.Cog):
         # Identify risk areas
         critical_suppliers = [s for s in suppliers.values() if s['criticality'] == 'critical' and s['risk_score'] >= 50]
         suppliers_with_incidents = [s for s in suppliers.values() if s['security_incidents'] > 0]
-        expiring_contracts = [s for s in suppliers.values() if datetime.fromisoformat(s['contract_end_date']) < datetime.utcnow() + timedelta(days=90)]
+        expiring_contracts = [s for s in suppliers.values() if datetime.fromisoformat(s['contract_end_date']) < get_now_pst() + timedelta(days=90)]
         
         embed = discord.Embed(
             title="🔍 Supply Chain Risk Monitoring",
             description="Real-time supply chain threat assessment",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Total Suppliers", value=f"🏭 {len(suppliers)}", inline=True)

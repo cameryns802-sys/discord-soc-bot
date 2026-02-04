@@ -19,6 +19,7 @@ from typing import Dict, List, Optional
 from enum import Enum
 
 from cogs.core.signal_bus import signal_bus, Signal, SignalType
+from cogs.core.pst_timezone import get_now_pst
 
 class PlaybookStatus(Enum):
     PENDING = "pending"
@@ -124,7 +125,7 @@ class AutomatedPlaybookExecutor(commands.Cog):
         
         execution = {
             'id': len(self.executions),
-            'timestamp': datetime.utcnow().isoformat(),
+            'timestamp': get_now_pst().isoformat(),
             'playbook_id': playbook_id,
             'playbook_name': playbook['name'],
             'signal_type': str(signal.signal_type),
@@ -144,7 +145,7 @@ class AutomatedPlaybookExecutor(commands.Cog):
         
         if playbook['auto_approve']:
             execution['status'] = PlaybookStatus.COMPLETED.value
-            execution['executed_at'] = datetime.utcnow().isoformat()
+            execution['executed_at'] = get_now_pst().isoformat()
         else:
             execution['status'] = PlaybookStatus.PENDING.value
             await self.send_approval_request(execution)
@@ -156,7 +157,7 @@ class AutomatedPlaybookExecutor(commands.Cog):
         """Execute a single playbook action"""
         result = {
             'type': action['type'],
-            'timestamp': datetime.utcnow().isoformat(),
+            'timestamp': get_now_pst().isoformat(),
             'status': 'completed',
             'details': {}
         }
@@ -198,7 +199,7 @@ class AutomatedPlaybookExecutor(commands.Cog):
                 title=f"🤖 Playbook Approval Required",
                 description=f"Playbook **{execution['playbook_name']}** needs approval",
                 color=discord.Color.orange(),
-                timestamp=datetime.utcnow()
+                timestamp=get_now_pst()
             )
             
             embed.add_field(
@@ -240,7 +241,7 @@ class AutomatedPlaybookExecutor(commands.Cog):
     
     def get_execution_history(self, playbook_id: str = None, hours: int = 24) -> List[Dict]:
         """Get playbook execution history"""
-        cutoff = datetime.utcnow() - timedelta(hours=hours)
+        cutoff = get_now_pst() - timedelta(hours=hours)
         
         history = [
             e for e in self.executions
@@ -308,7 +309,7 @@ class AutomatedPlaybookExecutor(commands.Cog):
             title="📋 Playbook Execution History",
             description=f"Showing {len(history)} executions from the last {hours} hours",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         for execution in history[:10]:
@@ -364,7 +365,7 @@ class AutomatedPlaybookExecutor(commands.Cog):
             title="📊 Playbook Execution Statistics",
             description=f"Analysis of {stats['total_executions']} total executions",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         # Status distribution
@@ -414,7 +415,7 @@ class AutomatedPlaybookExecutor(commands.Cog):
         
         if 0 <= execution_id < len(self.executions):
             self.executions[execution_id]['status'] = PlaybookStatus.COMPLETED.value
-            self.executions[execution_id]['executed_at'] = datetime.utcnow().isoformat()
+            self.executions[execution_id]['executed_at'] = get_now_pst().isoformat()
             self.executions[execution_id]['executed_by'] = str(ctx.author)
             self.save_executions()
             

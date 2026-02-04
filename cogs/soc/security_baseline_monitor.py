@@ -10,6 +10,7 @@ import json
 import os
 from datetime import datetime, timedelta
 import uuid
+from cogs.core.pst_timezone import get_now_pst
 
 class SecurityBaselineMonitor(commands.Cog):
     """Configuration baseline monitoring and drift detection"""
@@ -54,12 +55,12 @@ class SecurityBaselineMonitor(commands.Cog):
         baseline = {
             'id': baseline_id,
             'system': system,
-            'created_at': datetime.utcnow().isoformat(),
+            'created_at': get_now_pst().isoformat(),
             'items': 156,
             'hash': 'abc123def456',
             'drift_detections': 0,
             'compliance_state': 'compliant',
-            'last_updated': datetime.utcnow().isoformat()
+            'last_updated': get_now_pst().isoformat()
         }
         
         baselines[baseline_id] = baseline
@@ -69,7 +70,7 @@ class SecurityBaselineMonitor(commands.Cog):
             title="📐 Security Baseline Created",
             description=f"**{system}**",
             color=discord.Color.green(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Baseline ID", value=f"`{baseline_id}`", inline=True)
@@ -79,7 +80,7 @@ class SecurityBaselineMonitor(commands.Cog):
         embed.add_field(name="Baseline Details", value="━" * 25, inline=False)
         embed.add_field(name="Configuration Items", value=f"📋 156", inline=True)
         embed.add_field(name="Baseline Hash", value=f"`abc123def456`", inline=True)
-        embed.add_field(name="Creation Date", value=datetime.utcnow().strftime('%Y-%m-%d'), inline=True)
+        embed.add_field(name="Creation Date", value=get_now_pst().strftime('%Y-%m-%d'), inline=True)
         
         embed.add_field(name="Coverage", value="━" * 25, inline=False)
         embed.add_field(name="System Settings", value="✅ 34 items", inline=True)
@@ -97,7 +98,7 @@ class SecurityBaselineMonitor(commands.Cog):
             title="🔍 Baseline Drift Detection",
             description="Configuration changes detected",
             color=discord.Color.orange(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Drift Summary", value="━" * 25, inline=False)
@@ -150,7 +151,7 @@ class SecurityBaselineMonitor(commands.Cog):
             title="📊 Baseline Comparison Report",
             description=f"**{baseline['system']}** - Current vs Baseline",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Configuration Comparison", value="━" * 25, inline=False)
@@ -187,7 +188,7 @@ class SecurityBaselineMonitor(commands.Cog):
             title="📈 Baseline Analytics",
             description="Configuration stability metrics",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="System Baselines", value="━" * 25, inline=False)

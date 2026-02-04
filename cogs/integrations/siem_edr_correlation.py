@@ -6,6 +6,7 @@ from discord.ext import commands
 import json
 import os
 from datetime import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 class SIEMEDRCorrelationCog(commands.Cog):
     def __init__(self, bot):
@@ -60,7 +61,7 @@ class SIEMEDRCorrelationCog(commands.Cog):
             "platform": platform,
             "url": url,
             "api_key": "***" + (api_key[-4:] if api_key else ""),  # Mask token
-            "configured_at": datetime.utcnow().isoformat(),
+            "configured_at": get_now_pst().isoformat(),
             "status": "CONFIGURED",
             "last_sync": None,
             "events_sent": 0
@@ -131,7 +132,7 @@ class SIEMEDRCorrelationCog(commands.Cog):
             "severity": incident["severity"],
             "description": incident["description"][:500],
             "incident_type": incident["type"],
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": get_now_pst().isoformat(),
             "source": "discord_soc_bot",
             "indicators": incident.get("indicators", []),
             "status": incident["status"]
@@ -148,14 +149,14 @@ class SIEMEDRCorrelationCog(commands.Cog):
             if plat in self.data["siem_connectors"]:
                 connector = self.data["siem_connectors"][plat]
                 connector["events_sent"] += 1
-                connector["last_sync"] = datetime.utcnow().isoformat()
+                connector["last_sync"] = get_now_pst().isoformat()
                 synced_platforms.append(plat)
         
         self.data["event_correlations"][incident_id] = {
             "incident": incident_id,
             "siem_events": siem_event,
             "synced_to": synced_platforms,
-            "sync_time": datetime.utcnow().isoformat()
+            "sync_time": get_now_pst().isoformat()
         }
         
         self.save_data(self.data)
@@ -180,7 +181,7 @@ class SIEMEDRCorrelationCog(commands.Cog):
         
         webhook_config = {
             "url": webhook_url,
-            "configured_at": datetime.utcnow().isoformat(),
+            "configured_at": get_now_pst().isoformat(),
             "status": "ACTIVE",
             "event_types": ["user_activity", "permission_changes", "channel_updates", "role_changes", "member_join", "member_leave"],
             "events_sent": 0
@@ -226,7 +227,7 @@ class SIEMEDRCorrelationCog(commands.Cog):
             },
             "correlation_score": 0.15,  # Low risk
             "verdict": "LOW_RISK",
-            "timestamp": datetime.utcnow().isoformat()
+            "timestamp": get_now_pst().isoformat()
         }
         
         # Color code by correlation severity
@@ -276,7 +277,7 @@ class SIEMEDRCorrelationCog(commands.Cog):
             "status": "CONNECTED",
             "response_time_ms": 245,
             "events_queued": 12,
-            "last_heartbeat": datetime.utcnow().isoformat(),
+            "last_heartbeat": get_now_pst().isoformat(),
             "api_version": "v1"
         }
         

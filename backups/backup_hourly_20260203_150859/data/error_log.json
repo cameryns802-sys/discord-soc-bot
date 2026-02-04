@@ -1,0 +1,88 @@
+{
+  "total_errors": 7,
+  "errors": [
+    {
+      "timestamp": "2026-02-02T15:50:45.877080",
+      "type": "CommandNotFound",
+      "message": "Command \"shutdown\" is not found",
+      "command": "unknown",
+      "user_id": 960995456488448080,
+      "guild_id": null,
+      "channel_id": 1451662763314122782,
+      "traceback": "discord.ext.commands.errors.CommandNotFound: Command \"shutdown\" is not found\n",
+      "severity": "warning"
+    },
+    {
+      "timestamp": "2026-02-02T15:50:45.882996",
+      "type": "CommandNotFound",
+      "message": "Command \"shutdown\" is not found",
+      "command": "unknown",
+      "user_id": 960995456488448080,
+      "guild_id": null,
+      "channel_id": 1451662763314122782,
+      "traceback": "discord.ext.commands.errors.CommandNotFound: Command \"shutdown\" is not found\n",
+      "severity": "warning"
+    },
+    {
+      "timestamp": "2026-02-02T18:29:53.905825",
+      "type": "CommandNotFound",
+      "message": "Command \"help\" is not found",
+      "command": "unknown",
+      "user_id": 960995456488448080,
+      "guild_id": 1451439611766112319,
+      "channel_id": 1467997693178548492,
+      "traceback": "discord.ext.commands.errors.CommandNotFound: Command \"help\" is not found\n",
+      "severity": "warning"
+    },
+    {
+      "timestamp": "2026-02-02T20:36:38.832556",
+      "type": "CommandNotFound",
+      "message": "Command \"say\" is not found",
+      "command": "unknown",
+      "user_id": 960995456488448080,
+      "guild_id": 1466863901449785497,
+      "channel_id": 1466863904167694497,
+      "traceback": "discord.ext.commands.errors.CommandNotFound: Command \"say\" is not found\n",
+      "severity": "warning"
+    },
+    {
+      "timestamp": "2026-02-02T20:55:28.592133",
+      "type": "CommandNotFound",
+      "message": "Command \"say\" is not found",
+      "command": "unknown",
+      "user_id": 960995456488448080,
+      "guild_id": 1466863901449785497,
+      "channel_id": 1466863904167694497,
+      "traceback": "discord.ext.commands.errors.CommandNotFound: Command \"say\" is not found\n",
+      "severity": "warning"
+    },
+    {
+      "timestamp": "2026-02-03T14:28:38.090653",
+      "type": "CommandNotFound",
+      "message": "Command \"restart\" is not found",
+      "command": "unknown",
+      "user_id": 960995456488448080,
+      "guild_id": 1451439611766112319,
+      "channel_id": 1468372038291947581,
+      "traceback": "discord.ext.commands.errors.CommandNotFound: Command \"restart\" is not found\n",
+      "severity": "warning"
+    },
+    {
+      "timestamp": "2026-02-03T14:58:18.871329",
+      "type": "CommandNotFound",
+      "message": "Command \"help\" is not found",
+      "command": "unknown",
+      "user_id": 960995456488448080,
+      "guild_id": 1466863901449785497,
+      "channel_id": 1466863904167694497,
+      "traceback": "discord.ext.commands.errors.CommandNotFound: Command \"help\" is not found\n",
+      "severity": "warning"
+    }
+  ],
+  "error_types": {
+    "CommandNotFound": 7
+  },
+  "command_errors": {
+    "unknown": 7
+  }
+}

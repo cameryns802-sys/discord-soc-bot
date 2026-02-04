@@ -3,6 +3,7 @@ from discord.ext import commands
 import json
 import os
 from datetime import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 class SecurityPostureMonitorCog(commands.Cog):
     def __init__(self, bot):
@@ -25,7 +26,7 @@ class SecurityPostureMonitorCog(commands.Cog):
                     "data_protection": 82,
                     "vulnerability_mgmt": 78
                 },
-                "last_updated": datetime.utcnow().isoformat()
+                "last_updated": get_now_pst().isoformat()
             }
 
     def save_posture(self):
@@ -74,7 +75,7 @@ class SecurityPostureMonitorCog(commands.Cog):
         
         old_score = self.posture["areas"][area.lower()]
         self.posture["areas"][area.lower()] = new_score
-        self.posture["last_updated"] = datetime.utcnow().isoformat()
+        self.posture["last_updated"] = get_now_pst().isoformat()
         
         # Recalculate overall score
         self.posture["score"] = sum(self.posture["areas"].values()) // len(self.posture["areas"])

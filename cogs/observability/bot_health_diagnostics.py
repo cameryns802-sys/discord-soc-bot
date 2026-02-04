@@ -6,6 +6,7 @@ from discord.ext import commands, tasks
 import json
 import os
 from datetime import datetime, timedelta
+from cogs.core.pst_timezone import get_now_pst
 
 # Optional psutil import for system metrics
 try:
@@ -59,7 +60,7 @@ class BotHealthDiagnosticsCog(commands.Cog):
                     "cpu_percent": process.cpu_percent(interval=0.1),
                     "thread_count": process.num_threads(),
                     "file_descriptors": process.num_fds() if hasattr(process, 'num_fds') else 0,
-                    "timestamp": datetime.utcnow().isoformat()
+                    "timestamp": get_now_pst().isoformat()
                 }
             else:
                 # Fallback when psutil not available
@@ -68,11 +69,11 @@ class BotHealthDiagnosticsCog(commands.Cog):
                     "cpu_percent": 0.0,
                     "thread_count": 0,
                     "file_descriptors": 0,
-                    "timestamp": datetime.utcnow().isoformat(),
+                    "timestamp": get_now_pst().isoformat(),
                     "note": "psutil not installed"
                 }
         except:
-            return {"error": "Unable to collect metrics", "timestamp": datetime.utcnow().isoformat()}
+            return {"error": "Unable to collect metrics", "timestamp": get_now_pst().isoformat()}
 
     @tasks.loop(minutes=5)
     async def health_monitor(self):
@@ -80,7 +81,7 @@ class BotHealthDiagnosticsCog(commands.Cog):
         try:
             metrics = self.get_system_metrics()
             health_check = {
-                "timestamp": datetime.utcnow().isoformat(),
+                "timestamp": get_now_pst().isoformat(),
                 "latency_ms": round(self.bot.latency * 1000),
                 "guilds": len(self.bot.guilds),
                 "cogs_loaded": len(self.bot.cogs),
@@ -139,7 +140,7 @@ class BotHealthDiagnosticsCog(commands.Cog):
         
         if self.data["error_log"]:
             recent_errors = len([e for e in self.data["error_log"] if 
-                                (datetime.fromisoformat(e["timestamp"]) > datetime.utcnow() - timedelta(hours=1))])
+                                (datetime.fromisoformat(e["timestamp"]) > get_now_pst() - timedelta(hours=1))])
             embed.add_field(name="🚨 Errors (Last Hour)", value=str(recent_errors), inline=True)
         
         await ctx.send(embed=embed)
@@ -165,7 +166,7 @@ class BotHealthDiagnosticsCog(commands.Cog):
                 repairs.append({"issue": f"Missing {file_path}", "action": "CREATE"})
         
         repair_attempt = {
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": get_now_pst().isoformat(),
             "issues_found": len(repairs),
             "repairs": repairs,
             "status": "COMPLETED"
@@ -194,8 +195,8 @@ class BotHealthDiagnosticsCog(commands.Cog):
             await ctx.send("❌ Staff only.")
             return
         
-        start_time = self.bot.user.created_at if hasattr(self.bot, 'user') else datetime.utcnow()
-        uptime = datetime.utcnow() - start_time
+        start_time = self.bot.user.created_at if hasattr(self.bot, 'user') else get_now_pst()
+        uptime = get_now_pst() - start_time
         
         embed = discord.Embed(
             title="⏰ Bot Uptime Tracker",
@@ -218,7 +219,7 @@ class BotHealthDiagnosticsCog(commands.Cog):
             await ctx.send("❌ Staff only.")
             return
         
-        cutoff_time = datetime.utcnow() - timedelta(hours=hours)
+        cutoff_time = get_now_pst() - timedelta(hours=hours)
         recent_errors = [e for e in self.data["error_log"] if 
                         datetime.fromisoformat(e["timestamp"]) > cutoff_time]
         
@@ -264,7 +265,7 @@ class BotHealthDiagnosticsCog(commands.Cog):
             return
         
         api_status = {
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": get_now_pst().isoformat(),
             "gateway_connected": not self.bot.is_closed(),
             "latency": round(self.bot.latency * 1000),
             "status": "🟢 HEALTHY" if self.bot.latency < 0.5 else "🟡 DEGRADED"

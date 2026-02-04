@@ -1,0 +1,70 @@
+{
+  "gdpr": {
+    "name": "GDPR Compliance Report",
+    "framework": "GDPR",
+    "sections": [
+      "Data Processing Activities",
+      "Data Subject Rights",
+      "Data Protection Measures",
+      "Data Breach Incidents",
+      "Third-Party Processors",
+      "Privacy Impact Assessments"
+    ],
+    "frequency": "quarterly"
+  },
+  "soc2": {
+    "name": "SOC 2 Type II Report",
+    "framework": "SOC 2",
+    "sections": [
+      "Security Controls",
+      "Availability Controls",
+      "Processing Integrity",
+      "Confidentiality Controls",
+      "Privacy Controls",
+      "Incident Response"
+    ],
+    "frequency": "annual"
+  },
+  "iso27001": {
+    "name": "ISO 27001 Compliance Report",
+    "framework": "ISO 27001",
+    "sections": [
+      "Information Security Policy",
+      "Asset Management",
+      "Access Control",
+      "Cryptography",
+      "Physical Security",
+      "Operations Security",
+      "Communications Security",
+      "Incident Management",
+      "Business Continuity"
+    ],
+    "frequency": "annual"
+  },
+  "hipaa": {
+    "name": "HIPAA Compliance Report",
+    "framework": "HIPAA",
+    "sections": [
+      "Administrative Safeguards",
+      "Physical Safeguards",
+      "Technical Safeguards",
+      "PHI Access Controls",
+      "Audit Controls",
+      "Breach Notification"
+    ],
+    "frequency": "annual"
+  },
+  "pci_dss": {
+    "name": "PCI DSS Compliance Report",
+    "framework": "PCI DSS",
+    "sections": [
+      "Network Security",
+      "Cardholder Data Protection",
+      "Vulnerability Management",
+      "Access Control Measures",
+      "Network Monitoring",
+      "Information Security Policy"
+    ],
+    "frequency": "quarterly"
+  }
+}

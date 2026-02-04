@@ -4,6 +4,7 @@ from discord.ext import commands
 from datetime import datetime
 import json
 import os
+from cogs.core.pst_timezone import get_now_pst
 
 class AutoNotificationManagerCog(commands.Cog):
     def __init__(self, bot):
@@ -56,7 +57,7 @@ class AutoNotificationManagerCog(commands.Cog):
                 "dnd_until": None,
                 "muted_keywords": [],
                 "preferred_channels": [],
-                "created_at": datetime.utcnow().isoformat()
+                "created_at": get_now_pst().isoformat()
             }
         
         prefs = self.user_preferences[user_key]
@@ -102,7 +103,7 @@ class AutoNotificationManagerCog(commands.Cog):
             "action": action,
             "enabled": True,
             "created_by": ctx.author.id,
-            "created_at": datetime.utcnow().isoformat(),
+            "created_at": get_now_pst().isoformat(),
             "notification_count": 0,
             "last_notified": None,
             "target_role": None,
@@ -167,7 +168,7 @@ class AutoNotificationManagerCog(commands.Cog):
                 "dnd_until": None,
                 "muted_keywords": [],
                 "preferred_channels": [],
-                "created_at": datetime.utcnow().isoformat()
+                "created_at": get_now_pst().isoformat()
             }
         
         prefs = self.user_preferences[user_key]

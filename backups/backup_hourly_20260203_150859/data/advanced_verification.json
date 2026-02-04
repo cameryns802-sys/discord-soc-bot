@@ -1,0 +1,36 @@
+{
+  "config": {
+    "1466863901449785497": {
+      "guild_id": 1466863901449785497,
+      "guild_name": "2.3cam's server",
+      "verify_channel": 1467644868141650136,
+      "verify_role": 1467651695898001418,
+      "unverified_role": 1467651698255200397,
+      "method": "button",
+      "enabled": true,
+      "auto_assign_unverified": true,
+      "remove_unverified_on_verify": true,
+      "dm_verification_link": true,
+      "verification_timeout": 300,
+      "created_at": "2026-02-01T22:43:52.571644",
+      "total_verified": 1,
+      "pending_verifications": 0
+    }
+  },
+  "methods": {
+    "1466863901449785497": {
+      "button": true,
+      "captcha": false,
+      "reaction": false,
+      "manual": false
+    }
+  },
+  "log": {
+    "1466863901449785497_960995456488448080_2026-02-01T22:44:39.066733": {
+      "user_id": 960995456488448080,
+      "username": "2.3cam",
+      "guild_id": 1466863901449785497,
+      "verified_at": "2026-02-01T22:44:39.066762"
+    }
+  }
+}

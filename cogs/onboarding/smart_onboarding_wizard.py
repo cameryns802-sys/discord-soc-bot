@@ -6,6 +6,7 @@ from discord.ext import commands
 import json
 import os
 from datetime import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 class SmartOnboardingWizardCog(commands.Cog):
     def __init__(self, bot):
@@ -59,7 +60,7 @@ class SmartOnboardingWizardCog(commands.Cog):
         
         self.data["wizard_progress"][guild_id] = {
             "step": 1,
-            "started_at": datetime.utcnow().isoformat(),
+            "started_at": get_now_pst().isoformat(),
             "responses": []
         }
         self.save_data(self.data)
@@ -110,7 +111,7 @@ class SmartOnboardingWizardCog(commands.Cog):
             # Wizard complete
             guild_setup = {
                 "responses": progress["responses"],
-                "completed_at": datetime.utcnow().isoformat(),
+                "completed_at": get_now_pst().isoformat(),
                 "status": "active"
             }
             self.data["guild_setups"][guild_id] = guild_setup

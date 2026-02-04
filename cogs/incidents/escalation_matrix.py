@@ -3,6 +3,7 @@ from discord.ext import commands
 import json
 import os
 import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 DATA_FILE = 'data/escalation_matrix.json'
 
@@ -49,7 +50,7 @@ class EscalationMatrixCog(commands.Cog):
             "name": level_name,
             "severity_threshold": severity_threshold,
             "contacts": contacts.split(","),
-            "created_at": datetime.datetime.utcnow().isoformat(),
+            "created_at": datetime.get_now_pst().isoformat(),
             "created_by": str(ctx.author)
         }
         
@@ -76,7 +77,7 @@ class EscalationMatrixCog(commands.Cog):
             "alert_type": alert_type,
             "escalation_level_id": level_id,
             "description": description,
-            "created_at": datetime.datetime.utcnow().isoformat(),
+            "created_at": datetime.get_now_pst().isoformat(),
             "active": True
         }
         

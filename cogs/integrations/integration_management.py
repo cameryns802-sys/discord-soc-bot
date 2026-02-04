@@ -5,6 +5,7 @@ from discord import app_commands
 from datetime import datetime
 import json
 import os
+from cogs.core.pst_timezone import get_now_pst
 
 class IntegrationGroup(app_commands.Group):
     def __init__(self, cog):
@@ -15,7 +16,7 @@ class IntegrationGroup(app_commands.Group):
     @app_commands.checks.has_permissions(administrator=True)
     async def add(self, interaction: discord.Interaction, name: str, service: str, api_key: str = "configured"):
         integration_id = name.lower().replace(" ", "_")
-        self.cog.integrations[integration_id] = {"id": integration_id, "name": name, "service": service, "status": "active", "added_by": interaction.user.id, "added_at": datetime.utcnow().isoformat(), "last_sync": None, "api_configured": api_key != "configured"}
+        self.cog.integrations[integration_id] = {"id": integration_id, "name": name, "service": service, "status": "active", "added_by": interaction.user.id, "added_at": get_now_pst().isoformat(), "last_sync": None, "api_configured": api_key != "configured"}
         self.cog.save_data()
         embed = discord.Embed(title=f"🔗 Integration Added: {name}", color=discord.Color.green())
         embed.add_field(name="Service", value=service, inline=True)
@@ -40,7 +41,7 @@ class IntegrationGroup(app_commands.Group):
             await interaction.response.send_message("❌ Integration not found", ephemeral=True)
             return
         await interaction.response.defer()
-        self.cog.integrations[integration_id]['last_sync'] = datetime.utcnow().isoformat()
+        self.cog.integrations[integration_id]['last_sync'] = get_now_pst().isoformat()
         self.cog.integrations[integration_id]['sync_count'] = self.cog.integrations[integration_id].get('sync_count', 0) + 1
         self.cog.save_data()
         

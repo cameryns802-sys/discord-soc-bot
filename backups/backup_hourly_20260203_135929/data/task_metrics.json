@@ -1,0 +1,174 @@
+{
+  "tasks": {
+    "DataManager.auto_save": {
+      "runs": 0,
+      "errors": 0,
+      "last_run": null,
+      "status": "running",
+      "next_iteration": "2026-02-03T22:01:50.567794+00:00"
+    },
+    "AutoBackupSystem.hourly_backup": {
+      "runs": 0,
+      "errors": 0,
+      "last_run": null,
+      "status": "running",
+      "next_iteration": "2026-02-03T22:56:50.567819+00:00"
+    },
+    "DynamicStatus.rotate_status": {
+      "runs": 0,
+      "errors": 0,
+      "last_run": null,
+      "status": "running",
+      "next_iteration": "2026-02-03T21:57:16.747764+00:00"
+    },
+    "IOCManager.cleanup_expired_iocs": {
+      "runs": 0,
+      "errors": 0,
+      "last_run": null,
+      "status": "running",
+      "next_iteration": "2026-02-04T21:56:46.747813+00:00"
+    },
+    "LogRetentionTiers.tier_transition_task": {
+      "runs": 0,
+      "errors": 0,
+      "last_run": null,
+      "status": "running",
+      "next_iteration": "2026-02-04T21:56:50.567844+00:00"
+    },
+    "ErrorReporting.error_check": {
+      "runs": 0,
+      "errors": 0,
+      "last_run": null,
+      "status": "running",
+      "next_iteration": "2026-02-03T22:01:50.567856+00:00"
+    },
+    "ScheduledTasksDashboard.monitor_tasks": {
+      "runs": 0,
+      "errors": 0,
+      "last_run": null,
+      "status": "running",
+      "next_iteration": "2026-02-03T22:06:50.567876+00:00"
+    },
+    "LiveThreatStatus.update_bot_status": {
+      "runs": 0,
+      "errors": 0,
+      "last_run": null,
+      "status": "running",
+      "next_iteration": "2026-02-03T21:56:50.567887+00:00"
+    },
+    "SimulationSystem.run_simulations": {
+      "runs": 0,
+      "errors": 0,
+      "last_run": null,
+      "status": "running",
+      "next_iteration": "2026-02-03T22:01:46.750057+00:00"
+    },
+    "RealTimeThreatFeed.feed_update_task": {
+      "runs": 0,
+      "errors": 0,
+      "last_run": null,
+      "status": "running",
+      "next_iteration": "2026-02-03T21:56:50.567897+00:00"
+    },
+    "ServerAnalytics.collect_metrics": {
+      "runs": 0,
+      "errors": 0,
+      "last_run": null,
+      "status": "running",
+      "next_iteration": "2026-02-03T22:56:46.750238+00:00"
+    },
+    "UserDMNotifier.process_dm_queue": {
+      "runs": 0,
+      "errors": 0,
+      "last_run": null,
+      "status": "running",
+      "next_iteration": "2026-02-03T21:57:46.750265+00:00"
+    },
+    "HealthCheckSystem.health_check_task": {
+      "runs": 0,
+      "errors": 0,
+      "last_run": null,
+      "status": "running",
+      "next_iteration": "2026-02-03T01:21:46.952102+00:00"
+    },
+    "ContextCache.cleanup_expired": {
+      "runs": 0,
+      "errors": 0,
+      "last_run": null,
+      "status": "running",
+      "next_iteration": "2026-02-03T22:26:46.750113+00:00"
+    },
+    "MemoryLifecycleManager.lifecycle_management": {
+      "runs": 0,
+      "errors": 0,
+      "last_run": null,
+      "status": "running",
+      "next_iteration": "2026-02-04T03:56:46.750154+00:00"
+    },
+    "AdvancedMetricsDashboard.collect_metrics": {
+      "runs": 0,
+      "errors": 0,
+      "last_run": null,
+      "status": "running",
+      "next_iteration": "2026-02-03T22:01:50.567831+00:00"
+    },
+    "DailyChallenges.check_daily_reset": {
+      "runs": 0,
+      "errors": 0,
+      "last_run": null,
+      "status": "running",
+      "next_iteration": "2026-02-03T22:56:46.750182+00:00"
+    },
+    "StaffSchedulingRotation.rotation_task": {
+      "runs": 0,
+      "errors": 0,
+      "last_run": null,
+      "status": "running",
+      "next_iteration": "2026-02-03T21:57:46.748828+00:00"
+    },
+    "PostMortemWorkflow.monitor_incidents": {
+      "runs": 0,
+      "errors": 0,
+      "last_run": null,
+      "status": "running",
+      "next_iteration": "2026-02-03T22:01:46.748922+00:00"
+    },
+    "BotOfBotsHealthMonitor.heartbeat_task": {
+      "runs": 0,
+      "errors": 0,
+      "last_run": null,
+      "status": "running",
+      "next_iteration": "2026-02-03T21:57:16.749206+00:00"
+    },
+    "RateLimitLoadBalancer.evaluate_load": {
+      "runs": 0,
+      "errors": 0,
+      "last_run": null,
+      "status": "running",
+      "next_iteration": "2026-02-03T21:57:46.749847+00:00"
+    },
+    "RateLimitLoadBalancer.process_deferred": {
+      "runs": 0,
+      "errors": 0,
+      "last_run": null,
+      "status": "running",
+      "next_iteration": "2026-02-03T21:57:16.749914+00:00"
+    },
+    "RateLimitLoadBalancer.reset_counters": {
+      "runs": 0,
+      "errors": 0,
+      "last_run": null,
+      "status": "running",
+      "next_iteration": "2026-02-03T21:57:46.749674+00:00"
+    },
+    "SentimentTrendAnalysis.trend_task": {
+      "runs": 0,
+      "errors": 0,
+      "last_run": null,
+      "status": "running",
+      "next_iteration": "2026-02-03T22:56:46.750214+00:00"
+    }
+  },
+  "total_runs": 0,
+  "total_errors": 0
+}

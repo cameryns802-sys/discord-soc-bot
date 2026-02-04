@@ -5,6 +5,7 @@ from discord import app_commands
 import json
 import os
 from datetime import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 class ThreatDetectionEvasionCog(commands.Cog):
     def __init__(self, bot):
@@ -21,21 +22,21 @@ class ThreatDetectionEvasionCog(commands.Cog):
 
     @commands.Cog.listener()
     async def on_member_join(self, member):
-        account_age = (datetime.utcnow() - member.created_at).days
+        account_age = (get_now_pst() - member.created_at).days
         if account_age < 7:
             await self._flag_potential_threat(member.guild, member, f"New account (age: {account_age}d)")
 
     async def _flag_potential_threat(self, guild, member, reason):
         with open(self.threat_file, 'r') as f:
             data = json.load(f)
-        data["threats"].append({"user_id": member.id, "reason": reason, "timestamp": datetime.utcnow().isoformat()})
+        data["threats"].append({"user_id": member.id, "reason": reason, "timestamp": get_now_pst().isoformat()})
         with open(self.threat_file, 'w') as f:
             json.dump(data, f, indent=2)
 
     @app_commands.command(name="investigate_member", description="Deep member analysis")
     @app_commands.checks.has_permissions(moderate_members=True)
     async def investigate_member(self, interaction: discord.Interaction, user: discord.Member):
-        account_age = (datetime.utcnow() - user.created_at).days
+        account_age = (get_now_pst() - user.created_at).days
         embed = discord.Embed(title=f"🔍 Investigation - {user.name}", color=discord.Color.orange())
         embed.add_field(name="Account Age", value=f"{account_age} days", inline=True)
         embed.add_field(name="Threat Score", value="0.15", inline=True)

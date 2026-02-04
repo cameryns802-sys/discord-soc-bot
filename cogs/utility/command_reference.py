@@ -9,6 +9,7 @@ from discord.ext import commands
 from datetime import datetime
 import json
 import os
+from cogs.core.pst_timezone import get_now_pst
 
 class CommandReference(commands.Cog):
     """Provide quick command reference and documentation"""
@@ -53,7 +54,7 @@ class CommandReference(commands.Cog):
             title="📚 Command Reference",
             description="All available Sentinel SOC Bot commands",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         # Get all commands grouped by cog
@@ -98,7 +99,7 @@ class CommandReference(commands.Cog):
             title="📖 Command Documentation",
             description="Detailed command reference",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         if not category:
@@ -127,7 +128,7 @@ class CommandReference(commands.Cog):
             title="⚡ Command System Status",
             description="Bot command processor health",
             color=discord.Color.green(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         total_commands = len(list(self.bot.commands))

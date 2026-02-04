@@ -1,0 +1,172 @@
+{
+  "health_history": [
+    {
+      "timestamp": "2026-02-02T23:55:10.405498",
+      "latency_ms": 203,
+      "guilds": 2,
+      "cogs_loaded": 254,
+      "system_metrics": {
+        "memory_mb": 72.0859375,
+        "cpu_percent": 0.0,
+        "thread_count": 11,
+        "file_descriptors": 0,
+        "timestamp": "2026-02-02T23:55:10.405464"
+      },
+      "status": "HEALTHY"
+    },
+    {
+      "timestamp": "2026-02-02T23:56:18.447032",
+      "latency_ms": 103,
+      "guilds": 2,
+      "cogs_loaded": 259,
+      "system_metrics": {
+        "memory_mb": 71.12109375,
+        "cpu_percent": 0.0,
+        "thread_count": 11,
+        "file_descriptors": 0,
+        "timestamp": "2026-02-02T23:56:18.447001"
+      },
+      "status": "HEALTHY"
+    },
+    {
+      "timestamp": "2026-02-03T00:00:58.314936",
+      "latency_ms": 88,
+      "guilds": 2,
+      "cogs_loaded": 263,
+      "system_metrics": {
+        "memory_mb": 71.73046875,
+        "cpu_percent": 0.0,
+        "thread_count": 11,
+        "file_descriptors": 0,
+        "timestamp": "2026-02-03T00:00:58.314915"
+      },
+      "status": "HEALTHY"
+    },
+    {
+      "timestamp": "2026-02-03T00:02:42.495854",
+      "latency_ms": 100,
+      "guilds": 2,
+      "cogs_loaded": 210,
+      "system_metrics": {
+        "memory_mb": 68.7265625,
+        "cpu_percent": 0.0,
+        "thread_count": 11,
+        "file_descriptors": 0,
+        "timestamp": "2026-02-03T00:02:42.495820"
+      },
+      "status": "HEALTHY"
+    },
+    {
+      "timestamp": "2026-02-03T00:02:59.438192",
+      "latency_ms": 89,
+      "guilds": 2,
+      "cogs_loaded": 233,
+      "system_metrics": {
+        "memory_mb": 68.08203125,
+        "cpu_percent": 0.0,
+        "thread_count": 11,
+        "file_descriptors": 0,
+        "timestamp": "2026-02-03T00:02:59.438162"
+      },
+      "status": "HEALTHY"
+    },
+    {
+      "timestamp": "2026-02-03T00:19:51.104502",
+      "latency_ms": 101,
+      "guilds": 2,
+      "cogs_loaded": 237,
+      "system_metrics": {
+        "memory_mb": 70.58203125,
+        "cpu_percent": 0.0,
+        "thread_count": 11,
+        "file_descriptors": 0,
+        "timestamp": "2026-02-03T00:19:51.104479"
+      },
+      "status": "HEALTHY"
+    },
+    {
+      "timestamp": "2026-02-03T00:23:05.156729",
+      "latency_ms": 102,
+      "guilds": 2,
+      "cogs_loaded": 228,
+      "system_metrics": {
+        "memory_mb": 69.7578125,
+        "cpu_percent": 0.0,
+        "thread_count": 11,
+        "file_descriptors": 0,
+        "timestamp": "2026-02-03T00:23:05.156692"
+      },
+      "status": "HEALTHY"
+    },
+    {
+      "timestamp": "2026-02-03T00:28:05.154265",
+      "latency_ms": 173,
+      "guilds": 2,
+      "cogs_loaded": 264,
+      "system_metrics": {
+        "memory_mb": 74.1171875,
+        "cpu_percent": 0.0,
+        "thread_count": 6,
+        "file_descriptors": 0,
+        "timestamp": "2026-02-03T00:28:05.154231"
+      },
+      "status": "HEALTHY"
+    },
+    {
+      "timestamp": "2026-02-03T00:34:19.281143",
+      "latency_ms": 97,
+      "guilds": 2,
+      "cogs_loaded": 210,
+      "system_metrics": {
+        "memory_mb": 71.703125,
+        "cpu_percent": 15.5,
+        "thread_count": 11,
+        "file_descriptors": 0,
+        "timestamp": "2026-02-03T00:34:19.281105"
+      },
+      "status": "HEALTHY"
+    },
+    {
+      "timestamp": "2026-02-03T00:34:34.202475",
+      "latency_ms": 103,
+      "guilds": 2,
+      "cogs_loaded": 266,
+      "system_metrics": {
+        "memory_mb": 72.73046875,
+        "cpu_percent": 0.0,
+        "thread_count": 11,
+        "file_descriptors": 0,
+        "timestamp": "2026-02-03T00:34:34.202420"
+      },
+      "status": "HEALTHY"
+    },
+    {
+      "timestamp": "2026-02-03T01:13:25.074186",
+      "latency_ms": 110,
+      "guilds": 2,
+      "cogs_loaded": 189,
+      "system_metrics": {
+        "memory_mb": 64.5546875,
+        "cpu_percent": 0.0,
+        "thread_count": 11,
+        "file_descriptors": 0,
+        "timestamp": "2026-02-03T01:13:25.074151"
+      },
+      "status": "HEALTHY"
+    }
+  ],
+  "error_log": [],
+  "recovery_attempts": [],
+  "system_metrics": {},
+  "api_health": {
+    "rate_limits": 0,
+    "errors": 0,
+    "last_check": null
+  },
+  "auto_update_config": {
+    "enabled": false,
+    "check_interval": 24
+  },
+  "self_repair_triggers": [],
+  "uptime_milestones": []
+}

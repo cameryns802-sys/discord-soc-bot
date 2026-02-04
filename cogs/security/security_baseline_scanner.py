@@ -10,6 +10,7 @@ import json
 import os
 from datetime import datetime
 from typing import Dict, List, Tuple
+from cogs.core.pst_timezone import get_now_pst
 
 class SecurityBaselineScanner(commands.Cog):
     """Security configuration baseline scanning and assessment"""
@@ -276,8 +277,8 @@ class SecurityBaselineScanner(commands.Cog):
         })
         
         return {
-            'scan_id': datetime.utcnow().strftime('%Y%m%d%H%M%S'),
-            'timestamp': datetime.utcnow().isoformat(),
+            'scan_id': get_now_pst().strftime('%Y%m%d%H%M%S'),
+            'timestamp': get_now_pst().isoformat(),
             'score': max(0, min(100, score)),
             'total_checks': len(checks),
             'passed': sum(1 for c in checks if c['status'] == 'pass'),
@@ -312,7 +313,7 @@ class SecurityBaselineScanner(commands.Cog):
             title="🔒 Security Baseline Scan Results",
             description=f"Security Score: **{score}/100** - {status}",
             color=color,
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="✅ Passed", value=f"`{scan_result['passed']}`", inline=True)
@@ -388,7 +389,7 @@ class SecurityBaselineScanner(commands.Cog):
             title="📊 Baseline Scan History",
             description=f"{len(scans)} scan(s) recorded",
             color=discord.Color.blurple(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         for scan in scans[-10:]:

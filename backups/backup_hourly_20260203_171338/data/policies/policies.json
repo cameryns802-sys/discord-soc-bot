@@ -1,0 +1,62 @@
+{
+  "policies": {
+    "SPAM": {
+      "rule": "No spam or repetitive content",
+      "enforcement": [
+        "DELETE_MESSAGE",
+        "WARN"
+      ],
+      "severity": "MEDIUM",
+      "escalation": [
+        "MUTE",
+        "TEMP_BAN"
+      ]
+    },
+    "HARASSMENT": {
+      "rule": "No harassment, bullying, or targeted abuse",
+      "enforcement": [
+        "DELETE_MESSAGE",
+        "WARN"
+      ],
+      "severity": "HIGH",
+      "escalation": [
+        "MUTE",
+        "BAN"
+      ]
+    },
+    "NSFW": {
+      "rule": "Age-appropriate content only",
+      "enforcement": [
+        "DELETE_MESSAGE",
+        "WARN"
+      ],
+      "severity": "MEDIUM",
+      "escalation": [
+        "TEMP_BAN"
+      ]
+    },
+    "LINKS_RESTRICTED": {
+      "rule": "Links only allowed in #resources and #announcements",
+      "channels_allowed": [
+        "resources",
+        "announcements"
+      ],
+      "enforcement": [
+        "DELETE_MESSAGE"
+      ],
+      "severity": "LOW",
+      "escalation": [
+        "WARN"
+      ]
+    },
+    "RAID": {
+      "rule": "Coordinated attacks and raids prohibited",
+      "enforcement": [
+        "KICK",
+        "BAN"
+      ],
+      "severity": "CRITICAL",
+      "escalation": []
+    }
+  }
+}

@@ -11,6 +11,7 @@ import os
 from datetime import datetime, timedelta
 import random
 import hashlib
+from cogs.core.pst_timezone import get_now_pst
 
 class RealTimeThreatFeed(commands.Cog):
     """Real-time threat intelligence feed and correlation"""
@@ -73,8 +74,8 @@ class RealTimeThreatFeed(commands.Cog):
             'value': value,
             'threat_name': threat_name,
             'confidence': confidence,
-            'added_at': datetime.utcnow().isoformat(),
-            'last_seen': datetime.utcnow().isoformat(),
+            'added_at': get_now_pst().isoformat(),
+            'last_seen': get_now_pst().isoformat(),
             'hit_count': 0,
             'status': 'active'
         }
@@ -94,12 +95,12 @@ class RealTimeThreatFeed(commands.Cog):
         # Simulate new threat
         threat_types = ['Malware', 'Phishing', 'C2', 'Botnet', 'APT', 'Ransomware']
         new_threat = {
-            'id': f"TF-{datetime.utcnow().strftime('%Y%m%d')}-{random.randint(1000, 9999)}",
+            'id': f"TF-{get_now_pst().strftime('%Y%m%d')}-{random.randint(1000, 9999)}",
             'name': f"{random.choice(threat_types)} Campaign {random.randint(100, 999)}",
             'type': random.choice(threat_types),
             'severity': random.choice(['critical', 'high', 'medium', 'low']),
             'description': 'New threat detected by intelligence sources',
-            'discovered_at': datetime.utcnow().isoformat(),
+            'discovered_at': get_now_pst().isoformat(),
             'confidence': random.choice(['high', 'medium', 'low']),
             'source': random.choice(['OSINT', 'Commercial Feed', 'ISAC', 'Internal'])
         }
@@ -129,7 +130,7 @@ class RealTimeThreatFeed(commands.Cog):
             title="📡 Real-time Threat Feed",
             description=f"Latest {len(recent)} threat(s) from intelligence sources",
             color=discord.Color.red(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         for threat in recent:
@@ -142,7 +143,7 @@ class RealTimeThreatFeed(commands.Cog):
                 inline=False
             )
         
-        embed.add_field(name="📊 Feed Stats", value=f"Total threats tracked: {len(feed)}\nLast updated: <t:{int(datetime.utcnow().timestamp())}:R>", inline=False)
+        embed.add_field(name="📊 Feed Stats", value=f"Total threats tracked: {len(feed)}\nLast updated: <t:{int(get_now_pst().timestamp())}:R>", inline=False)
         embed.set_footer(text="Sentinel Threat Intelligence | Auto-updates every 30min")
         
         await ctx.send(embed=embed)
@@ -166,7 +167,7 @@ class RealTimeThreatFeed(commands.Cog):
             title="🎯 IOC Added",
             description=f"Indicator of Compromise added to watchlist",
             color=discord.Color.orange(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="IOC ID", value=f"`{ioc['id']}`", inline=True)
@@ -192,7 +193,7 @@ class RealTimeThreatFeed(commands.Cog):
             title="🎯 Indicators of Compromise",
             description=f"{len(active_iocs)} active IOC(s) being monitored",
             color=discord.Color.orange(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         # Group by type
@@ -229,7 +230,7 @@ class RealTimeThreatFeed(commands.Cog):
                 title="✅ No IOC Match",
                 description=f"Value does not match any known IOCs",
                 color=discord.Color.green(),
-                timestamp=datetime.utcnow()
+                timestamp=get_now_pst()
             )
             embed.add_field(name="Checked Value", value=f"`{value}`", inline=False)
             await ctx.send(embed=embed)
@@ -239,7 +240,7 @@ class RealTimeThreatFeed(commands.Cog):
             title="⚠️ IOC Match Found!",
             description=f"{len(matches)} matching IOC(s) detected",
             color=discord.Color.red(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Checked Value", value=f"`{value}`", inline=False)
@@ -267,7 +268,7 @@ class RealTimeThreatFeed(commands.Cog):
             return
         
         # Simulate correlation
-        recent_threats = [t for t in feed if datetime.fromisoformat(t['discovered_at']) > (datetime.utcnow() - timedelta(days=7))]
+        recent_threats = [t for t in feed if datetime.fromisoformat(t['discovered_at']) > (get_now_pst() - timedelta(days=7))]
         
         correlations = []
         for threat in recent_threats[:5]:
@@ -283,7 +284,7 @@ class RealTimeThreatFeed(commands.Cog):
             title="🔗 Threat Correlation Analysis",
             description=f"{len(correlations)} correlation(s) found between threat feed and IOCs",
             color=discord.Color.red(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         for threat, ioc in correlations[:5]:

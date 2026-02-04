@@ -5,6 +5,7 @@ import json
 import os
 from datetime import datetime
 import uuid
+from cogs.core.pst_timezone import get_now_pst
 
 DATA_FILE = 'data/tickets.json'
 
@@ -49,7 +50,7 @@ class TicketManagementCog(commands.Cog):
             "title": title,
             "description": description,
             "created_by": ctx.author.id,
-            "created_at": datetime.utcnow().isoformat(),
+            "created_at": get_now_pst().isoformat(),
             "status": "open",
             "priority": "medium",
             "assigned_to": None,
@@ -138,7 +139,7 @@ class TicketManagementCog(commands.Cog):
         embed = discord.Embed(
             title=f"🎫 {ticket.get('id')} - {ticket.get('title')}",
             color=status_colors.get(ticket.get('status'), discord.Color.blue()),
-            timestamp=datetime.fromisoformat(ticket.get('created_at', datetime.utcnow().isoformat()))
+            timestamp=datetime.fromisoformat(ticket.get('created_at', get_now_pst().isoformat()))
         )
         
         embed.add_field(name="Status", value=ticket.get('status').upper(), inline=True)
@@ -229,7 +230,7 @@ class TicketManagementCog(commands.Cog):
             "author": ctx.author.name,
             "author_id": ctx.author.id,
             "text": comment,
-            "timestamp": datetime.utcnow().isoformat()
+            "timestamp": get_now_pst().isoformat()
         }
         
         if 'comments' not in ticket:
@@ -263,7 +264,7 @@ class TicketManagementCog(commands.Cog):
             return
         
         ticket['status'] = 'closed'
-        ticket['closed_at'] = datetime.utcnow().isoformat()
+        ticket['closed_at'] = get_now_pst().isoformat()
         ticket['closed_by'] = ctx.author.id
         save_tickets(data)
         

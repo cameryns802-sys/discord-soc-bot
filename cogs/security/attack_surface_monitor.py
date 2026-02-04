@@ -9,6 +9,7 @@ from discord.ext import commands
 import json
 import os
 from datetime import datetime, timedelta
+from cogs.core.pst_timezone import get_now_pst
 
 class AttackSurfaceMonitor(commands.Cog):
     """Attack surface monitoring and exposure tracking"""
@@ -188,7 +189,7 @@ class AttackSurfaceMonitor(commands.Cog):
         return {
             'exposure_score': exposure_score,
             'findings': findings,
-            'timestamp': datetime.utcnow().isoformat()
+            'timestamp': get_now_pst().isoformat()
         }
     
     async def _surfacescan_logic(self, ctx):
@@ -228,7 +229,7 @@ class AttackSurfaceMonitor(commands.Cog):
             title="🛡️ Attack Surface Analysis",
             description=f"**Exposure Score: {score}** - {status}",
             color=color,
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         # Group findings by severity
@@ -309,7 +310,7 @@ class AttackSurfaceMonitor(commands.Cog):
             title="📈 Attack Surface History",
             description=f"{len(scans)} scan(s) recorded",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         # Show last 5 scans
@@ -346,7 +347,7 @@ class AttackSurfaceMonitor(commands.Cog):
     
     def _relative_time(self, dt):
         """Get relative time string"""
-        now = datetime.utcnow()
+        now = get_now_pst()
         delta = now - dt
         
         if delta.days > 0:

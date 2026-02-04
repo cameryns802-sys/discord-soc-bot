@@ -9,6 +9,7 @@ from discord.ext import commands
 import json
 import os
 from datetime import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 class ModerationLogging(commands.Cog):
     """Log all moderation actions"""
@@ -35,7 +36,7 @@ class ModerationLogging(commands.Cog):
         guild_logs = data.get(str(guild_id), [])
         
         log_entry = {
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": get_now_pst().isoformat(),
             "action": action_type,
             "actor": str(actor),
             "target": str(target),

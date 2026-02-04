@@ -1,0 +1,18 @@
+{
+  "nightwatch_active": true,
+  "last_activation": "2026-02-03T19:00:28.567144",
+  "last_deactivation": null,
+  "sessions": [],
+  "alerts_tonight": 0,
+  "monitored_users": [],
+  "blackout_channels": [],
+  "config": {
+    "enabled": true,
+    "start_hour": 19,
+    "end_hour": 7,
+    "alert_threshold": null,
+    "auto_escalate": false,
+    "dm_alerts": false,
+    "log_all_activity": false
+  }
+}

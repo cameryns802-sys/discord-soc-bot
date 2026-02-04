@@ -9,6 +9,7 @@ import json
 import os
 from datetime import datetime, timedelta
 from typing import Dict, List, Optional
+from cogs.core.pst_timezone import get_now_pst
 
 class ExecutiveThreatBriefingCog(commands.Cog):
     """
@@ -87,7 +88,7 @@ class ExecutiveThreatBriefingCog(commands.Cog):
         }
         
         # Analyze recent threats (last 30 days)
-        now = datetime.utcnow()
+        now = get_now_pst()
         recent_threats = [
             t for t in self.threats
             if (now - datetime.fromisoformat(t["detected_at"])).days <= 30
@@ -117,7 +118,7 @@ class ExecutiveThreatBriefingCog(commands.Cog):
         
         # Generate briefing
         briefing = {
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": get_now_pst().isoformat(),
             "period": "Last 30 Days",
             "threat_summary": threat_summary,
             "generated_by": str(ctx.author.id)
@@ -131,7 +132,7 @@ class ExecutiveThreatBriefingCog(commands.Cog):
             title="🎯 Executive Threat Briefing",
             description=f"Security Landscape Overview - {briefing['period']}",
             color=discord.Color.dark_blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         # Executive Summary
@@ -224,7 +225,7 @@ class ExecutiveThreatBriefingCog(commands.Cog):
             "severity": severity.lower(),
             "category": category,
             "description": description,
-            "detected_at": datetime.utcnow().isoformat(),
+            "detected_at": get_now_pst().isoformat(),
             "added_by": str(ctx.author.id),
             "status": "active"
         }
@@ -254,7 +255,7 @@ class ExecutiveThreatBriefingCog(commands.Cog):
             title="✅ Threat Added to Executive Tracking",
             description=f"New {severity.upper()} threat logged",
             color=color_map.get(severity.lower(), discord.Color.blue()),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Threat ID", value=f"#{threat['id']}", inline=True)
@@ -292,7 +293,7 @@ class ExecutiveThreatBriefingCog(commands.Cog):
         
         # Mark as resolved
         threat['status'] = 'resolved'
-        threat['resolved_at'] = datetime.utcnow().isoformat()
+        threat['resolved_at'] = get_now_pst().isoformat()
         threat['resolved_by'] = str(ctx.author.id)
         self.save_threats()
         
@@ -311,7 +312,7 @@ class ExecutiveThreatBriefingCog(commands.Cog):
             title="✅ Threat Resolved",
             description=f"Threat #{threat_id} marked as resolved",
             color=discord.Color.green(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Category", value=threat['category'], inline=True)
@@ -331,7 +332,7 @@ class ExecutiveThreatBriefingCog(commands.Cog):
         
         Example: !exec_threat_trends 90
         """
-        now = datetime.utcnow()
+        now = get_now_pst()
         period_threats = [
             t for t in self.threats
             if (now - datetime.fromisoformat(t["detected_at"])).days <= days
@@ -341,7 +342,7 @@ class ExecutiveThreatBriefingCog(commands.Cog):
             title="📈 Threat Trend Analysis",
             description=f"Security trends over the past {days} days",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         if not period_threats:
@@ -421,7 +422,7 @@ class ExecutiveThreatBriefingCog(commands.Cog):
             return
         
         threat["status"] = "resolved"
-        threat["resolved_at"] = datetime.utcnow().isoformat()
+        threat["resolved_at"] = get_now_pst().isoformat()
         threat["resolution"] = resolution
         threat["resolved_by"] = str(ctx.author.id)
         
@@ -431,7 +432,7 @@ class ExecutiveThreatBriefingCog(commands.Cog):
             title="✅ Threat Resolved",
             description=f"Threat #{threat_id} has been marked as resolved",
             color=discord.Color.green(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Threat ID", value=f"#{threat_id}", inline=True)
@@ -454,7 +455,7 @@ class ExecutiveThreatBriefingCog(commands.Cog):
         critical_active = [t for t in active_threats if t.get("severity") == "critical"]
         
         # Recent threats (7 days)
-        now = datetime.utcnow()
+        now = get_now_pst()
         recent = [
             t for t in active_threats
             if (now - datetime.fromisoformat(t["detected_at"])).days <= 7
@@ -464,7 +465,7 @@ class ExecutiveThreatBriefingCog(commands.Cog):
             title="🎯 Executive Threat Dashboard",
             description="Real-time security posture overview",
             color=discord.Color.dark_blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="🚨 Active Threats", value=len(active_threats), inline=True)

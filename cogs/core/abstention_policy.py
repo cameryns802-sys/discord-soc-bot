@@ -7,6 +7,7 @@ from datetime import datetime
 from typing import Dict, Optional
 from enum import Enum
 from cogs.core.signal_bus import signal_bus, Signal, SignalType
+from cogs.core.pst_timezone import get_now_pst
 
 class AbstentionReason(Enum):
     """Reasons why an AI system might abstain"""
@@ -90,7 +91,7 @@ class AbstentionPolicy:
                 'reason': reason,
                 'escalation_type': 'ABSTENTION_REQUIRED'
             },
-            timestamp=datetime.utcnow().isoformat()
+            timestamp=get_now_pst().isoformat()
         )
         await signal_bus.emit(signal)
     

@@ -21,6 +21,7 @@ import csv
 import io
 
 from cogs.core.signal_bus import signal_bus, Signal, SignalType
+from cogs.core.pst_timezone import get_now_pst
 
 class IOCManager(commands.Cog):
     """Advanced IOC lifecycle management"""
@@ -59,7 +60,7 @@ class IOCManager(commands.Cog):
             'internal': {
                 'name': 'Internal IOCs',
                 'enabled': True,
-                'last_update': datetime.utcnow().isoformat()
+                'last_update': get_now_pst().isoformat()
             }
         }
         self.save_manager_data()
@@ -86,7 +87,7 @@ class IOCManager(commands.Cog):
         expired_count = 0
         for ioc_value, metadata in list(self.ioc_metadata.items()):
             expiry = metadata.get('expires_at')
-            if expiry and datetime.fromisoformat(expiry) < datetime.utcnow():
+            if expiry and datetime.fromisoformat(expiry) < get_now_pst():
                 # Mark as expired
                 if ioc_value in threat_intel.iocs:
                     del threat_intel.iocs[ioc_value]
@@ -102,15 +103,15 @@ class IOCManager(commands.Cog):
         """Add metadata to IOC"""
         expires_at = None
         if ttl_days:
-            expires_at = (datetime.utcnow() + timedelta(days=ttl_days)).isoformat()
+            expires_at = (get_now_pst() + timedelta(days=ttl_days)).isoformat()
         
         self.ioc_metadata[ioc_value] = {
-            'added_at': datetime.utcnow().isoformat(),
+            'added_at': get_now_pst().isoformat(),
             'expires_at': expires_at,
             'confidence': confidence,
             'tags': tags or [],
             'source_feed': source_feed,
-            'last_updated': datetime.utcnow().isoformat()
+            'last_updated': get_now_pst().isoformat()
         }
         
         self.save_manager_data()
@@ -121,7 +122,7 @@ class IOCManager(commands.Cog):
             'ioc_value': ioc_value,
             'reason': reason,
             'reporter': reporter,
-            'timestamp': datetime.utcnow().isoformat()
+            'timestamp': get_now_pst().isoformat()
         }
         
         self.false_positives.append(fp)
@@ -136,7 +137,7 @@ class IOCManager(commands.Cog):
         self.ioc_relationships[ioc_value].append({
             'related_ioc': related_ioc,
             'type': relationship_type,
-            'timestamp': datetime.utcnow().isoformat()
+            'timestamp': get_now_pst().isoformat()
         })
         
         self.save_manager_data()
@@ -217,7 +218,7 @@ class IOCManager(commands.Cog):
     
     def get_aging_report(self) -> Dict:
         """Get IOC aging report"""
-        now = datetime.utcnow()
+        now = get_now_pst()
         
         aging_buckets = {
             'fresh': 0,      # < 7 days
@@ -277,7 +278,7 @@ class IOCManager(commands.Cog):
             embed = discord.Embed(
                 title="📥 IOC Import Complete",
                 color=discord.Color.green(),
-                timestamp=datetime.utcnow()
+                timestamp=get_now_pst()
             )
             
             embed.add_field(name="Imported", value=str(result['imported']), inline=True)
@@ -301,7 +302,7 @@ class IOCManager(commands.Cog):
             
             file = discord.File(
                 io.BytesIO(csv_content.encode('utf-8')),
-                filename=f'iocs_export_{datetime.utcnow().strftime("%Y%m%d_%H%M%S")}.csv'
+                filename=f'iocs_export_{get_now_pst().strftime("%Y%m%d_%H%M%S")}.csv'
             )
             
             await ctx.send("📤 IOC Export", file=file)
@@ -334,7 +335,7 @@ class IOCManager(commands.Cog):
         embed = discord.Embed(
             title="📅 IOC Aging Report",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="🟢 Fresh (<7 days)", value=str(report['fresh']), inline=True)

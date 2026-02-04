@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin - Sentinel SOC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #5865F2;
+            --primary-dark: #4752C4;
+            --secondary: #57F287;
+            --danger: #ED4245;
+            --bg-primary: #0f0f1e;
+            --bg-secondary: #1a1a2e;
+            --bg-card: #16213e;
+            --text-primary: #ffffff;
+            --text-secondary: #b9bbbe;
+            --border-radius: 12px;
+            --shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, #0a0a15 100%);
+            color: var(--text-primary);
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header p {
+            color: var(--text-secondary);
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-tab {
+            padding: 1rem 2rem;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .nav-tab:hover {
+            color: var(--text-primary);
+        }
+
+        .section {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--bg-secondary);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.95rem;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .color-preview {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 1rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        .btn-success {
+            background: var(--secondary);
+            color: var(--bg-primary);
+        }
+
+        .actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .team-member-card {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-card {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .alert {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .alert.show {
+            display: block;
+        }
+
+        .alert-success {
+            background: rgba(87, 242, 135, 0.2);
+            border: 1px solid var(--secondary);
+            color: var(--secondary);
+        }
+
+        .alert-danger {
+            background: rgba(237, 66, 69, 0.2);
+            border: 1px solid var(--danger);
+            color: var(--danger);
+        }
+
+        .preview-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .preview-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🛡️ Dashboard Admin Panel</h1>
+            <p>Customize every aspect of your Sentinel SOC dashboard</p>
+        </div>
+
+        <div class="alert alert-success" id="successAlert">
+            <strong>✅ Success!</strong> Changes saved successfully. <a href="/" class="preview-link">View Dashboard →</a>
+        </div>
+
+        <div class="alert alert-danger" id="errorAlert">
+            <strong>❌ Error!</strong> <span id="errorMessage"></span>
+        </div>
+
+        <div class="nav-tabs">
+            <button class="nav-tab active" data-tab="branding">Branding</button>
+            <button class="nav-tab" data-tab="colors">Colors</button>
+            <button class="nav-tab" data-tab="links">Links</button>
+            <button class="nav-tab" data-tab="team">Team</button>
+            <button class="nav-tab" data-tab="features">Features</button>
+            <button class="nav-tab" data-tab="stats">Statistics</button>
+        </div>
+
+        <!-- Branding Section -->
+        <div class="section active" id="branding">
+            <h2>🎨 Branding & Identity</h2>
+            <div class="form-group">
+                <label>Bot Name</label>
+                <input type="text" id="brandingName" placeholder="Sentinel SOC">
+            </div>
+            <div class="form-group">
+                <label>Logo Emoji</label>
+                <input type="text" id="brandingLogo" placeholder="🛡️" maxlength="2">
+            </div>
+            <div class="form-group">
+                <label>Tagline</label>
+                <input type="text" id="brandingTagline" placeholder="Enterprise-Grade Security Platform">
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <input type="text" id="brandingDescription" placeholder="Advanced Security Operations Center for Discord">
+            </div>
+            <div class="form-group">
+                <label>Subtitle (Hero Section)</label>
+                <textarea id="brandingSubtitle" placeholder="100+ Security Modules | Real-Time Threat Detection"></textarea>
+            </div>
+            <div class="actions">
+                <button class="btn btn-primary" onclick="saveBranding()">💾 Save Branding</button>
+                <button class="btn btn-secondary" onclick="loadConfig()">🔄 Reset</button>
+            </div>
+        </div>
+
+        <!-- Colors Section -->
+        <div class="section" id="colors">
+            <h2>🎨 Color Theme</h2>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Primary Color <span class="color-preview" id="previewPrimary"></span></label>
+                    <input type="color" id="colorPrimary">
+                </div>
+                <div class="form-group">
+                    <label>Primary Dark <span class="color-preview" id="previewPrimaryDark"></span></label>
+                    <input type="color" id="colorPrimaryDark">
+                </div>
+                <div class="form-group">
+                    <label>Secondary Color <span class="color-preview" id="previewSecondary"></span></label>
+                    <input type="color" id="colorSecondary">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Danger Color <span class="color-preview" id="previewDanger"></span></label>
+                    <input type="color" id="colorDanger">
+                </div>
+                <div class="form-group">
+                    <label>Warning Color <span class="color-preview" id="previewWarning"></span></label>
+                    <input type="color" id="colorWarning">
+                </div>
+            </div>
+            <div class="actions">
+                <button class="btn btn-primary" onclick="saveColors()">💾 Save Colors</button>
+                <button class="btn btn-secondary" onclick="resetToDefaults()">🔄 Reset to Defaults</button>
+            </div>
+        </div>
+
+        <!-- Links Section -->
+        <div class="section" id="links">
+            <h2>🔗 Links & URLs</h2>
+            <div class="form-group">
+                <label>🏠 Dashboard URL</label>
+                <input type="url" id="linkDashboardUrl" placeholder="http://localhost:8000">
+                <small>Main dashboard URL (e.g., http://yourdomain.com or https://dashboard.yourbot.com)</small>
+            </div>
+            <div class="form-group">
+                <label>Discord Invite Link</label>
+                <input type="url" id="linkDiscordInvite" placeholder="https://discord.gg/your-invite">
+            </div>
+            <div class="form-group">
+                <label>Support Server</label>
+                <input type="url" id="linkSupportServer" placeholder="https://discord.gg/support">
+            </div>
+            <div class="form-group">
+                <label>GitHub Repository</label>
+                <input type="url" id="linkGithub" placeholder="https://github.com/your-repo">
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Documentation Path</label>
+                    <input type="text" id="linkDocumentation" placeholder="/docs">
+                </div>
+                <div class="form-group">
+                    <label>API Reference Path</label>
+                    <input type="text" id="linkApiReference" placeholder="/api/docs">
+                </div>
+            </div>
+            <div class="actions">
+                <button class="btn btn-primary" onclick="saveLinks()">💾 Save Links</button>
+            </div>
+        </div>
+
+        <!-- Team Section -->
+        <div class="section" id="team">
+            <h2>👥 Team Members</h2>
+            <div id="teamMembers"></div>
+            <button class="btn btn-secondary" onclick="addTeamMember()">➕ Add Team Member</button>
+            <div class="actions">
+                <button class="btn btn-primary" onclick="saveTeam()">💾 Save Team</button>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="section" id="features">
+            <h2>✨ Features Showcase</h2>
+            <div id="featuresList"></div>
+            <div class="actions">
+                <button class="btn btn-primary" onclick="saveFeatures()">💾 Save Features</button>
+            </div>
+        </div>
+
+        <!-- Stats Section -->
+        <div class="section" id="stats">
+            <h2>📊 Statistics Settings</h2>
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" id="statsShowLive"> Show Live Statistics
+                </label>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Default Servers</label>
+                    <input type="number" id="statsGuilds" value="2">
+                </div>
+                <div class="form-group">
+                    <label>Default Users</label>
+                    <input type="number" id="statsUsers" value="13">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Total Cogs</label>
+                    <input type="number" id="statsCogs" value="172">
+                </div>
+                <div class="form-group">
+                    <label>Total Commands</label>
+                    <input type="number" id="statsCommands" value="100">
+                </div>
+            </div>
+            <div class="actions">
+                <button class="btn btn-primary" onclick="saveStats()">💾 Save Statistics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let config = {};
+
+        // Load configuration on page load
+        document.addEventListener('DOMContentLoaded', loadConfig);
+
+        // Tab switching
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.tab).classList.add('active');
+            });
+        });
+
+        async function loadConfig() {
+            try {
+                const response = await fetch('/static/dashboard_config.json');
+                config = await response.json();
+                populateForm();
+            } catch (error) {
+                showError('Failed to load configuration');
+            }
+        }
+
+        function populateForm() {
+            // Branding
+            document.getElementById('brandingName').value = config.branding.name;
+            document.getElementById('brandingLogo').value = config.branding.logo_emoji;
+            document.getElementById('brandingTagline').value = config.branding.tagline;
+            document.getElementById('brandingDescription').value = config.branding.description;
+            document.getElementById('brandingSubtitle').value = config.branding.subtitle;
+
+            // Colors
+            document.getElementById('colorPrimary').value = config.colors.primary;
+            document.getElementById('colorPrimaryDark').value = config.colors.primary_dark;
+            document.getElementById('colorSecondary').value = config.colors.secondary;
+            document.getElementById('colorDanger').value = config.colors.danger;
+            document.getElementById('colorWarning').value = config.colors.warning;
+            updateColorPreviews();
+
+            // Links
+            document.getElementById('linkDashboardUrl').value = config.links.dashboard_url || 'http://localhost:8000';
+            document.getElementById('linkDiscordInvite').value = config.links.discord_invite;
+            document.getElementById('linkSupportServer').value = config.links.support_server;
+            document.getElementById('linkGithub').value = config.links.github;
+            document.getElementById('linkDocumentation').value = config.links.documentation;
+            document.getElementById('linkApiReference').value = config.links.api_reference;
+
+            // Stats
+            document.getElementById('statsShowLive').checked = config.stats.show_live_stats;
+            document.getElementById('statsGuilds').value = config.stats.default_guilds;
+            document.getElementById('statsUsers').value = config.stats.default_users;
+            document.getElementById('statsCogs').value = config.stats.total_cogs;
+            document.getElementById('statsCommands').value = config.stats.total_commands;
+
+            // Team
+            renderTeamMembers();
+            // Features
+            renderFeatures();
+        }
+
+        function updateColorPreviews() {
+            document.getElementById('previewPrimary').style.backgroundColor = document.getElementById('colorPrimary').value;
+            document.getElementById('previewPrimaryDark').style.backgroundColor = document.getElementById('colorPrimaryDark').value;
+            document.getElementById('previewSecondary').style.backgroundColor = document.getElementById('colorSecondary').value;
+            document.getElementById('previewDanger').style.backgroundColor = document.getElementById('colorDanger').value;
+            document.getElementById('previewWarning').style.backgroundColor = document.getElementById('colorWarning').value;
+        }
+
+        // Auto-update color previews
+        ['colorPrimary', 'colorPrimaryDark', 'colorSecondary', 'colorDanger', 'colorWarning'].forEach(id => {
+            document.getElementById(id).addEventListener('input', updateColorPreviews);
+        });
+
+        function renderTeamMembers() {
+            const container = document.getElementById('teamMembers');
+            container.innerHTML = config.team.map((member, index) => `
+                <div class="team-member-card">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" value="${member.name}" onchange="updateTeamMember(${index}, 'name', this.value)">
+                    </div>
+                    <div class="form-group">
+                        <label>Role</label>
+                        <input type="text" value="${member.role}" onchange="updateTeamMember(${index}, 'role', this.value)">
+                    </div>
+                    <div class="form-group">
+                        <label>Avatar URL</label>
+                        <input type="url" value="${member.avatar}" onchange="updateTeamMember(${index}, 'avatar', this.value)">
+                    </div>
+                    <div class="form-group">
+                        <label>Badges (comma-separated)</label>
+                        <input type="text" value="${member.badges.join(', ')}" onchange="updateTeamMember(${index}, 'badges', this.value.split(',').map(s => s.trim()))">
+                    </div>
+                    <button class="btn btn-danger" onclick="removeTeamMember(${index})">🗑️ Remove</button>
+                </div>
+            `).join('');
+        }
+
+        function renderFeatures() {
+            const container = document.getElementById('featuresList');
+            container.innerHTML = config.features.map((feature, index) => `
+                <div class="feature-card">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Icon</label>
+                            <input type="text" value="${feature.icon}" onchange="updateFeature(${index}, 'icon', this.value)">
+                        </div>
+                        <div class="form-group">
+                            <label>Title</label>
+                            <input type="text" value="${feature.title}" onchange="updateFeature(${index}, 'title', this.value)">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea onchange="updateFeature(${index}, 'description', this.value)">${feature.description}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Tags (comma-separated)</label>
+                        <input type="text" value="${feature.tags.join(', ')}" onchange="updateFeature(${index}, 'tags', this.value.split(',').map(s => s.trim()))">
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function updateTeamMember(index, field, value) {
+            config.team[index][field] = value;
+        }
+
+        function updateFeature(index, field, value) {
+            config.features[index][field] = value;
+        }
+
+        function addTeamMember() {
+            config.team.push({
+                name: "New Member",
+                role: "Role",
+                avatar: "https://cdn.discordapp.com/embed/avatars/0.png",
+                badges: ["Badge1"],
+                projects: ["Sentinel SOC Bot"]
+            });
+            renderTeamMembers();
+        }
+
+        function removeTeamMember(index) {
+            config.team.splice(index, 1);
+            renderTeamMembers();
+        }
+
+        async function saveBranding() {
+            config.branding.name = document.getElementById('brandingName').value;
+            config.branding.logo_emoji = document.getElementById('brandingLogo').value;
+            config.branding.tagline = document.getElementById('brandingTagline').value;
+            config.branding.description = document.getElementById('brandingDescription').value;
+            config.branding.subtitle = document.getElementById('brandingSubtitle').value;
+            await saveConfig();
+        }
+
+        async function saveColors() {
+            config.colors.primary = document.getElementById('colorPrimary').value;
+            config.colors.primary_dark = document.getElementById('colorPrimaryDark').value;
+            config.colors.secondary = document.getElementById('colorSecondary').value;
+            config.colors.danger = document.getElementById('colorDanger').value;
+            config.colors.warning = document.getElementById('colorWarning').value;
+            await saveConfig();
+        }
+
+        async function saveLinks() {
+            config.links.dashboard_url = document.getElementById('linkDashboardUrl').value;
+            config.links.discord_invite = document.getElementById('linkDiscordInvite').value;
+            config.links.support_server = document.getElementById('linkSupportServer').value;
+            config.links.github = document.getElementById('linkGithub').value;
+            config.links.documentation = document.getElementById('linkDocumentation').value;
+            config.links.api_reference = document.getElementById('linkApiReference').value;
+            await saveConfig();
+        }
+
+        async function saveTeam() {
+            await saveConfig();
+        }
+
+        async function saveFeatures() {
+            await saveConfig();
+        }
+
+        async function saveStats() {
+            config.stats.show_live_stats = document.getElementById('statsShowLive').checked;
+            config.stats.default_guilds = parseInt(document.getElementById('statsGuilds').value);
+            config.stats.default_users = parseInt(document.getElementById('statsUsers').value);
+            config.stats.total_cogs = parseInt(document.getElementById('statsCogs').value);
+            config.stats.total_commands = parseInt(document.getElementById('statsCommands').value);
+            await saveConfig();
+        }
+
+        async function saveConfig() {
+            try {
+                const response = await fetch('/api/save-config', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(config)
+                });
+                
+                if (response.ok) {
+                    showSuccess();
+                } else {
+                    showError('Failed to save configuration');
+                }
+            } catch (error) {
+                showError(error.message);
+            }
+        }
+
+        function resetToDefaults() {
+            document.getElementById('colorPrimary').value = '#5865F2';
+            document.getElementById('colorPrimaryDark').value = '#4752C4';
+            document.getElementById('colorSecondary').value = '#57F287';
+            document.getElementById('colorDanger').value = '#ED4245';
+            document.getElementById('colorWarning').value = '#FEE75C';
+            updateColorPreviews();
+        }
+
+        function showSuccess() {
+            const alert = document.getElementById('successAlert');
+            alert.classList.add('show');
+            setTimeout(() => alert.classList.remove('show'), 5000);
+        }
+
+        function showError(message) {
+            document.getElementById('errorMessage').textContent = message;
+            const alert = document.getElementById('errorAlert');
+            alert.classList.add('show');
+            setTimeout(() => alert.classList.remove('show'), 5000);
+        }
+    </script>
+</body>
+</html>

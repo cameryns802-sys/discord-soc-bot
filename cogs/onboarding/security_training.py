@@ -6,6 +6,7 @@ from discord.ext import commands
 import json
 import os
 from datetime import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 DATA_FILE = 'data/security_training.json'
 
@@ -52,7 +53,7 @@ class SecurityTrainingCog(commands.Cog):
             "event_id": event_id,
             "name": event_name,
             "scenario": scenario,
-            "launched_at": datetime.utcnow().isoformat(),
+            "launched_at": get_now_pst().isoformat(),
             "launched_by": str(ctx.author),
             "status": "ACTIVE",
             "participants": []
@@ -67,7 +68,7 @@ class SecurityTrainingCog(commands.Cog):
         embed.add_field(name="Event ID", value=event_id, inline=True)
         embed.add_field(name="Status", value="🟢 Active", inline=True)
         embed.add_field(name="Scenario", value=scenario[:100], inline=False)
-        embed.timestamp = datetime.utcnow()
+        embed.timestamp = get_now_pst()
         await ctx.send(embed=embed)
 
     @commands.command(name='microlearning_quiz')
@@ -118,7 +119,7 @@ class SecurityTrainingCog(commands.Cog):
             "name": campaign_name,
             "target_group": target_group,
             "duration_days": duration_days,
-            "created_at": datetime.utcnow().isoformat(),
+            "created_at": get_now_pst().isoformat(),
             "status": "ACTIVE"
         })
         self.save_data(data)
@@ -140,7 +141,7 @@ class SecurityTrainingCog(commands.Cog):
         embed.add_field(name="Overall Score", value=f"{score.get('score', 0)}/100", inline=True)
         embed.add_field(name="Modules Completed", value=score.get('modules_completed', 0), inline=True)
         embed.add_field(name="Last Quiz", value="2 hours ago", inline=True)
-        embed.timestamp = datetime.utcnow()
+        embed.timestamp = get_now_pst()
         await ctx.send(embed=embed)
 
     @commands.command(name='red_team_results')
@@ -159,7 +160,7 @@ class SecurityTrainingCog(commands.Cog):
         embed.add_field(name="Average Score", value="76%", inline=True)
         embed.add_field(name="Best Performer", value="User X - 92%", inline=False)
         embed.add_field(name="Key Vulnerabilities Found", value="• Credential reuse\n• Social engineering susceptibility", inline=False)
-        embed.timestamp = datetime.utcnow()
+        embed.timestamp = get_now_pst()
         await ctx.send(embed=embed)
 
 async def setup(bot):

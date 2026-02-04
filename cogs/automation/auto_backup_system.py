@@ -3,9 +3,10 @@ from discord.ext import commands, tasks
 import os
 import json
 import shutil
-import datetime
+from datetime import datetime
 import hashlib
 from pathlib import Path
+from cogs.core.pst_timezone import get_now_pst
 
 class AutoBackupSystem(commands.Cog):
     """Automated backup system with retention policies"""
@@ -158,7 +159,7 @@ class AutoBackupSystem(commands.Cog):
             title="💾 Creating Backup...",
             description="Creating manual backup of all data",
             color=discord.Color.blue(),
-            timestamp=datetime.datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         msg = await ctx.send(embed=embed)
         
@@ -169,7 +170,7 @@ class AutoBackupSystem(commands.Cog):
                 title="✅ Backup Complete",
                 description=f"Backup created successfully: `{backup_name}`",
                 color=discord.Color.green(),
-                timestamp=datetime.datetime.now(datetime.UTC)
+                timestamp=get_now_pst()
             )
             embed.add_field(name="Files Backed Up", value=str(file_count), inline=True)
             embed.add_field(name="Type", value="Manual", inline=True)
@@ -202,7 +203,7 @@ class AutoBackupSystem(commands.Cog):
             title="📦 Available Backups",
             description=f"Total: {len(backups)} backups",
             color=discord.Color.blue(),
-            timestamp=datetime.datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         
         for i, backup in enumerate(backups[:15], 1):  # Show last 15
@@ -283,7 +284,7 @@ class AutoBackupSystem(commands.Cog):
                 title="✅ Backup Restored",
                 description=f"Successfully restored from `{backup_name}`",
                 color=discord.Color.green(),
-                timestamp=datetime.datetime.now(datetime.UTC)
+                timestamp=get_now_pst()
             )
             embed.add_field(name="Files Restored", value=str(len(restored)), inline=True)
             embed.add_field(name="Current State Backup", value=f"`{current_backup}`", inline=True)
@@ -330,7 +331,7 @@ class AutoBackupSystem(commands.Cog):
             title="🔍 Backup Verification",
             description=f"Backup: `{backup_name}`",
             color=discord.Color.green() if not failed else discord.Color.red(),
-            timestamp=datetime.datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         embed.add_field(name="✅ Verified", value=str(verified), inline=True)
         embed.add_field(name="❌ Failed", value=str(len(failed)), inline=True)
@@ -349,7 +350,7 @@ class AutoBackupSystem(commands.Cog):
             embed = discord.Embed(
                 title="⚙️ Backup Configuration",
                 color=discord.Color.blue(),
-                timestamp=datetime.datetime.now(datetime.UTC)
+                timestamp=get_now_pst()
             )
             embed.add_field(name="Enabled", value="✅" if self.config['enabled'] else "❌", inline=True)
             embed.add_field(name="Hourly", value="✅" if self.config['hourly_enabled'] else "❌", inline=True)
@@ -383,3 +384,4 @@ class AutoBackupSystem(commands.Cog):
 
 async def setup(bot):
     await bot.add_cog(AutoBackupSystem(bot))
+

@@ -1,0 +1,34 @@
+{
+  "security": {
+    "commands": [
+      "!security",
+      "!antinuke",
+      "!anti_phishing"
+    ],
+    "description": "Core security operations"
+  },
+  "moderation": {
+    "commands": [
+      "!automod",
+      "!verification",
+      "!moderation_utilities"
+    ],
+    "description": "Moderation and user management"
+  },
+  "analytics": {
+    "commands": [
+      "!security_dashboard",
+      "!executive_risk_dashboard",
+      "!botstatus"
+    ],
+    "description": "Security analytics and reporting"
+  },
+  "intelligence": {
+    "commands": [
+      "!threatintel",
+      "!ioc_manager",
+      "!analyzethreatscape"
+    ],
+    "description": "Threat intelligence systems"
+  }
+}

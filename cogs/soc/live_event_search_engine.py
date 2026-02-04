@@ -10,6 +10,7 @@ import json
 import os
 from datetime import datetime, timedelta
 import re
+from cogs.core.pst_timezone import get_now_pst
 
 class LiveEventSearchEngine(commands.Cog):
     """Full-text search across security events and incident data"""
@@ -97,7 +98,7 @@ class LiveEventSearchEngine(commands.Cog):
     
     def search_by_date(self, guild_id, days_back=7):
         """Search events from past N days"""
-        cutoff = datetime.utcnow() - timedelta(days=days_back)
+        cutoff = get_now_pst() - timedelta(days=days_back)
         
         results = {
             'threats': [],
@@ -158,7 +159,7 @@ class LiveEventSearchEngine(commands.Cog):
             title=f"🔍 Search Results",
             description=f"Query: `{query}` | Found: {results['total']} result(s)",
             color=discord.Color.blurple(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         # Threats
@@ -209,7 +210,7 @@ class LiveEventSearchEngine(commands.Cog):
             title=f"📅 Recent Events (Past {days} Days)",
             description=f"Total: {total} event(s)",
             color=discord.Color.blurple(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         if results['threats']:
@@ -267,7 +268,7 @@ class LiveEventSearchEngine(commands.Cog):
             title="📊 Security Event Statistics",
             description="Summary of all recorded events (30-day window)",
             color=discord.Color.greyple(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="🎯 Threats", value=f"`{len(results['threats'])}`", inline=True)

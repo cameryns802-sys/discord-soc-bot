@@ -9,6 +9,7 @@ from datetime import datetime
 from typing import Optional, List
 import json
 import os
+from cogs.core.pst_timezone import get_now_pst
 
 DEFAULT_RULES = [
     "Be respectful to all members",
@@ -136,7 +137,7 @@ class ContentGenerator(commands.Cog):
         self.server_rules[guild_key] = {
             'rules': rules,
             'style': style,
-            'generated_at': datetime.now(datetime.UTC).isoformat(),
+            'generated_at': get_now_pst().isoformat(),
             'generated_by': ctx.author.id
         }
         self._save_rules()
@@ -146,7 +147,7 @@ class ContentGenerator(commands.Cog):
             title=f"📋 {ctx.guild.name} - Server Rules",
             description=f"Generated in **{style}** style",
             color=discord.Color.blue(),
-            timestamp=datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         
         for i, rule in enumerate(rules[:15], 1):  # Max 15 rules
@@ -200,7 +201,7 @@ class ContentGenerator(commands.Cog):
             title=f"📜 {ctx.guild.name} - Terms of Service",
             description="By using this server, you agree to the following terms:",
             color=discord.Color.gold(),
-            timestamp=datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         
         # Terms sections
@@ -289,7 +290,7 @@ class ContentGenerator(commands.Cog):
             title=f"🤝 {ctx.guild.name} - Community Guidelines",
             description="These guidelines help create a positive and welcoming environment for everyone",
             color=discord.Color.green(),
-            timestamp=datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         
         for i, guideline in enumerate(COMMUNITY_GUIDELINES, 1):
@@ -345,7 +346,7 @@ class ContentGenerator(commands.Cog):
             self.server_rules[guild_key] = {
                 'rules': DEFAULT_RULES.copy(),
                 'style': 'default',
-                'generated_at': datetime.now(datetime.UTC).isoformat(),
+                'generated_at': get_now_pst().isoformat(),
                 'generated_by': ctx.author.id
             }
         
@@ -356,7 +357,7 @@ class ContentGenerator(commands.Cog):
             title="✅ Rule Added",
             description=f"Rule #{len(self.server_rules[guild_key]['rules'])}",
             color=discord.Color.green(),
-            timestamp=datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         embed.add_field(name="New Rule", value=rule, inline=False)
         embed.add_field(name="Added by", value=ctx.author.mention, inline=True)
@@ -413,7 +414,7 @@ class ContentGenerator(commands.Cog):
             title="🗑️ Rule Removed",
             description=f"Rule #{rule_number} has been removed",
             color=discord.Color.orange(),
-            timestamp=datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         embed.add_field(name="Removed Rule", value=removed_rule, inline=False)
         embed.add_field(name="Removed by", value=ctx.author.mention, inline=True)

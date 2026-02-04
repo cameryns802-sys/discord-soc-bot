@@ -5,6 +5,7 @@ from discord import app_commands
 from datetime import datetime
 import json
 import os
+from cogs.core.pst_timezone import get_now_pst
 
 class AssetGroup(app_commands.Group):
     def __init__(self, cog):
@@ -16,7 +17,7 @@ class AssetGroup(app_commands.Group):
     async def add(self, interaction: discord.Interaction, asset_type: str, name: str, owner: discord.Member = None):
         self.cog.asset_counter += 1
         asset_id = str(self.cog.asset_counter)
-        self.cog.assets[asset_id] = {"id": asset_id, "type": asset_type, "name": name, "owner": owner.id if owner else interaction.user.id, "status": "active", "added_by": interaction.user.id, "added_at": datetime.utcnow().isoformat(), "last_audit": None}
+        self.cog.assets[asset_id] = {"id": asset_id, "type": asset_type, "name": name, "owner": owner.id if owner else interaction.user.id, "status": "active", "added_by": interaction.user.id, "added_at": get_now_pst().isoformat(), "last_audit": None}
         self.cog.save_data()
         embed = discord.Embed(title=f"📦 Asset #{asset_id} Added", description=name, color=discord.Color.green())
         embed.add_field(name="Type", value=asset_type, inline=True)
@@ -60,7 +61,7 @@ class AssetGroup(app_commands.Group):
         if asset_id not in self.cog.assets:
             await interaction.response.send_message("❌ Asset not found", ephemeral=True)
             return
-        self.cog.assets[asset_id]['last_audit'] = datetime.utcnow().isoformat()
+        self.cog.assets[asset_id]['last_audit'] = get_now_pst().isoformat()
         self.cog.save_data()
         await interaction.response.send_message(f"✅ Asset #{asset_id} audited by {interaction.user.mention}")
 
@@ -71,7 +72,7 @@ class AssetGroup(app_commands.Group):
             await interaction.response.send_message("❌ Asset not found", ephemeral=True)
             return
         self.cog.assets[asset_id]['status'] = 'decommissioned'
-        self.cog.assets[asset_id]['decommissioned_at'] = datetime.utcnow().isoformat()
+        self.cog.assets[asset_id]['decommissioned_at'] = get_now_pst().isoformat()
         self.cog.save_data()
         await interaction.response.send_message(f"✅ Asset #{asset_id} decommissioned")
 

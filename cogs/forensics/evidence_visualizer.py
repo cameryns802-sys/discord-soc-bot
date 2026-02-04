@@ -8,6 +8,7 @@ import os
 from datetime import datetime
 import zipfile
 import io
+from cogs.core.pst_timezone import get_now_pst
 
 class EvidenceVisualizerCog(commands.Cog):
     def __init__(self, bot):
@@ -33,7 +34,7 @@ class EvidenceVisualizerCog(commands.Cog):
         """Generate ASCII timeline visualization."""
         timeline = f"""
 # INCIDENT TIMELINE - {case_id}
-**Generated:** {datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S UTC')}
+**Generated:** {get_now_pst().strftime('%Y-%m-%d %H:%M:%S UTC')}
 
 ## Visual Timeline
 
@@ -108,10 +109,10 @@ All timeline events have been preserved with:
         bundle_manifest = {
             "bundle_id": bundle_id,
             "case_id": case_id,
-            "created_at": datetime.utcnow().isoformat(),
+            "created_at": get_now_pst().isoformat(),
             "chain_of_custody": {
                 "collected_by": "SOC Bot",
-                "collection_date": datetime.utcnow().isoformat(),
+                "collection_date": get_now_pst().isoformat(),
                 "hash_algorithm": "SHA-256",
                 "integrity_verified": True
             },
@@ -241,7 +242,7 @@ To verify evidence integrity:
             "timeline_id": timeline_id,
             "case_id": case_id,
             "generated_by": str(ctx.author.id),
-            "generated_at": datetime.utcnow().isoformat(),
+            "generated_at": get_now_pst().isoformat(),
             "content": timeline_text
         }
         self.data['counter'] += 1
@@ -305,7 +306,7 @@ To verify evidence integrity:
         with open(readme_file, 'w') as f:
             f.write(f"""EVIDENCE BUNDLE: {bundle_id}
 CASE: {case_id}
-CREATED: {datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S UTC')}
+CREATED: {get_now_pst().strftime('%Y-%m-%d %H:%M:%S UTC')}
 
 CONTENTS:
 - MANIFEST.json - Complete evidence inventory with hashes

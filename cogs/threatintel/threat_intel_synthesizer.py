@@ -7,6 +7,7 @@ import json
 import os
 from datetime import datetime, timedelta
 from collections import Counter
+from cogs.core.pst_timezone import get_now_pst
 
 class ThreatIntelSynthesizerCog(commands.Cog):
     def __init__(self, bot):
@@ -33,7 +34,7 @@ class ThreatIntelSynthesizerCog(commands.Cog):
         synthesis = f"""
 # THREAT INTELLIGENCE SYNTHESIS REPORT
 **Report ID:** INTEL-{self.data['counter']:05d}
-**Generated:** {datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S UTC')}
+**Generated:** {get_now_pst().strftime('%Y-%m-%d %H:%M:%S UTC')}
 **Time Period:** Last {time_period}
 **Confidence:** 89%
 
@@ -241,7 +242,7 @@ User accessed 500+ sensitive files in 30-minute period - 10x normal behavior for
         }
         
         finding = findings.get(pattern_type, f"Pattern analysis for {pattern_type} - No specific finding template available")
-        return finding.format(timestamp=datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S UTC'))
+        return finding.format(timestamp=get_now_pst().strftime('%Y-%m-%d %H:%M:%S UTC'))
 
     @commands.command(name="synthesize_threats")
     async def synthesize_threats(self, ctx, time_period: str = "7d"):
@@ -259,7 +260,7 @@ User accessed 500+ sensitive files in 30-minute period - 10x normal behavior for
             "synthesis_id": synthesis_id,
             "time_period": time_period,
             "generated_by": str(ctx.author.id),
-            "generated_at": datetime.utcnow().isoformat(),
+            "generated_at": get_now_pst().isoformat(),
             "content": synthesis_text
         }
         self.data['counter'] += 1
@@ -297,7 +298,7 @@ User accessed 500+ sensitive files in 30-minute period - 10x normal behavior for
             "pattern_id": pattern_id,
             "type": pattern_type,
             "generated_by": str(ctx.author.id),
-            "generated_at": datetime.utcnow().isoformat(),
+            "generated_at": get_now_pst().isoformat(),
             "content": finding_text
         }
         self.data['counter'] += 1

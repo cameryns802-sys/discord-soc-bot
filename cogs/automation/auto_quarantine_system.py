@@ -4,6 +4,7 @@ from discord.ext import commands
 from datetime import datetime, timedelta
 import json
 import os
+from cogs.core.pst_timezone import get_now_pst
 
 class AutoQuarantineSystemCog(commands.Cog):
     def __init__(self, bot):
@@ -63,7 +64,7 @@ class AutoQuarantineSystemCog(commands.Cog):
             "action": action,
             "enabled": True,
             "created_by": ctx.author.id,
-            "created_at": datetime.utcnow().isoformat(),
+            "created_at": get_now_pst().isoformat(),
             "enforcement_count": 0,
             "last_enforced": None
         }
@@ -114,7 +115,7 @@ class AutoQuarantineSystemCog(commands.Cog):
             "item_name": str(user),
             "reason": reason,
             "quarantined_by": ctx.author.id,
-            "quarantined_at": datetime.utcnow().isoformat(),
+            "quarantined_at": get_now_pst().isoformat(),
             "released": False,
             "released_at": None,
             "duration_minutes": None
@@ -130,7 +131,7 @@ class AutoQuarantineSystemCog(commands.Cog):
         )
         embed.add_field(name="Reason", value=reason, inline=False)
         embed.add_field(name="Quarantined By", value=ctx.author.mention, inline=True)
-        embed.add_field(name="Time", value=datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S"), inline=True)
+        embed.add_field(name="Time", value=get_now_pst().strftime("%Y-%m-%d %H:%M:%S"), inline=True)
         
         await ctx.send(embed=embed)
 
@@ -155,7 +156,7 @@ class AutoQuarantineSystemCog(commands.Cog):
             "item_name": channel.name,
             "reason": reason,
             "quarantined_by": ctx.author.id,
-            "quarantined_at": datetime.utcnow().isoformat(),
+            "quarantined_at": get_now_pst().isoformat(),
             "released": False,
             "released_at": None,
             "duration_minutes": None
@@ -200,7 +201,7 @@ class AutoQuarantineSystemCog(commands.Cog):
             pass
         
         quarantine["released"] = True
-        quarantine["released_at"] = datetime.utcnow().isoformat()
+        quarantine["released_at"] = get_now_pst().isoformat()
         self.save_quarantine()
         
         embed = discord.Embed(
@@ -209,7 +210,7 @@ class AutoQuarantineSystemCog(commands.Cog):
             color=discord.Color.green()
         )
         embed.add_field(name="Released By", value=ctx.author.mention, inline=True)
-        embed.add_field(name="Released At", value=datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S"), inline=True)
+        embed.add_field(name="Released At", value=get_now_pst().strftime("%Y-%m-%d %H:%M:%S"), inline=True)
         
         await ctx.send(embed=embed)
 
@@ -235,7 +236,7 @@ class AutoQuarantineSystemCog(commands.Cog):
             pass
         
         quarantine["released"] = True
-        quarantine["released_at"] = datetime.utcnow().isoformat()
+        quarantine["released_at"] = get_now_pst().isoformat()
         self.save_quarantine()
         
         embed = discord.Embed(
@@ -244,7 +245,7 @@ class AutoQuarantineSystemCog(commands.Cog):
             color=discord.Color.green()
         )
         embed.add_field(name="Released By", value=ctx.author.mention, inline=True)
-        embed.add_field(name="Released At", value=datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S"), inline=True)
+        embed.add_field(name="Released At", value=get_now_pst().strftime("%Y-%m-%d %H:%M:%S"), inline=True)
         
         await ctx.send(embed=embed)
 

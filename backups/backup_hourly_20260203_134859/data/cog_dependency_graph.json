@@ -1,0 +1,124 @@
+{
+  "graph": {
+    "SecurityControlFramework": [
+      "signal_bus"
+    ],
+    "SecurityAwarenessMetrics": [
+      "signal_bus"
+    ],
+    "SecurityTrainingSystem": [
+      "signal_bus"
+    ],
+    "SecurityAuditTrail": [
+      "signal_bus"
+    ],
+    "APISecurityGovernance": [
+      "signal_bus"
+    ],
+    "CloudSecurityPosture": [
+      "signal_bus"
+    ],
+    "MobileSecurityManager": [
+      "signal_bus"
+    ],
+    "SecurityCog": [
+      "signal_bus"
+    ],
+    "SecurityBaselineScanner": [
+      "signal_bus"
+    ],
+    "SecurityPostureScoring": [
+      "signal_bus"
+    ],
+    "QuarterlySecurityPostureReportCog": [
+      "signal_bus"
+    ],
+    "SecurityBaselineMonitor": [
+      "signal_bus"
+    ],
+    "SecurityChecklist": [
+      "signal_bus"
+    ],
+    "SecurityDashboard": [
+      "signal_bus"
+    ],
+    "SecurityDrill": [
+      "signal_bus"
+    ],
+    "SecurityEventCorrelation": [
+      "signal_bus"
+    ],
+    "SecurityMetricsKPIs": [
+      "signal_bus"
+    ],
+    "DependencySecurityCheck": [
+      "signal_bus"
+    ],
+    "DependencySecurity": [
+      "signal_bus"
+    ],
+    "MobileDeviceSecurityCog": [
+      "signal_bus"
+    ],
+    "ExternalSecurityAPI": [
+      "signal_bus"
+    ],
+    "SecurityTrainingCog": [
+      "signal_bus"
+    ],
+    "SecurityPostureMonitorCog": [
+      "signal_bus"
+    ],
+    "SecurityReport": [
+      "signal_bus"
+    ],
+    "TamperDetectionSecurityCog": [
+      "signal_bus"
+    ],
+    "CloudSecurityMonitorCog": [
+      "signal_bus"
+    ]
+  },
+  "circular": [],
+  "critical_path": [
+    "SecurityControlFramework",
+    "SecurityAwarenessMetrics",
+    "SecurityTrainingSystem",
+    "SecurityAuditTrail",
+    "APISecurityGovernance",
+    "CloudSecurityPosture",
+    "MobileSecurityManager",
+    "SecurityCog",
+    "SecurityBaselineScanner",
+    "SecurityPostureScoring"
+  ],
+  "load_order": [
+    "SecurityControlFramework",
+    "SecurityAwarenessMetrics",
+    "SecurityTrainingSystem",
+    "SecurityAuditTrail",
+    "APISecurityGovernance",
+    "CloudSecurityPosture",
+    "MobileSecurityManager",
+    "SecurityCog",
+    "SecurityBaselineScanner",
+    "SecurityPostureScoring",
+    "QuarterlySecurityPostureReportCog",
+    "SecurityBaselineMonitor",
+    "SecurityChecklist",
+    "SecurityDashboard",
+    "SecurityDrill",
+    "SecurityEventCorrelation",
+    "SecurityMetricsKPIs",
+    "DependencySecurityCheck",
+    "DependencySecurity",
+    "MobileDeviceSecurityCog",
+    "ExternalSecurityAPI",
+    "SecurityTrainingCog",
+    "SecurityPostureMonitorCog",
+    "SecurityReport",
+    "TamperDetectionSecurityCog",
+    "CloudSecurityMonitorCog"
+  ],
+  "timestamp": "2026-02-03T01:13:49.593000"
+}

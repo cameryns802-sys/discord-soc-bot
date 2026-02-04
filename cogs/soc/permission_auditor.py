@@ -6,6 +6,7 @@ import discord
 from discord.ext import commands
 from discord import app_commands
 from datetime import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 class PermissionAuditor(commands.Cog):
     """Audit server permissions for security issues"""
@@ -148,7 +149,7 @@ class PermissionAuditor(commands.Cog):
             title=f"{severity} Permission Audit Report",
             description=f"Scanning {len(guild.roles)} roles, {len(list(guild.text_channels))} channels",
             color=discord.Color.red() if severity == "🔴" else (discord.Color.gold() if severity == "⚠️" else discord.Color.green()),
-            timestamp=datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         
         if issues:
@@ -196,3 +197,4 @@ class PermissionAuditor(commands.Cog):
 
 async def setup(bot):
     await bot.add_cog(PermissionAuditor(bot))
+

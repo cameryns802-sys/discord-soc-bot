@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 class StaffAssignment(commands.Cog):
     def __init__(self, bot):
@@ -10,7 +11,7 @@ class StaffAssignment(commands.Cog):
     @commands.command()
     @commands.has_permissions(administrator=True)
     async def assignstaff(self, ctx, user: discord.Member):
-        self.assignments.append({"user": user.id, "timestamp": datetime.datetime.utcnow().isoformat()})
+        self.assignments.append({"user": user.id, "timestamp": datetime.get_now_pst().isoformat()})
         await ctx.send(f"{user.mention} assigned to incident.")
 
     @commands.command()

@@ -19,6 +19,7 @@ from typing import Dict, List, Tuple
 from statistics import mean
 
 from cogs.core.signal_bus import signal_bus, Signal, SignalType
+from cogs.core.pst_timezone import get_now_pst
 
 class ThreatScorer(commands.Cog):
     """Dynamic threat risk scoring system"""
@@ -67,7 +68,7 @@ class ThreatScorer(commands.Cog):
         
         # Update current threat
         self.current_threats[threat_key] = {
-            'timestamp': datetime.utcnow().isoformat(),
+            'timestamp': get_now_pst().isoformat(),
             'source': signal.source,
             'signal_type': str(signal.signal_type),
             'severity': signal.severity,
@@ -157,7 +158,7 @@ class ThreatScorer(commands.Cog):
             return 0.0
         
         # Count threats in last hour
-        cutoff = datetime.utcnow() - timedelta(hours=1)
+        cutoff = get_now_pst() - timedelta(hours=1)
         recent_count = 0
         
         for key in threat_keys:
@@ -206,7 +207,7 @@ class ThreatScorer(commands.Cog):
     
     def get_threat_summary(self, hours: int = 24) -> Dict:
         """Get summary of current threats"""
-        cutoff = datetime.utcnow() - timedelta(hours=hours)
+        cutoff = get_now_pst() - timedelta(hours=hours)
         
         current = []
         for key, threat in self.current_threats.items():
@@ -239,7 +240,7 @@ class ThreatScorer(commands.Cog):
     
     def get_threat_trend(self, system: str = None, hours: int = 24) -> List[Dict]:
         """Get threat trend for visualization"""
-        cutoff = datetime.utcnow() - timedelta(hours=hours)
+        cutoff = get_now_pst() - timedelta(hours=hours)
         
         trend = []
         for key, history in self.threat_history.items():
@@ -273,7 +274,7 @@ class ThreatScorer(commands.Cog):
             title="🚨 Threat Risk Summary",
             description=f"Analysis of threats over last {hours} hours",
             color=discord.Color.red() if summary['critical_count'] > 0 else discord.Color.orange(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(
@@ -353,7 +354,7 @@ class ThreatScorer(commands.Cog):
             title="📈 Threat Score Timeline",
             description=f"Threat progression over last {hours} hours",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         if system:

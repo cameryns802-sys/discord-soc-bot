@@ -6,6 +6,7 @@ from discord.ext import commands, tasks
 import json
 import os
 from datetime import datetime, timedelta
+from cogs.core.pst_timezone import get_now_pst
 
 class LiveThreatIntelFeedCog(commands.Cog):
     def __init__(self, bot):
@@ -48,7 +49,7 @@ class LiveThreatIntelFeedCog(commands.Cog):
         enrichment = {
             "indicator": indicator,
             "type": indicator_type,
-            "enriched_at": datetime.utcnow().isoformat(),
+            "enriched_at": get_now_pst().isoformat(),
             "context": {
                 "threat_score": 85,
                 "first_seen": "2026-01-15",
@@ -73,7 +74,7 @@ class LiveThreatIntelFeedCog(commands.Cog):
                     if new_iocs:
                         await self.alert_on_iocs(new_iocs, feed_name)
                     
-                    feed_data["last_check"] = datetime.utcnow().isoformat()
+                    feed_data["last_check"] = get_now_pst().isoformat()
             
             self.save_data(self.data)
         except Exception as e:
@@ -178,7 +179,7 @@ class LiveThreatIntelFeedCog(commands.Cog):
             "indicator": indicator,
             "type": indicator_type,
             "added_by": str(ctx.author.id),
-            "added_at": datetime.utcnow().isoformat(),
+            "added_at": get_now_pst().isoformat(),
             "hits": 0
         }
         
@@ -225,7 +226,7 @@ class LiveThreatIntelFeedCog(commands.Cog):
             await ctx.send("❌ Staff only.")
             return
         
-        cutoff = datetime.utcnow() - timedelta(hours=hours)
+        cutoff = get_now_pst() - timedelta(hours=hours)
         recent = [
             alert for alert in self.data["alert_history"]
             if datetime.fromisoformat(alert.get("detected_at", "2000-01-01")) > cutoff

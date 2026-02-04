@@ -10,6 +10,7 @@ import os
 from datetime import datetime, timedelta
 from typing import Dict, List, Optional
 import asyncio
+from cogs.core.pst_timezone import get_now_pst
 
 class ZeroTrustPolicyEngineCog(commands.Cog):
     """
@@ -97,7 +98,7 @@ class ZeroTrustPolicyEngineCog(commands.Cog):
             "id": len(self.policies["global_policies"]) + 1,
             "type": policy_type,
             "rules": rules,
-            "created_at": datetime.utcnow().isoformat(),
+            "created_at": get_now_pst().isoformat(),
             "created_by": str(ctx.author.id),
             "active": True
         }
@@ -121,7 +122,7 @@ class ZeroTrustPolicyEngineCog(commands.Cog):
             title="✅ Zero-Trust Policy Added",
             description=f"New {policy_type} policy created",
             color=discord.Color.green(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         embed.add_field(name="Policy ID", value=f"#{policy['id']}", inline=True)
         embed.add_field(name="Type", value=policy_type.upper(), inline=True)
@@ -144,7 +145,7 @@ class ZeroTrustPolicyEngineCog(commands.Cog):
             title="🔒 Zero-Trust Policies",
             description="Current active policies",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         # Global policies
@@ -223,8 +224,8 @@ class ZeroTrustPolicyEngineCog(commands.Cog):
         
         # Perform verification checks
         checks = {
-            "account_age": (datetime.utcnow() - member.created_at).days,
-            "server_tenure": (datetime.utcnow() - member.joined_at).days if member.joined_at else 0,
+            "account_age": (get_now_pst() - member.created_at).days,
+            "server_tenure": (get_now_pst() - member.joined_at).days if member.joined_at else 0,
             "roles": len(member.roles),
             "verification_status": "verified" if member.verified else "unverified",
             "bot_account": member.bot,
@@ -245,7 +246,7 @@ class ZeroTrustPolicyEngineCog(commands.Cog):
             trust_score += 10
         
         verification = {
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": get_now_pst().isoformat(),
             "guild_id": guild_id,
             "checks": checks,
             "trust_score": min(trust_score, 100),
@@ -262,7 +263,7 @@ class ZeroTrustPolicyEngineCog(commands.Cog):
             title="🔍 Zero-Trust Verification",
             description=f"Verification result for {member.mention}",
             color=color,
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Trust Score", value=f"**{trust_score}/100**", inline=True)
@@ -295,7 +296,7 @@ class ZeroTrustPolicyEngineCog(commands.Cog):
             title="⚠️ Zero-Trust Policy Violations",
             description=f"Showing {len(recent_violations)} most recent violations",
             color=discord.Color.orange(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         if not recent_violations:
@@ -354,7 +355,7 @@ class ZeroTrustPolicyEngineCog(commands.Cog):
         
         # Record enforcement
         violation = {
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": get_now_pst().isoformat(),
             "guild_id": str(ctx.guild.id),
             "user_id": str(member.id),
             "policy_id": policy_id,
@@ -371,7 +372,7 @@ class ZeroTrustPolicyEngineCog(commands.Cog):
             title="✅ Policy Enforced",
             description=f"Zero-trust policy enforced on {member.mention}",
             color=discord.Color.green(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         embed.add_field(name="Policy ID", value=f"#{policy_id}", inline=True)
         embed.add_field(name="Policy Type", value=policy["type"].upper(), inline=True)
@@ -403,7 +404,7 @@ class ZeroTrustPolicyEngineCog(commands.Cog):
         total_verifications = sum(len(v) for v in self.verifications.values())
         
         # Recent violations (last 24h)
-        now = datetime.utcnow()
+        now = get_now_pst()
         recent_violations = [
             v for v in self.violations
             if (now - datetime.fromisoformat(v["timestamp"])).days < 1
@@ -413,7 +414,7 @@ class ZeroTrustPolicyEngineCog(commands.Cog):
             title="🔒 Zero-Trust Security Dashboard",
             description="Continuous verification and policy enforcement status",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="📋 Active Policies", value=total_policies, inline=True)

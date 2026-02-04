@@ -1,0 +1,134 @@
+{
+  "frameworks": {
+    "GDPR": {
+      "enabled": true,
+      "violations": []
+    },
+    "CCPA": {
+      "enabled": true,
+      "violations": []
+    },
+    "DSA": {
+      "enabled": true,
+      "violations": []
+    },
+    "SOC2": {
+      "enabled": false,
+      "violations": []
+    }
+  },
+  "policies": {},
+  "scan_history": [
+    {
+      "scan_id": "SCAN-00001",
+      "timestamp": "2026-02-02T23:52:45.284420",
+      "violations_found": 0,
+      "frameworks_checked": [
+        "GDPR",
+        "CCPA",
+        "DSA"
+      ]
+    },
+    {
+      "scan_id": "SCAN-00002",
+      "timestamp": "2026-02-02T23:55:10.297143",
+      "violations_found": 0,
+      "frameworks_checked": [
+        "GDPR",
+        "CCPA",
+        "DSA"
+      ]
+    },
+    {
+      "scan_id": "SCAN-00003",
+      "timestamp": "2026-02-02T23:56:18.339105",
+      "violations_found": 0,
+      "frameworks_checked": [
+        "GDPR",
+        "CCPA",
+        "DSA"
+      ]
+    },
+    {
+      "scan_id": "SCAN-00004",
+      "timestamp": "2026-02-03T00:00:57.180812",
+      "violations_found": 0,
+      "frameworks_checked": [
+        "GDPR",
+        "CCPA",
+        "DSA"
+      ]
+    },
+    {
+      "scan_id": "SCAN-00005",
+      "timestamp": "2026-02-03T00:02:42.500966",
+      "violations_found": 0,
+      "frameworks_checked": [
+        "GDPR",
+        "CCPA",
+        "DSA"
+      ]
+    },
+    {
+      "scan_id": "SCAN-00006",
+      "timestamp": "2026-02-03T00:02:59.442074",
+      "violations_found": 0,
+      "frameworks_checked": [
+        "GDPR",
+        "CCPA",
+        "DSA"
+      ]
+    },
+    {
+      "scan_id": "SCAN-00007",
+      "timestamp": "2026-02-03T00:19:50.998443",
+      "violations_found": 0,
+      "frameworks_checked": [
+        "GDPR",
+        "CCPA",
+        "DSA"
+      ]
+    },
+    {
+      "scan_id": "SCAN-00008",
+      "timestamp": "2026-02-03T00:23:05.161913",
+      "violations_found": 0,
+      "frameworks_checked": [
+        "GDPR",
+        "CCPA",
+        "DSA"
+      ]
+    },
+    {
+      "scan_id": "SCAN-00009",
+      "timestamp": "2026-02-03T00:34:33.619483",
+      "violations_found": 0,
+      "frameworks_checked": [
+        "GDPR",
+        "CCPA",
+        "DSA"
+      ]
+    },
+    {
+      "scan_id": "SCAN-00010",
+      "timestamp": "2026-02-03T00:39:39.241227",
+      "violations_found": 0,
+      "frameworks_checked": [
+        "GDPR",
+        "CCPA",
+        "DSA"
+      ]
+    },
+    {
+      "scan_id": "SCAN-00011",
+      "timestamp": "2026-02-03T01:13:25.077541",
+      "violations_found": 0,
+      "frameworks_checked": [
+        "GDPR",
+        "CCPA",
+        "DSA"
+      ]
+    }
+  ],
+  "drift_detections": []
+}

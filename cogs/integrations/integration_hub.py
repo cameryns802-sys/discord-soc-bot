@@ -2,6 +2,7 @@
 import discord
 from discord.ext import commands
 import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 class IntegrationHubCog(commands.Cog):
     def __init__(self, bot):
@@ -30,7 +31,7 @@ class IntegrationHubCog(commands.Cog):
             "masked_key": masked_key,
             "status": "active",
             "added_by": ctx.author.mention,
-            "added_at": datetime.datetime.utcnow(),
+            "added_at": datetime.get_now_pst(),
             "last_sync": None
         }
         
@@ -67,13 +68,13 @@ class IntegrationHubCog(commands.Cog):
             return
         
         integration = self.integrations[integration_id]
-        integration["last_sync"] = datetime.datetime.utcnow()
+        integration["last_sync"] = datetime.get_now_pst()
         
         # Log sync event
         self.sync_history.append({
             "integration_id": integration_id,
             "service": integration["service"],
-            "timestamp": datetime.datetime.utcnow(),
+            "timestamp": datetime.get_now_pst(),
             "records_synced": 150  # Simulated
         })
         
@@ -83,7 +84,7 @@ class IntegrationHubCog(commands.Cog):
             color=discord.Color.green()
         )
         embed.add_field(name="Records Synced", value="150", inline=True)
-        embed.add_field(name="Timestamp", value=datetime.datetime.utcnow().strftime("%H:%M:%S"), inline=True)
+        embed.add_field(name="Timestamp", value=datetime.get_now_pst().strftime("%H:%M:%S"), inline=True)
         await ctx.send(embed=embed)
 
     @commands.command()

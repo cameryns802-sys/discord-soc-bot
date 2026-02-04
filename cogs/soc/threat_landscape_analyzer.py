@@ -10,6 +10,7 @@ import json
 import os
 from datetime import datetime, timedelta
 import uuid
+from cogs.core.pst_timezone import get_now_pst
 
 class ThreatLandscapeAnalyzer(commands.Cog):
     """Threat landscape monitoring and analysis"""
@@ -52,7 +53,7 @@ class ThreatLandscapeAnalyzer(commands.Cog):
             title="🌍 Current Threat Landscape",
             description="Real-time threat environment assessment",
             color=discord.Color.orange(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Global Threat Level", value="━" * 25, inline=False)
@@ -93,7 +94,7 @@ class ThreatLandscapeAnalyzer(commands.Cog):
             title="👥 Threat Actor Activity",
             description="Active threat groups and operations",
             color=discord.Color.red(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Active Operations", value="━" * 25, inline=False)
@@ -132,7 +133,7 @@ class ThreatLandscapeAnalyzer(commands.Cog):
             title="🔓 Vulnerability Landscape",
             description="Active exploitation in the wild",
             color=discord.Color.orange(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Critical CVEs (In Exploitation)", value="━" * 25, inline=False)
@@ -169,7 +170,7 @@ class ThreatLandscapeAnalyzer(commands.Cog):
             title="📊 Sector Threat Trends",
             description="Industry-specific threat landscape",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Threat Intensity by Sector", value="━" * 25, inline=False)

@@ -1,0 +1,25 @@
+{
+  "active_challenges": {
+    "1466863901449785497": [
+      "give_5_rep",
+      "spend_1000_coins",
+      "react_20_times"
+    ],
+    "1451439611766112319": [
+      "send_10_messages",
+      "help_member",
+      "send_50_messages"
+    ]
+  },
+  "user_progress": {
+    "960995456488448080": {
+      "send_10_messages": 4,
+      "send_50_messages": 4
+    },
+    "862083132735225858": {
+      "send_10_messages": 4,
+      "send_50_messages": 4
+    }
+  },
+  "last_reset": "2026-02-03"
+}

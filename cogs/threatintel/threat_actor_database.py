@@ -3,6 +3,7 @@ from discord.ext import commands
 import json
 import os
 import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 DATA_FILE = 'data/threat_actors.json'
 
@@ -52,7 +53,7 @@ class ThreatActorDatabaseCog(commands.Cog):
             "aliases": [],
             "known_tactics": [],
             "known_campaigns": [],
-            "created_at": datetime.datetime.utcnow().isoformat(),
+            "created_at": datetime.get_now_pst().isoformat(),
             "created_by": str(ctx.author),
             "threat_level": "medium"
         }

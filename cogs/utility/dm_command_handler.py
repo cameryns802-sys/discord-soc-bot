@@ -9,6 +9,7 @@ from discord.ext import commands
 import json
 import os
 from datetime import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 class DMCommandHandler(commands.Cog):
     """Handle private messages and DM-based commands"""
@@ -47,7 +48,7 @@ class DMCommandHandler(commands.Cog):
             title="🤖 Sentinel SOC Bot - Command Help",
             description="Private message command guide",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="📋 Available DM Commands", value="━" * 40, inline=False)
@@ -96,13 +97,13 @@ class DMCommandHandler(commands.Cog):
     @commands.command(name='botstatus')
     async def botstatus(self, ctx):
         """Check bot operational status"""
-        uptime = datetime.utcnow() - self.bot.user.created_at
+        uptime = get_now_pst() - self.bot.user.created_at
         
         embed = discord.Embed(
             title="🤖 Bot Status",
             description="Sentinel SOC Bot operational status",
             color=discord.Color.green(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Status", value="✅ ONLINE", inline=True)
@@ -129,7 +130,7 @@ class DMCommandHandler(commands.Cog):
             title="⚡ Quick Diagnostics Test",
             description="Running bot health checks...",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         # Test 1: Bot connectivity
@@ -160,7 +161,7 @@ class DMCommandHandler(commands.Cog):
             title="🖥️ System Information",
             description="Sentinel SOC Bot system status",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Bot Information", value="━" * 25, inline=False)
@@ -200,7 +201,7 @@ class DMCommandHandler(commands.Cog):
             title=f"🏛️ Server: {guild.name}",
             description="Security operations overview",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Server Details", value="━" * 25, inline=False)
@@ -273,7 +274,7 @@ class DMCommandHandler(commands.Cog):
         )
         
         embed.add_field(name="Status", value="✅ Rules acknowledged", inline=True)
-        embed.add_field(name="Timestamp", value=datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S'), inline=True)
+        embed.add_field(name="Timestamp", value=get_now_pst().strftime('%Y-%m-%d %H:%M:%S'), inline=True)
         embed.add_field(name="Next Steps", value="━" * 25, inline=False)
         embed.add_field(name="→", value="Use security commands in appropriate channels", inline=False)
         embed.add_field(name="→", value="Access DM commands for bot help", inline=False)

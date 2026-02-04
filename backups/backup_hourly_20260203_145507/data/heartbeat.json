@@ -1,0 +1,30 @@
+{
+  "timestamp": "2026-02-03T14:55:03.037993-08:00",
+  "guilds": 0,
+  "uptime_seconds": 0,
+  "signal_bus_ok": true,
+  "signal_stats": {
+    "total_signals": 0,
+    "by_type": {
+      "threat_detected": 0,
+      "anomaly_detected": 0,
+      "policy_violation": 0,
+      "compliance_issue": 0,
+      "pii_exposure": 0,
+      "unauthorized_access": 0,
+      "escalation_required": 0,
+      "resource_warning": 0,
+      "performance_issue": 0,
+      "integration_failure": 0,
+      "user_escalation": 0,
+      "user_feedback": 0,
+      "human_override": 0
+    },
+    "by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    }
+  }
+}

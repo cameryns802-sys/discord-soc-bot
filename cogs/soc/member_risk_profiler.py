@@ -10,6 +10,7 @@ import json
 import os
 from datetime import datetime, timedelta
 import re
+from cogs.core.pst_timezone import get_now_pst
 
 class MemberRiskProfiler(commands.Cog):
     """AI-powered member risk assessment and profiling"""
@@ -46,7 +47,7 @@ class MemberRiskProfiler(commands.Cog):
         factors = []
         
         # Account age factor (0-20 points)
-        account_age_days = (datetime.utcnow() - member.created_at.replace(tzinfo=None)).days
+        account_age_days = (get_now_pst() - member.created_at.replace(tzinfo=None)).days
         if account_age_days < 7:
             score += 20
             factors.append("Very new account (< 7 days)")
@@ -77,7 +78,7 @@ class MemberRiskProfiler(commands.Cog):
                 factors.append(f"Has privilege: {perm_obj.flag}")
         
         # Member join time (5-15 points if very recent)
-        join_age_days = (datetime.utcnow() - member.joined_at.replace(tzinfo=None)).days
+        join_age_days = (get_now_pst() - member.joined_at.replace(tzinfo=None)).days
         if join_age_days < 1:
             score += 15
             factors.append("Joined today")
@@ -146,7 +147,7 @@ class MemberRiskProfiler(commands.Cog):
             title=f"{self.get_risk_level(score)} Risk Profile",
             description=f"User: {target.mention}",
             color=self.get_risk_color(score),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Risk Score", value=f"`{score}/100`", inline=True)
@@ -194,7 +195,7 @@ class MemberRiskProfiler(commands.Cog):
             title=f"🔍 Risk Audit Results",
             description=f"{len(high_risk)} high-risk member(s) found (threshold: {threshold})",
             color=discord.Color.orange(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         for member, score in high_risk[:10]:
@@ -221,7 +222,7 @@ class MemberRiskProfiler(commands.Cog):
             title="🕐 Recent Joins & Risk Assessment",
             description="Last 20 members to join",
             color=discord.Color.blurple(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         for member in recent:

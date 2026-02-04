@@ -6,6 +6,76 @@
       "actor": "System",
       "target": "Welcomer#5491",
       "reason": "Added role: \ud83e\udd16Bot"
+    },
+    {
+      "timestamp": "2026-02-03T14:49:59.822823-08:00",
+      "action": "ROLE_ADD",
+      "actor": "System",
+      "target": "2.3cam",
+      "reason": "Added role: He/him"
+    },
+    {
+      "timestamp": "2026-02-03T14:50:03.769081-08:00",
+      "action": "ROLE_REMOVE",
+      "actor": "System",
+      "target": "2.3cam",
+      "reason": "Removed role: He/him"
+    },
+    {
+      "timestamp": "2026-02-03T14:50:05.821617-08:00",
+      "action": "ROLE_ADD",
+      "actor": "System",
+      "target": "2.3cam",
+      "reason": "Added role: He/him"
+    },
+    {
+      "timestamp": "2026-02-03T14:50:09.713736-08:00",
+      "action": "ROLE_REMOVE",
+      "actor": "System",
+      "target": "2.3cam",
+      "reason": "Removed role: He/him"
+    },
+    {
+      "timestamp": "2026-02-03T14:50:12.821335-08:00",
+      "action": "ROLE_ADD",
+      "actor": "System",
+      "target": "2.3cam",
+      "reason": "Added role: He/him"
+    },
+    {
+      "timestamp": "2026-02-03T19:21:17.680825-08:00",
+      "action": "ROLE_ADD",
+      "actor": "System",
+      "target": "timmyvalero22",
+      "reason": "Added role: \u2699\ufe0fServer Staff"
+    },
+    {
+      "timestamp": "2026-02-03T19:21:29.021637-08:00",
+      "action": "ROLE_ADD",
+      "actor": "System",
+      "target": "timmyvalero22",
+      "reason": "Added role: Member"
+    },
+    {
+      "timestamp": "2026-02-03T20:13:55.696458-08:00",
+      "action": "ROLE_ADD",
+      "actor": "System",
+      "target": "carter.accs",
+      "reason": "Added role: \ud83c\udf00Moderator"
+    },
+    {
+      "timestamp": "2026-02-03T20:13:59.457350-08:00",
+      "action": "ROLE_ADD",
+      "actor": "System",
+      "target": "carter.accs",
+      "reason": "Added role: \u2699\ufe0fServer Staff"
+    },
+    {
+      "timestamp": "2026-02-03T20:14:07.850939-08:00",
+      "action": "ROLE_ADD",
+      "actor": "System",
+      "target": "carter.accs",
+      "reason": "Added role: Member"
     }
   ]
 }

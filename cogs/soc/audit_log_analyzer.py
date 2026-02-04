@@ -8,6 +8,7 @@ from discord import app_commands
 from datetime import datetime, timedelta
 from typing import Optional
 import json
+from cogs.core.pst_timezone import get_now_pst
 
 class AuditLogAnalyzer(commands.Cog):
     """Analyze audit logs for suspicious activity"""
@@ -48,7 +49,7 @@ class AuditLogAnalyzer(commands.Cog):
             hours = 1
         
         # Fetch audit logs
-        time_filter = datetime.now(datetime.UTC) - timedelta(hours=hours)
+        time_filter = get_now_pst() - timedelta(hours=hours)
         
         audit_data = {
             'kicks': 0,
@@ -131,7 +132,7 @@ class AuditLogAnalyzer(commands.Cog):
         embed = discord.Embed(
             title=f"📊 Audit Log Analysis ({hours}h)",
             color=discord.Color.blue() if not suspicious else discord.Color.orange(),
-            timestamp=datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         
         embed.add_field(
@@ -165,3 +166,4 @@ class AuditLogAnalyzer(commands.Cog):
 
 async def setup(bot):
     await bot.add_cog(AuditLogAnalyzer(bot))
+

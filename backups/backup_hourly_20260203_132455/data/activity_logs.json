@@ -1,0 +1,286 @@
+{
+  "1": {
+    "id": 1,
+    "timestamp": "2026-02-02T01:50:02.521024",
+    "type": "MESSAGE_CREATED",
+    "data": {
+      "user": "2.3cam",
+      "user_id": 960995456488448080,
+      "channel": "member-logs",
+      "content_length": 18
+    }
+  },
+  "2": {
+    "id": 2,
+    "timestamp": "2026-02-02T01:50:02.648430",
+    "type": "MESSAGE",
+    "data": {
+      "user": "2.3cam",
+      "user_id": 960995456488448080,
+      "channel": "member-logs",
+      "content_length": 18
+    }
+  },
+  "3": {
+    "id": 3,
+    "timestamp": "2026-02-02T01:50:02.785312",
+    "type": "COMMAND",
+    "user": "2.3cam",
+    "user_id": 960995456488448080,
+    "command": "generate_playbook",
+    "args": "[<cogs.playbook_generator.PlaybookGeneratorCog object at 0x0000021EC1392660>, <discord.ext.commands.context.Context object at 0x0000021EC2C66270>]",
+    "status": "success",
+    "guild": "2.3cam's server",
+    "channel": "member-logs"
+  },
+  "4": {
+    "id": 4,
+    "timestamp": "2026-02-02T01:50:02.793156",
+    "type": "COMMAND",
+    "user": "2.3cam",
+    "user_id": 960995456488448080,
+    "command": "generate_playbook",
+    "args": "[<cogs.playbook_generator.PlaybookGeneratorCog object at 0x0000021EC1392660>, <discord.ext.commands.context.Context object at 0x0000021EC2C66270>]",
+    "status": "success",
+    "guild": "2.3cam's server",
+    "channel": "member-logs"
+  },
+  "5": {
+    "id": 5,
+    "timestamp": "2026-02-02T01:50:02.871797",
+    "type": "ERROR",
+    "error_type": "COMMAND_ERROR",
+    "error_msg": "threat_type is a required argument that is missing.",
+    "context": "Command: generate_playbook"
+  },
+  "6": {
+    "id": 6,
+    "timestamp": "2026-02-02T01:51:10.299985",
+    "type": "MESSAGE_CREATED",
+    "data": {
+      "user": "2.3cam",
+      "user_id": 960995456488448080,
+      "channel": "member-logs",
+      "content_length": 25
+    }
+  },
+  "7": {
+    "id": 7,
+    "timestamp": "2026-02-02T01:51:10.376290",
+    "type": "MESSAGE",
+    "data": {
+      "user": "2.3cam",
+      "user_id": 960995456488448080,
+      "channel": "member-logs",
+      "content_length": 25
+    }
+  },
+  "8": {
+    "id": 8,
+    "timestamp": "2026-02-02T01:51:10.395373",
+    "type": "COMMAND",
+    "user": "2.3cam",
+    "user_id": 960995456488448080,
+    "command": "generate_playbook",
+    "args": "[<cogs.playbook_generator.PlaybookGeneratorCog object at 0x0000021EC1392660>, <discord.ext.commands.context.Context object at 0x0000021EC2ECC2D0>]",
+    "status": "success",
+    "guild": "2.3cam's server",
+    "channel": "member-logs"
+  },
+  "9": {
+    "id": 9,
+    "timestamp": "2026-02-02T01:51:10.410953",
+    "type": "COMMAND",
+    "user": "2.3cam",
+    "user_id": 960995456488448080,
+    "command": "generate_playbook",
+    "args": "[<cogs.playbook_generator.PlaybookGeneratorCog object at 0x0000021EC1392660>, <discord.ext.commands.context.Context object at 0x0000021EC2ECC2D0>]",
+    "status": "success",
+    "guild": "2.3cam's server",
+    "channel": "member-logs"
+  },
+  "10": {
+    "id": 10,
+    "timestamp": "2026-02-02T01:51:10.748752",
+    "type": "ERROR",
+    "error_type": "COMMAND_ERROR",
+    "error_msg": "Command raised an exception: UnicodeEncodeError: 'charmap' codec can't encode character '\\u2705' in position 2805: character maps to <undefined>",
+    "context": "Command: generate_playbook"
+  },
+  "11": {
+    "id": 11,
+    "timestamp": "2026-02-02T01:51:27.052385",
+    "type": "MESSAGE_CREATED",
+    "data": {
+      "user": "2.3cam",
+      "user_id": 960995456488448080,
+      "channel": "member-logs",
+      "content_length": 28
+    }
+  },
+  "12": {
+    "id": 12,
+    "timestamp": "2026-02-02T01:51:27.065329",
+    "type": "MESSAGE",
+    "data": {
+      "user": "2.3cam",
+      "user_id": 960995456488448080,
+      "channel": "member-logs",
+      "content_length": 28
+    }
+  },
+  "13": {
+    "id": 13,
+    "timestamp": "2026-02-02T01:51:27.084032",
+    "type": "COMMAND",
+    "user": "2.3cam",
+    "user_id": 960995456488448080,
+    "command": "generate_playbook",
+    "args": "[<cogs.playbook_generator.PlaybookGeneratorCog object at 0x0000021EC1392660>, <discord.ext.commands.context.Context object at 0x0000021EC2ECCF50>]",
+    "status": "success",
+    "guild": "2.3cam's server",
+    "channel": "member-logs"
+  },
+  "14": {
+    "id": 14,
+    "timestamp": "2026-02-02T01:51:27.097872",
+    "type": "COMMAND",
+    "user": "2.3cam",
+    "user_id": 960995456488448080,
+    "command": "generate_playbook",
+    "args": "[<cogs.playbook_generator.PlaybookGeneratorCog object at 0x0000021EC1392660>, <discord.ext.commands.context.Context object at 0x0000021EC2ECCF50>]",
+    "status": "success",
+    "guild": "2.3cam's server",
+    "channel": "member-logs"
+  },
+  "15": {
+    "id": 15,
+    "timestamp": "2026-02-02T01:51:27.282834",
+    "type": "ERROR",
+    "error_type": "COMMAND_ERROR",
+    "error_msg": "Command raised an exception: UnicodeEncodeError: 'charmap' codec can't encode character '\\u2705' in position 2817: character maps to <undefined>",
+    "context": "Command: generate_playbook"
+  },
+  "16": {
+    "id": 16,
+    "timestamp": "2026-02-02T01:53:05.185845",
+    "type": "MESSAGE_CREATED",
+    "data": {
+      "user": "2.3cam",
+      "user_id": 960995456488448080,
+      "channel": "message-logs",
+      "content_length": 16
+    }
+  },
+  "17": {
+    "id": 17,
+    "timestamp": "2026-02-02T01:53:05.223149",
+    "type": "MESSAGE",
+    "data": {
+      "user": "2.3cam",
+      "user_id": 960995456488448080,
+      "channel": "message-logs",
+      "content_length": 16
+    }
+  },
+  "18": {
+    "id": 18,
+    "timestamp": "2026-02-02T01:53:05.244498",
+    "type": "COMMAND",
+    "user": "2.3cam",
+    "user_id": 960995456488448080,
+    "command": "generate_policy",
+    "args": "[<cogs.policy_comms_generator.PolicyCommsGeneratorCog object at 0x0000021EC1393380>, <discord.ext.commands.context.Context object at 0x0000021EC2C51BA0>]",
+    "status": "success",
+    "guild": "2.3cam's server",
+    "channel": "message-logs"
+  },
+  "19": {
+    "id": 19,
+    "timestamp": "2026-02-02T01:53:05.256015",
+    "type": "COMMAND",
+    "user": "2.3cam",
+    "user_id": 960995456488448080,
+    "command": "generate_policy",
+    "args": "[<cogs.policy_comms_generator.PolicyCommsGeneratorCog object at 0x0000021EC1393380>, <discord.ext.commands.context.Context object at 0x0000021EC2C51BA0>]",
+    "status": "success",
+    "guild": "2.3cam's server",
+    "channel": "message-logs"
+  },
+  "20": {
+    "id": 20,
+    "timestamp": "2026-02-02T01:53:05.273682",
+    "type": "ERROR",
+    "error_type": "COMMAND_ERROR",
+    "error_msg": "policy_type is a required argument that is missing.",
+    "context": "Command: generate_policy"
+  },
+  "21": {
+    "id": 21,
+    "timestamp": "2026-02-02T01:54:16.687815",
+    "type": "MESSAGE_CREATED",
+    "data": {
+      "user": "2.3cam",
+      "user_id": 960995456488448080,
+      "channel": "message-logs",
+      "content_length": 22
+    }
+  },
+  "22": {
+    "id": 22,
+    "timestamp": "2026-02-02T01:54:16.738013",
+    "type": "MESSAGE",
+    "data": {
+      "user": "2.3cam",
+      "user_id": 960995456488448080,
+      "channel": "message-logs",
+      "content_length": 22
+    }
+  },
+  "23": {
+    "id": 23,
+    "timestamp": "2026-02-02T01:54:16.755606",
+    "type": "COMMAND",
+    "user": "2.3cam",
+    "user_id": 960995456488448080,
+    "command": "generate_policy",
+    "args": "[<cogs.policy_comms_generator.PolicyCommsGeneratorCog object at 0x0000021EC1393380>, <discord.ext.commands.context.Context object at 0x0000021EC2C51CD0>]",
+    "status": "success",
+    "guild": "2.3cam's server",
+    "channel": "message-logs"
+  },
+  "24": {
+    "id": 24,
+    "timestamp": "2026-02-02T01:54:16.761651",
+    "type": "COMMAND",
+    "user": "2.3cam",
+    "user_id": 960995456488448080,
+    "command": "generate_policy",
+    "args": "[<cogs.policy_comms_generator.PolicyCommsGeneratorCog object at 0x0000021EC1393380>, <discord.ext.commands.context.Context object at 0x0000021EC2C51CD0>]",
+    "status": "success",
+    "guild": "2.3cam's server",
+    "channel": "message-logs"
+  },
+  "25": {
+    "id": 25,
+    "timestamp": "2026-02-02T01:55:01.794248",
+    "type": "MESSAGE_CREATED",
+    "data": {
+      "user": "2.3cam",
+      "user_id": 960995456488448080,
+      "channel": "scope",
+      "content_length": 0
+    }
+  },
+  "26": {
+    "id": 26,
+    "timestamp": "2026-02-02T01:55:01.811601",
+    "type": "MESSAGE",
+    "data": {
+      "user": "2.3cam",
+      "user_id": 960995456488448080,
+      "channel": "scope",
+      "content_length": 0
+    }
+  }
+}

@@ -10,6 +10,7 @@ import json
 import os
 from datetime import datetime
 import uuid
+from cogs.core.pst_timezone import get_now_pst
 
 class MobileSecurityManager(commands.Cog):
     """Mobile device and application security management"""
@@ -78,7 +79,7 @@ class MobileSecurityManager(commands.Cog):
         # Last security check
         if device.get('last_security_check'):
             last = datetime.fromisoformat(device['last_security_check'])
-            days_since = (datetime.utcnow() - last).days
+            days_since = (get_now_pst() - last).days
             if days_since > 30:
                 score -= 20
         else:
@@ -101,7 +102,7 @@ class MobileSecurityManager(commands.Cog):
             'name': device_name,
             'type': device_type.lower(),
             'owner': owner_name or 'Unknown',
-            'added_at': datetime.utcnow().isoformat(),
+            'added_at': get_now_pst().isoformat(),
             'os_version': 'Latest',
             'encryption_enabled': True,
             'mfa_enabled': True,
@@ -109,7 +110,7 @@ class MobileSecurityManager(commands.Cog):
             'antivirus_installed': True,
             'is_compromised': False,
             'excessive_permissions': False,
-            'last_security_check': datetime.utcnow().isoformat(),
+            'last_security_check': get_now_pst().isoformat(),
             'security_score': 100,
             'compliance_status': 'compliant',
             'installed_apps': [],
@@ -124,7 +125,7 @@ class MobileSecurityManager(commands.Cog):
             title="📱 Mobile Device Added",
             description=f"**{device_name}**",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Device ID", value=f"`{device_id}`", inline=True)
@@ -153,7 +154,7 @@ class MobileSecurityManager(commands.Cog):
             title="📱 Mobile Device Inventory",
             description=f"{len(sorted_devices)} device(s) managed",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         compliant = sum(1 for d in devices.values() if d['compliance_status'] == 'compliant')
@@ -199,7 +200,7 @@ class MobileSecurityManager(commands.Cog):
             title=f"📱 {device['name']}",
             description=f"Device Type: {device['type'].title()}",
             color=color,
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Device ID", value=f"`{device['id']}`", inline=True)
@@ -250,7 +251,7 @@ class MobileSecurityManager(commands.Cog):
             title="🔍 Mobile Security Scan Results",
             description=f"Scanned {len(devices)} device(s)",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         compliant = sum(1 for d in devices.values() if d['compliance_status'] == 'compliant' and d['security_score'] >= 80)

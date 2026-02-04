@@ -12,6 +12,7 @@ import json
 import os
 from cogs.core.signal_bus import signal_bus, Signal, SignalType
 from cogs.core.feature_flags import flags
+from cogs.core.pst_timezone import get_now_pst
 
 class AlertManagementCog(commands.Cog):
     def __init__(self, bot):
@@ -56,7 +57,7 @@ class AlertManagementCog(commands.Cog):
         self.alerts[alert_id] = {
             "id": alert_id, "title": title, "severity": severity.lower(), "status": "new",
             "source": source, "created_by": interaction.user.id,
-            "created_at": datetime.utcnow().isoformat()
+            "created_at": get_now_pst().isoformat()
         }
         self.save_data()
         
@@ -91,7 +92,7 @@ class AlertManagementCog(commands.Cog):
         
         self.alerts[alert_id]["status"] = "resolved"
         self.alerts[alert_id]["resolved_by"] = interaction.user.id
-        self.alerts[alert_id]["resolved_at"] = datetime.utcnow().isoformat()
+        self.alerts[alert_id]["resolved_at"] = get_now_pst().isoformat()
         self.save_data()
         
         await interaction.response.send_message(f"✅ Alert #{alert_id} resolved")

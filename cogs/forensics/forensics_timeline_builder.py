@@ -6,6 +6,7 @@ from discord.ext import commands
 import json
 import os
 from datetime import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 class ForensicsTimelineBuilderCog(commands.Cog):
     def __init__(self, bot):
@@ -48,7 +49,7 @@ class ForensicsTimelineBuilderCog(commands.Cog):
             "timeline_id": timeline_id,
             "investigation_name": investigation_name,
             "created_by": str(ctx.author.id),
-            "created_at": datetime.utcnow().isoformat(),
+            "created_at": get_now_pst().isoformat(),
             "events": [],
             "subjects": [],
             "status": "ACTIVE"
@@ -88,7 +89,7 @@ class ForensicsTimelineBuilderCog(commands.Cog):
             "event_id": f"EVT-{len(timeline['events']) + 1:05d}",
             "type": event_type.upper(),
             "description": event_description,
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": get_now_pst().isoformat(),
             "recorded_by": str(ctx.author.id),
             "metadata": {}
         }
@@ -159,7 +160,7 @@ class ForensicsTimelineBuilderCog(commands.Cog):
         timeline = self.data["timelines"][timeline_id]
         
         # Create export file
-        export_filename = f"timeline_{timeline_id}_{datetime.utcnow().strftime('%Y%m%d_%H%M%S')}.json"
+        export_filename = f"timeline_{timeline_id}_{get_now_pst().strftime('%Y%m%d_%H%M%S')}.json"
         export_path = os.path.join("data", "exports", export_filename)
         os.makedirs(os.path.dirname(export_path), exist_ok=True)
         

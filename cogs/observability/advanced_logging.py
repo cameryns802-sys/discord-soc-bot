@@ -7,7 +7,7 @@ from pathlib import Path
 from logging.handlers import RotatingFileHandler
 
 class AdvancedLogging(commands.Cog):
-    """Advanced logging system with rotation and filtering"""
+    """Advanced logging system with rotation and filtering - Observability variant"""
     
     def __init__(self, bot):
         self.bot = bot
@@ -16,7 +16,7 @@ class AdvancedLogging(commands.Cog):
         self.logs_dir = Path('./logs')
         self.logs_dir.mkdir(exist_ok=True)
         
-        self.config_file = self.data_dir / 'logging_config.json'
+        self.config_file = self.data_dir / 'logging_config_adv.json'
         self.config = {
             'log_level': 'INFO',
             'max_size_mb': 10,
@@ -72,7 +72,7 @@ class AdvancedLogging(commands.Cog):
         
         print(f"[Logging] Configured: Level={self.config['log_level']}, MaxSize={self.config['max_size_mb']}MB")
     
-    @commands.command(name='view_logs')
+    @commands.command(name='advlogs')
     @commands.is_owner()
     async def view_logs(self, ctx, lines: int = 50):
         """View recent log lines (owner only)"""

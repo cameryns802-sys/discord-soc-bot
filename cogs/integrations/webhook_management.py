@@ -5,6 +5,7 @@ from discord import app_commands
 import json
 import os
 from datetime import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 class WebhookGroup(app_commands.Group):
     def __init__(self, cog):
@@ -15,7 +16,7 @@ class WebhookGroup(app_commands.Group):
     @app_commands.checks.has_permissions(manage_webhooks=True)
     async def create(self, interaction: discord.Interaction, channel: discord.TextChannel, name: str):
         webhook = await channel.create_webhook(name=name, reason=f"Created by {interaction.user}")
-        self.cog.webhooks[str(webhook.id)] = {"id": webhook.id, "name": name, "channel_id": channel.id, "created_by": interaction.user.id, "created_at": datetime.utcnow().isoformat(), "message_count": 0}
+        self.cog.webhooks[str(webhook.id)] = {"id": webhook.id, "name": name, "channel_id": channel.id, "created_by": interaction.user.id, "created_at": get_now_pst().isoformat(), "message_count": 0}
         self.cog.save_data()
         await interaction.response.send_message(f"✅ Webhook **{name}** created in {channel.mention}\nURL: ||{webhook.url}||", ephemeral=True)
 

@@ -1,0 +1,64 @@
+{
+  "rules": {
+    "threat_detected": {
+      "low_confidence": {
+        "threshold": 0.4,
+        "action": "log",
+        "escalate_after": 5
+      },
+      "medium_confidence": {
+        "threshold": 0.6,
+        "action": "alert_mods",
+        "escalate_after": 3
+      },
+      "high_confidence": {
+        "threshold": 0.8,
+        "action": "timeout",
+        "escalate_after": 1
+      },
+      "critical_confidence": {
+        "threshold": 0.95,
+        "action": "ban",
+        "escalate_after": 0
+      }
+    },
+    "raid_detected": {
+      "users_per_minute": {
+        "threshold": 10,
+        "action": "enable_raidmode",
+        "escalate_after": 0
+      },
+      "spam_volume": {
+        "threshold": 50,
+        "action": "lockdown",
+        "escalate_after": 0
+      }
+    },
+    "phishing_detected": {
+      "urls": {
+        "threshold": 3,
+        "action": "alert_community",
+        "escalate_after": 1
+      },
+      "confidence": {
+        "threshold": 0.9,
+        "action": "ban_user",
+        "escalate_after": 0
+      }
+    },
+    "malware_detected": {
+      "file_indicators": {
+        "threshold": 1,
+        "action": "ban_user",
+        "escalate_after": 0
+      },
+      "confidence": {
+        "threshold": 0.85,
+        "action": "purge_messages",
+        "escalate_after": 0
+      }
+    }
+  },
+  "history": [],
+  "on_call": []
+}

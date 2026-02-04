@@ -1,0 +1,14 @@
+{
+  "retention": {
+    "hot": 7,
+    "warm": 30,
+    "cold": 90,
+    "expired": 180
+  },
+  "tiers": {
+    "hot": [],
+    "warm": [],
+    "cold": [],
+    "archive": []
+  }
+}

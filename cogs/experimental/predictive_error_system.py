@@ -6,6 +6,7 @@ from discord.ext import commands
 import json
 import os
 from datetime import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 class PredictiveErrorSystemCog(commands.Cog):
     def __init__(self, bot):
@@ -99,7 +100,7 @@ class PredictiveErrorSystemCog(commands.Cog):
             "action": action,
             "prediction": success_rate,
             "warnings": warnings,
-            "timestamp": datetime.utcnow().isoformat()
+            "timestamp": get_now_pst().isoformat()
         })
         self.save_data(self.data)
         
@@ -128,7 +129,7 @@ class PredictiveErrorSystemCog(commands.Cog):
         for metric, status in predictions.items():
             embed.add_field(name=metric, value=status, inline=False)
         
-        embed.set_footer(text="Updated: " + datetime.utcnow().strftime("%H:%M:%S"))
+        embed.set_footer(text="Updated: " + get_now_pst().strftime("%H:%M:%S"))
         
         await ctx.send(embed=embed)
 

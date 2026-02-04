@@ -3,6 +3,7 @@ from discord.ext import commands
 import json
 import os
 from datetime import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 class CompromiseDetectorCog(commands.Cog):
     def __init__(self, bot):
@@ -39,7 +40,7 @@ class CompromiseDetectorCog(commands.Cog):
             "system": system_name,
             "findings": [],
             "severity": "CLEAN",
-            "timestamp": datetime.utcnow().isoformat()
+            "timestamp": get_now_pst().isoformat()
         }
         
         # Simulate detection of indicators

@@ -6,6 +6,7 @@ from discord.ext import commands
 import json
 import os
 from datetime import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 DATA_FILE = 'data/conversational_siem.json'
 
@@ -49,7 +50,7 @@ class ConversationalSIEMCog(commands.Cog):
         data['queries'].append({
             "query": query,
             "executed_by": str(ctx.author),
-            "executed_at": datetime.utcnow().isoformat(),
+            "executed_at": get_now_pst().isoformat(),
             "results_count": 0
         })
         self.save_data(data)
@@ -80,7 +81,7 @@ class ConversationalSIEMCog(commands.Cog):
         embed.add_field(name="Timeframe", value=timeframe, inline=True)
         embed.add_field(name="Results Found", value="12 events", inline=True)
         embed.add_field(name="Sample Results", value="• User X changed roles\n• User Y accessed API\n• User Z modified config", inline=False)
-        embed.timestamp = datetime.utcnow()
+        embed.timestamp = get_now_pst()
         await ctx.send(embed=embed)
 
     @commands.command(name='operator_session')
@@ -96,7 +97,7 @@ class ConversationalSIEMCog(commands.Cog):
         data['operator_sessions'].append({
             "session_id": session_id,
             "operator": str(ctx.author),
-            "started_at": datetime.utcnow().isoformat(),
+            "started_at": get_now_pst().isoformat(),
             "queries": []
         })
         self.save_data(data)
@@ -110,7 +111,7 @@ class ConversationalSIEMCog(commands.Cog):
         embed.add_field(name="Session ID", value=session_id, inline=True)
         embed.add_field(name="Status", value="🟢 Active", inline=True)
         embed.add_field(name="Available Commands", value="`threat_query`, `save_search`, `threat_report`, `api_lookup`", inline=False)
-        embed.timestamp = datetime.utcnow()
+        embed.timestamp = get_now_pst()
         await ctx.send(embed=embed)
 
     @commands.command(name='save_search')
@@ -124,7 +125,7 @@ class ConversationalSIEMCog(commands.Cog):
         data['saved_searches'][search_name] = {
             "query": query,
             "created_by": str(ctx.author),
-            "created_at": datetime.utcnow().isoformat(),
+            "created_at": get_now_pst().isoformat(),
             "usage_count": 0
         }
         self.save_data(data)
@@ -154,7 +155,7 @@ class ConversationalSIEMCog(commands.Cog):
                 inline=False
             )
         
-        embed.timestamp = datetime.utcnow()
+        embed.timestamp = get_now_pst()
         await ctx.send(embed=embed)
 
     @commands.command(name='api_lookup')
@@ -172,7 +173,7 @@ class ConversationalSIEMCog(commands.Cog):
         embed.add_field(name="Reputation Score", value="2/10 (Suspicious)", inline=True)
         embed.add_field(name="Previous Reports", value="5 incidents", inline=True)
         embed.add_field(name="Threat Intel", value="Associated with phishing campaigns", inline=False)
-        embed.timestamp = datetime.utcnow()
+        embed.timestamp = get_now_pst()
         await ctx.send(embed=embed)
 
     @commands.command(name='threat_report')
@@ -189,7 +190,7 @@ class ConversationalSIEMCog(commands.Cog):
             "report_id": report_id,
             "summary": summary,
             "created_by": str(ctx.author),
-            "created_at": datetime.utcnow().isoformat(),
+            "created_at": get_now_pst().isoformat(),
             "status": "PENDING_REVIEW"
         })
         self.save_data(data)

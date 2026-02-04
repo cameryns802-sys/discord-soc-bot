@@ -1,0 +1,20 @@
+{
+  "config": {
+    "1466863901449785497": {
+      "enabled": true,
+      "action": "delete",
+      "notify_user": true,
+      "notify_mods": true,
+      "whitelist_enabled": false
+    },
+    "1451439611766112319": {
+      "enabled": true,
+      "action": "delete",
+      "notify_user": true,
+      "notify_mods": true,
+      "whitelist_enabled": false
+    }
+  },
+  "whitelisted": {},
+  "invite_log": []
+}

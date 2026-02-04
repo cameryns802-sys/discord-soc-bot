@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands, tasks
 import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 class SecurityReport(commands.Cog):
     def __init__(self, bot):
@@ -15,7 +16,7 @@ class SecurityReport(commands.Cog):
             return
         channel = self.bot.get_channel(self.report_channel_id)
         if channel:
-            now = datetime.datetime.utcnow()
+            now = datetime.get_now_pst()
             report = f"Security/Compliance Report for {now:%Y-%m-%d}:\n- No major incidents detected.\n- All systems operational."
             await channel.send(report)
             self.last_report = now

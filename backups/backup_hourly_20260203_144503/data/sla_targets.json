@@ -1,0 +1,42 @@
+{
+  "mttr_critical": {
+    "target": 15,
+    "unit": "minutes",
+    "name": "MTTR - Critical"
+  },
+  "mttr_high": {
+    "target": 60,
+    "unit": "minutes",
+    "name": "MTTR - High"
+  },
+  "mttr_medium": {
+    "target": 240,
+    "unit": "minutes",
+    "name": "MTTR - Medium"
+  },
+  "mttd_critical": {
+    "target": 5,
+    "unit": "minutes",
+    "name": "MTTD - Critical"
+  },
+  "mttd_high": {
+    "target": 15,
+    "unit": "minutes",
+    "name": "MTTD - High"
+  },
+  "response_time_p1": {
+    "target": 5,
+    "unit": "minutes",
+    "name": "Response Time - P1"
+  },
+  "response_time_p2": {
+    "target": 30,
+    "unit": "minutes",
+    "name": "Response Time - P2"
+  },
+  "false_positive_rate": {
+    "target": 5,
+    "unit": "percent",
+    "name": "False Positive Rate"
+  }
+}

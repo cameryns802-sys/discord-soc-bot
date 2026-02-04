@@ -10,6 +10,7 @@ import json
 import os
 from datetime import datetime, timedelta
 import uuid
+from cogs.core.pst_timezone import get_now_pst
 
 class SecurityAwarenessMetrics(commands.Cog):
     """Security awareness training metrics and effectiveness tracking"""
@@ -107,10 +108,10 @@ class SecurityAwarenessMetrics(commands.Cog):
             'type': campaign_type.lower(),
             'target_audience': target_audience,
             'description': description or '',
-            'created_at': datetime.utcnow().isoformat(),
+            'created_at': get_now_pst().isoformat(),
             'status': 'active',
-            'start_date': datetime.utcnow().isoformat(),
-            'end_date': (datetime.utcnow() + timedelta(days=30)).isoformat(),
+            'start_date': get_now_pst().isoformat(),
+            'end_date': (get_now_pst() + timedelta(days=30)).isoformat(),
             'participants': 0,
             'completions': 0,
             'engagement_rate': 0.0,
@@ -125,7 +126,7 @@ class SecurityAwarenessMetrics(commands.Cog):
             title="📢 Awareness Campaign Started",
             description=f"**{campaign_type.title()}** - {target_audience}",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Campaign ID", value=f"`{campaign_id}`", inline=True)
@@ -169,7 +170,7 @@ class SecurityAwarenessMetrics(commands.Cog):
             title="📊 Security Awareness Program Dashboard",
             description=f"Organization Awareness Score: **{awareness_score}/100**",
             color=score_color,
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         # Key metrics
@@ -213,7 +214,7 @@ class SecurityAwarenessMetrics(commands.Cog):
             title="📊 Security Awareness Metrics",
             description=f"Overall Score: **{awareness_score}/100**",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         # Training metrics
@@ -267,7 +268,7 @@ class SecurityAwarenessMetrics(commands.Cog):
             title="💰 Awareness Program ROI Analysis",
             description="Return on Investment for Security Awareness",
             color=discord.Color.gold(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Program Cost (Annual)", value=f"${program_cost:,}", inline=True)

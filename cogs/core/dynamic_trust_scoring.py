@@ -10,6 +10,7 @@ import os
 from datetime import datetime, timedelta
 from typing import Dict, List, Optional
 import math
+from cogs.core.pst_timezone import get_now_pst
 
 class DynamicTrustScoringCog(commands.Cog):
     """
@@ -77,7 +78,7 @@ class DynamicTrustScoringCog(commands.Cog):
         score = 50.0  # Neutral starting point
         
         # Account age factor
-        account_age_days = (datetime.utcnow() - member.created_at).days
+        account_age_days = (get_now_pst() - member.created_at).days
         if account_age_days > 365:
             score += 15
         elif account_age_days > 180:
@@ -89,7 +90,7 @@ class DynamicTrustScoringCog(commands.Cog):
         
         # Server tenure factor
         if member.joined_at:
-            tenure_days = (datetime.utcnow() - member.joined_at).days
+            tenure_days = (get_now_pst() - member.joined_at).days
             if tenure_days > 90:
                 score += 10
             elif tenure_days > 30:
@@ -114,7 +115,7 @@ class DynamicTrustScoringCog(commands.Cog):
     def apply_decay(self, current_score: float, last_update: str) -> float:
         """Apply time-based decay to trust score"""
         last_update_dt = datetime.fromisoformat(last_update)
-        days_since_update = (datetime.utcnow() - last_update_dt).days
+        days_since_update = (get_now_pst() - last_update_dt).days
         
         # Decay rate: 0.5% per day
         decay_rate = 0.005
@@ -148,7 +149,7 @@ class DynamicTrustScoringCog(commands.Cog):
             
             # Update score
             self.scores[user_id][guild_id]["score"] = current_score
-            self.scores[user_id][guild_id]["last_update"] = datetime.utcnow().isoformat()
+            self.scores[user_id][guild_id]["last_update"] = get_now_pst().isoformat()
         else:
             # Calculate new score
             current_score = self.calculate_base_score(target)
@@ -158,7 +159,7 @@ class DynamicTrustScoringCog(commands.Cog):
             
             self.scores[user_id][guild_id] = {
                 "score": current_score,
-                "last_update": datetime.utcnow().isoformat(),
+                "last_update": get_now_pst().isoformat(),
                 "history": []
             }
         
@@ -185,15 +186,15 @@ class DynamicTrustScoringCog(commands.Cog):
             title="🎯 Dynamic Trust Score",
             description=f"Trust assessment for {target.mention}",
             color=color,
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Score", value=f"**{current_score:.1f}/100**", inline=True)
         embed.add_field(name="Trust Level", value=level, inline=True)
-        embed.add_field(name="Account Age", value=f"{(datetime.utcnow() - target.created_at).days} days", inline=True)
+        embed.add_field(name="Account Age", value=f"{(get_now_pst() - target.created_at).days} days", inline=True)
         
         if target.joined_at:
-            embed.add_field(name="Server Tenure", value=f"{(datetime.utcnow() - target.joined_at).days} days", inline=True)
+            embed.add_field(name="Server Tenure", value=f"{(get_now_pst() - target.joined_at).days} days", inline=True)
         
         embed.add_field(name="Roles", value=len([r for r in target.roles if r.name != "@everyone"]), inline=True)
         embed.add_field(name="Verified", value="Yes" if target.verified else "No", inline=True)
@@ -226,7 +227,7 @@ class DynamicTrustScoringCog(commands.Cog):
         if guild_id not in self.scores[user_id]:
             self.scores[user_id][guild_id] = {
                 "score": self.calculate_base_score(member),
-                "last_update": datetime.utcnow().isoformat(),
+                "last_update": get_now_pst().isoformat(),
                 "history": []
             }
         
@@ -235,9 +236,9 @@ class DynamicTrustScoringCog(commands.Cog):
         
         # Record adjustment
         self.scores[user_id][guild_id]["score"] = new_score
-        self.scores[user_id][guild_id]["last_update"] = datetime.utcnow().isoformat()
+        self.scores[user_id][guild_id]["last_update"] = get_now_pst().isoformat()
         self.scores[user_id][guild_id]["history"].append({
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": get_now_pst().isoformat(),
             "adjustment": adjustment,
             "reason": reason,
             "adjusted_by": str(ctx.author.id),
@@ -247,7 +248,7 @@ class DynamicTrustScoringCog(commands.Cog):
         
         # Record event
         event = {
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": get_now_pst().isoformat(),
             "guild_id": guild_id,
             "user_id": user_id,
             "event_type": "manual_adjustment",
@@ -265,7 +266,7 @@ class DynamicTrustScoringCog(commands.Cog):
             title="✅ Trust Score Adjusted",
             description=f"Trust score updated for {member.mention}",
             color=color,
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Old Score", value=f"{old_score:.1f}", inline=True)
@@ -305,7 +306,7 @@ class DynamicTrustScoringCog(commands.Cog):
             title="📊 Trust Score History",
             description=f"History for {member.mention}",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Current Score", value=f"**{current_score:.1f}/100**", inline=True)
@@ -353,7 +354,7 @@ class DynamicTrustScoringCog(commands.Cog):
             title="⚙️ Trust Score Thresholds",
             description="Current threshold configuration",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="🔴 Critical", value=f"< {self.thresholds['critical']}", inline=True)
@@ -392,7 +393,7 @@ class DynamicTrustScoringCog(commands.Cog):
             title="🏆 Trust Score Leaderboard",
             description=f"Top {len(top_scores)} most trusted members",
             color=discord.Color.gold(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         if not top_scores:
@@ -445,7 +446,7 @@ class DynamicTrustScoringCog(commands.Cog):
             title="🎯 Dynamic Trust Scoring Dashboard",
             description="Real-time trust metrics and distribution",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="📊 Total Tracked", value=total_tracked, inline=True)

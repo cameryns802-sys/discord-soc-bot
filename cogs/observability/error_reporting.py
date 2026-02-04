@@ -2,10 +2,11 @@ import discord
 from discord.ext import commands, tasks
 import json
 import traceback
-import datetime
+from datetime import datetime, timedelta
 import os
 from pathlib import Path
 from collections import deque
+from cogs.core.pst_timezone import get_now_pst
 
 class ErrorReporting(commands.Cog):
     """Error reporting and monitoring system"""
@@ -149,7 +150,7 @@ class ErrorReporting(commands.Cog):
                 title="🚨 Critical Error Detected",
                 description=f"A critical error occurred in the bot",
                 color=discord.Color.red(),
-                timestamp=datetime.datetime.now(datetime.UTC)
+                timestamp=get_now_pst()
             )
             
             embed.add_field(name="Error Type", value=error_record['type'], inline=True)
@@ -180,10 +181,10 @@ class ErrorReporting(commands.Cog):
             return
         
         # Count errors in last 5 minutes
-        now = datetime.datetime.now()
+        now = get_now_pst()
         recent_count = sum(
             1 for err in self.recent_errors
-            if (now - datetime.datetime.fromisoformat(err['timestamp'])).total_seconds() < 300
+            if (now - datetime.fromisoformat(err['timestamp'])).total_seconds() < 300
         )
         
         if recent_count >= self.config['notify_threshold']:
@@ -194,7 +195,7 @@ class ErrorReporting(commands.Cog):
                     title="⚠️ High Error Rate Detected",
                     description=f"{recent_count} errors in the last 5 minutes",
                     color=discord.Color.orange(),
-                    timestamp=datetime.datetime.now(datetime.UTC)
+                    timestamp=get_now_pst()
                 )
                 
                 # Top error types
@@ -250,7 +251,7 @@ class ErrorReporting(commands.Cog):
         embed = discord.Embed(
             title="🚨 Error Dashboard",
             color=discord.Color.red(),
-            timestamp=datetime.datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Total Errors", value=f"{total:,}", inline=True)
@@ -345,7 +346,7 @@ class ErrorReporting(commands.Cog):
         # Filter errors within time range
         recent_errors = [
             err for err in self.errors['errors']
-            if datetime.datetime.fromisoformat(err['timestamp']) > cutoff
+            if datetime.fromisoformat(err['timestamp']) > cutoff
         ]
         
         # Group by day
@@ -357,7 +358,7 @@ class ErrorReporting(commands.Cog):
         embed = discord.Embed(
             title=f"📊 Error Statistics ({days} days)",
             color=discord.Color.blue(),
-            timestamp=datetime.datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Total Errors", value=f"{len(recent_errors):,}", inline=True)
@@ -460,3 +461,4 @@ class ErrorReporting(commands.Cog):
 
 async def setup(bot):
     await bot.add_cog(ErrorReporting(bot))
+

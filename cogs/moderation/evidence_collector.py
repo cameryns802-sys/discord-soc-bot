@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 class EvidenceCollector(commands.Cog):
     def __init__(self, bot):
@@ -13,7 +14,7 @@ class EvidenceCollector(commands.Cog):
         entry = {
             "user": user.id,
             "reason": reason,
-            "timestamp": datetime.datetime.utcnow().isoformat()
+            "timestamp": datetime.get_now_pst().isoformat()
         }
         self.incident_log.append(entry)
         await ctx.send(f"Incident logged for {user.mention}: {reason}")

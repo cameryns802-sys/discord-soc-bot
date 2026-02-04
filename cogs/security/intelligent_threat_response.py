@@ -11,6 +11,7 @@ from typing import Optional, Dict, List
 import json
 import os
 import asyncio
+from cogs.core.pst_timezone import get_now_pst
 
 class ThreatLevel:
     LOW = "low"
@@ -235,7 +236,7 @@ class IntelligentThreatResponse(commands.Cog):
             'type': threat_type,
             'level': level,
             'description': description,
-            'detected_at': datetime.now(datetime.UTC).isoformat(),
+            'detected_at': get_now_pst().isoformat(),
             'detected_by': ctx.author.id,
             'guild_id': ctx.guild.id,
             'channel_id': ctx.channel.id,
@@ -251,7 +252,7 @@ class IntelligentThreatResponse(commands.Cog):
             title="🚨 THREAT DETECTED",
             description=f"Automated response initiated",
             color=self._get_level_color(level),
-            timestamp=datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         embed.add_field(name="Threat Type", value=threat_type.title(), inline=True)
         embed.add_field(name="Severity", value=f"**{level.upper()}**", inline=True)
@@ -293,7 +294,7 @@ class IntelligentThreatResponse(commands.Cog):
         
         # Update status
         threat['status'] = 'resolved'
-        threat['response_time'] = (datetime.now(datetime.UTC) - datetime.fromisoformat(threat['detected_at'])).total_seconds()
+        threat['response_time'] = (get_now_pst() - datetime.fromisoformat(threat['detected_at'])).total_seconds()
         
         # Save to history
         self.threat_history.append(threat)
@@ -308,7 +309,7 @@ class IntelligentThreatResponse(commands.Cog):
             title="✅ THREAT RESPONSE COMPLETE",
             description=f"{playbook['name']} executed successfully",
             color=discord.Color.green(),
-            timestamp=datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         result_embed.add_field(name="Threat ID", value=f"#{threat['id']}", inline=True)
         result_embed.add_field(name="Type", value=threat_type.title(), inline=True)
@@ -447,7 +448,7 @@ class IntelligentThreatResponse(commands.Cog):
             title="🛡️ Threat Response History",
             description=f"Showing {len(recent)} most recent threats",
             color=discord.Color.blue(),
-            timestamp=datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         
         for threat in recent:
@@ -503,7 +504,7 @@ class IntelligentThreatResponse(commands.Cog):
             title="📚 Automated Threat Response Playbooks",
             description="The bot will automatically execute these responses when threats are detected",
             color=discord.Color.blue(),
-            timestamp=datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         
         for threat_type, playbook in self.response_playbooks.items():
@@ -532,3 +533,4 @@ class IntelligentThreatResponse(commands.Cog):
 
 async def setup(bot):
     await bot.add_cog(IntelligentThreatResponse(bot))
+

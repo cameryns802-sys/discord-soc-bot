@@ -9,6 +9,7 @@ from datetime import datetime
 from typing import Optional
 import json
 import os
+from cogs.core.pst_timezone import get_now_pst
 
 class ModerationHistory(commands.Cog):
     """Moderation history tracking and appeals system"""
@@ -63,7 +64,7 @@ class ModerationHistory(commands.Cog):
             'type': action_type,
             'moderator_id': moderator_id,
             'reason': reason,
-            'timestamp': datetime.now(datetime.UTC).isoformat()
+            'timestamp': get_now_pst().isoformat()
         }
         
         self.history[guild_key][user_key].append(action)
@@ -112,7 +113,7 @@ class ModerationHistory(commands.Cog):
             title=f"📋 Moderation History: {member.name}",
             description=f"User: {member.mention} ({member.id})",
             color=discord.Color.blue(),
-            timestamp=datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         
         # Count action types
@@ -199,7 +200,7 @@ class ModerationHistory(commands.Cog):
             'user_name': str(ctx.author),
             'reason': reason,
             'status': 'pending',
-            'timestamp': datetime.now(datetime.UTC).isoformat(),
+            'timestamp': get_now_pst().isoformat(),
             'reviewed_by': None,
             'review_note': None
         }
@@ -212,7 +213,7 @@ class ModerationHistory(commands.Cog):
             title="✅ Appeal Submitted",
             description="Your appeal has been submitted for review",
             color=discord.Color.green(),
-            timestamp=datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         embed.add_field(name="Appeal ID", value=f"#{appeal_id}", inline=True)
         embed.add_field(name="Status", value="⏳ Pending", inline=True)
@@ -235,7 +236,7 @@ class ModerationHistory(commands.Cog):
                     title="📝 New Appeal Submitted",
                     description=f"Appeal #{appeal_id}",
                     color=discord.Color.gold(),
-                    timestamp=datetime.now(datetime.UTC)
+                    timestamp=get_now_pst()
                 )
                 notif_embed.add_field(name="User", value=ctx.author.mention, inline=True)
                 notif_embed.add_field(name="Status", value="⏳ Pending", inline=True)
@@ -309,7 +310,7 @@ class ModerationHistory(commands.Cog):
         appeal['status'] = 'approved' if decision.startswith('approve') else 'denied'
         appeal['reviewed_by'] = ctx.author.id
         appeal['review_note'] = note
-        appeal['reviewed_at'] = datetime.now(datetime.UTC).isoformat()
+        appeal['reviewed_at'] = get_now_pst().isoformat()
         
         self._save_appeals()
         
@@ -321,7 +322,7 @@ class ModerationHistory(commands.Cog):
                 title=f"{'✅ Appeal Approved' if appeal['status'] == 'approved' else '❌ Appeal Denied'}",
                 description=f"Your appeal (#{appeal_id}) has been reviewed",
                 color=discord.Color.green() if appeal['status'] == 'approved' else discord.Color.red(),
-                timestamp=datetime.now(datetime.UTC)
+                timestamp=get_now_pst()
             )
             user_embed.add_field(name="Decision", value=appeal['status'].title(), inline=True)
             user_embed.add_field(name="Reviewed by", value=str(ctx.author), inline=True)
@@ -337,7 +338,7 @@ class ModerationHistory(commands.Cog):
             title=f"{'✅ Appeal Approved' if appeal['status'] == 'approved' else '❌ Appeal Denied'}",
             description=f"Appeal #{appeal_id} has been {appeal['status']}",
             color=discord.Color.green() if appeal['status'] == 'approved' else discord.Color.red(),
-            timestamp=datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         confirm_embed.add_field(name="User", value=f"<@{appeal['user_id']}>", inline=True)
         confirm_embed.add_field(name="Reviewer", value=ctx.author.mention, inline=True)
@@ -396,7 +397,7 @@ class ModerationHistory(commands.Cog):
             title=f"📋 Appeals ({status.title()})",
             description=f"Total: {len(filtered)} appeal(s)",
             color=discord.Color.blue(),
-            timestamp=datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         
         for appeal in filtered[-10:]:  # Last 10
@@ -426,3 +427,4 @@ class ModerationHistory(commands.Cog):
 
 async def setup(bot):
     await bot.add_cog(ModerationHistory(bot))
+

@@ -20,6 +20,7 @@ from statistics import mean, stdev
 import math
 
 from cogs.core.signal_bus import signal_bus, Signal, SignalType
+from cogs.core.pst_timezone import get_now_pst
 
 class MLAnomalyDetector(commands.Cog):
     """Machine learning-based anomaly detection"""
@@ -79,7 +80,7 @@ class MLAnomalyDetector(commands.Cog):
         baseline['signal_count'] += 1
         baseline['confidence_scores'].append(signal.confidence)
         baseline['last_signals'].append({
-            'timestamp': datetime.utcnow().isoformat(),
+            'timestamp': get_now_pst().isoformat(),
             'type': str(signal.signal_type),
             'confidence': signal.confidence,
             'severity': signal.severity
@@ -141,7 +142,7 @@ class MLAnomalyDetector(commands.Cog):
     async def record_anomaly(self, system: str, signal: Signal, score: float):
         """Record detected anomaly"""
         anomaly = {
-            'timestamp': datetime.utcnow().isoformat(),
+            'timestamp': get_now_pst().isoformat(),
             'system': system,
             'signal_type': str(signal.signal_type),
             'confidence': signal.confidence,
@@ -196,7 +197,7 @@ class MLAnomalyDetector(commands.Cog):
     
     def get_anomaly_report(self, hours: int = 24, system: str = None) -> Dict:
         """Generate anomaly detection report"""
-        cutoff = datetime.utcnow() - timedelta(hours=hours)
+        cutoff = get_now_pst() - timedelta(hours=hours)
         
         recent = [
             a for a in self.anomalies
@@ -287,7 +288,7 @@ class MLAnomalyDetector(commands.Cog):
             title="🔍 Anomaly Detection Report",
             description=f"{report['total_anomalies']} anomalies detected",
             color=discord.Color.orange(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(
@@ -345,7 +346,7 @@ class MLAnomalyDetector(commands.Cog):
         embed = discord.Embed(
             title=f"📊 Baseline Statistics: {system}",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(

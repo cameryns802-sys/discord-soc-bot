@@ -1,0 +1,12 @@
+{
+  "metadata": {},
+  "false_positives": [],
+  "relationships": {},
+  "feeds": {
+    "internal": {
+      "name": "Internal IOCs",
+      "enabled": true,
+      "last_update": "2026-02-02T06:22:39.654554"
+    }
+  }
+}

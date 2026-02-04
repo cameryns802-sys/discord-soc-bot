@@ -10,6 +10,7 @@ import json
 import os
 from datetime import datetime, timedelta
 import statistics
+from cogs.core.pst_timezone import get_now_pst
 
 class SecurityMetricsKPIs(commands.Cog):
     """Security operations metrics and KPI tracking"""
@@ -113,7 +114,7 @@ class SecurityMetricsKPIs(commands.Cog):
         detections = metrics.get('detections', [])
         
         # Filter last 30 days
-        now = datetime.utcnow()
+        now = get_now_pst()
         thirty_days_ago = now - timedelta(days=30)
         
         recent_incidents = [i for i in incidents if datetime.fromisoformat(i['created_at']) > thirty_days_ago]
@@ -123,7 +124,7 @@ class SecurityMetricsKPIs(commands.Cog):
             title="📊 Security Operations KPI Dashboard",
             description=f"Last 30 Days | {len(recent_incidents)} incidents | {len(recent_detections)} detections",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         # Calculate MTTR
@@ -205,7 +206,7 @@ class SecurityMetricsKPIs(commands.Cog):
         incidents = metrics.get('incidents', [])
         
         # Filter by days
-        now = datetime.utcnow()
+        now = get_now_pst()
         cutoff = now - timedelta(days=days)
         
         filtered = [i for i in incidents if datetime.fromisoformat(i['created_at']) > cutoff]
@@ -228,7 +229,7 @@ class SecurityMetricsKPIs(commands.Cog):
             title=f"📈 KPI Trend Analysis ({days} days)",
             description=f"{len(filtered)} incidents tracked",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         # Weekly incident chart (simple text visualization)
@@ -278,7 +279,7 @@ class SecurityMetricsKPIs(commands.Cog):
             title="📋 SLA Targets",
             description=f"{len(sla_targets)} active SLAs",
             color=discord.Color.green(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         for sla_id, sla in sorted(sla_targets.items()):

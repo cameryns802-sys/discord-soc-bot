@@ -8,6 +8,7 @@ from discord.ext import commands
 import json
 import os
 from datetime import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 class DependencyThreatMonitorCog(commands.Cog):
     """Dependency Threat Monitor - Tracks CVEs and security issues in dependencies"""
@@ -50,7 +51,7 @@ class DependencyThreatMonitorCog(commands.Cog):
             "package": package_name,
             "version": version,
             "description": description,
-            "added_at": datetime.utcnow().isoformat(),
+            "added_at": get_now_pst().isoformat(),
             "added_by": str(ctx.author.id),
             "cve_count": 0,
             "status": "active"
@@ -59,7 +60,7 @@ class DependencyThreatMonitorCog(commands.Cog):
         self.dependencies.append(dependency)
         self.save_dependencies()
         
-        embed = discord.Embed(title="✅ Dependency Added", color=discord.Color.green(), timestamp=datetime.utcnow())
+        embed = discord.Embed(title="✅ Dependency Added", color=discord.Color.green(), timestamp=get_now_pst())
         embed.add_field(name="Dependency ID", value=f"#{dependency['id']}", inline=True)
         embed.add_field(name="Package", value=package_name, inline=True)
         embed.add_field(name="Version", value=version, inline=True)
@@ -84,7 +85,7 @@ class DependencyThreatMonitorCog(commands.Cog):
             "version": dependency["version"],
             "severity": severity.lower(),
             "description": description,
-            "reported_at": datetime.utcnow().isoformat(),
+            "reported_at": get_now_pst().isoformat(),
             "reported_by": str(ctx.author.id),
             "status": "open",
             "patched": False
@@ -96,7 +97,7 @@ class DependencyThreatMonitorCog(commands.Cog):
         self.save_dependencies()
         
         color_map = {"critical": discord.Color.dark_red(), "high": discord.Color.red(), "medium": discord.Color.gold(), "low": discord.Color.green()}
-        embed = discord.Embed(title="🚨 CVE Reported", color=color_map.get(severity.lower(), discord.Color.blue()), timestamp=datetime.utcnow())
+        embed = discord.Embed(title="🚨 CVE Reported", color=color_map.get(severity.lower(), discord.Color.blue()), timestamp=get_now_pst())
         embed.add_field(name="CVE ID", value=cve_id, inline=True)
         embed.add_field(name="Package", value=dependency["package"], inline=True)
         embed.add_field(name="Severity", value=severity.upper(), inline=True)
@@ -116,7 +117,7 @@ class DependencyThreatMonitorCog(commands.Cog):
         critical_cves = [c for c in self.cves if c.get("severity") == "critical" and not c.get("patched", False)]
         high_cves = [c for c in self.cves if c.get("severity") == "high" and not c.get("patched", False)]
         
-        embed = discord.Embed(title="🔍 Dependency Vulnerability Scan", color=discord.Color.blue(), timestamp=datetime.utcnow())
+        embed = discord.Embed(title="🔍 Dependency Vulnerability Scan", color=discord.Color.blue(), timestamp=get_now_pst())
         embed.add_field(name="📦 Total Dependencies", value=len(self.dependencies), inline=True)
         embed.add_field(name="⚠️ Vulnerable", value=len(vulnerable_deps), inline=True)
         embed.add_field(name="🚨 Critical CVEs", value=len(critical_cves), inline=True)
@@ -147,7 +148,7 @@ class DependencyThreatMonitorCog(commands.Cog):
         
         open_cves = [c for c in filtered_cves if c.get("status") == "open"]
         
-        embed = discord.Embed(title=f"🚨 CVE List{' - ' + severity.upper() if severity else ''}", color=discord.Color.red(), timestamp=datetime.utcnow())
+        embed = discord.Embed(title=f"🚨 CVE List{' - ' + severity.upper() if severity else ''}", color=discord.Color.red(), timestamp=get_now_pst())
         
         for cve in open_cves[:10]:
             severity_emoji = {"critical": "🔴", "high": "🟠", "medium": "🟡", "low": "🟢"}
@@ -166,7 +167,7 @@ class DependencyThreatMonitorCog(commands.Cog):
         open_cves = len([c for c in self.cves if c.get("status") == "open"])
         critical_cves = len([c for c in self.cves if c.get("severity") == "critical" and not c.get("patched", False)])
         
-        embed = discord.Embed(title="📦 Dependency Threat Monitor Dashboard", color=discord.Color.blue(), timestamp=datetime.utcnow())
+        embed = discord.Embed(title="📦 Dependency Threat Monitor Dashboard", color=discord.Color.blue(), timestamp=get_now_pst())
         embed.add_field(name="📊 Tracked Dependencies", value=total_deps, inline=True)
         embed.add_field(name="🚨 Total CVEs", value=total_cves, inline=True)
         embed.add_field(name="⚠️ Open CVEs", value=open_cves, inline=True)

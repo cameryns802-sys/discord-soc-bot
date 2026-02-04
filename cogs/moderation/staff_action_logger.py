@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 class StaffActionLogger(commands.Cog):
     def __init__(self, bot):
@@ -13,7 +14,7 @@ class StaffActionLogger(commands.Cog):
             "action": "ban",
             "user": user.id,
             "guild": guild.id,
-            "timestamp": datetime.datetime.utcnow().isoformat()
+            "timestamp": datetime.get_now_pst().isoformat()
         })
 
     @commands.Cog.listener()
@@ -22,7 +23,7 @@ class StaffActionLogger(commands.Cog):
             "action": "unban",
             "user": user.id,
             "guild": guild.id,
-            "timestamp": datetime.datetime.utcnow().isoformat()
+            "timestamp": datetime.get_now_pst().isoformat()
         })
 
     @commands.command()

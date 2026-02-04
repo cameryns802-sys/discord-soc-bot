@@ -10,6 +10,7 @@ import json
 import os
 from datetime import datetime, timedelta
 import uuid
+from cogs.core.pst_timezone import get_now_pst
 
 class ExecutiveRiskDashboard(commands.Cog):
     """Executive security risk dashboard and reporting"""
@@ -127,7 +128,7 @@ class ExecutiveRiskDashboard(commands.Cog):
             title=f"{risk_emoji} Executive Security Risk Dashboard",
             description="C-Level Security & Risk Overview",
             color=color,
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Overall Risk Rating", value=f"**{risk_rating}/100**", inline=True)
@@ -168,7 +169,7 @@ class ExecutiveRiskDashboard(commands.Cog):
             title=f"📋 Executive Security Summary ({period_label.title()})",
             description="Key Security & Risk Metrics for Leadership",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         # Executive summary
@@ -214,7 +215,7 @@ class ExecutiveRiskDashboard(commands.Cog):
             title="📈 Risk Trending Analysis",
             description="Security risk trends over the past 12 months",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="12-Month Trend", value="━" * 25, inline=False)
@@ -253,7 +254,7 @@ class ExecutiveRiskDashboard(commands.Cog):
             title="🏛️ Board-Level Security & Risk Report",
             description="Strategic Security Status for Board Review",
             color=discord.Color.gold(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="EXECUTIVE SUMMARY", value="━" * 25, inline=False)

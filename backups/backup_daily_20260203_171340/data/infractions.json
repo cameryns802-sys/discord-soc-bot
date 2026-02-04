@@ -1,0 +1,19 @@
+{
+  "infractions": {
+    "862083132735225858": [
+      {
+        "id": "INF-20260203151110-862083132735225858",
+        "type": "warn",
+        "reason": "hi",
+        "moderator_id": 960995456488448080,
+        "guild_id": 1451439611766112319,
+        "timestamp": "2026-02-03T15:11:10.548135-08:00",
+        "duration_minutes": null,
+        "active_count": 1,
+        "resolved": false,
+        "appeal_id": null
+      }
+    ]
+  },
+  "appeals": []
+}

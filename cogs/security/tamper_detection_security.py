@@ -7,6 +7,7 @@ import json
 import os
 import hashlib
 from datetime import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 class TamperDetectionSecurityCog(commands.Cog):
     def __init__(self, bot):
@@ -69,7 +70,7 @@ class TamperDetectionSecurityCog(commands.Cog):
                     count += 1
         
         # Store snapshots
-        timestamp = datetime.utcnow().isoformat()
+        timestamp = get_now_pst().isoformat()
         self.data["integrity_checks"].append({
             "timestamp": timestamp,
             "directory": directory,
@@ -128,7 +129,7 @@ class TamperDetectionSecurityCog(commands.Cog):
             # Log as security event
             self.data["tamper_alerts"].append({
                 "type": "file_modification",
-                "detected_at": datetime.utcnow().isoformat(),
+                "detected_at": get_now_pst().isoformat(),
                 "files_changed": len(changes_detected),
                 "details": changes_detected[:10]
             })
@@ -146,7 +147,7 @@ class TamperDetectionSecurityCog(commands.Cog):
             return
         
         rotation_entry = {
-            "rotated_at": datetime.utcnow().isoformat(),
+            "rotated_at": get_now_pst().isoformat(),
             "rotated_by": str(ctx.author.id),
             "credentials_affected": ["DISCORD_TOKEN", "BOT_OWNER_ID", "AUDIT_CHANNEL_ID"],
             "status": "pending_admin_approval"

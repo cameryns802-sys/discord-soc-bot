@@ -3,6 +3,7 @@ from discord.ext import commands
 import json
 import os
 import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 DATA_FILE = 'data/evidence_chain_of_custody.json'
 
@@ -48,7 +49,7 @@ class EvidenceChainOfCustodyCog(commands.Cog):
             "id": data["evidence_counter"],
             "type": evidence_type,
             "description": description,
-            "collected_at": datetime.datetime.utcnow().isoformat(),
+            "collected_at": datetime.get_now_pst().isoformat(),
             "collected_by": str(ctx.author),
             "status": "collected",
             "hash": "N/A",
@@ -93,7 +94,7 @@ class EvidenceChainOfCustodyCog(commands.Cog):
         custody_entry = {
             "evidence_id": evidence_id,
             "action": "transferred",
-            "timestamp": datetime.datetime.utcnow().isoformat(),
+            "timestamp": datetime.get_now_pst().isoformat(),
             "user": str(ctx.author),
             "notes": f"Transferred to {new_custodian}"
         }

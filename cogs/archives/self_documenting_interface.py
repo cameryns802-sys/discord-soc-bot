@@ -6,6 +6,7 @@ from discord.ext import commands
 import json
 import os
 from datetime import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 class SelfDocumentingInterfaceCog(commands.Cog):
     def __init__(self, bot):
@@ -73,7 +74,7 @@ class SelfDocumentingInterfaceCog(commands.Cog):
         self.data["help_requests"].append({
             "query": topic,
             "user": str(ctx.author.id),
-            "timestamp": datetime.utcnow().isoformat()
+            "timestamp": get_now_pst().isoformat()
         })
         
         self.save_data(self.data)

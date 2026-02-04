@@ -10,6 +10,7 @@ import json
 import os
 from datetime import datetime, timedelta
 import re
+from cogs.core.pst_timezone import get_now_pst
 
 CAPS_THRESHOLD = 0.7  # 70% caps
 EMOJI_SPAM_THRESHOLD = 5
@@ -72,13 +73,15 @@ class AutoModCog(commands.Cog):
             
             synced_count = 0
             for rule in automod_rules:
+                # Handle different Discord.py versions
+                rule_type = getattr(rule, 'trigger_type', getattr(rule, 'trigger', 'unknown'))
                 self.discord_automod_cache[f"{guild.id}:{rule.id}"] = {
                     'id': rule.id,
                     'name': rule.name,
-                    'type': str(rule.trigger_type),
+                    'type': str(rule_type),
                     'enabled': rule.enabled,
                     'actions': [str(a) for a in rule.actions],
-                    'synced_at': datetime.utcnow().isoformat()
+                    'synced_at': get_now_pst().isoformat()
                 }
                 synced_count += 1
             
@@ -103,7 +106,7 @@ class AutoModCog(commands.Cog):
         violations = self.get_violations(guild_id)
         
         violation = {
-            'timestamp': datetime.utcnow().isoformat(),
+            'timestamp': get_now_pst().isoformat(),
             'user_id': user_id,
             'type': violation_type,
             'severity': severity,
@@ -237,7 +240,7 @@ class AutoModCog(commands.Cog):
             title="🤖 Discord AutoMod Rules",
             description=f"{len(rules)} rule(s) active",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         for rule in rules[:10]:
@@ -262,7 +265,7 @@ class AutoModCog(commands.Cog):
             return
         
         # Filter by date
-        cutoff = (datetime.utcnow() - timedelta(days=days)).isoformat()
+        cutoff = (get_now_pst() - timedelta(days=days)).isoformat()
         recent = [v for v in violations if v['timestamp'] > cutoff]
         
         # Group by type
@@ -275,7 +278,7 @@ class AutoModCog(commands.Cog):
             title=f"⚠️ Violations (Last {days} Days)",
             description=f"{len(recent)} violation(s)",
             color=discord.Color.orange(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Summary", value="━" * 25, inline=False)
@@ -309,7 +312,7 @@ class AutoModCog(commands.Cog):
             title="✅ AutoMod Rules Synced",
             description=f"Synchronized {synced} rule(s)",
             color=discord.Color.green(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Status", value="🔄 Bot and Discord automod are in sync", inline=False)

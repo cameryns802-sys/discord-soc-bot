@@ -3,6 +3,7 @@ from discord.ext import commands
 import json
 import os
 from datetime import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 class EventCorrelationEngineCog(commands.Cog):
     def __init__(self, bot):
@@ -112,7 +113,7 @@ class EventCorrelationEngineCog(commands.Cog):
         rule = {
             "name": rule_name,
             "condition": condition,
-            "created": datetime.utcnow().isoformat(),
+            "created": get_now_pst().isoformat(),
             "enabled": True
         }
         self.correlations["patterns"].append(rule)

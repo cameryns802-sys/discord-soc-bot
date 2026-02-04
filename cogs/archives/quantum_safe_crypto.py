@@ -6,6 +6,7 @@ from discord.ext import commands
 import json
 import os
 from datetime import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 DATA_FILE = 'data/quantum_safe_crypto.json'
 
@@ -56,7 +57,7 @@ class QuantumSafeCryptoCog(commands.Cog):
         data['quantum_keys'].append({
             "key_id": key_id,
             "algorithm": algorithm,
-            "generated_at": datetime.utcnow().isoformat(),
+            "generated_at": get_now_pst().isoformat(),
             "key_size": 2048,
             "status": "ACTIVE"
         })
@@ -70,7 +71,7 @@ class QuantumSafeCryptoCog(commands.Cog):
         embed.add_field(name="Key ID", value=key_id, inline=True)
         embed.add_field(name="Key Size", value="2048 bits", inline=True)
         embed.add_field(name="Quantum Resistant", value="✅ Yes (NIST approved)", inline=True)
-        embed.timestamp = datetime.utcnow()
+        embed.timestamp = get_now_pst()
         await ctx.send(embed=embed)
 
     @commands.command(name='quantum_key_exchange')
@@ -87,7 +88,7 @@ class QuantumSafeCryptoCog(commands.Cog):
             "exchange_id": exchange_id,
             "endpoint": endpoint,
             "algorithm": "CRYSTALS-Kyber",
-            "exchanged_at": datetime.utcnow().isoformat(),
+            "exchanged_at": get_now_pst().isoformat(),
             "status": "SUCCESS"
         })
         self.save_data(data)
@@ -111,7 +112,7 @@ class QuantumSafeCryptoCog(commands.Cog):
         embed.add_field(name="Hash Algorithm", value="SHA-3", inline=True)
         embed.add_field(name="Post-Quantum Ready", value="✅ Yes (100%)", inline=True)
         embed.add_field(name="Harvest-Now-Decrypt-Later Risk", value="Mitigated", inline=True)
-        embed.timestamp = datetime.utcnow()
+        embed.timestamp = get_now_pst()
         await ctx.send(embed=embed)
 
     @commands.command(name='quantum_readiness')
@@ -129,7 +130,7 @@ class QuantumSafeCryptoCog(commands.Cog):
         embed.add_field(name="PQC Migration", value="75% Complete", inline=True)
         embed.add_field(name="Legacy Crypto Phased Out", value="✅ Yes", inline=True)
         embed.add_field(name="Next Review", value="Q2 2026", inline=False)
-        embed.timestamp = datetime.utcnow()
+        embed.timestamp = get_now_pst()
         await ctx.send(embed=embed)
 
 async def setup(bot):

@@ -3,6 +3,7 @@ from discord.ext import commands
 import json
 import os
 import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 DATA_FILE = 'data/post_incident_reviews.json'
 
@@ -48,7 +49,7 @@ class PostIncidentReviewCog(commands.Cog):
             "id": pir_id,
             "incident_id": incident_id,
             "summary": summary,
-            "created_at": datetime.datetime.utcnow().isoformat(),
+            "created_at": datetime.get_now_pst().isoformat(),
             "created_by": str(ctx.author),
             "status": "draft",
             "severity": "medium",
@@ -82,7 +83,7 @@ class PostIncidentReviewCog(commands.Cog):
         finding_entry = {
             "severity": severity,
             "description": finding,
-            "added_at": datetime.datetime.utcnow().isoformat(),
+            "added_at": datetime.get_now_pst().isoformat(),
             "added_by": str(ctx.author)
         }
         
@@ -136,7 +137,7 @@ class PostIncidentReviewCog(commands.Cog):
             "owner": owner,
             "due_date": due_date,
             "status": "open",
-            "created_at": datetime.datetime.utcnow().isoformat()
+            "created_at": datetime.get_now_pst().isoformat()
         }
         
         data["action_items"].append(action_item)

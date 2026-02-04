@@ -10,6 +10,7 @@ import json
 import os
 from datetime import datetime, timedelta
 import uuid
+from cogs.core.pst_timezone import get_now_pst
 
 class VulnerabilityManagementSystem(commands.Cog):
     """Vulnerability tracking and remediation management"""
@@ -65,7 +66,7 @@ class VulnerabilityManagementSystem(commands.Cog):
             'cvss_score': f"{cvss_range[0]}-{cvss_range[1]}",
             'affected_system': affected_system,
             'status': 'open',
-            'reported_at': datetime.utcnow().isoformat(),
+            'reported_at': get_now_pst().isoformat(),
             'reported_by': reporter,
             'assigned_to': None,
             'patched': False,
@@ -109,7 +110,7 @@ class VulnerabilityManagementSystem(commands.Cog):
             title=f"{severity_emoji} Vulnerability Created",
             description=f"**{title}**",
             color=severity_color,
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Vulnerability ID", value=f"`{vuln['id']}`", inline=True)
@@ -141,7 +142,7 @@ class VulnerabilityManagementSystem(commands.Cog):
             title=f"🔒 {status.upper()} Vulnerabilities",
             description=f"{len(sorted_vulns)} vulnerability(ies)",
             color=discord.Color.orange(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         for vuln in sorted_vulns[:10]:
@@ -191,7 +192,7 @@ class VulnerabilityManagementSystem(commands.Cog):
             title="📊 Vulnerability Statistics",
             description=f"Total: {total} | Risk Score: {risk_score}",
             color=discord.Color.orange(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         severity_str = f"🔴 Critical: {by_severity['critical']}\n🟠 High: {by_severity['high']}\n🟡 Medium: {by_severity['medium']}\n🟢 Low: {by_severity['low']}"

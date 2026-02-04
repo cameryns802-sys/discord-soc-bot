@@ -7,6 +7,7 @@ import json
 import os
 from datetime import datetime
 import hashlib
+from cogs.core.pst_timezone import get_now_pst
 
 class InterServerThreatExchangeCog(commands.Cog):
     def __init__(self, bot):
@@ -66,7 +67,7 @@ class InterServerThreatExchangeCog(commands.Cog):
         network_entry = {
             "guild_name": ctx.guild.name,
             "anon_id": anon_id,
-            "joined_at": datetime.utcnow().isoformat(),
+            "joined_at": get_now_pst().isoformat(),
             "status": "ACTIVE",
             "reputation_score": 0.5,
             "threats_reported": 0,
@@ -102,14 +103,14 @@ class InterServerThreatExchangeCog(commands.Cog):
             await ctx.send("❌ Not connected to threat network. Use `/join_threat_network` first.")
             return
         
-        threat_id = f"THR-{datetime.utcnow().strftime('%Y%m%d%H%M%S')}"
+        threat_id = f"THR-{get_now_pst().strftime('%Y%m%d%H%M%S')}"
         
         threat_report = {
             "id": threat_id,
             "type": threat_type,
             "details": details,
             "reported_by_guild": self.data["threat_network"][guild_id]["anon_id"],  # Anonymized
-            "reported_at": datetime.utcnow().isoformat(),
+            "reported_at": get_now_pst().isoformat(),
             "severity": "MEDIUM",
             "impact_radius": 5,  # Estimated affected servers
             "mitigated": False
@@ -165,7 +166,7 @@ class InterServerThreatExchangeCog(commands.Cog):
         
         embed.add_field(name="Recent Threats", value=feed_str or "None", inline=False)
         
-        self.data["threat_network"][guild_id]["last_activity"] = datetime.utcnow().isoformat()
+        self.data["threat_network"][guild_id]["last_activity"] = get_now_pst().isoformat()
         self.save_data(self.data)
         
         await ctx.send(embed=embed)
@@ -182,7 +183,7 @@ class InterServerThreatExchangeCog(commands.Cog):
             await ctx.send("❌ Not connected to threat network.")
             return
         
-        blocklist_id = f"BL-{datetime.utcnow().strftime('%Y%m%d%H%M%S')}"
+        blocklist_id = f"BL-{get_now_pst().strftime('%Y%m%d%H%M%S')}"
         
         # Parse user IDs
         user_list = [uid.strip() for uid in user_ids.split(",")]
@@ -192,7 +193,7 @@ class InterServerThreatExchangeCog(commands.Cog):
             "source_guild": self.data["threat_network"][guild_id]["anon_id"],
             "users": len(user_list),
             "reason": "Threat actors / Raid accounts",
-            "shared_at": datetime.utcnow().isoformat(),
+            "shared_at": get_now_pst().isoformat(),
             "impact": "Applied by peers",
             "confidence": 0.95
         }
@@ -226,14 +227,14 @@ class InterServerThreatExchangeCog(commands.Cog):
             await ctx.send("❌ Not connected to threat network.")
             return
         
-        ttp_id = f"TTP-{datetime.utcnow().strftime('%Y%m%d%H%M%S')}"
+        ttp_id = f"TTP-{get_now_pst().strftime('%Y%m%d%H%M%S')}"
         
         ttp = {
             "id": ttp_id,
             "name": ttp_name,
             "description": description,
             "shared_by": self.data["threat_network"][guild_id]["anon_id"],
-            "shared_at": datetime.utcnow().isoformat(),
+            "shared_at": get_now_pst().isoformat(),
             "mitigations": [],
             "adoption_rate": 0.3
         }
@@ -265,14 +266,14 @@ class InterServerThreatExchangeCog(commands.Cog):
             await ctx.send("❌ Not connected to threat network.")
             return
         
-        pattern_id = f"RAID-{datetime.utcnow().strftime('%Y%m%d%H%M%S')}"
+        pattern_id = f"RAID-{get_now_pst().strftime('%Y%m%d%H%M%S')}"
         
         raid_pattern = {
             "id": pattern_id,
             "name": pattern_name,
             "detected_by": self.data["threat_network"][guild_id]["anon_id"],
             "severity": severity,
-            "detected_at": datetime.utcnow().isoformat(),
+            "detected_at": get_now_pst().isoformat(),
             "affected_count": 3,
             "status": "ONGOING"
         }

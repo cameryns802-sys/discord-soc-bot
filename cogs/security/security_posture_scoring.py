@@ -10,6 +10,7 @@ import json
 import os
 from datetime import datetime, timedelta
 import uuid
+from cogs.core.pst_timezone import get_now_pst
 
 class SecurityPostureScoring(commands.Cog):
     """Security posture and health scoring"""
@@ -107,7 +108,7 @@ class SecurityPostureScoring(commands.Cog):
             'id': f"SP-{str(uuid.uuid4())[:8].upper()}",
             'score': score,
             'risk_level': self.get_risk_level(score),
-            'timestamp': datetime.utcnow().isoformat(),
+            'timestamp': get_now_pst().isoformat(),
             'factors': factors,
             'trend': 'improving',  # improving, stable, declining
             'month_over_month': 4  # +4 points
@@ -127,7 +128,7 @@ class SecurityPostureScoring(commands.Cog):
             title="🔐 Security Posture Update",
             description="Real-time security health assessment",
             color=discord.Color.green() if score >= 75 else discord.Color.orange(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Current Score", value=f"{score}/100", inline=True)
@@ -158,14 +159,14 @@ class SecurityPostureScoring(commands.Cog):
             return
         
         # Filter by days
-        cutoff = (datetime.utcnow() - timedelta(days=days)).isoformat()
+        cutoff = (get_now_pst() - timedelta(days=days)).isoformat()
         recent = [p for p in history if p['timestamp'] >= cutoff]
         
         embed = discord.Embed(
             title=f"📈 Security Posture Trend ({days} Days)",
             description="Historical security score progression",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         if recent:
@@ -224,7 +225,7 @@ class SecurityPostureScoring(commands.Cog):
             title="💡 Security Improvement Recommendations",
             description=f"Based on current posture analysis",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Current Score", value=f"{current.get('score', 0)}/100", inline=False)

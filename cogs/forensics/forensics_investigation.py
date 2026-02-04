@@ -5,6 +5,7 @@ from discord import app_commands
 from datetime import datetime
 import json
 import os
+from cogs.core.pst_timezone import get_now_pst
 
 class ForensicsGroup(app_commands.Group):
     def __init__(self, cog):
@@ -20,7 +21,7 @@ class ForensicsGroup(app_commands.Group):
         
         embed = discord.Embed(title="📸 Forensic Snapshot Created", color=discord.Color.blue())
         embed.add_field(name="Snapshot ID", value=snapshot_id, inline=True)
-        embed.add_field(name="Timestamp", value=datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S"), inline=True)
+        embed.add_field(name="Timestamp", value=get_now_pst().strftime("%Y-%m-%d %H:%M:%S"), inline=True)
         embed.add_field(name="Items Captured", value="Users, roles, channels, permissions", inline=False)
         embed.add_field(name="Chain of Custody", value="✅ Locked & Immutable", inline=False)
         
@@ -87,7 +88,7 @@ class ForensicsGroup(app_commands.Group):
         
         embed = discord.Embed(title="📄 Forensic Investigation Report", color=discord.Color.blue())
         embed.add_field(name="Report ID", value=report['report_id'], inline=True)
-        embed.add_field(name="Generated", value=datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S"), inline=True)
+        embed.add_field(name="Generated", value=get_now_pst().strftime("%Y-%m-%d %H:%M:%S"), inline=True)
         embed.add_field(name="Evidence Items", value=report['evidence_count'], inline=True)
         embed.add_field(name="Timeline Events", value=report['timeline_events'], inline=True)
         embed.add_field(name="Key Findings", value=report['findings'], inline=False)
@@ -133,7 +134,7 @@ class ForensicsCog(commands.Cog):
         
         self.snapshots[snapshot_id] = {
             "id": snapshot_id,
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": get_now_pst().isoformat(),
             "server_state": {
                 "users": "captured",
                 "roles": "captured",
@@ -174,7 +175,7 @@ class ForensicsCog(commands.Cog):
 
     def generate_forensic_report(self, case_id: str = None) -> dict:
         """Generate forensic report"""
-        report_id = f"REPORT-{datetime.utcnow().strftime('%Y%m%d%H%M%S')}"
+        report_id = f"REPORT-{get_now_pst().strftime('%Y%m%d%H%M%S')}"
         return {
             "report_id": report_id,
             "evidence_count": "12 items collected",

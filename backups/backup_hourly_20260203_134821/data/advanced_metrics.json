@@ -1,0 +1,663 @@
+{
+  "history": [
+    {
+      "timestamp": "2026-02-03T02:05:10.989517",
+      "cogs_loaded": 172,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T02:10:10.509279",
+      "cogs_loaded": 172,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T02:11:50.792076",
+      "cogs_loaded": 172,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T02:16:50.366138",
+      "cogs_loaded": 172,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T02:21:50.358855",
+      "cogs_loaded": 172,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T02:22:27.651841",
+      "cogs_loaded": 172,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T02:26:37.966453",
+      "cogs_loaded": 172,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T02:31:37.329349",
+      "cogs_loaded": 172,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T02:36:37.351029",
+      "cogs_loaded": 172,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T02:41:37.326651",
+      "cogs_loaded": 172,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T02:46:37.335339",
+      "cogs_loaded": 172,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T02:51:37.320327",
+      "cogs_loaded": 172,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T02:58:32.055528",
+      "cogs_loaded": 172,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T03:00:27.804399",
+      "cogs_loaded": 171,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T03:01:00.631290",
+      "cogs_loaded": 172,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T03:04:45.336138",
+      "cogs_loaded": 172,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T03:17:39.233830",
+      "cogs_loaded": 172,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T03:17:39.250768",
+      "cogs_loaded": 172,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T03:19:44.954722",
+      "cogs_loaded": 172,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T03:53:22.244730",
+      "cogs_loaded": 172,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T03:54:24.279617",
+      "cogs_loaded": 172,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T03:59:23.898212",
+      "cogs_loaded": 172,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T04:04:23.899647",
+      "cogs_loaded": 172,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T04:10:16.499048",
+      "cogs_loaded": 172,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T04:15:37.593154",
+      "cogs_loaded": 172,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T04:19:45.424287",
+      "cogs_loaded": 174,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T04:20:26.809820",
+      "cogs_loaded": 173,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T04:20:43.979912",
+      "cogs_loaded": 173,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T04:23:13.103941",
+      "cogs_loaded": 172,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T04:24:39.555226",
+      "cogs_loaded": 172,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T04:27:39.502461",
+      "cogs_loaded": 174,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T04:33:26.688379",
+      "cogs_loaded": 174,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T04:38:26.271703",
+      "cogs_loaded": 174,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T04:47:18.000094",
+      "cogs_loaded": 174,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T04:48:26.271598",
+      "cogs_loaded": 174,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T04:53:26.281651",
+      "cogs_loaded": 174,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T17:33:39.934877",
+      "cogs_loaded": 174,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T17:38:39.177237",
+      "cogs_loaded": 174,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T17:43:39.173983",
+      "cogs_loaded": 174,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T17:49:12.776965",
+      "cogs_loaded": 174,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T17:53:39.181672",
+      "cogs_loaded": 174,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T17:58:39.178118",
+      "cogs_loaded": 174,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T18:03:39.246967",
+      "cogs_loaded": 174,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T18:08:39.210339",
+      "cogs_loaded": 174,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T18:21:29.260879",
+      "cogs_loaded": 174,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T18:21:30.027391",
+      "cogs_loaded": 174,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T18:23:39.184448",
+      "cogs_loaded": 174,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T18:28:39.175547",
+      "cogs_loaded": 174,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T18:35:51.379867",
+      "cogs_loaded": 174,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T18:38:39.175140",
+      "cogs_loaded": 174,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T18:41:55.183495",
+      "cogs_loaded": 173,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T18:46:54.756593",
+      "cogs_loaded": 173,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T20:21:19.461121",
+      "cogs_loaded": 173,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T20:21:21.907923",
+      "cogs_loaded": 173,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T20:21:21.947691",
+      "cogs_loaded": 173,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T20:21:21.999754",
+      "cogs_loaded": 173,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T20:21:22.024524",
+      "cogs_loaded": 173,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T20:21:22.119009",
+      "cogs_loaded": 173,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T20:21:22.136569",
+      "cogs_loaded": 173,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T20:21:22.156778",
+      "cogs_loaded": 173,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T20:21:22.174872",
+      "cogs_loaded": 173,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T20:21:22.192043",
+      "cogs_loaded": 173,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T20:21:22.215683",
+      "cogs_loaded": 173,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T20:21:22.229437",
+      "cogs_loaded": 173,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T20:21:22.293910",
+      "cogs_loaded": 173,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T20:21:22.304638",
+      "cogs_loaded": 173,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T20:21:22.320838",
+      "cogs_loaded": 173,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T20:21:22.332781",
+      "cogs_loaded": 173,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T20:21:22.345494",
+      "cogs_loaded": 173,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T20:21:22.373666",
+      "cogs_loaded": 173,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T20:21:54.755507",
+      "cogs_loaded": 173,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T20:26:54.759858",
+      "cogs_loaded": 173,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T20:31:54.733968",
+      "cogs_loaded": 173,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T20:38:12.366452",
+      "cogs_loaded": 173,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T20:41:55.179055",
+      "cogs_loaded": 173,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T20:46:54.733913",
+      "cogs_loaded": 173,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T20:48:24.738162",
+      "cogs_loaded": 182,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T20:50:01.138994",
+      "cogs_loaded": 182,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T20:51:51.814018",
+      "cogs_loaded": 182,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T20:56:51.489836",
+      "cogs_loaded": 182,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T20:59:40.125930",
+      "cogs_loaded": 182,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T21:04:39.312243",
+      "cogs_loaded": 182,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T21:09:39.295900",
+      "cogs_loaded": 182,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T21:14:39.289916",
+      "cogs_loaded": 182,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T21:19:39.293661",
+      "cogs_loaded": 182,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T21:20:33.129392",
+      "cogs_loaded": 189,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T21:21:04.216368",
+      "cogs_loaded": 189,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T21:24:56.036652",
+      "cogs_loaded": 189,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T21:29:55.339293",
+      "cogs_loaded": 189,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T21:35:10.367200",
+      "cogs_loaded": 188,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T21:36:36.519725",
+      "cogs_loaded": 189,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T21:38:28.089492",
+      "cogs_loaded": 188,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T21:46:53.952470",
+      "cogs_loaded": 187,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    },
+    {
+      "timestamp": "2026-02-03T21:47:31.812302",
+      "cogs_loaded": 187,
+      "guilds": 2,
+      "users": 13,
+      "threat_level": "green"
+    }
+  ],
+  "alerts": []
+}

@@ -13,6 +13,7 @@ import os
 import random
 from cogs.core.signal_bus import signal_bus, Signal, SignalType
 from cogs.core.feature_flags import flags
+from cogs.core.pst_timezone import get_now_pst
 
 class AnomalyDetectionCog(commands.Cog):
     def __init__(self, bot):
@@ -49,7 +50,7 @@ class AnomalyDetectionCog(commands.Cog):
         return "• Unusual activity pattern\n• Login time deviation\n• Excessive permissions requests"
     
     async def log_scan(self, user: discord.Member, score: float):
-        self.anomalies[str(user.id)] = {"score": score, "timestamp": datetime.utcnow().isoformat()}
+        self.anomalies[str(user.id)] = {"score": score, "timestamp": get_now_pst().isoformat()}
         self.save_data()
         
         # Emit signal if anomaly detected
@@ -118,7 +119,7 @@ class AnomalyDetectionCog(commands.Cog):
     @commands.has_permissions(administrator=True)
     async def anomalybaseline(self, ctx, user: discord.Member):
         """Set user behavior baseline"""
-        self.baselines[str(user.id)] = {"timestamp": datetime.utcnow().isoformat()}
+        self.baselines[str(user.id)] = {"timestamp": get_now_pst().isoformat()}
         self.save_data()
         embed = discord.Embed(title=f"Baseline Set: {user}", color=discord.Color.green())
         embed.add_field(name="Status", value="✅ Baseline established for behavioral analysis", inline=False)

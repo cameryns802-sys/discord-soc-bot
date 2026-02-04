@@ -2,7 +2,7 @@
 import discord
 from discord.ext import commands
 from discord import app_commands
-import datetime
+from cogs.core.pst_timezone import get_now_pst
 import json
 import os
 
@@ -20,7 +20,7 @@ class ThreatIntelGroup(app_commands.Group):
             embed.add_field(name="Domain Status", value="✅ Clean (83/83 vendors)", inline=True)
         else:
             embed.add_field(name="IP Address", value="✅ Clean", inline=True)
-        self.cog.query_log.append({"query": query, "type": "vt", "user_id": ctx.author.id, "timestamp": datetime.datetime.now(datetime.UTC).isoformat()})
+        self.cog.query_log.append({"query": query, "type": "vt", "user_id": ctx.author.id, "timestamp": get_now_pst().isoformat()})
         self.cog.save_data()
         await ctx.send(embed=embed)
 
@@ -29,7 +29,7 @@ class ThreatIntelGroup(app_commands.Group):
         embed = discord.Embed(title="🔍 AbuseIPDB Report", description=f"IP: {ip}", color=discord.Color.blue())
         embed.add_field(name="Abuse Confidence", value="5% (Low Risk)", inline=True)
         embed.add_field(name="Reports", value="12 reports", inline=True)
-        self.cog.query_log.append({"query": ip, "type": "abuseipdb", "user_id": ctx.author.id, "timestamp": datetime.datetime.now(datetime.UTC).isoformat()})
+        self.cog.query_log.append({"query": ip, "type": "abuseipdb", "user_id": ctx.author.id, "timestamp": get_now_pst().isoformat()})
         self.cog.save_data()
         await ctx.send(embed=embed)
 
@@ -38,7 +38,7 @@ class ThreatIntelGroup(app_commands.Group):
         embed = discord.Embed(title="🔍 Shodan Host Report", description=f"IP: {ip}", color=discord.Color.blue())
         embed.add_field(name="Open Ports", value="80, 443, 22", inline=True)
         embed.add_field(name="Services", value="nginx, OpenSSH", inline=True)
-        self.cog.query_log.append({"query": ip, "type": "shodan", "user_id": ctx.author.id, "timestamp": datetime.datetime.now(datetime.UTC).isoformat()})
+        self.cog.query_log.append({"query": ip, "type": "shodan", "user_id": ctx.author.id, "timestamp": get_now_pst().isoformat()})
         self.cog.save_data()
         await ctx.send(embed=embed)
 
@@ -49,7 +49,7 @@ class ThreatIntelGroup(app_commands.Group):
         embed = discord.Embed(title="🔍 Bulk Threat Intelligence Check", color=discord.Color.blue())
         for query in query_list:
             embed.add_field(name=query, value="✅ Clean", inline=False)
-            self.cog.query_log.append({"query": query, "type": "bulk", "user_id": ctx.author.id, "timestamp": datetime.datetime.now(datetime.UTC).isoformat()})
+            self.cog.query_log.append({"query": query, "type": "bulk", "user_id": ctx.author.id, "timestamp": get_now_pst().isoformat()})
         self.cog.save_data()
         await ctx.send(embed=embed)
 
@@ -82,7 +82,7 @@ class VendorGroup(app_commands.Group):
         if risk_level.lower() not in ["critical", "high", "medium", "low"]:
             await ctx.send("❌ Risk level must be: critical, high, medium, low")
             return
-        self.cog.vendors[vendor.lower()] = {"name": vendor, "risk_level": risk_level.lower(), "added_by": ctx.author.id, "added_at": datetime.datetime.now(datetime.UTC).isoformat(), "status": "approved"}
+        self.cog.vendors[vendor.lower()] = {"name": vendor, "risk_level": risk_level.lower(), "added_by": ctx.author.id, "added_at": get_now_pst().isoformat(), "status": "approved"}
         self.cog.save_data()
         await ctx.send(f"✅ Added vendor: {vendor} (Risk: {risk_level.upper()})")
 
@@ -183,3 +183,4 @@ class ThreatIntelSupplyChainCog(commands.Cog):
 
 async def setup(bot):
     await bot.add_cog(ThreatIntelSupplyChainCog(bot))
+

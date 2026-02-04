@@ -10,6 +10,7 @@ import json
 import os
 from datetime import datetime, timedelta
 import uuid
+from cogs.core.pst_timezone import get_now_pst
 
 class QuantifiedRiskDashboard(commands.Cog):
     """Quantified risk and financial impact tracking"""
@@ -71,7 +72,7 @@ class QuantifiedRiskDashboard(commands.Cog):
             'annual_impact': impact,
             'arv': arv,
             'status': 'active',
-            'created_at': datetime.utcnow().isoformat(),
+            'created_at': get_now_pst().isoformat(),
             'mitigation_cost': int(impact * 0.15),  # Assume 15% mitigation cost
             'roi_mitigation': 'positive' if arv > int(impact * 0.15) else 'negative'
         }
@@ -85,7 +86,7 @@ class QuantifiedRiskDashboard(commands.Cog):
             title="💰 Risk Quantification",
             description=f"**{threat_name}**",
             color=color,
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Risk ID", value=f"`{risk_id}`", inline=True)
@@ -126,7 +127,7 @@ class QuantifiedRiskDashboard(commands.Cog):
             title="💼 Risk Portfolio Summary",
             description="Aggregate risk exposure",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Portfolio Overview", value="━" * 25, inline=False)
@@ -166,7 +167,7 @@ class QuantifiedRiskDashboard(commands.Cog):
             title="🛡️ Mitigation Strategy",
             description=f"**{risk['name']}**",
             color=discord.Color.green(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Risk Metrics", value="━" * 25, inline=False)
@@ -197,7 +198,7 @@ class QuantifiedRiskDashboard(commands.Cog):
             title="📈 Risk Trending (30 Days)",
             description="Annual Risk Value trending",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Trend Data", value="━" * 25, inline=False)

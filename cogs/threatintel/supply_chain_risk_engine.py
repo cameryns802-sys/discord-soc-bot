@@ -8,6 +8,7 @@ from discord.ext import commands
 import json
 import os
 from datetime import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 class SupplyChainRiskEngineCog(commands.Cog):
     """Supply Chain Risk Engine - Tracks third-party and dependency security risks"""
@@ -50,7 +51,7 @@ class SupplyChainRiskEngineCog(commands.Cog):
             "name": vendor_name,
             "trust_score": max(0, min(100, trust_score)),
             "description": description,
-            "added_at": datetime.utcnow().isoformat(),
+            "added_at": get_now_pst().isoformat(),
             "added_by": str(ctx.author.id),
             "status": "active"
         }
@@ -59,7 +60,7 @@ class SupplyChainRiskEngineCog(commands.Cog):
         self.save_vendors()
         
         color = discord.Color.green() if trust_score >= 70 else discord.Color.gold() if trust_score >= 50 else discord.Color.red()
-        embed = discord.Embed(title="✅ Vendor Added", color=color, timestamp=datetime.utcnow())
+        embed = discord.Embed(title="✅ Vendor Added", color=color, timestamp=get_now_pst())
         embed.add_field(name="Vendor ID", value=f"#{vendor['id']}", inline=True)
         embed.add_field(name="Name", value=vendor_name, inline=True)
         embed.add_field(name="Trust Score", value=f"{trust_score}/100", inline=True)
@@ -81,7 +82,7 @@ class SupplyChainRiskEngineCog(commands.Cog):
             "vendor_name": vendor["name"],
             "severity": severity.lower(),
             "description": description,
-            "created_at": datetime.utcnow().isoformat(),
+            "created_at": get_now_pst().isoformat(),
             "created_by": str(ctx.author.id),
             "status": "open"
         }
@@ -90,7 +91,7 @@ class SupplyChainRiskEngineCog(commands.Cog):
         self.save_alerts()
         
         color_map = {"critical": discord.Color.dark_red(), "high": discord.Color.red(), "medium": discord.Color.gold(), "low": discord.Color.green()}
-        embed = discord.Embed(title="⚠️ Supply Chain Alert", color=color_map.get(severity.lower(), discord.Color.blue()), timestamp=datetime.utcnow())
+        embed = discord.Embed(title="⚠️ Supply Chain Alert", color=color_map.get(severity.lower(), discord.Color.blue()), timestamp=get_now_pst())
         embed.add_field(name="Alert ID", value=f"#{alert['id']}", inline=True)
         embed.add_field(name="Vendor", value=vendor["name"], inline=True)
         embed.add_field(name="Severity", value=severity.upper(), inline=True)
@@ -112,7 +113,7 @@ class SupplyChainRiskEngineCog(commands.Cog):
         open_alerts = [a for a in self.alerts if a.get("status") == "open"]
         critical_alerts = [a for a in open_alerts if a.get("severity") == "critical"]
         
-        embed = discord.Embed(title="📊 Supply Chain Risk Report", color=discord.Color.blue(), timestamp=datetime.utcnow())
+        embed = discord.Embed(title="📊 Supply Chain Risk Report", color=discord.Color.blue(), timestamp=get_now_pst())
         embed.add_field(name="🔴 High Risk Vendors", value=len(high_risk), inline=True)
         embed.add_field(name="🟡 Medium Risk Vendors", value=len(medium_risk), inline=True)
         embed.add_field(name="🟢 Low Risk Vendors", value=len(low_risk), inline=True)
@@ -137,7 +138,7 @@ class SupplyChainRiskEngineCog(commands.Cog):
             return
         
         sorted_vendors = sorted(self.vendors, key=lambda x: x["trust_score"])
-        embed = discord.Embed(title="📋 Supply Chain Vendors", color=discord.Color.blue(), timestamp=datetime.utcnow())
+        embed = discord.Embed(title="📋 Supply Chain Vendors", color=discord.Color.blue(), timestamp=get_now_pst())
         
         for vendor in sorted_vendors[:10]:
             trust = vendor["trust_score"]
@@ -155,7 +156,7 @@ class SupplyChainRiskEngineCog(commands.Cog):
         open_alerts = len([a for a in self.alerts if a.get("status") == "open"])
         high_risk_vendors = len([v for v in self.vendors if v["trust_score"] < 50])
         
-        embed = discord.Embed(title="🔗 Supply Chain Risk Dashboard", color=discord.Color.blue(), timestamp=datetime.utcnow())
+        embed = discord.Embed(title="🔗 Supply Chain Risk Dashboard", color=discord.Color.blue(), timestamp=get_now_pst())
         embed.add_field(name="📊 Total Vendors", value=total_vendors, inline=True)
         embed.add_field(name="⚠️ Total Alerts", value=total_alerts, inline=True)
         embed.add_field(name="🔴 Open Alerts", value=open_alerts, inline=True)

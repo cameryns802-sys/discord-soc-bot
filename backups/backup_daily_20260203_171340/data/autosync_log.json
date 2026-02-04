@@ -1,0 +1,2124 @@
+[
+  {
+    "timestamp": "2026-02-02T23:57:29.362522",
+    "type": "COG_LOAD",
+    "file": "cogs.hunting.threat_hunting",
+    "status": "failed: Extension 'cogs.hunting.threat_hunting' raised an "
+  },
+  {
+    "timestamp": "2026-02-02T23:57:29.404611",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.server_health_monitor",
+    "status": "failed: Extension 'cogs.utility.server_health_monitor' rai"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:29.446981",
+    "type": "COG_LOAD",
+    "file": "cogs.security.member_risk_profiler",
+    "status": "failed: Extension 'cogs.security.member_risk_profiler' rai"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:29.483857",
+    "type": "COG_LOAD",
+    "file": "cogs.observability.event_correlation_engine",
+    "status": "failed: Extension 'cogs.observability.event_correlation_en"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:29.534121",
+    "type": "COG_LOAD",
+    "file": "cogs.incidents.breach_response_orchestration",
+    "status": "failed: Extension 'cogs.incidents.breach_response_orchestr"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:29.581263",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.incident_ticketing",
+    "status": "failed: Extension 'cogs.utility.incident_ticketing' raised"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:29.623292",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.security_posture_dashboard",
+    "status": "failed: Extension 'cogs.soc.security_posture_dashboard' ra"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:29.669506",
+    "type": "COG_LOAD",
+    "file": "cogs.threatintel.threat_intelligence_synthesizer",
+    "status": "failed: Extension 'cogs.threatintel.threat_intelligence_sy"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:29.711137",
+    "type": "COG_LOAD",
+    "file": "cogs.security.server_lockdown",
+    "status": "failed: Extension 'cogs.security.server_lockdown' raised a"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:29.758587",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.quantified_risk_dashboard",
+    "status": "failed: Extension 'cogs.soc.quantified_risk_dashboard' rai"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:29.807861",
+    "type": "COG_LOAD",
+    "file": "cogs.incidents.incident_response_playbooks",
+    "status": "failed: Extension 'cogs.incidents.incident_response_playbo"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:29.853821",
+    "type": "COG_LOAD",
+    "file": "cogs.security.security_drill",
+    "status": "failed: Extension 'cogs.security.security_drill' raised an"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:29.895317",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.compliance_automation_suite",
+    "status": "failed: Extension 'cogs.soc.compliance_automation_suite' r"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:29.941719",
+    "type": "COG_LOAD",
+    "file": "cogs.forensics.forensics_investigation",
+    "status": "failed: Extension 'cogs.forensics.forensics_investigation'"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:29.998852",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.security_reports",
+    "status": "failed: Extension 'cogs.soc.security_reports' raised an er"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:30.042552",
+    "type": "COG_LOAD",
+    "file": "cogs.observability.advanced_logging",
+    "status": "failed: Extension 'cogs.observability.advanced_logging' ra"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:30.082098",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.incident_management",
+    "status": "failed: Extension 'cogs.soc.incident_management' raised an"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:30.137593",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.tos_generator",
+    "status": "failed: Extension 'cogs.utility.tos_generator' raised an e"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:30.174870",
+    "type": "COG_LOAD",
+    "file": "cogs.security.compromise_detector",
+    "status": "failed: Extension 'cogs.security.compromise_detector' rais"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:30.202842",
+    "type": "COG_LOAD",
+    "file": "cogs.humanops.role_management",
+    "status": "failed: Extension 'cogs.humanops.role_management' raised a"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:30.225928",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.owner_commands",
+    "status": "failed: Extension 'cogs.utility.owner_commands' raised an "
+  },
+  {
+    "timestamp": "2026-02-02T23:57:35.630782",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.alert_management",
+    "status": "failed: Extension 'cogs.soc.alert_management' raised an er"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:35.673490",
+    "type": "COG_LOAD",
+    "file": "cogs.moderation.advanced_moderation",
+    "status": "failed: Extension 'cogs.moderation.advanced_moderation' ra"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:35.719714",
+    "type": "COG_LOAD",
+    "file": "cogs.hunting.threat_hunting",
+    "status": "failed: Extension 'cogs.hunting.threat_hunting' raised an "
+  },
+  {
+    "timestamp": "2026-02-02T23:57:35.759637",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.server_health_monitor",
+    "status": "failed: Extension 'cogs.utility.server_health_monitor' rai"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:35.801405",
+    "type": "COG_LOAD",
+    "file": "cogs.security.member_risk_profiler",
+    "status": "failed: Extension 'cogs.security.member_risk_profiler' rai"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:35.857633",
+    "type": "COG_LOAD",
+    "file": "cogs.observability.event_correlation_engine",
+    "status": "failed: Extension 'cogs.observability.event_correlation_en"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:35.891552",
+    "type": "COG_LOAD",
+    "file": "cogs.incidents.breach_response_orchestration",
+    "status": "failed: Extension 'cogs.incidents.breach_response_orchestr"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:35.921945",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.incident_ticketing",
+    "status": "failed: Extension 'cogs.utility.incident_ticketing' raised"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:35.944070",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.security_posture_dashboard",
+    "status": "failed: Extension 'cogs.soc.security_posture_dashboard' ra"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:35.968145",
+    "type": "COG_LOAD",
+    "file": "cogs.threatintel.threat_intelligence_synthesizer",
+    "status": "failed: Extension 'cogs.threatintel.threat_intelligence_sy"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:36.001096",
+    "type": "COG_LOAD",
+    "file": "cogs.security.server_lockdown",
+    "status": "failed: Extension 'cogs.security.server_lockdown' raised a"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:36.026437",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.quantified_risk_dashboard",
+    "status": "failed: Extension 'cogs.soc.quantified_risk_dashboard' rai"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:36.065119",
+    "type": "COG_LOAD",
+    "file": "cogs.incidents.incident_response_playbooks",
+    "status": "failed: Extension 'cogs.incidents.incident_response_playbo"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:36.096997",
+    "type": "COG_LOAD",
+    "file": "cogs.security.security_drill",
+    "status": "failed: Extension 'cogs.security.security_drill' raised an"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:36.134242",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.compliance_automation_suite",
+    "status": "failed: Extension 'cogs.soc.compliance_automation_suite' r"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:36.173179",
+    "type": "COG_LOAD",
+    "file": "cogs.forensics.forensics_investigation",
+    "status": "failed: Extension 'cogs.forensics.forensics_investigation'"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:36.198444",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.security_reports",
+    "status": "failed: Extension 'cogs.soc.security_reports' raised an er"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:36.226711",
+    "type": "COG_LOAD",
+    "file": "cogs.observability.advanced_logging",
+    "status": "failed: Extension 'cogs.observability.advanced_logging' ra"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:36.257159",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.incident_management",
+    "status": "failed: Extension 'cogs.soc.incident_management' raised an"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:36.280340",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.tos_generator",
+    "status": "failed: Extension 'cogs.utility.tos_generator' raised an e"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:36.311460",
+    "type": "COG_LOAD",
+    "file": "cogs.security.compromise_detector",
+    "status": "failed: Extension 'cogs.security.compromise_detector' rais"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:36.352460",
+    "type": "COG_LOAD",
+    "file": "cogs.humanops.role_management",
+    "status": "failed: Extension 'cogs.humanops.role_management' raised a"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:36.387334",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.owner_commands",
+    "status": "failed: Extension 'cogs.utility.owner_commands' raised an "
+  },
+  {
+    "timestamp": "2026-02-02T23:57:36.427196",
+    "type": "DATA_SYNC",
+    "file": "data\\autosync_log.json",
+    "status": "updated"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:41.729619",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.alert_management",
+    "status": "failed: Extension 'cogs.soc.alert_management' raised an er"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:41.769024",
+    "type": "COG_LOAD",
+    "file": "cogs.moderation.advanced_moderation",
+    "status": "failed: Extension 'cogs.moderation.advanced_moderation' ra"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:41.797056",
+    "type": "COG_LOAD",
+    "file": "cogs.hunting.threat_hunting",
+    "status": "failed: Extension 'cogs.hunting.threat_hunting' raised an "
+  },
+  {
+    "timestamp": "2026-02-02T23:57:41.825528",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.server_health_monitor",
+    "status": "failed: Extension 'cogs.utility.server_health_monitor' rai"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:41.861830",
+    "type": "COG_LOAD",
+    "file": "cogs.security.member_risk_profiler",
+    "status": "failed: Extension 'cogs.security.member_risk_profiler' rai"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:41.904911",
+    "type": "COG_LOAD",
+    "file": "cogs.observability.event_correlation_engine",
+    "status": "failed: Extension 'cogs.observability.event_correlation_en"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:41.931902",
+    "type": "COG_LOAD",
+    "file": "cogs.incidents.breach_response_orchestration",
+    "status": "failed: Extension 'cogs.incidents.breach_response_orchestr"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:41.959804",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.incident_ticketing",
+    "status": "failed: Extension 'cogs.utility.incident_ticketing' raised"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:41.994762",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.security_posture_dashboard",
+    "status": "failed: Extension 'cogs.soc.security_posture_dashboard' ra"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:42.035396",
+    "type": "COG_LOAD",
+    "file": "cogs.threatintel.threat_intelligence_synthesizer",
+    "status": "failed: Extension 'cogs.threatintel.threat_intelligence_sy"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:42.090113",
+    "type": "COG_LOAD",
+    "file": "cogs.security.server_lockdown",
+    "status": "failed: Extension 'cogs.security.server_lockdown' raised a"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:42.127131",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.quantified_risk_dashboard",
+    "status": "failed: Extension 'cogs.soc.quantified_risk_dashboard' rai"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:42.170204",
+    "type": "COG_LOAD",
+    "file": "cogs.incidents.incident_response_playbooks",
+    "status": "failed: Extension 'cogs.incidents.incident_response_playbo"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:42.208023",
+    "type": "COG_LOAD",
+    "file": "cogs.security.security_drill",
+    "status": "failed: Extension 'cogs.security.security_drill' raised an"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:42.260901",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.compliance_automation_suite",
+    "status": "failed: Extension 'cogs.soc.compliance_automation_suite' r"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:42.296453",
+    "type": "COG_LOAD",
+    "file": "cogs.forensics.forensics_investigation",
+    "status": "failed: Extension 'cogs.forensics.forensics_investigation'"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:42.340462",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.security_reports",
+    "status": "failed: Extension 'cogs.soc.security_reports' raised an er"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:42.397303",
+    "type": "COG_LOAD",
+    "file": "cogs.observability.advanced_logging",
+    "status": "failed: Extension 'cogs.observability.advanced_logging' ra"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:42.439340",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.incident_management",
+    "status": "failed: Extension 'cogs.soc.incident_management' raised an"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:42.468056",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.tos_generator",
+    "status": "failed: Extension 'cogs.utility.tos_generator' raised an e"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:42.503274",
+    "type": "COG_LOAD",
+    "file": "cogs.security.compromise_detector",
+    "status": "failed: Extension 'cogs.security.compromise_detector' rais"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:42.531613",
+    "type": "COG_LOAD",
+    "file": "cogs.automation.auto_sla_tracker",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:42.563510",
+    "type": "COG_LOAD",
+    "file": "cogs.humanops.role_management",
+    "status": "failed: Extension 'cogs.humanops.role_management' raised a"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:42.601391",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.owner_commands",
+    "status": "failed: Extension 'cogs.utility.owner_commands' raised an "
+  },
+  {
+    "timestamp": "2026-02-02T23:57:42.797490",
+    "type": "COG_RELOAD",
+    "file": "cogs.automation.auto_sla_tracker",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:48.052426",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.alert_management",
+    "status": "failed: Extension 'cogs.soc.alert_management' raised an er"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:48.086086",
+    "type": "COG_LOAD",
+    "file": "cogs.moderation.advanced_moderation",
+    "status": "failed: Extension 'cogs.moderation.advanced_moderation' ra"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:48.129017",
+    "type": "COG_LOAD",
+    "file": "cogs.hunting.threat_hunting",
+    "status": "failed: Extension 'cogs.hunting.threat_hunting' raised an "
+  },
+  {
+    "timestamp": "2026-02-02T23:57:48.177504",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.server_health_monitor",
+    "status": "failed: Extension 'cogs.utility.server_health_monitor' rai"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:48.206434",
+    "type": "COG_LOAD",
+    "file": "cogs.security.member_risk_profiler",
+    "status": "failed: Extension 'cogs.security.member_risk_profiler' rai"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:48.252518",
+    "type": "COG_LOAD",
+    "file": "cogs.observability.event_correlation_engine",
+    "status": "failed: Extension 'cogs.observability.event_correlation_en"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:48.303710",
+    "type": "COG_LOAD",
+    "file": "cogs.incidents.breach_response_orchestration",
+    "status": "failed: Extension 'cogs.incidents.breach_response_orchestr"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:48.354773",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.incident_ticketing",
+    "status": "failed: Extension 'cogs.utility.incident_ticketing' raised"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:48.427841",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.security_posture_dashboard",
+    "status": "failed: Extension 'cogs.soc.security_posture_dashboard' ra"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:48.486607",
+    "type": "COG_LOAD",
+    "file": "cogs.threatintel.threat_intelligence_synthesizer",
+    "status": "failed: Extension 'cogs.threatintel.threat_intelligence_sy"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:48.535693",
+    "type": "COG_LOAD",
+    "file": "cogs.security.server_lockdown",
+    "status": "failed: Extension 'cogs.security.server_lockdown' raised a"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:48.592815",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.quantified_risk_dashboard",
+    "status": "failed: Extension 'cogs.soc.quantified_risk_dashboard' rai"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:48.663855",
+    "type": "COG_LOAD",
+    "file": "cogs.incidents.incident_response_playbooks",
+    "status": "failed: Extension 'cogs.incidents.incident_response_playbo"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:48.743662",
+    "type": "COG_LOAD",
+    "file": "cogs.security.security_drill",
+    "status": "failed: Extension 'cogs.security.security_drill' raised an"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:48.789879",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.compliance_automation_suite",
+    "status": "failed: Extension 'cogs.soc.compliance_automation_suite' r"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:48.842063",
+    "type": "COG_LOAD",
+    "file": "cogs.forensics.forensics_investigation",
+    "status": "failed: Extension 'cogs.forensics.forensics_investigation'"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:48.889151",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.security_reports",
+    "status": "failed: Extension 'cogs.soc.security_reports' raised an er"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:48.920711",
+    "type": "COG_LOAD",
+    "file": "cogs.observability.advanced_logging",
+    "status": "failed: Extension 'cogs.observability.advanced_logging' ra"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:48.954199",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.incident_management",
+    "status": "failed: Extension 'cogs.soc.incident_management' raised an"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:48.986907",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.tos_generator",
+    "status": "failed: Extension 'cogs.utility.tos_generator' raised an e"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:49.019337",
+    "type": "COG_LOAD",
+    "file": "cogs.security.compromise_detector",
+    "status": "failed: Extension 'cogs.security.compromise_detector' rais"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:49.047721",
+    "type": "COG_LOAD",
+    "file": "cogs.automation.auto_daily_report",
+    "status": "failed: Extension 'cogs.automation.auto_daily_report' has "
+  },
+  {
+    "timestamp": "2026-02-02T23:57:49.086695",
+    "type": "COG_LOAD",
+    "file": "cogs.humanops.role_management",
+    "status": "failed: Extension 'cogs.humanops.role_management' raised a"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:49.111614",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.owner_commands",
+    "status": "failed: Extension 'cogs.utility.owner_commands' raised an "
+  },
+  {
+    "timestamp": "2026-02-02T23:57:49.147118",
+    "type": "DATA_SYNC",
+    "file": "data\\autosync_log.json",
+    "status": "updated"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:54.584721",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.alert_management",
+    "status": "failed: Extension 'cogs.soc.alert_management' raised an er"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:54.615997",
+    "type": "COG_LOAD",
+    "file": "cogs.moderation.advanced_moderation",
+    "status": "failed: Extension 'cogs.moderation.advanced_moderation' ra"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:54.660142",
+    "type": "COG_LOAD",
+    "file": "cogs.hunting.threat_hunting",
+    "status": "failed: Extension 'cogs.hunting.threat_hunting' raised an "
+  },
+  {
+    "timestamp": "2026-02-02T23:57:54.710314",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.server_health_monitor",
+    "status": "failed: Extension 'cogs.utility.server_health_monitor' rai"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:54.741116",
+    "type": "COG_LOAD",
+    "file": "cogs.security.member_risk_profiler",
+    "status": "failed: Extension 'cogs.security.member_risk_profiler' rai"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:54.765875",
+    "type": "COG_LOAD",
+    "file": "cogs.observability.event_correlation_engine",
+    "status": "failed: Extension 'cogs.observability.event_correlation_en"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:54.789041",
+    "type": "COG_LOAD",
+    "file": "cogs.incidents.breach_response_orchestration",
+    "status": "failed: Extension 'cogs.incidents.breach_response_orchestr"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:54.812529",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.incident_ticketing",
+    "status": "failed: Extension 'cogs.utility.incident_ticketing' raised"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:54.836587",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.security_posture_dashboard",
+    "status": "failed: Extension 'cogs.soc.security_posture_dashboard' ra"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:54.861142",
+    "type": "COG_LOAD",
+    "file": "cogs.threatintel.threat_intelligence_synthesizer",
+    "status": "failed: Extension 'cogs.threatintel.threat_intelligence_sy"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:54.890542",
+    "type": "COG_LOAD",
+    "file": "cogs.security.server_lockdown",
+    "status": "failed: Extension 'cogs.security.server_lockdown' raised a"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:54.918495",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.quantified_risk_dashboard",
+    "status": "failed: Extension 'cogs.soc.quantified_risk_dashboard' rai"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:54.949985",
+    "type": "COG_LOAD",
+    "file": "cogs.incidents.incident_response_playbooks",
+    "status": "failed: Extension 'cogs.incidents.incident_response_playbo"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:54.979143",
+    "type": "COG_LOAD",
+    "file": "cogs.security.security_drill",
+    "status": "failed: Extension 'cogs.security.security_drill' raised an"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:55.009070",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.compliance_automation_suite",
+    "status": "failed: Extension 'cogs.soc.compliance_automation_suite' r"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:55.042776",
+    "type": "COG_LOAD",
+    "file": "cogs.forensics.forensics_investigation",
+    "status": "failed: Extension 'cogs.forensics.forensics_investigation'"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:55.072802",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.security_reports",
+    "status": "failed: Extension 'cogs.soc.security_reports' raised an er"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:55.104931",
+    "type": "COG_LOAD",
+    "file": "cogs.observability.advanced_logging",
+    "status": "failed: Extension 'cogs.observability.advanced_logging' ra"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:55.143362",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.incident_management",
+    "status": "failed: Extension 'cogs.soc.incident_management' raised an"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:55.173520",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.tos_generator",
+    "status": "failed: Extension 'cogs.utility.tos_generator' raised an e"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:55.204402",
+    "type": "COG_LOAD",
+    "file": "cogs.security.compromise_detector",
+    "status": "failed: Extension 'cogs.security.compromise_detector' rais"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:55.239585",
+    "type": "COG_LOAD",
+    "file": "cogs.automation.auto_daily_report",
+    "status": "failed: Extension 'cogs.automation.auto_daily_report' rais"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:55.272151",
+    "type": "COG_LOAD",
+    "file": "cogs.humanops.role_management",
+    "status": "failed: Extension 'cogs.humanops.role_management' raised a"
+  },
+  {
+    "timestamp": "2026-02-02T23:57:55.313083",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.owner_commands",
+    "status": "failed: Extension 'cogs.utility.owner_commands' raised an "
+  },
+  {
+    "timestamp": "2026-02-02T23:58:00.520469",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.alert_management",
+    "status": "failed: Extension 'cogs.soc.alert_management' raised an er"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:00.552858",
+    "type": "COG_LOAD",
+    "file": "cogs.moderation.advanced_moderation",
+    "status": "failed: Extension 'cogs.moderation.advanced_moderation' ra"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:00.581240",
+    "type": "COG_LOAD",
+    "file": "cogs.hunting.threat_hunting",
+    "status": "failed: Extension 'cogs.hunting.threat_hunting' raised an "
+  },
+  {
+    "timestamp": "2026-02-02T23:58:00.610795",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.server_health_monitor",
+    "status": "failed: Extension 'cogs.utility.server_health_monitor' rai"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:00.642817",
+    "type": "COG_LOAD",
+    "file": "cogs.security.member_risk_profiler",
+    "status": "failed: Extension 'cogs.security.member_risk_profiler' rai"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:00.673940",
+    "type": "COG_LOAD",
+    "file": "cogs.observability.event_correlation_engine",
+    "status": "failed: Extension 'cogs.observability.event_correlation_en"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:00.701027",
+    "type": "COG_LOAD",
+    "file": "cogs.incidents.breach_response_orchestration",
+    "status": "failed: Extension 'cogs.incidents.breach_response_orchestr"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:00.728800",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.incident_ticketing",
+    "status": "failed: Extension 'cogs.utility.incident_ticketing' raised"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:00.756579",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.security_posture_dashboard",
+    "status": "failed: Extension 'cogs.soc.security_posture_dashboard' ra"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:00.786902",
+    "type": "COG_LOAD",
+    "file": "cogs.threatintel.threat_intelligence_synthesizer",
+    "status": "failed: Extension 'cogs.threatintel.threat_intelligence_sy"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:00.814838",
+    "type": "COG_LOAD",
+    "file": "cogs.security.server_lockdown",
+    "status": "failed: Extension 'cogs.security.server_lockdown' raised a"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:00.848049",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.quantified_risk_dashboard",
+    "status": "failed: Extension 'cogs.soc.quantified_risk_dashboard' rai"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:00.875759",
+    "type": "COG_LOAD",
+    "file": "cogs.incidents.incident_response_playbooks",
+    "status": "failed: Extension 'cogs.incidents.incident_response_playbo"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:00.911632",
+    "type": "COG_LOAD",
+    "file": "cogs.security.security_drill",
+    "status": "failed: Extension 'cogs.security.security_drill' raised an"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:00.939518",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.compliance_automation_suite",
+    "status": "failed: Extension 'cogs.soc.compliance_automation_suite' r"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:00.959670",
+    "type": "COG_LOAD",
+    "file": "cogs.forensics.forensics_investigation",
+    "status": "failed: Extension 'cogs.forensics.forensics_investigation'"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:00.980007",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.security_reports",
+    "status": "failed: Extension 'cogs.soc.security_reports' raised an er"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:01.001484",
+    "type": "COG_LOAD",
+    "file": "cogs.observability.advanced_logging",
+    "status": "failed: Extension 'cogs.observability.advanced_logging' ra"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:01.026354",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.incident_management",
+    "status": "failed: Extension 'cogs.soc.incident_management' raised an"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:01.062913",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.tos_generator",
+    "status": "failed: Extension 'cogs.utility.tos_generator' raised an e"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:01.091210",
+    "type": "COG_LOAD",
+    "file": "cogs.security.compromise_detector",
+    "status": "failed: Extension 'cogs.security.compromise_detector' rais"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:01.118053",
+    "type": "COG_LOAD",
+    "file": "cogs.automation.auto_daily_report",
+    "status": "failed: Extension 'cogs.automation.auto_daily_report' rais"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:01.148819",
+    "type": "COG_LOAD",
+    "file": "cogs.humanops.role_management",
+    "status": "failed: Extension 'cogs.humanops.role_management' raised a"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:01.174318",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.owner_commands",
+    "status": "failed: Extension 'cogs.utility.owner_commands' raised an "
+  },
+  {
+    "timestamp": "2026-02-02T23:58:01.301661",
+    "type": "DATA_SYNC",
+    "file": "data\\autosync_log.json",
+    "status": "updated"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:06.630939",
+    "type": "COG_LOAD",
+    "file": "cogs.automation.auto_playbook_executor",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:06.666684",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.alert_management",
+    "status": "failed: Extension 'cogs.soc.alert_management' raised an er"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:06.748614",
+    "type": "COG_LOAD",
+    "file": "cogs.moderation.advanced_moderation",
+    "status": "failed: Extension 'cogs.moderation.advanced_moderation' ra"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:06.773517",
+    "type": "COG_LOAD",
+    "file": "cogs.hunting.threat_hunting",
+    "status": "failed: Extension 'cogs.hunting.threat_hunting' raised an "
+  },
+  {
+    "timestamp": "2026-02-02T23:58:06.806562",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.server_health_monitor",
+    "status": "failed: Extension 'cogs.utility.server_health_monitor' rai"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:06.842230",
+    "type": "COG_LOAD",
+    "file": "cogs.security.member_risk_profiler",
+    "status": "failed: Extension 'cogs.security.member_risk_profiler' rai"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:06.881676",
+    "type": "COG_LOAD",
+    "file": "cogs.observability.event_correlation_engine",
+    "status": "failed: Extension 'cogs.observability.event_correlation_en"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:06.925739",
+    "type": "COG_LOAD",
+    "file": "cogs.incidents.breach_response_orchestration",
+    "status": "failed: Extension 'cogs.incidents.breach_response_orchestr"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:06.972366",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.incident_ticketing",
+    "status": "failed: Extension 'cogs.utility.incident_ticketing' raised"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:06.999826",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.security_posture_dashboard",
+    "status": "failed: Extension 'cogs.soc.security_posture_dashboard' ra"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:07.022371",
+    "type": "COG_LOAD",
+    "file": "cogs.threatintel.threat_intelligence_synthesizer",
+    "status": "failed: Extension 'cogs.threatintel.threat_intelligence_sy"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:07.058963",
+    "type": "COG_LOAD",
+    "file": "cogs.security.server_lockdown",
+    "status": "failed: Extension 'cogs.security.server_lockdown' raised a"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:07.085007",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.quantified_risk_dashboard",
+    "status": "failed: Extension 'cogs.soc.quantified_risk_dashboard' rai"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:07.110188",
+    "type": "COG_LOAD",
+    "file": "cogs.incidents.incident_response_playbooks",
+    "status": "failed: Extension 'cogs.incidents.incident_response_playbo"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:07.145714",
+    "type": "COG_LOAD",
+    "file": "cogs.security.security_drill",
+    "status": "failed: Extension 'cogs.security.security_drill' raised an"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:07.177257",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.compliance_automation_suite",
+    "status": "failed: Extension 'cogs.soc.compliance_automation_suite' r"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:07.210062",
+    "type": "COG_LOAD",
+    "file": "cogs.forensics.forensics_investigation",
+    "status": "failed: Extension 'cogs.forensics.forensics_investigation'"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:07.247398",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.security_reports",
+    "status": "failed: Extension 'cogs.soc.security_reports' raised an er"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:07.329359",
+    "type": "COG_LOAD",
+    "file": "cogs.observability.advanced_logging",
+    "status": "failed: Extension 'cogs.observability.advanced_logging' ra"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:07.385112",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.incident_management",
+    "status": "failed: Extension 'cogs.soc.incident_management' raised an"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:07.426954",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.tos_generator",
+    "status": "failed: Extension 'cogs.utility.tos_generator' raised an e"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:07.485879",
+    "type": "COG_LOAD",
+    "file": "cogs.security.compromise_detector",
+    "status": "failed: Extension 'cogs.security.compromise_detector' rais"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:07.515362",
+    "type": "COG_LOAD",
+    "file": "cogs.automation.auto_daily_report",
+    "status": "failed: Extension 'cogs.automation.auto_daily_report' rais"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:07.552522",
+    "type": "COG_LOAD",
+    "file": "cogs.humanops.role_management",
+    "status": "failed: Extension 'cogs.humanops.role_management' raised a"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:07.579882",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.owner_commands",
+    "status": "failed: Extension 'cogs.utility.owner_commands' raised an "
+  },
+  {
+    "timestamp": "2026-02-02T23:58:08.725571",
+    "type": "COG_RELOAD",
+    "file": "cogs.automation.auto_playbook_executor",
+    "status": "success"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:12.978236",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.alert_management",
+    "status": "failed: Extension 'cogs.soc.alert_management' raised an er"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:13.006042",
+    "type": "COG_LOAD",
+    "file": "cogs.moderation.advanced_moderation",
+    "status": "failed: Extension 'cogs.moderation.advanced_moderation' ra"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:13.030223",
+    "type": "COG_LOAD",
+    "file": "cogs.hunting.threat_hunting",
+    "status": "failed: Extension 'cogs.hunting.threat_hunting' raised an "
+  },
+  {
+    "timestamp": "2026-02-02T23:58:13.057169",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.server_health_monitor",
+    "status": "failed: Extension 'cogs.utility.server_health_monitor' rai"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:13.087196",
+    "type": "COG_LOAD",
+    "file": "cogs.security.member_risk_profiler",
+    "status": "failed: Extension 'cogs.security.member_risk_profiler' rai"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:13.111191",
+    "type": "COG_LOAD",
+    "file": "cogs.observability.event_correlation_engine",
+    "status": "failed: Extension 'cogs.observability.event_correlation_en"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:13.145756",
+    "type": "COG_LOAD",
+    "file": "cogs.incidents.breach_response_orchestration",
+    "status": "failed: Extension 'cogs.incidents.breach_response_orchestr"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:13.170320",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.incident_ticketing",
+    "status": "failed: Extension 'cogs.utility.incident_ticketing' raised"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:13.192013",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.security_posture_dashboard",
+    "status": "failed: Extension 'cogs.soc.security_posture_dashboard' ra"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:13.217201",
+    "type": "COG_LOAD",
+    "file": "cogs.threatintel.threat_intelligence_synthesizer",
+    "status": "failed: Extension 'cogs.threatintel.threat_intelligence_sy"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:13.246490",
+    "type": "COG_LOAD",
+    "file": "cogs.security.server_lockdown",
+    "status": "failed: Extension 'cogs.security.server_lockdown' raised a"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:13.279659",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.quantified_risk_dashboard",
+    "status": "failed: Extension 'cogs.soc.quantified_risk_dashboard' rai"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:13.308795",
+    "type": "COG_LOAD",
+    "file": "cogs.incidents.incident_response_playbooks",
+    "status": "failed: Extension 'cogs.incidents.incident_response_playbo"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:13.337289",
+    "type": "COG_LOAD",
+    "file": "cogs.security.security_drill",
+    "status": "failed: Extension 'cogs.security.security_drill' raised an"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:13.361569",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.compliance_automation_suite",
+    "status": "failed: Extension 'cogs.soc.compliance_automation_suite' r"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:13.391493",
+    "type": "COG_LOAD",
+    "file": "cogs.forensics.forensics_investigation",
+    "status": "failed: Extension 'cogs.forensics.forensics_investigation'"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:13.419553",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.security_reports",
+    "status": "failed: Extension 'cogs.soc.security_reports' raised an er"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:13.445329",
+    "type": "COG_LOAD",
+    "file": "cogs.observability.advanced_logging",
+    "status": "failed: Extension 'cogs.observability.advanced_logging' ra"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:13.471731",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.incident_management",
+    "status": "failed: Extension 'cogs.soc.incident_management' raised an"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:13.494876",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.tos_generator",
+    "status": "failed: Extension 'cogs.utility.tos_generator' raised an e"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:13.519689",
+    "type": "COG_LOAD",
+    "file": "cogs.security.compromise_detector",
+    "status": "failed: Extension 'cogs.security.compromise_detector' rais"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:13.540563",
+    "type": "COG_LOAD",
+    "file": "cogs.automation.auto_daily_report",
+    "status": "failed: Extension 'cogs.automation.auto_daily_report' rais"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:13.570689",
+    "type": "COG_LOAD",
+    "file": "cogs.humanops.role_management",
+    "status": "failed: Extension 'cogs.humanops.role_management' raised a"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:13.594791",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.owner_commands",
+    "status": "failed: Extension 'cogs.utility.owner_commands' raised an "
+  },
+  {
+    "timestamp": "2026-02-02T23:58:13.621525",
+    "type": "DATA_SYNC",
+    "file": "data\\autosync_log.json",
+    "status": "updated"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:18.857920",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.alert_management",
+    "status": "failed: Extension 'cogs.soc.alert_management' raised an er"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:18.891097",
+    "type": "COG_LOAD",
+    "file": "cogs.moderation.advanced_moderation",
+    "status": "failed: Extension 'cogs.moderation.advanced_moderation' ra"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:18.917954",
+    "type": "COG_LOAD",
+    "file": "cogs.hunting.threat_hunting",
+    "status": "failed: Extension 'cogs.hunting.threat_hunting' raised an "
+  },
+  {
+    "timestamp": "2026-02-02T23:58:18.941593",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.server_health_monitor",
+    "status": "failed: Extension 'cogs.utility.server_health_monitor' rai"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:18.971155",
+    "type": "COG_LOAD",
+    "file": "cogs.security.member_risk_profiler",
+    "status": "failed: Extension 'cogs.security.member_risk_profiler' rai"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:18.995716",
+    "type": "COG_LOAD",
+    "file": "cogs.observability.event_correlation_engine",
+    "status": "failed: Extension 'cogs.observability.event_correlation_en"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:19.020330",
+    "type": "COG_LOAD",
+    "file": "cogs.incidents.breach_response_orchestration",
+    "status": "failed: Extension 'cogs.incidents.breach_response_orchestr"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:19.043834",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.incident_ticketing",
+    "status": "failed: Extension 'cogs.utility.incident_ticketing' raised"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:19.070671",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.security_posture_dashboard",
+    "status": "failed: Extension 'cogs.soc.security_posture_dashboard' ra"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:19.096908",
+    "type": "COG_LOAD",
+    "file": "cogs.threatintel.threat_intelligence_synthesizer",
+    "status": "failed: Extension 'cogs.threatintel.threat_intelligence_sy"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:19.125355",
+    "type": "COG_LOAD",
+    "file": "cogs.security.server_lockdown",
+    "status": "failed: Extension 'cogs.security.server_lockdown' raised a"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:19.151418",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.quantified_risk_dashboard",
+    "status": "failed: Extension 'cogs.soc.quantified_risk_dashboard' rai"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:19.174377",
+    "type": "COG_LOAD",
+    "file": "cogs.incidents.incident_response_playbooks",
+    "status": "failed: Extension 'cogs.incidents.incident_response_playbo"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:19.197545",
+    "type": "COG_LOAD",
+    "file": "cogs.security.security_drill",
+    "status": "failed: Extension 'cogs.security.security_drill' raised an"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:19.226055",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.compliance_automation_suite",
+    "status": "failed: Extension 'cogs.soc.compliance_automation_suite' r"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:19.252393",
+    "type": "COG_LOAD",
+    "file": "cogs.forensics.forensics_investigation",
+    "status": "failed: Extension 'cogs.forensics.forensics_investigation'"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:19.274720",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.security_reports",
+    "status": "failed: Extension 'cogs.soc.security_reports' raised an er"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:19.298469",
+    "type": "COG_LOAD",
+    "file": "cogs.observability.advanced_logging",
+    "status": "failed: Extension 'cogs.observability.advanced_logging' ra"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:19.322170",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.incident_management",
+    "status": "failed: Extension 'cogs.soc.incident_management' raised an"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:19.344292",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.tos_generator",
+    "status": "failed: Extension 'cogs.utility.tos_generator' raised an e"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:19.369864",
+    "type": "COG_LOAD",
+    "file": "cogs.security.compromise_detector",
+    "status": "failed: Extension 'cogs.security.compromise_detector' rais"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:19.390710",
+    "type": "COG_LOAD",
+    "file": "cogs.automation.auto_daily_report",
+    "status": "failed: Extension 'cogs.automation.auto_daily_report' rais"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:19.417501",
+    "type": "COG_LOAD",
+    "file": "cogs.humanops.role_management",
+    "status": "failed: Extension 'cogs.humanops.role_management' raised a"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:19.440817",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.owner_commands",
+    "status": "failed: Extension 'cogs.utility.owner_commands' raised an "
+  },
+  {
+    "timestamp": "2026-02-02T23:58:24.756395",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.alert_management",
+    "status": "failed: Extension 'cogs.soc.alert_management' raised an er"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:24.795986",
+    "type": "COG_LOAD",
+    "file": "cogs.moderation.advanced_moderation",
+    "status": "failed: Extension 'cogs.moderation.advanced_moderation' ra"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:24.834923",
+    "type": "COG_LOAD",
+    "file": "cogs.hunting.threat_hunting",
+    "status": "failed: Extension 'cogs.hunting.threat_hunting' raised an "
+  },
+  {
+    "timestamp": "2026-02-02T23:58:24.857747",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.server_health_monitor",
+    "status": "failed: Extension 'cogs.utility.server_health_monitor' rai"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:24.891045",
+    "type": "COG_LOAD",
+    "file": "cogs.security.member_risk_profiler",
+    "status": "failed: Extension 'cogs.security.member_risk_profiler' rai"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:24.917172",
+    "type": "COG_LOAD",
+    "file": "cogs.observability.event_correlation_engine",
+    "status": "failed: Extension 'cogs.observability.event_correlation_en"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:24.941723",
+    "type": "COG_LOAD",
+    "file": "cogs.incidents.breach_response_orchestration",
+    "status": "failed: Extension 'cogs.incidents.breach_response_orchestr"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:24.974113",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.incident_ticketing",
+    "status": "failed: Extension 'cogs.utility.incident_ticketing' raised"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:25.008378",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.security_posture_dashboard",
+    "status": "failed: Extension 'cogs.soc.security_posture_dashboard' ra"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:25.043636",
+    "type": "COG_LOAD",
+    "file": "cogs.threatintel.threat_intelligence_synthesizer",
+    "status": "failed: Extension 'cogs.threatintel.threat_intelligence_sy"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:25.083360",
+    "type": "COG_LOAD",
+    "file": "cogs.security.server_lockdown",
+    "status": "failed: Extension 'cogs.security.server_lockdown' raised a"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:25.116969",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.quantified_risk_dashboard",
+    "status": "failed: Extension 'cogs.soc.quantified_risk_dashboard' rai"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:25.145208",
+    "type": "COG_LOAD",
+    "file": "cogs.incidents.incident_response_playbooks",
+    "status": "failed: Extension 'cogs.incidents.incident_response_playbo"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:25.169532",
+    "type": "COG_LOAD",
+    "file": "cogs.security.security_drill",
+    "status": "failed: Extension 'cogs.security.security_drill' raised an"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:25.208465",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.compliance_automation_suite",
+    "status": "failed: Extension 'cogs.soc.compliance_automation_suite' r"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:25.256137",
+    "type": "COG_LOAD",
+    "file": "cogs.forensics.forensics_investigation",
+    "status": "failed: Extension 'cogs.forensics.forensics_investigation'"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:25.292610",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.security_reports",
+    "status": "failed: Extension 'cogs.soc.security_reports' raised an er"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:25.326457",
+    "type": "COG_LOAD",
+    "file": "cogs.observability.advanced_logging",
+    "status": "failed: Extension 'cogs.observability.advanced_logging' ra"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:25.359464",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.incident_management",
+    "status": "failed: Extension 'cogs.soc.incident_management' raised an"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:25.389363",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.tos_generator",
+    "status": "failed: Extension 'cogs.utility.tos_generator' raised an e"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:25.415017",
+    "type": "COG_LOAD",
+    "file": "cogs.security.compromise_detector",
+    "status": "failed: Extension 'cogs.security.compromise_detector' rais"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:25.436604",
+    "type": "COG_LOAD",
+    "file": "cogs.automation.auto_daily_report",
+    "status": "failed: Extension 'cogs.automation.auto_daily_report' rais"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:25.461953",
+    "type": "COG_LOAD",
+    "file": "cogs.humanops.role_management",
+    "status": "failed: Extension 'cogs.humanops.role_management' raised a"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:25.487619",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.owner_commands",
+    "status": "failed: Extension 'cogs.utility.owner_commands' raised an "
+  },
+  {
+    "timestamp": "2026-02-02T23:58:25.517390",
+    "type": "DATA_SYNC",
+    "file": "data\\autosync_log.json",
+    "status": "updated"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:30.952435",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.alert_management",
+    "status": "failed: Extension 'cogs.soc.alert_management' raised an er"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:31.006747",
+    "type": "COG_LOAD",
+    "file": "cogs.moderation.advanced_moderation",
+    "status": "failed: Extension 'cogs.moderation.advanced_moderation' ra"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:31.068323",
+    "type": "COG_LOAD",
+    "file": "cogs.hunting.threat_hunting",
+    "status": "failed: Extension 'cogs.hunting.threat_hunting' raised an "
+  },
+  {
+    "timestamp": "2026-02-02T23:58:31.109584",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.server_health_monitor",
+    "status": "failed: Extension 'cogs.utility.server_health_monitor' rai"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:31.135819",
+    "type": "COG_LOAD",
+    "file": "cogs.security.member_risk_profiler",
+    "status": "failed: Extension 'cogs.security.member_risk_profiler' rai"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:31.159873",
+    "type": "COG_LOAD",
+    "file": "cogs.observability.event_correlation_engine",
+    "status": "failed: Extension 'cogs.observability.event_correlation_en"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:31.186131",
+    "type": "COG_LOAD",
+    "file": "cogs.incidents.breach_response_orchestration",
+    "status": "failed: Extension 'cogs.incidents.breach_response_orchestr"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:31.208465",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.incident_ticketing",
+    "status": "failed: Extension 'cogs.utility.incident_ticketing' raised"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:31.233097",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.security_posture_dashboard",
+    "status": "failed: Extension 'cogs.soc.security_posture_dashboard' ra"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:31.255174",
+    "type": "COG_LOAD",
+    "file": "cogs.threatintel.threat_intelligence_synthesizer",
+    "status": "failed: Extension 'cogs.threatintel.threat_intelligence_sy"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:31.279178",
+    "type": "COG_LOAD",
+    "file": "cogs.security.server_lockdown",
+    "status": "failed: Extension 'cogs.security.server_lockdown' raised a"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:31.305793",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.quantified_risk_dashboard",
+    "status": "failed: Extension 'cogs.soc.quantified_risk_dashboard' rai"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:31.333985",
+    "type": "COG_LOAD",
+    "file": "cogs.incidents.incident_response_playbooks",
+    "status": "failed: Extension 'cogs.incidents.incident_response_playbo"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:31.367374",
+    "type": "COG_LOAD",
+    "file": "cogs.security.security_drill",
+    "status": "failed: Extension 'cogs.security.security_drill' raised an"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:31.406234",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.compliance_automation_suite",
+    "status": "failed: Extension 'cogs.soc.compliance_automation_suite' r"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:31.433454",
+    "type": "COG_LOAD",
+    "file": "cogs.forensics.forensics_investigation",
+    "status": "failed: Extension 'cogs.forensics.forensics_investigation'"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:31.461325",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.security_reports",
+    "status": "failed: Extension 'cogs.soc.security_reports' raised an er"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:31.492213",
+    "type": "COG_LOAD",
+    "file": "cogs.observability.advanced_logging",
+    "status": "failed: Extension 'cogs.observability.advanced_logging' ra"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:31.520442",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.incident_management",
+    "status": "failed: Extension 'cogs.soc.incident_management' raised an"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:31.546162",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.tos_generator",
+    "status": "failed: Extension 'cogs.utility.tos_generator' raised an e"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:31.571713",
+    "type": "COG_LOAD",
+    "file": "cogs.security.compromise_detector",
+    "status": "failed: Extension 'cogs.security.compromise_detector' rais"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:31.592709",
+    "type": "COG_LOAD",
+    "file": "cogs.automation.auto_daily_report",
+    "status": "failed: Extension 'cogs.automation.auto_daily_report' rais"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:31.626742",
+    "type": "COG_LOAD",
+    "file": "cogs.humanops.role_management",
+    "status": "failed: Extension 'cogs.humanops.role_management' raised a"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:31.654377",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.owner_commands",
+    "status": "failed: Extension 'cogs.utility.owner_commands' raised an "
+  },
+  {
+    "timestamp": "2026-02-02T23:58:36.915640",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.alert_management",
+    "status": "failed: Extension 'cogs.soc.alert_management' raised an er"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:36.945086",
+    "type": "COG_LOAD",
+    "file": "cogs.moderation.advanced_moderation",
+    "status": "failed: Extension 'cogs.moderation.advanced_moderation' ra"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:36.973467",
+    "type": "COG_LOAD",
+    "file": "cogs.hunting.threat_hunting",
+    "status": "failed: Extension 'cogs.hunting.threat_hunting' raised an "
+  },
+  {
+    "timestamp": "2026-02-02T23:58:37.013188",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.server_health_monitor",
+    "status": "failed: Extension 'cogs.utility.server_health_monitor' rai"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:37.066098",
+    "type": "COG_LOAD",
+    "file": "cogs.security.member_risk_profiler",
+    "status": "failed: Extension 'cogs.security.member_risk_profiler' rai"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:37.106376",
+    "type": "COG_LOAD",
+    "file": "cogs.observability.event_correlation_engine",
+    "status": "failed: Extension 'cogs.observability.event_correlation_en"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:37.142329",
+    "type": "COG_LOAD",
+    "file": "cogs.incidents.breach_response_orchestration",
+    "status": "failed: Extension 'cogs.incidents.breach_response_orchestr"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:37.167509",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.incident_ticketing",
+    "status": "failed: Extension 'cogs.utility.incident_ticketing' raised"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:37.199403",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.security_posture_dashboard",
+    "status": "failed: Extension 'cogs.soc.security_posture_dashboard' ra"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:37.243378",
+    "type": "COG_LOAD",
+    "file": "cogs.threatintel.threat_intelligence_synthesizer",
+    "status": "failed: Extension 'cogs.threatintel.threat_intelligence_sy"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:37.281964",
+    "type": "COG_LOAD",
+    "file": "cogs.security.server_lockdown",
+    "status": "failed: Extension 'cogs.security.server_lockdown' raised a"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:37.307894",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.quantified_risk_dashboard",
+    "status": "failed: Extension 'cogs.soc.quantified_risk_dashboard' rai"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:37.332858",
+    "type": "COG_LOAD",
+    "file": "cogs.incidents.incident_response_playbooks",
+    "status": "failed: Extension 'cogs.incidents.incident_response_playbo"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:37.356617",
+    "type": "COG_LOAD",
+    "file": "cogs.security.security_drill",
+    "status": "failed: Extension 'cogs.security.security_drill' raised an"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:37.385860",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.compliance_automation_suite",
+    "status": "failed: Extension 'cogs.soc.compliance_automation_suite' r"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:37.409539",
+    "type": "COG_LOAD",
+    "file": "cogs.forensics.forensics_investigation",
+    "status": "failed: Extension 'cogs.forensics.forensics_investigation'"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:37.440630",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.security_reports",
+    "status": "failed: Extension 'cogs.soc.security_reports' raised an er"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:37.476385",
+    "type": "COG_LOAD",
+    "file": "cogs.observability.advanced_logging",
+    "status": "failed: Extension 'cogs.observability.advanced_logging' ra"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:37.504876",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.incident_management",
+    "status": "failed: Extension 'cogs.soc.incident_management' raised an"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:37.531481",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.tos_generator",
+    "status": "failed: Extension 'cogs.utility.tos_generator' raised an e"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:37.558540",
+    "type": "COG_LOAD",
+    "file": "cogs.security.compromise_detector",
+    "status": "failed: Extension 'cogs.security.compromise_detector' rais"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:37.580497",
+    "type": "COG_LOAD",
+    "file": "cogs.automation.auto_daily_report",
+    "status": "failed: Extension 'cogs.automation.auto_daily_report' rais"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:37.602000",
+    "type": "COG_LOAD",
+    "file": "cogs.humanops.role_management",
+    "status": "failed: Extension 'cogs.humanops.role_management' raised a"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:37.628639",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.owner_commands",
+    "status": "failed: Extension 'cogs.utility.owner_commands' raised an "
+  },
+  {
+    "timestamp": "2026-02-02T23:58:37.840332",
+    "type": "DATA_SYNC",
+    "file": "data\\autosync_log.json",
+    "status": "updated"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:43.116215",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.alert_management",
+    "status": "failed: Extension 'cogs.soc.alert_management' raised an er"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:43.152191",
+    "type": "COG_LOAD",
+    "file": "cogs.moderation.advanced_moderation",
+    "status": "failed: Extension 'cogs.moderation.advanced_moderation' ra"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:43.189581",
+    "type": "COG_LOAD",
+    "file": "cogs.hunting.threat_hunting",
+    "status": "failed: Extension 'cogs.hunting.threat_hunting' raised an "
+  },
+  {
+    "timestamp": "2026-02-02T23:58:43.232304",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.server_health_monitor",
+    "status": "failed: Extension 'cogs.utility.server_health_monitor' rai"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:43.263997",
+    "type": "COG_LOAD",
+    "file": "cogs.security.member_risk_profiler",
+    "status": "failed: Extension 'cogs.security.member_risk_profiler' rai"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:43.285737",
+    "type": "COG_LOAD",
+    "file": "cogs.observability.event_correlation_engine",
+    "status": "failed: Extension 'cogs.observability.event_correlation_en"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:43.308055",
+    "type": "COG_LOAD",
+    "file": "cogs.incidents.breach_response_orchestration",
+    "status": "failed: Extension 'cogs.incidents.breach_response_orchestr"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:43.331015",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.incident_ticketing",
+    "status": "failed: Extension 'cogs.utility.incident_ticketing' raised"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:43.352917",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.security_posture_dashboard",
+    "status": "failed: Extension 'cogs.soc.security_posture_dashboard' ra"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:43.377054",
+    "type": "COG_LOAD",
+    "file": "cogs.threatintel.threat_intelligence_synthesizer",
+    "status": "failed: Extension 'cogs.threatintel.threat_intelligence_sy"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:43.400534",
+    "type": "COG_LOAD",
+    "file": "cogs.security.server_lockdown",
+    "status": "failed: Extension 'cogs.security.server_lockdown' raised a"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:43.424867",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.quantified_risk_dashboard",
+    "status": "failed: Extension 'cogs.soc.quantified_risk_dashboard' rai"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:43.451483",
+    "type": "COG_LOAD",
+    "file": "cogs.incidents.incident_response_playbooks",
+    "status": "failed: Extension 'cogs.incidents.incident_response_playbo"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:43.479191",
+    "type": "COG_LOAD",
+    "file": "cogs.security.security_drill",
+    "status": "failed: Extension 'cogs.security.security_drill' raised an"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:43.503697",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.compliance_automation_suite",
+    "status": "failed: Extension 'cogs.soc.compliance_automation_suite' r"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:43.532629",
+    "type": "COG_LOAD",
+    "file": "cogs.forensics.forensics_investigation",
+    "status": "failed: Extension 'cogs.forensics.forensics_investigation'"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:43.554164",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.security_reports",
+    "status": "failed: Extension 'cogs.soc.security_reports' raised an er"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:43.579879",
+    "type": "COG_LOAD",
+    "file": "cogs.observability.advanced_logging",
+    "status": "failed: Extension 'cogs.observability.advanced_logging' ra"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:43.604106",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.incident_management",
+    "status": "failed: Extension 'cogs.soc.incident_management' raised an"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:43.630124",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.tos_generator",
+    "status": "failed: Extension 'cogs.utility.tos_generator' raised an e"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:43.655183",
+    "type": "COG_LOAD",
+    "file": "cogs.security.compromise_detector",
+    "status": "failed: Extension 'cogs.security.compromise_detector' rais"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:43.675573",
+    "type": "COG_LOAD",
+    "file": "cogs.automation.auto_daily_report",
+    "status": "failed: Extension 'cogs.automation.auto_daily_report' rais"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:43.701505",
+    "type": "COG_LOAD",
+    "file": "cogs.humanops.role_management",
+    "status": "failed: Extension 'cogs.humanops.role_management' raised a"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:43.724828",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.owner_commands",
+    "status": "failed: Extension 'cogs.utility.owner_commands' raised an "
+  },
+  {
+    "timestamp": "2026-02-02T23:58:49.019747",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.alert_management",
+    "status": "failed: Extension 'cogs.soc.alert_management' raised an er"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:49.061917",
+    "type": "COG_LOAD",
+    "file": "cogs.moderation.advanced_moderation",
+    "status": "failed: Extension 'cogs.moderation.advanced_moderation' ra"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:49.103023",
+    "type": "COG_LOAD",
+    "file": "cogs.hunting.threat_hunting",
+    "status": "failed: Extension 'cogs.hunting.threat_hunting' raised an "
+  },
+  {
+    "timestamp": "2026-02-02T23:58:49.134861",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.server_health_monitor",
+    "status": "failed: Extension 'cogs.utility.server_health_monitor' rai"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:49.177059",
+    "type": "COG_LOAD",
+    "file": "cogs.security.member_risk_profiler",
+    "status": "failed: Extension 'cogs.security.member_risk_profiler' rai"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:49.224155",
+    "type": "COG_LOAD",
+    "file": "cogs.observability.event_correlation_engine",
+    "status": "failed: Extension 'cogs.observability.event_correlation_en"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:49.263168",
+    "type": "COG_LOAD",
+    "file": "cogs.incidents.breach_response_orchestration",
+    "status": "failed: Extension 'cogs.incidents.breach_response_orchestr"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:49.297965",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.incident_ticketing",
+    "status": "failed: Extension 'cogs.utility.incident_ticketing' raised"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:49.329722",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.security_posture_dashboard",
+    "status": "failed: Extension 'cogs.soc.security_posture_dashboard' ra"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:49.368942",
+    "type": "COG_LOAD",
+    "file": "cogs.threatintel.threat_intelligence_synthesizer",
+    "status": "failed: Extension 'cogs.threatintel.threat_intelligence_sy"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:49.419190",
+    "type": "COG_LOAD",
+    "file": "cogs.security.server_lockdown",
+    "status": "failed: Extension 'cogs.security.server_lockdown' raised a"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:49.459577",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.quantified_risk_dashboard",
+    "status": "failed: Extension 'cogs.soc.quantified_risk_dashboard' rai"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:49.503371",
+    "type": "COG_LOAD",
+    "file": "cogs.incidents.incident_response_playbooks",
+    "status": "failed: Extension 'cogs.incidents.incident_response_playbo"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:49.540969",
+    "type": "COG_LOAD",
+    "file": "cogs.security.security_drill",
+    "status": "failed: Extension 'cogs.security.security_drill' raised an"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:49.585443",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.compliance_automation_suite",
+    "status": "failed: Extension 'cogs.soc.compliance_automation_suite' r"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:49.625865",
+    "type": "COG_LOAD",
+    "file": "cogs.forensics.forensics_investigation",
+    "status": "failed: Extension 'cogs.forensics.forensics_investigation'"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:49.670042",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.security_reports",
+    "status": "failed: Extension 'cogs.soc.security_reports' raised an er"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:49.704209",
+    "type": "COG_LOAD",
+    "file": "cogs.observability.advanced_logging",
+    "status": "failed: Extension 'cogs.observability.advanced_logging' ra"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:49.740786",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.incident_management",
+    "status": "failed: Extension 'cogs.soc.incident_management' raised an"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:49.786076",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.tos_generator",
+    "status": "failed: Extension 'cogs.utility.tos_generator' raised an e"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:49.835288",
+    "type": "COG_LOAD",
+    "file": "cogs.security.compromise_detector",
+    "status": "failed: Extension 'cogs.security.compromise_detector' rais"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:49.861739",
+    "type": "COG_LOAD",
+    "file": "cogs.automation.auto_daily_report",
+    "status": "failed: Extension 'cogs.automation.auto_daily_report' rais"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:49.895370",
+    "type": "COG_LOAD",
+    "file": "cogs.humanops.role_management",
+    "status": "failed: Extension 'cogs.humanops.role_management' raised a"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:49.940052",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.owner_commands",
+    "status": "failed: Extension 'cogs.utility.owner_commands' raised an "
+  },
+  {
+    "timestamp": "2026-02-02T23:58:49.992346",
+    "type": "DATA_SYNC",
+    "file": "data\\autosync_log.json",
+    "status": "updated"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:55.189951",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.alert_management",
+    "status": "failed: Extension 'cogs.soc.alert_management' raised an er"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:55.217746",
+    "type": "COG_LOAD",
+    "file": "cogs.moderation.advanced_moderation",
+    "status": "failed: Extension 'cogs.moderation.advanced_moderation' ra"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:55.245612",
+    "type": "COG_LOAD",
+    "file": "cogs.hunting.threat_hunting",
+    "status": "failed: Extension 'cogs.hunting.threat_hunting' raised an "
+  },
+  {
+    "timestamp": "2026-02-02T23:58:55.268766",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.server_health_monitor",
+    "status": "failed: Extension 'cogs.utility.server_health_monitor' rai"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:55.297677",
+    "type": "COG_LOAD",
+    "file": "cogs.security.member_risk_profiler",
+    "status": "failed: Extension 'cogs.security.member_risk_profiler' rai"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:55.327397",
+    "type": "COG_LOAD",
+    "file": "cogs.observability.event_correlation_engine",
+    "status": "failed: Extension 'cogs.observability.event_correlation_en"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:55.357635",
+    "type": "COG_LOAD",
+    "file": "cogs.incidents.breach_response_orchestration",
+    "status": "failed: Extension 'cogs.incidents.breach_response_orchestr"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:55.399494",
+    "type": "COG_LOAD",
+    "file": "cogs.utility.incident_ticketing",
+    "status": "failed: Extension 'cogs.utility.incident_ticketing' raised"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:55.448363",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.security_posture_dashboard",
+    "status": "failed: Extension 'cogs.soc.security_posture_dashboard' ra"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:55.474789",
+    "type": "COG_LOAD",
+    "file": "cogs.threatintel.threat_intelligence_synthesizer",
+    "status": "failed: Extension 'cogs.threatintel.threat_intelligence_sy"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:55.504816",
+    "type": "COG_LOAD",
+    "file": "cogs.security.server_lockdown",
+    "status": "failed: Extension 'cogs.security.server_lockdown' raised a"
+  },
+  {
+    "timestamp": "2026-02-02T23:58:55.535813",
+    "type": "COG_LOAD",
+    "file": "cogs.soc.quantified_risk_dashboard",
+    "status": "failed: Extension 'cogs.soc.quantified_risk_dashboard' rai"

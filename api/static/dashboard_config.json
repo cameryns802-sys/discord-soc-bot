@@ -1,0 +1,149 @@
+{
+  "branding": {
+    "name": "Sentinel SOC",
+    "tagline": "Enterprise-Grade Security Platform",
+    "description": "Advanced Security Operations Center for Discord",
+    "subtitle": "100+ Security Modules | Real-Time Threat Detection | Automated Response",
+    "logo_emoji": "🛡️"
+  },
+  "colors": {
+    "primary": "#5865F2",
+    "primary_dark": "#4752C4",
+    "secondary": "#57F287",
+    "danger": "#ED4245",
+    "warning": "#FEE75C",
+    "bg_primary": "#0f0f1e",
+    "bg_secondary": "#1a1a2e",
+    "bg_card": "#16213e"
+  },
+  "links": {
+    "dashboard_url": "https://sentinel-soc.vercel.app",
+    "discord_invite": "https://discord.gg/DyEKp6puBC",
+    "support_server": "https://discord.gg/support",
+    "github": "https://github.com/your-repo",
+    "documentation": "/docs",
+    "api_reference": "/api/docs",
+    "terms": "/terms",
+    "privacy": "/privacy"
+  },
+  "hero": {
+    "badge_text": "✨ Enterprise-Grade Security Platform",
+    "cta_primary": "Add to Discord",
+    "cta_secondary": "View Features"
+  },
+  "stats": {
+    "show_live_stats": true,
+    "default_guilds": 2,
+    "default_users": 13,
+    "total_cogs": 172,
+    "total_commands": 100
+  },
+  "team": [
+    {
+      "name": "2.3cam_yt",
+      "role": "Bot Owner & Architect",
+      "avatar": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAHoA2gMBIgACEQEDEQH/xAAcAAABBQEBAQAAAAAAAAAAAAADAAECBAUHBgj/xABGEAABAwICBQYLBgQEBwAAAAACAAEDBBIFEQYTISIyFDFBQlFSBxUjYWJxcoGRocEzgpKx0fAkU6LhFkOD8RclVHOTo7L/xAAZAQADAQEBAAAAAAAAAAAAAAABAgMABAX/xAAmEQACAgICAgEEAwEAAAAAAAAAAQIRAyESMQRBURNhcYEjM5Ei/9oADAMBAAIRAxEAPwA+L4dBQTCJ6y7ulsQIanDrPKwTXd4ST43jMuLza8xEStt3R6FlK+O3HYs6T0W5vF27qpZhK3hIWf6qrIMXtKLj7SdhHrqpMi4j3RQ3hE+AvqrIwwFxy2+kIZoo0FDxeMSEv+0X0RujUUeT+l/ShlEQdVaRU8Q8FSJfdfP5obx9whJbkzUULC7pfhTWl3VoFEQIaPMxVaMu6rSSm2qvt1o3d1BuzGFj2IjTnqD1gkQ8Q8zrx8p39Zeo0ypB3ZwLe4bf0XmBppz4Ii/ClKLoE7KKuDh9SZ26ovp8VVcCDqojJDgSRowUxEA7pXFl81qz6MYjT8cGsHvCTOgMjHiUmcrx7qvy4JXU+qvgK6bO0Od9nmUMPpRqK8aaUijuzHh2s+XSyFoY9PonpLU0s0FJbGNNc5XEJPz87Z5+tdZwqpoa+jin8oJFxdn5LwGAaKclrx1urkgEmIBImuN+3LsXvqamHdG638lGTQrRoR1FNS/ZCRbvWyy/JWf8QT8Ooj+aUWDQWCR1gjd1Ry+e1GbC8O/6mS79+ZTckCiqOM1hn1fwq3DidSXHvfdTeLIA4JZC/wBJ1agoOsEv9KHJBouwTjKG+JD8Ua32vxOoxRkHXIvgp5JUjHyvW6RlT2x0lpWjvkXa3YjU+lkBfbQEPskzsvLE16ZhFdqYjSZ0oCGUBIN4SyIVlYzjY4aYxgOslLi3ssl5+jx2ppYRjARIR4blRqXKtqSnllEbiu3iJ/o6zYqjss4hjVZUHuT6se7GTt8+dX8Hx8gMY63eEi3T7PWsXkRakpwljkESYStz2Z82x2ZCZt/iWsavg6gEdwXXJ2hG/wC6vGw6QVwBbrYSHuln9FSrcXrjrNbrSgId22MnZvciJxOiW+n+SIId+UV4iPSbE7B8hGW7xWvt8/OquI6R11VCUBiMd3Fq82f80GgpF3S3E5YqwqSnLyVrERCXPn6l5qOeUJhkCUrh3hJIQI1IoSDetVIx+THpcBx2KU9XixbpdchbZ2r2FA+j1VU8kixWnHrCRAQi79meW1cqjBGaNTlD7jKVHS6+twAazkktZHOP82MXcM/Wy8NiM0EsJQUNLHBFGREREbOR7cmyfL5Ms1wVqKhqT4IiTY8MvkEsiXZv6JY5R0Hk8ToynG5iA47WcH6Xd3bb/ZddxQcDosBlxAJ9fFq7gISZ3d35sm2dK4pTYLWSgRardHiLo2+foW9huD4riVNySnKaeKP/AC9ri2XyUc+N3tlccoypox5cZrPGXK9fcUMlwbu6+XNsbLYup4Hiejlfo3PjPiekjxKmjIjEg2X5Z5+p+faueT4DLTmUcoyRkPEJD+qPTYfSxAQyy1uqL7UIwZs8vO77VOSXVnorwZyjaMuXSzFTxvxkGpGURcRDVNZl07F03waaXDjnKaTG4qQZYxvCfYF2b8OX1zXgZqXRuy4/Gto+jGs0ww6/+EGq9G4hz+TKrx3HRwzg4umdU0i8J+B4VMMWFUPLZRzvLhFstmx32uoYd4YsKlqRjq8MmpI+tKJMWWzus2bsuWlQU0u7ynVkX84dj+9s/myqV2Hz0R6uoitIhuHezZ2fmdnbY7edkixRrYlndg8K2ihXfxVQPtQv8sln4v4X8FpbfFkE1aRZ3XeTYeznbauJQ00tRNq6eIpJS6sYu7/BkSow6upQ1lRR1EcV1t8kRC2fZm7c6H0kajoGB+F/FYsS/wCcRRyUJE+Yxhvi3Rk7c69l/wAXNF+9Wf8Ah/uuAkm+8s8dgBtElycVbyi7yd2H9iqWNworAMURiUo6wR6vaiHi3co6If8AS/uoysKrvGPdRSELEeJCPBBDH6Qi3wU56ujOmlLVDyki3dzNsslS1Y91IgH0fZTAsakmiiqRKURIRLeG3Y6M0sUtSJGI290dmzNBYB7qkwpxWzQKow7qRf8Atf8ARVaqWCWYdVFaNtpDdnt7VAQHuqTNailYGFjlowpt+ISL3/REjrKOyUeTCJFG4iQ5875ZPtVUmE+qo2Cn46BZIfQUndW8JKCKvgKrpiqYLt+ISdnP1OzKb264i3uJ7RIcsm7FnEIOCDrS/h/VemptMcRoqYYIpRtjFhHyQPsbm52XmpZUNpRVIPiiOTGp9o9vHp5ip0E9NKUZRTbpeSFn8+WTLU0X05lwimKLVCURb1tvT25rnYSbnsqYyj3lDKlJ2VwxUaijpUvhCxOU5CDUx25lbY2eWfnZBk07xKohKE5Y7TF2cdUPM7beheHpWv4JY97d3idWOTlTmN5Rld3SZ/yXO8ULPdxz447cU69l8KEqq4QG4S/fuRv8OTxeUOAht9HJev8ABxSx1VYPKBuG1y9ez/ddLq6CklozjOOMY7e7zKjnGOjzsuXlJyfZ83YnBYdwLUwWqocUoIsJxDdIsxCUuaMn4SZ35mfaxNzczqzpGEUVTKIDcIk9pe/Jl5U6my6whjt3t7nd/N50ZR9HOjpvgq0UxHCNIzra0Yyg1BCJxyiW13boZ8+34La8Nsg/4SiEetVh/wDJLi8WOYnTgUVPXTRiXFqyyz+Cs4hpPieJYPTYRVyiVNS5EG7vbM2bN+nJndQcWpWOjFcSTWqSSe0ZgLkjlQ0lkhOQnIk7FuITkouaZGD5pjtQr07un7FCCnZDBSuLhD7ypDG2K2FZ0aKAi6qjAO+ruvEO9+/MumHjk3kHjoB4ju9lWIqKDe+zG3vfRViqNzcJAKp9IiVXgaJ8mzaF6aIPtSL2R/VReXDiO49ZcPpZfHJYevJPeRqMsdaKxbaNmSSls3CL8TKoclKG6d0nsiyrMycaYS4yt9HpUmqGRMoxPeDVx+0W34MoDDfva8fwv+ijK0UX2Q/eLaqc8xEfEldDpl/Ig6wq3SNZvGSxIpLFYaUu9/UptIo5+jomj+kMVBNEVJd5MXEiubbm/O2zZ6l6Ku09nqKYozId7d6GXJY6nVAl4w9pDhvoFm9idaMtxLztW4kdygdYq8kyZpsVNIHI/llalGIZiGIiki6pEOTu3nbN8lSNGFysU5rSHi7CpZoWZJ8iUxqKuabNEtTOKpRKyDxiai8SMwp0UgWBYSTsxIrspMyrBCtkBAg626iMylGwmY3laPWK3PLz5I4RDeVnD83bo9Wxd+HFy0QnIUcUoANhDaXV6W8+S1qLBYqimik5TbKXEMkRu3P2szt2c+XOnoqbW2jave4JonUwU+s1cJDJvmEgPmz5ZNkTbW9y9CcI4YW3RyPzcWGX8is5ri9LyI9Ucscm7cJRlm3+/mWfTxT1kwQ04jcWwbiFtr+d3yXsNMKCelqSE6YhGWN2tkdjy25u4O7ZtzetmWTo9S4C9443PURl1NXll0drP5/kruMFiWR7/Gzr8VQ8mX8b7+TPqcIxOCpKm5HIU8ewwhyk6M+cXdCpGumKMxIZRLIht25t0ZetegrqTA4oSkwrHJglG7IZBJs2Zs2ydunPZ71i6OvEeMQSVspCGuZ5T2u/Pm7v2uvP8meJxuPf4o6cmCeF1Kv0dKw7wW4rLTDJLLTwXCxWET5tn0PkyJP4Myp92rxWjg9o3+WbL1k+NaLy3F44kK4rrY2f5bFlYppBoXeMhjVTlGO7vO3uzd14LnKzKJ52t8Fc9RTFLhOK0VXb1drbezPa3xXN8awupwivlpK6LVzx8Q/ouqy+Eujw2mliwHDI6a7rSHdt5s/Wub43JXYrDPjdRvCU+qI7m4nZ3yZvUyaLl7NRgqYGhGoK3YyRZeoUdegC6NHBLLcUUREMY3GQi75M3S/Yqxx30C0TkIbFB2Ky63dLrIjtShTcUhTl1djCHv2u7/D3qFRVz1VutlItWNoD0AzdDM2xvcqTxRitvYEgeafWF3lBLJQ4t+jJE9YXeT69DyTWqbx/YZN/JaTXIetUbkEmxArmlehXJkVF+zaCPIk8xIaZWxxFZaje8BVmm41Sp36qsg9q9PAqZzzPW6PGPKRvtHeb8126gqowwu2IhKYs7W2bed2yXz5htSV937yW22ktZEAxxTkIjzCJO35Ouvy/FflKLT6PHzYsqzc4fFf6ek8IusYoCqciIQ6ezN1yasK89z9uvR4vjU9eFtROUnpSbS588s325LHwnFyw6/8AhqOpE8rgqYRNtnY77W9zrqwYlDD9N7a/R2+DheKFN2ZZXKzRNwknrqmOotIKaGn589XdvZu755O7s3Q2zLmZauhvi7xrAOLXcmIt7VjtXmefBQR6KdkRcrOsgTbm8u9vo/obLTRWwEIlvDaJZv69jrxPhIwnRygw0SwwpBqSK20hfLLLbzsy8FZE30V4nLZZEJ5ys1V27ddbdsz7U0j76C7qiSYCR2oZJOSi7pk0g7Lw09HFR66WpunLOyCMX2dGZu+xvU2fuQeWT8mGm1pagSus6M+1+11XZTYV1Q5z/r0LpDcSkzJ0668XjJd7YHJjMye1JJ3XZFY4rYozpJKVql9F5dw6CpUQSSd0zOvEGHSSdJljEX406Tsk6eDAyQFYdytAd6pokR2LuhkJSjZfjn1QbiTzkgM6FKZAas8zRNQsPJNaqbumIr0yV52VjGh3dWKafVW728KqpO65cmTl2Ojf8fVwf58n4yVKqr5aj7UiL2izWexJLicI2PbJESESmoEyz6Mhkks0mSDDipshpZrrxZuCEaCpZodyWa615lC8WTzSZRASM7VbaEYguNKs3N/9dDxiBZrE1yYyvUU2Xz+L443SQOKXYxuos6c0y88JJ0mSSVVFC2M7p2TEnZCK2Z9DpJMkumPQjDhLucPCoyvvpU/W9yabjJVjsC7Bukkk6lL2MJmUmhIuqX4Uel6q2qfgXLNjdGDqJf5RKDst2t4P351jVHGo3sIJJJJMYi4pnFSJM6VpDIiknfgTKakwk2t9lFii1p2gq61qD7FUTsxJoYqcFnzya0/RV3EuAVnJ2/QLrQySdJTaBZ//2Q==",
+      "badges": [
+        "Python",
+        "Security",
+        "DevOps"
+      ],
+      "projects": [
+        "Sentinel SOC Bot"
+      ]
+    }
+  ],
+  "features": [
+    {
+      "icon": "🎣",
+      "title": "Anti-Phishing",
+      "description": "Real-time detection and blocking of phishing attempts. AI-powered analysis of malicious URLs and suspicious patterns.",
+      "tags": [
+        "Real-Time",
+        "AI-Powered",
+        "URL Scanning"
+      ]
+    },
+    {
+      "icon": "🚨",
+      "title": "Anti-Raid System",
+      "description": "Automated detection and prevention of mass join/raid attacks with intelligent pattern recognition.",
+      "tags": [
+        "Automated",
+        "Pattern Detection",
+        "Mass Ban"
+      ]
+    },
+    {
+      "icon": "🦠",
+      "title": "Malware Detection",
+      "description": "Multi-layer malware scanning for file attachments with ransomware and trojan protection.",
+      "tags": [
+        "File Scanning",
+        "Multi-Layer",
+        "Ransomware Protection"
+      ]
+    },
+    {
+      "icon": "📊",
+      "title": "Security Dashboard",
+      "description": "Real-time security metrics and threat visualization with executive-level reporting.",
+      "tags": [
+        "Real-Time",
+        "Analytics",
+        "Executive Reporting"
+      ]
+    },
+    {
+      "icon": "🎯",
+      "title": "Threat Drills",
+      "description": "8 simulation scenarios for team training and incident response testing.",
+      "tags": [
+        "Training",
+        "Simulation",
+        "8 Scenarios"
+      ]
+    },
+    {
+      "icon": "🔍",
+      "title": "Threat Intelligence",
+      "description": "IOC tracking, threat actor profiling, and correlation with external threat feeds.",
+      "tags": [
+        "IOC Tracking",
+        "Threat Feeds",
+        "Attribution"
+      ]
+    },
+    {
+      "icon": "🤖",
+      "title": "AI Governance",
+      "description": "Human-in-the-loop AI decisions with confidence scoring and abstention policies.",
+      "tags": [
+        "AI Safety",
+        "Human Oversight",
+        "Transparency"
+      ]
+    },
+    {
+      "icon": "📋",
+      "title": "Compliance",
+      "description": "GDPR, SOC2, and ISO27001 compliance monitoring with policy enforcement.",
+      "tags": [
+        "GDPR",
+        "SOC2",
+        "Audit Trails"
+      ]
+    }
+  ],
+  "cta": {
+    "title": "Ready to Secure Your Server?",
+    "subtitle": "Join thousands of communities protected by Sentinel SOC",
+    "button_primary": "Add to Discord",
+    "button_secondary": "Join Support Server"
+  },
+  "footer": {
+    "description": "Enterprise-grade security for Discord communities",
+    "copyright": "© 2026 Sentinel SOC Bot. All rights reserved.",
+    "version": "v2.0.0"
+  }
+}

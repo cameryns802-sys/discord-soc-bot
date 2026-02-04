@@ -10,6 +10,7 @@ import json
 import os
 from datetime import datetime, timedelta
 import uuid
+from cogs.core.pst_timezone import get_now_pst
 
 class RealtimeObservabilityHub(commands.Cog):
     """Real-time observability and monitoring hub"""
@@ -132,7 +133,7 @@ class RealtimeObservabilityHub(commands.Cog):
                 'security_events_24h': 23,
                 'error_rate_percent': 0.8,
                 'active_alerts': 3,
-                'last_update': datetime.utcnow().isoformat(),
+                'last_update': get_now_pst().isoformat(),
                 'uptime_days': 127
             }
             self.save_metrics(ctx.guild.id, metrics)
@@ -146,7 +147,7 @@ class RealtimeObservabilityHub(commands.Cog):
             title=f"📊 Real-Time Observability Dashboard {health_emoji}",
             description=f"System Health: **{health_score}/100**",
             color=color,
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="System Resources", value="━" * 25, inline=False)
@@ -190,14 +191,14 @@ class RealtimeObservabilityHub(commands.Cog):
             return
         
         # Filter recent events
-        cutoff = datetime.utcnow() - timedelta(hours=hours)
+        cutoff = get_now_pst() - timedelta(hours=hours)
         recent = [e for e in events if datetime.fromisoformat(e['timestamp']) > cutoff]
         
         embed = discord.Embed(
             title=f"📊 Observability Events (Last {hours} hour{'s' if hours > 1 else ''})",
             description=f"{len(recent)} event(s) detected",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         # Count by severity
@@ -258,7 +259,7 @@ class RealtimeObservabilityHub(commands.Cog):
             title="🔔 Active Observability Alerts",
             description=f"{len(alerts)} alert(s) active" if alerts else "No active alerts",
             color=discord.Color.red() if alerts else discord.Color.green(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         if not alerts:

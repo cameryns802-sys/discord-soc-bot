@@ -1,0 +1,14 @@
+{
+  "timestamp": "20260203_171340",
+  "type": "daily",
+  "files": [
+    "data",
+    "transcripts",
+    "cogs\\data_manager.py"
+  ],
+  "checksums": {
+    "cogs\\data_manager.py": "aebc34fb03751f96f84716ea6d190c912b47195a6e788c7f9e05242bb7775e93"
+  },
+  "bot_version": "Phase 11",
+  "created_at": "2026-02-03T17:13:41.187856"
+}

@@ -3,6 +3,7 @@ from discord.ext import commands
 import json
 import os
 from datetime import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 class BreachImpactAssessorCog(commands.Cog):
     def __init__(self, bot):
@@ -45,7 +46,7 @@ class BreachImpactAssessorCog(commands.Cog):
             "severity": severity.lower(),
             "blast_radius": blast_radius,
             "estimated_cost": affected_accounts * (500 * severity_level),
-            "created": datetime.utcnow().isoformat()
+            "created": get_now_pst().isoformat()
         }
         self.assessments.append(assessment)
         self.save_assessments()

@@ -8,6 +8,7 @@ from discord.ext import commands
 import json
 import os
 from datetime import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 class AlertNoiseOptimizerCog(commands.Cog):
     """Alert Noise Optimizer - Reduces false positive alerts and improves signal quality"""
@@ -62,7 +63,7 @@ class AlertNoiseOptimizerCog(commands.Cog):
             "type": alert_type,
             "disposition": disposition.lower(),
             "description": description,
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": get_now_pst().isoformat(),
             "logged_by": str(ctx.author.id)
         }
         
@@ -70,7 +71,7 @@ class AlertNoiseOptimizerCog(commands.Cog):
         self.save_alerts()
         
         color = discord.Color.green() if disposition.lower() == "true_positive" else discord.Color.orange()
-        embed = discord.Embed(title="✅ Alert Logged", color=color, timestamp=datetime.utcnow())
+        embed = discord.Embed(title="✅ Alert Logged", color=color, timestamp=get_now_pst())
         embed.add_field(name="Alert ID", value=f"#{alert['id']}", inline=True)
         embed.add_field(name="Type", value=alert_type, inline=True)
         embed.add_field(name="Disposition", value=disposition.upper(), inline=True)
@@ -86,8 +87,8 @@ class AlertNoiseOptimizerCog(commands.Cog):
             "alert_type": alert_type,
             "duration_hours": duration_hours,
             "reason": reason,
-            "created_at": datetime.utcnow().isoformat(),
-            "expires_at": (datetime.utcnow() + datetime.timedelta(hours=duration_hours)).isoformat(),
+            "created_at": get_now_pst().isoformat(),
+            "expires_at": (get_now_pst() + datetime.timedelta(hours=duration_hours)).isoformat(),
             "created_by": str(ctx.author.id),
             "active": True
         }
@@ -95,7 +96,7 @@ class AlertNoiseOptimizerCog(commands.Cog):
         self.suppressions.append(suppression)
         self.save_suppressions()
         
-        embed = discord.Embed(title="🔇 Alert Suppression Created", color=discord.Color.blue(), timestamp=datetime.utcnow())
+        embed = discord.Embed(title="🔇 Alert Suppression Created", color=discord.Color.blue(), timestamp=get_now_pst())
         embed.add_field(name="Suppression ID", value=f"#{suppression['id']}", inline=True)
         embed.add_field(name="Alert Type", value=alert_type, inline=True)
         embed.add_field(name="Duration", value=f"{duration_hours}h", inline=True)
@@ -125,7 +126,7 @@ class AlertNoiseOptimizerCog(commands.Cog):
         top_noisy_types = sorted(alert_types.items(), key=lambda x: x[1], reverse=True)[:5]
         
         color = discord.Color.green() if signal_to_noise >= 70 else discord.Color.gold() if signal_to_noise >= 50 else discord.Color.red()
-        embed = discord.Embed(title="📊 Alert Noise Analysis", color=color, timestamp=datetime.utcnow())
+        embed = discord.Embed(title="📊 Alert Noise Analysis", color=color, timestamp=get_now_pst())
         embed.add_field(name="Signal-to-Noise Ratio", value=f"**{signal_to_noise:.1f}%**", inline=True)
         embed.add_field(name="Total Alerts", value=total_alerts, inline=True)
         embed.add_field(name="✅ True Positives", value=true_positives, inline=True)
@@ -150,7 +151,7 @@ class AlertNoiseOptimizerCog(commands.Cog):
             await ctx.send("📋 No active suppressions")
             return
         
-        embed = discord.Embed(title="🔇 Active Alert Suppressions", color=discord.Color.blue(), timestamp=datetime.utcnow())
+        embed = discord.Embed(title="🔇 Active Alert Suppressions", color=discord.Color.blue(), timestamp=get_now_pst())
         
         for suppression in active_suppressions[:10]:
             embed.add_field(
@@ -170,7 +171,7 @@ class AlertNoiseOptimizerCog(commands.Cog):
         signal_to_noise = self.calculate_signal_to_noise()
         active_suppressions = len([s for s in self.suppressions if s.get("active", False)])
         
-        embed = discord.Embed(title="🔇 Alert Noise Optimizer Dashboard", color=discord.Color.blue(), timestamp=datetime.utcnow())
+        embed = discord.Embed(title="🔇 Alert Noise Optimizer Dashboard", color=discord.Color.blue(), timestamp=get_now_pst())
         embed.add_field(name="📊 Total Alerts", value=total_alerts, inline=True)
         embed.add_field(name="📈 Signal-to-Noise", value=f"{signal_to_noise:.1f}%", inline=True)
         embed.add_field(name="🔇 Active Suppressions", value=active_suppressions, inline=True)

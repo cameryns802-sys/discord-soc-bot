@@ -11,6 +11,7 @@ import os
 from datetime import datetime, timedelta
 import hashlib
 from collections import defaultdict
+from cogs.core.pst_timezone import get_now_pst
 
 class SecurityEventCorrelation(commands.Cog):
     """Security event correlation and pattern detection"""
@@ -130,10 +131,10 @@ class SecurityEventCorrelation(commands.Cog):
         events = self.get_guild_events(guild_id)
         
         event = {
-            'id': hashlib.md5(f"{guild_id}{user_id}{event_type}{datetime.utcnow().isoformat()}".encode()).hexdigest()[:12],
+            'id': hashlib.md5(f"{guild_id}{user_id}{event_type}{get_now_pst().isoformat()}".encode()).hexdigest()[:12],
             'type': event_type,
             'user_id': user_id,
-            'timestamp': datetime.utcnow().isoformat(),
+            'timestamp': get_now_pst().isoformat(),
             'details': details or {}
         }
         
@@ -158,13 +159,13 @@ class SecurityEventCorrelation(commands.Cog):
             matched = self.match_pattern(user_events, pattern)
             if matched:
                 correlation = {
-                    'id': hashlib.md5(f"{guild_id}{user_id}{pattern_id}{datetime.utcnow().isoformat()}".encode()).hexdigest()[:12],
+                    'id': hashlib.md5(f"{guild_id}{user_id}{pattern_id}{get_now_pst().isoformat()}".encode()).hexdigest()[:12],
                     'pattern_id': pattern_id,
                     'pattern_name': pattern['name'],
                     'user_id': user_id,
                     'severity': pattern['severity'],
                     'events': matched['event_ids'],
-                    'timestamp': datetime.utcnow().isoformat(),
+                    'timestamp': get_now_pst().isoformat(),
                     'status': 'active'
                 }
                 
@@ -186,7 +187,7 @@ class SecurityEventCorrelation(commands.Cog):
             return None
         
         # Try to match pattern in recent events
-        now = datetime.utcnow()
+        now = get_now_pst()
         cutoff = now - timedelta(seconds=timeframe)
         
         recent_events = [e for e in sorted_events if datetime.fromisoformat(e['timestamp']) > cutoff]
@@ -228,7 +229,7 @@ class SecurityEventCorrelation(commands.Cog):
             title="📝 Event Logged",
             description=f"Event logged for correlation analysis",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Event ID", value=f"`{event['id']}`", inline=True)
@@ -251,7 +252,7 @@ class SecurityEventCorrelation(commands.Cog):
             return
         
         # Filter active correlations from last 24 hours
-        now = datetime.utcnow()
+        now = get_now_pst()
         cutoff = now - timedelta(hours=24)
         
         active = [c for c in correlations if c['status'] == 'active' and datetime.fromisoformat(c['timestamp']) > cutoff]
@@ -264,7 +265,7 @@ class SecurityEventCorrelation(commands.Cog):
             title="⚠️ Correlated Attack Patterns Detected",
             description=f"{len(active)} active correlation(s) in last 24 hours",
             color=discord.Color.red(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         for correlation in active[:5]:
@@ -300,7 +301,7 @@ class SecurityEventCorrelation(commands.Cog):
             title="🎯 Attack Pattern Library",
             description=f"{len(patterns)} pattern(s) monitored",
             color=discord.Color.orange(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         for pattern_id, pattern in sorted(patterns.items()):
@@ -329,7 +330,7 @@ class SecurityEventCorrelation(commands.Cog):
             title="📊 Event Correlation Statistics",
             description=f"{len(events)} events | {len(correlations)} correlations",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         # Events by type
@@ -350,7 +351,7 @@ class SecurityEventCorrelation(commands.Cog):
         embed.add_field(name="Correlations by Severity", value=severity_str, inline=True)
         
         # Recent activity
-        now = datetime.utcnow()
+        now = get_now_pst()
         last_hour = sum(1 for e in events if datetime.fromisoformat(e['timestamp']) > now - timedelta(hours=1))
         last_day = sum(1 for e in events if datetime.fromisoformat(e['timestamp']) > now - timedelta(hours=24))
         
@@ -362,7 +363,7 @@ class SecurityEventCorrelation(commands.Cog):
     
     def _relative_time(self, dt):
         """Get relative time string"""
-        now = datetime.utcnow()
+        now = get_now_pst()
         delta = now - dt
         
         if delta.days > 0:

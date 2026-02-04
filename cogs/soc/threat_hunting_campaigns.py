@@ -10,6 +10,7 @@ import json
 import os
 from datetime import datetime, timedelta
 import uuid
+from cogs.core.pst_timezone import get_now_pst
 
 class ThreatHuntingCampaigns(commands.Cog):
     """Threat hunting campaign management and coordination"""
@@ -52,7 +53,7 @@ class ThreatHuntingCampaigns(commands.Cog):
             'description': description,
             'threat_type': threat_type,
             'status': 'active',
-            'created_at': datetime.utcnow().isoformat(),
+            'created_at': get_now_pst().isoformat(),
             'created_by': hunter,
             'hunt_queries': hunt_queries.split('\n') if isinstance(hunt_queries, str) else hunt_queries,
             'findings': [],
@@ -76,7 +77,7 @@ class ThreatHuntingCampaigns(commands.Cog):
             'description': description,
             'severity': severity,
             'evidence': evidence,
-            'found_at': datetime.utcnow().isoformat(),
+            'found_at': get_now_pst().isoformat(),
             'status': 'open'
         }
         
@@ -106,7 +107,7 @@ class ThreatHuntingCampaigns(commands.Cog):
             title="🔍 Hunt Campaign Created",
             description=f"**{name}**",
             color=discord.Color.blurple(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Campaign ID", value=f"`{campaign['id']}`", inline=True)
@@ -138,7 +139,7 @@ class ThreatHuntingCampaigns(commands.Cog):
             title="🔎 Hunt Query Added",
             description=f"Campaign: `{campaign_id}`",
             color=discord.Color.blurple(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Query", value=f"`{query}`", inline=False)
@@ -187,7 +188,7 @@ class ThreatHuntingCampaigns(commands.Cog):
                 'medium': discord.Color.gold(),
                 'low': discord.Color.green()
             }.get(severity.lower(), discord.Color.greyple()),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Campaign", value=campaigns[campaign_id]['name'], inline=True)
@@ -215,7 +216,7 @@ class ThreatHuntingCampaigns(commands.Cog):
             title=f"🔍 {status.upper()} Hunt Campaigns",
             description=f"{len(filtered)} campaign(s)",
             color=discord.Color.blurple(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         for campaign in list(filtered.values())[:10]:
@@ -246,7 +247,7 @@ class ThreatHuntingCampaigns(commands.Cog):
             title=f"🔍 Hunt Campaign Details",
             description=campaign['name'],
             color=discord.Color.blurple(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Campaign ID", value=f"`{campaign['id']}`", inline=True)
@@ -254,7 +255,7 @@ class ThreatHuntingCampaigns(commands.Cog):
         embed.add_field(name="Threat Type", value=campaign['threat_type'], inline=True)
         embed.add_field(name="Created By", value=f"<@{campaign['created_by']}>", inline=True)
         embed.add_field(name="Created At", value=f"<t:{int(datetime.fromisoformat(campaign['created_at']).timestamp())}:R>", inline=True)
-        embed.add_field(name="Duration", value=f"{(datetime.utcnow() - datetime.fromisoformat(campaign['created_at'])).days} days", inline=True)
+        embed.add_field(name="Duration", value=f"{(get_now_pst() - datetime.fromisoformat(campaign['created_at'])).days} days", inline=True)
         
         embed.add_field(name="Description", value=campaign['description'], inline=False)
         

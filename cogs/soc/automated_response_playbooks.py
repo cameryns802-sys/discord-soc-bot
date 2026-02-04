@@ -10,6 +10,7 @@ import json
 import os
 from datetime import datetime
 import uuid
+from cogs.core.pst_timezone import get_now_pst
 
 class AutomatedResponsePlaybooks(commands.Cog):
     """SOAR playbook execution and response automation"""
@@ -154,8 +155,8 @@ class AutomatedResponsePlaybooks(commands.Cog):
             'id': str(uuid.uuid4())[:8],
             'playbook_id': playbook_id,
             'playbook_name': playbook['name'],
-            'started_at': datetime.utcnow().isoformat(),
-            'completed_at': datetime.utcnow().isoformat(),
+            'started_at': get_now_pst().isoformat(),
+            'completed_at': get_now_pst().isoformat(),
             'executor': executor,
             'incident_id': incident_id,
             'status': 'completed',
@@ -173,7 +174,7 @@ class AutomatedResponsePlaybooks(commands.Cog):
             title="🎯 Available Response Playbooks",
             description="Pre-configured automation responses for security threats",
             color=discord.Color.blurple(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         for playbook_id, playbook in self.playbooks.items():
@@ -207,7 +208,7 @@ class AutomatedResponsePlaybooks(commands.Cog):
             title=f"📋 Playbook: {playbook['name']}",
             description=playbook['description'],
             color=discord.Color.blurple(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Trigger", value=playbook['trigger_type'], inline=True)
@@ -250,7 +251,7 @@ class AutomatedResponsePlaybooks(commands.Cog):
             title=f"⚡ Playbook Executed: {playbook['name']}",
             description=f"Response automation initiated",
             color=severity_color,
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Playbook ID", value=f"`{playbook_id}`", inline=True)
@@ -270,7 +271,7 @@ class AutomatedResponsePlaybooks(commands.Cog):
         embed.add_field(name="🚀 Executed Steps", value=steps_str, inline=False)
         
         embed.add_field(name="⏱️ Execution Time", value=playbook['estimated_time'], inline=True)
-        embed.add_field(name="Completed", value=f"<t:{int(datetime.utcnow().timestamp())}:R>", inline=True)
+        embed.add_field(name="Completed", value=f"<t:{int(get_now_pst().timestamp())}:R>", inline=True)
         
         embed.set_footer(text="Sentinel SOAR | Response automated and logged")
         
@@ -288,7 +289,7 @@ class AutomatedResponsePlaybooks(commands.Cog):
             title="📊 Playbook Execution History",
             description=f"{len(executions)} playbook(s) executed",
             color=discord.Color.blurple(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         # Show recent

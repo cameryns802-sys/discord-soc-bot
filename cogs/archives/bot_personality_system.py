@@ -6,6 +6,7 @@ from discord.ext import commands
 import json
 import os
 from datetime import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 class BotPersonalityCog(commands.Cog):
     def __init__(self, bot):
@@ -59,7 +60,7 @@ class BotPersonalityCog(commands.Cog):
         self.data["personality_history"].append({
             "personality": personality,
             "changed_by": str(ctx.author.id),
-            "changed_at": datetime.utcnow().isoformat()
+            "changed_at": get_now_pst().isoformat()
         })
         self.save_data(self.data)
         
@@ -111,7 +112,7 @@ class BotPersonalityCog(commands.Cog):
             "trigger": trigger,
             "response": response,
             "added_by": str(ctx.author.id),
-            "added_at": datetime.utcnow().isoformat()
+            "added_at": get_now_pst().isoformat()
         })
         self.save_data(self.data)
         
@@ -194,3 +195,4 @@ class BotPersonalityCog(commands.Cog):
 
 async def setup(bot):
     await bot.add_cog(BotPersonalityCog(bot))
+# End of bot_personality_system.py

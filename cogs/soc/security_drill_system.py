@@ -10,6 +10,7 @@ import json
 import os
 from datetime import datetime, timedelta
 from enum import Enum
+from cogs.core.pst_timezone import get_now_pst
 
 class DrillType(Enum):
     BREACH = "Data Breach"
@@ -92,7 +93,7 @@ class SecurityDrill(commands.Cog):
             "protocol_description": protocol.value,
             "level": "CRITICAL",
             "activated_by": str(ctx.author),
-            "activated_at": datetime.utcnow().isoformat(),
+            "activated_at": get_now_pst().isoformat(),
             "status": "ACTIVE",
             "team_responses": [],
             "timeline": []
@@ -116,7 +117,7 @@ class SecurityDrill(commands.Cog):
         
         embed.add_field(name="🎯 Drill ID", value=drill_id, inline=True)
         embed.add_field(name="📋 Type", value=f"🔴 {drill_type.value}", inline=True)
-        embed.add_field(name="⏰ Activated", value=datetime.utcnow().strftime('%H:%M:%S'), inline=True)
+        embed.add_field(name="⏰ Activated", value=get_now_pst().strftime('%H:%M:%S'), inline=True)
         
         embed.add_field(name="📌 Protocol", value=protocol.value, inline=False)
         embed.add_field(name="🔴 Level", value="CRITICAL", inline=True)
@@ -152,7 +153,7 @@ class SecurityDrill(commands.Cog):
         
         drill_info = self.active_drill[guild.id]
         drill_info["status"] = "COMPLETED"
-        drill_info["completed_at"] = datetime.utcnow().isoformat()
+        drill_info["completed_at"] = get_now_pst().isoformat()
         
         # Deactivate drill status
         dynamic_status = self.bot.get_cog('DynamicStatus')
@@ -164,7 +165,7 @@ class SecurityDrill(commands.Cog):
         for drill in drill_data.get("drills", []):
             if drill["drill_id"] == drill_info["drill_id"]:
                 drill["status"] = "COMPLETED"
-                drill["completed_at"] = datetime.utcnow().isoformat()
+                drill["completed_at"] = get_now_pst().isoformat()
         
         self.save_drill_data(guild.id, drill_data)
         
@@ -216,7 +217,7 @@ class SecurityDrill(commands.Cog):
         embed.add_field(name="Previous", value=old_protocol, inline=True)
         embed.add_field(name="Current", value=protocol.value, inline=True)
         embed.add_field(name="Changed By", value=ctx.author.mention, inline=True)
-        embed.add_field(name="Time", value=datetime.utcnow().strftime('%H:%M:%S'), inline=False)
+        embed.add_field(name="Time", value=get_now_pst().strftime('%H:%M:%S'), inline=False)
         
         for channel in guild.text_channels:
             if channel.permissions_for(guild.me).send_messages:
@@ -239,7 +240,7 @@ class SecurityDrill(commands.Cog):
         response = {
             "responder": str(ctx.author),
             "status": status,
-            "timestamp": datetime.utcnow().isoformat()
+            "timestamp": get_now_pst().isoformat()
         }
         
         if "team_responses" not in drill_info:
@@ -255,7 +256,7 @@ class SecurityDrill(commands.Cog):
         
         embed.add_field(name="Responder", value=ctx.author.mention, inline=True)
         embed.add_field(name="Status", value=status, inline=True)
-        embed.add_field(name="Time", value=datetime.utcnow().strftime('%H:%M:%S'), inline=True)
+        embed.add_field(name="Time", value=get_now_pst().strftime('%H:%M:%S'), inline=True)
         
         await ctx.send(embed=embed)
     

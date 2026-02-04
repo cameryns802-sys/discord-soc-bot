@@ -3,6 +3,7 @@ import discord
 from discord.ext import commands, tasks
 import datetime
 import random
+from cogs.core.pst_timezone import get_now_pst
 
 class BotStatusSystemCog(commands.Cog):
     def __init__(self, bot):
@@ -108,7 +109,7 @@ class BotStatusSystemCog(commands.Cog):
             "from": old_status,
             "to": new_status,
             "reason": reason,
-            "time": datetime.datetime.utcnow()
+            "time": datetime.get_now_pst()
         })
         
         # Immediately update status
@@ -136,7 +137,7 @@ class BotStatusSystemCog(commands.Cog):
                 color=discord.Color.green() if status_level == "normal" else discord.Color.orange() if status_level == "elevated" else discord.Color.red()
             )
             embed.add_field(name="Changed By", value=ctx.author.mention, inline=True)
-            embed.add_field(name="Time", value=datetime.datetime.utcnow().strftime("%H:%M:%S"), inline=True)
+            embed.add_field(name="Time", value=datetime.get_now_pst().strftime("%H:%M:%S"), inline=True)
             await ctx.send(embed=embed)
 
     @commands.command()

@@ -3,6 +3,7 @@ import re
 from typing import List, Dict, Tuple
 import discord
 from discord.ext import commands
+from cogs.core.pst_timezone import get_now_pst
 
 class PromptInjectionDetector:
     """Detect and prevent prompt injection attacks"""
@@ -80,7 +81,7 @@ class PromptInjectionDetector:
     def log_injection(self, user_id: int, content: str, patterns: List[str]):
         """Log detected injection attempt"""
         self.detected_injections.append({
-            'timestamp': str(__import__('datetime').datetime.utcnow()),
+            'timestamp': str(__import__('datetime').get_now_pst()),
             'user_id': user_id,
             'content': content[:100],  # First 100 chars only
             'patterns_found': patterns

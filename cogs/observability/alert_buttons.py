@@ -6,7 +6,8 @@ Provides Discord UI components for alert handling
 import discord
 from discord.ext import commands
 from discord import ui
-import datetime
+from datetime import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 class AlertActionButtons(ui.View):
     """Interactive buttons for alert actions"""
@@ -31,7 +32,7 @@ class AlertActionButtons(ui.View):
         # Acknowledge alert
         alert['acknowledged'] = True
         alert['acknowledged_by'] = interaction.user.id
-        alert['acknowledged_at'] = datetime.datetime.now(datetime.UTC).isoformat()
+        alert['acknowledged_at'] = get_now_pst().isoformat()
         alert['status'] = 'acknowledged'
         self.alert_system.save_data()
         
@@ -55,7 +56,7 @@ class AlertActionButtons(ui.View):
         alert['severity'] = 'critical'
         alert['escalated'] = True
         alert['escalated_by'] = interaction.user.id
-        alert['escalated_at'] = datetime.datetime.now(datetime.UTC).isoformat()
+        alert['escalated_at'] = get_now_pst().isoformat()
         self.alert_system.save_data()
         
         await interaction.response.send_message(
@@ -81,7 +82,7 @@ class AlertActionButtons(ui.View):
         # Resolve alert
         alert['resolved'] = True
         alert['resolved_by'] = interaction.user.id
-        alert['resolved_at'] = datetime.datetime.now(datetime.UTC).isoformat()
+        alert['resolved_at'] = get_now_pst().isoformat()
         alert['status'] = 'resolved'
         self.alert_system.save_data()
         
@@ -162,3 +163,4 @@ class AlertActionButtons(ui.View):
 async def setup(bot):
     """This is a utility module, no cog to register"""
     pass
+

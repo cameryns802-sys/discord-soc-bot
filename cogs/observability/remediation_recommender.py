@@ -6,6 +6,7 @@ from discord.ext import commands
 import json
 import os
 from datetime import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 class RemediationRecommenderCog(commands.Cog):
     def __init__(self, bot):
@@ -460,12 +461,12 @@ Comprehensive remediation plan addressing data breach response, regulatory compl
         template = plan_templates.get(incident_type.lower(), "# Remediation Plan\n\nCustom plan for {incident_type} - {severity}")
         
         plan_id = f"REM-{self.data['counter']:05d}"
-        audit_date = datetime.utcnow().strftime('%Y-%m-%d')
+        audit_date = get_now_pst().strftime('%Y-%m-%d')
         
         return template.format(
             plan_id=plan_id,
             severity=severity,
-            timestamp=datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S UTC'),
+            timestamp=get_now_pst().strftime('%Y-%m-%d %H:%M:%S UTC'),
             audit_date=audit_date
         )
 
@@ -686,7 +687,7 @@ Extra layer of security requiring:
             "incident_type": incident_type,
             "severity": severity,
             "generated_by": str(ctx.author.id),
-            "generated_at": datetime.utcnow().isoformat(),
+            "generated_at": get_now_pst().isoformat(),
             "content": plan_text
         }
         self.data['counter'] += 1
@@ -728,7 +729,7 @@ Extra layer of security requiring:
             "topic": topic,
             "audience": audience,
             "generated_by": str(ctx.author.id),
-            "generated_at": datetime.utcnow().isoformat(),
+            "generated_at": get_now_pst().isoformat(),
             "content": training_content
         }
         self.data['counter'] += 1
@@ -769,7 +770,7 @@ Extra layer of security requiring:
         
         plan = self.data['remediation_plans'][plan_id]
         plan['audit_scheduled'] = True
-        plan['audit_date'] = (datetime.utcnow().replace(day=1) + timedelta(days=90)).isoformat()
+        plan['audit_date'] = (get_now_pst().replace(day=1) + timedelta(days=90)).isoformat()
         self.save_data(self.data)
         
         embed = discord.Embed(

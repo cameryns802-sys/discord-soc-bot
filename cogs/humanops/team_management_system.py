@@ -4,6 +4,7 @@ from discord.ext import commands
 from datetime import datetime
 import json
 import os
+from cogs.core.pst_timezone import get_now_pst
 
 class TeamManagementCog(commands.Cog):
     def __init__(self, bot):
@@ -50,7 +51,7 @@ class TeamManagementCog(commands.Cog):
             "id": team_id,
             "name": name,
             "lead": ctx.author.id,
-            "created_at": datetime.utcnow().isoformat(),
+            "created_at": get_now_pst().isoformat(),
             "member_count": 0,
             "members": [],
             "description": "",
@@ -89,7 +90,7 @@ class TeamManagementCog(commands.Cog):
                 "user_id": member.id,
                 "team_id": team_id,
                 "role": "member",
-                "added_at": datetime.utcnow().isoformat(),
+                "added_at": get_now_pst().isoformat(),
                 "permissions": []
             }
             

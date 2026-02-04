@@ -6,7 +6,8 @@ Provides Discord UI components (buttons, select menus) for ticket management
 import discord
 from discord.ext import commands
 from discord import ui
-import datetime
+from datetime import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 class TicketActionButtons(ui.View):
     """Interactive buttons for ticket actions"""
@@ -35,13 +36,13 @@ class TicketActionButtons(ui.View):
         # Claim ticket
         ticket['assigned_to'] = interaction.user.id
         ticket['assigned_by'] = interaction.user.id
-        ticket['assigned_at'] = datetime.datetime.now(datetime.UTC).isoformat()
+        ticket['assigned_at'] = get_now_pst().isoformat()
         ticket['status'] = 'in_progress'
         ticket['comments'].append({
             'user_id': interaction.user.id,
             'username': str(interaction.user),
             'comment': f"🤝 Claimed ticket",
-            'timestamp': datetime.datetime.now(datetime.UTC).isoformat()
+            'timestamp': get_now_pst().isoformat()
         })
         self.ticket_system.save_data()
         
@@ -76,13 +77,13 @@ class TicketActionButtons(ui.View):
         
         # Close ticket
         ticket['status'] = 'closed'
-        ticket['closed_at'] = datetime.datetime.now(datetime.UTC).isoformat()
+        ticket['closed_at'] = get_now_pst().isoformat()
         ticket['closed_by'] = interaction.user.id
         ticket['comments'].append({
             'user_id': interaction.user.id,
             'username': str(interaction.user),
             'comment': f"🔒 Closed ticket",
-            'timestamp': datetime.datetime.now(datetime.UTC).isoformat()
+            'timestamp': get_now_pst().isoformat()
         })
         self.ticket_system.save_data()
         
@@ -197,7 +198,7 @@ class CommentModal(ui.Modal, title="Add Comment"):
             'user_id': interaction.user.id,
             'username': str(interaction.user),
             'comment': self.comment.value,
-            'timestamp': datetime.datetime.now(datetime.UTC).isoformat()
+            'timestamp': get_now_pst().isoformat()
         })
         self.ticket_system.save_data()
         
@@ -238,7 +239,7 @@ class PrioritySelectView(ui.View):
             'user_id': interaction.user.id,
             'username': str(interaction.user),
             'comment': f"⚡ Changed priority from {old_priority.upper()} to {new_priority.upper()}",
-            'timestamp': datetime.datetime.now(datetime.UTC).isoformat()
+            'timestamp': get_now_pst().isoformat()
         })
         self.ticket_system.save_data()
         
@@ -250,3 +251,4 @@ class PrioritySelectView(ui.View):
 async def setup(bot):
     """This is a utility module, no cog to register"""
     pass
+

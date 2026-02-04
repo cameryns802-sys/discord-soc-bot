@@ -6,6 +6,7 @@ from discord.ext import commands
 import json
 import os
 from datetime import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 class ExplainabilityEngineCog(commands.Cog):
     def __init__(self, bot):
@@ -390,7 +391,7 @@ If you believe this is a false positive:
         explanation = explanations.get(action, f"# Explanation for {action}\n\nGeneric explanation placeholder")
         
         return explanation.format(
-            timestamp=datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S UTC'),
+            timestamp=get_now_pst().strftime('%Y-%m-%d %H:%M:%S UTC'),
             alert_id=f"{self.data['counter']:06d}"
         )
 
@@ -557,7 +558,7 @@ If you believe this is a false positive:
         
         return chain.format(
             event=event,
-            timestamp=datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S UTC')
+            timestamp=get_now_pst().strftime('%Y-%m-%d %H:%M:%S UTC')
         )
 
     @commands.command(name="explain")
@@ -576,7 +577,7 @@ If you believe this is a false positive:
             "explain_id": explain_id,
             "action": action,
             "generated_by": str(ctx.author.id),
-            "generated_at": datetime.utcnow().isoformat(),
+            "generated_at": get_now_pst().isoformat(),
             "content": explanation_text
         }
         self.data['counter'] += 1
@@ -616,7 +617,7 @@ If you believe this is a false positive:
             "chain_id": chain_id,
             "event": event,
             "generated_by": str(ctx.author.id),
-            "generated_at": datetime.utcnow().isoformat(),
+            "generated_at": get_now_pst().isoformat(),
             "content": chain_text
         }
         self.data['counter'] += 1
@@ -650,7 +651,7 @@ If you believe this is a false positive:
         # Simulated decision justification
         justification = f"""
 **Decision ID:** {decision_id}
-**Timestamp:** {datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S UTC')}
+**Timestamp:** {get_now_pst().strftime('%Y-%m-%d %H:%M:%S UTC')}
 
 **JUSTIFICATION:**
 

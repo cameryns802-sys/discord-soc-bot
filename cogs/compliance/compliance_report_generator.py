@@ -9,6 +9,7 @@ from discord.ext import commands
 import json
 import os
 from datetime import datetime, timedelta
+from cogs.core.pst_timezone import get_now_pst
 
 class ComplianceReportGenerator(commands.Cog):
     """Automated compliance report generation"""
@@ -146,14 +147,14 @@ class ComplianceReportGenerator(commands.Cog):
         
         # Collect compliance data (in production, would query actual data sources)
         report_data = {
-            'report_id': f"RPT-{datetime.utcnow().strftime('%Y%m%d-%H%M%S')}",
+            'report_id': f"RPT-{get_now_pst().strftime('%Y%m%d-%H%M%S')}",
             'framework': framework,
             'framework_name': template['name'],
             'guild_id': guild.id,
             'guild_name': guild.name,
-            'generated_at': datetime.utcnow().isoformat(),
-            'period_start': (datetime.utcnow() - timedelta(days=90)).isoformat(),
-            'period_end': datetime.utcnow().isoformat(),
+            'generated_at': get_now_pst().isoformat(),
+            'period_start': (get_now_pst() - timedelta(days=90)).isoformat(),
+            'period_end': get_now_pst().isoformat(),
             'sections': []
         }
         
@@ -235,7 +236,7 @@ class ComplianceReportGenerator(commands.Cog):
             title=f"📊 {report['framework_name']}",
             description=f"**Compliance Score: {score}/100** {status_emoji}",
             color=color,
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Report ID", value=f"`{report['report_id']}`", inline=True)
@@ -282,7 +283,7 @@ class ComplianceReportGenerator(commands.Cog):
             title="📊 Compliance Reports",
             description=f"{len(sorted_reports)} report(s) generated",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         for report in sorted_reports[:10]:
@@ -312,7 +313,7 @@ class ComplianceReportGenerator(commands.Cog):
             title="📋 Compliance Report Templates",
             description=f"{len(templates)} framework(s) available",
             color=discord.Color.green(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         for template_id, template in sorted(templates.items()):
@@ -336,7 +337,7 @@ class ComplianceReportGenerator(commands.Cog):
             title="📅 Compliance Report Schedule",
             description="Recommended reporting frequency",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         quarterly = []

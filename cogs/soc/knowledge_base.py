@@ -5,6 +5,7 @@ from discord import app_commands
 import datetime
 import json
 import os
+from cogs.core.pst_timezone import get_now_pst
 
 class KBGroup(app_commands.Group):
     def __init__(self, cog):
@@ -16,7 +17,7 @@ class KBGroup(app_commands.Group):
     async def add(self, interaction: discord.Interaction, category: str, title: str, content: str):
         self.cog.article_counter += 1
         art_id = str(self.cog.article_counter)
-        self.cog.articles[art_id] = {"id": art_id, "title": title, "content": content, "category": category.lower(), "created_by": interaction.user.id, "created_at": datetime.datetime.utcnow().isoformat(), "views": 0}
+        self.cog.articles[art_id] = {"id": art_id, "title": title, "content": content, "category": category.lower(), "created_by": interaction.user.id, "created_at": datetime.get_now_pst().isoformat(), "views": 0}
         if category.lower() not in self.cog.categories:
             self.cog.categories.append(category.lower())
         self.cog.save_data()

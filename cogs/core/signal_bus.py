@@ -6,6 +6,7 @@ from typing import Dict, List, Callable, Any
 import asyncio
 from enum import Enum
 import json
+from cogs.core.pst_timezone import get_now_pst
 
 class SignalType(Enum):
     """All possible signal types in the system"""
@@ -31,12 +32,12 @@ class SignalType(Enum):
 class Signal:
     """Standard signal format across entire system"""
     def __init__(self, signal_type: SignalType, severity: str, source: str, data: Dict):
-        self.id = f"{signal_type.value}_{int(datetime.utcnow().timestamp()*1000)}"
+        self.id = f"{signal_type.value}_{int(get_now_pst().timestamp()*1000)}"
         self.type = signal_type
         self.severity = severity  # critical, high, medium, low, info
         self.source = source  # which cog/service emitted
         self.data = data
-        self.timestamp = datetime.utcnow()
+        self.timestamp = get_now_pst()
         self.confidence = data.get('confidence', 0.5)  # 0.0-1.0
         self.requires_human_review = severity in ['critical', 'high']
         self.deduplication_key = data.get('dedup_key', None)
@@ -67,7 +68,7 @@ class SignalBus:
         if signal.deduplication_key:
             recent = [s for s in self.signal_history[-100:] 
                      if s.deduplication_key == signal.deduplication_key 
-                     and (datetime.utcnow() - s.timestamp).seconds < self.deduplication_window]
+                     and (get_now_pst() - s.timestamp).seconds < self.deduplication_window]
             if recent:
                 return  # Duplicate, suppress
         

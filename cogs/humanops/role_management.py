@@ -2,6 +2,7 @@
 import discord
 from discord.ext import commands
 from datetime import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 class RoleManagementCog(commands.Cog):
     def __init__(self, bot):
@@ -37,7 +38,7 @@ class RoleManagementCog(commands.Cog):
                 "name": name,
                 "description": description,
                 "created_by": ctx.author.id,
-                "created_at": datetime.utcnow().isoformat()
+                "created_at": get_now_pst().isoformat()
             })
             
             embed = discord.Embed(

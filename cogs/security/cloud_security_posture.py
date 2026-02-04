@@ -10,6 +10,7 @@ import json
 import os
 from datetime import datetime
 import uuid
+from cogs.core.pst_timezone import get_now_pst
 
 class CloudSecurityPosture(commands.Cog):
     """Multi-cloud security posture management and assessment"""
@@ -88,7 +89,7 @@ class CloudSecurityPosture(commands.Cog):
         # Last assessment
         if account.get('last_assessment'):
             last = datetime.fromisoformat(account['last_assessment'])
-            days_since = (datetime.utcnow() - last).days
+            days_since = (get_now_pst() - last).days
             if days_since > 30:
                 score -= 10
         else:
@@ -107,7 +108,7 @@ class CloudSecurityPosture(commands.Cog):
             'provider': provider.upper(),
             'account_id': account_id,
             'account_name': account_name or f"{provider} Account",
-            'added_at': datetime.utcnow().isoformat(),
+            'added_at': get_now_pst().isoformat(),
             'mfa_enforced': True,
             'encryption_at_rest': True,
             'encryption_in_transit': True,
@@ -130,7 +131,7 @@ class CloudSecurityPosture(commands.Cog):
             title="☁️ Cloud Account Added",
             description=f"**{provider.upper()}** - {account_name or 'Account'}",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Account ID", value=f"`{cloud_id}`", inline=True)
@@ -159,7 +160,7 @@ class CloudSecurityPosture(commands.Cog):
             title="☁️ Cloud Accounts",
             description=f"{len(sorted_accounts)} account(s) managed",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         # Aggregate stats
@@ -217,7 +218,7 @@ class CloudSecurityPosture(commands.Cog):
             title=f"☁️ {account['account_name']}",
             description=f"Provider: **{account['provider']}**",
             color=color,
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Account ID", value=f"`{account['id']}`", inline=True)
@@ -275,7 +276,7 @@ class CloudSecurityPosture(commands.Cog):
             title="☁️ Cloud Security Assessment",
             description=f"Assessed {len(accounts)} cloud account(s)",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         secure = sum(1 for a in accounts.values() if a['security_score'] >= 70)

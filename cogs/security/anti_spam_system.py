@@ -10,6 +10,7 @@ import json
 import os
 from datetime import datetime, timedelta
 from collections import defaultdict
+from cogs.core.pst_timezone import get_now_pst
 
 class AntiSpamSystem(commands.Cog):
     """Detect and prevent spam messages"""
@@ -34,7 +35,7 @@ class AntiSpamSystem(commands.Cog):
         
         # Track messages per user
         user_key = f"{message.guild.id}_{message.author.id}"
-        now = datetime.utcnow()
+        now = get_now_pst()
         
         self.message_cache[user_key].append(now)
         

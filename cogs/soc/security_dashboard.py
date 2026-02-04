@@ -9,6 +9,7 @@ from datetime import datetime, timedelta
 from typing import Optional
 import json
 import os
+from cogs.core.pst_timezone import get_now_pst
 
 class SecurityDashboard(commands.Cog):
     """Real-time security metrics and dashboard"""
@@ -53,13 +54,13 @@ class SecurityDashboard(commands.Cog):
         
         return min(score, 100)
     
-    @commands.command(name='dashboard')
+    @commands.command(name='securitydash')
     @commands.has_permissions(manage_guild=True)
     async def dashboard(self, ctx):
         """View security dashboard"""
         await self._dashboard_logic(ctx)
     
-    @app_commands.command(name="dashboard", description="View real-time security dashboard")
+    @app_commands.command(name="securitydash", description="View real-time security dashboard")
     @app_commands.checks.has_permissions(manage_guild=True)
     async def dashboard_slash(self, interaction: discord.Interaction):
         """Dashboard using slash command"""
@@ -102,7 +103,7 @@ class SecurityDashboard(commands.Cog):
             title=f"🛡️ {guild.name} - Security Dashboard",
             description="Real-time security metrics and server health",
             color=self._get_score_color(security_score),
-            timestamp=datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         
         # Main metrics
@@ -265,7 +266,7 @@ class SecurityDashboard(commands.Cog):
         embed = discord.Embed(
             title="🔍 Security Status Check",
             color=discord.Color.blue(),
-            timestamp=datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         
         for check, status in status_checks:
@@ -275,3 +276,4 @@ class SecurityDashboard(commands.Cog):
 
 async def setup(bot):
     await bot.add_cog(SecurityDashboard(bot))
+

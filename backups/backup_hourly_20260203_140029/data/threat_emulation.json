@@ -1,0 +1,33 @@
+{
+  "active_simulations": {},
+  "results": {},
+  "defense_metrics": {},
+  "attack_scenarios": {
+    "permission_creep": {
+      "description": "Slowly escalate permissions",
+      "severity": "HIGH",
+      "ttl_minutes": 15
+    },
+    "token_compromise": {
+      "description": "Simulate exposed bot token access",
+      "severity": "CRITICAL",
+      "ttl_minutes": 10
+    },
+    "phishing_simulation": {
+      "description": "Send deceptive links in DMs",
+      "severity": "HIGH",
+      "ttl_minutes": 20
+    },
+    "privilege_escalation": {
+      "description": "Attempt to assign high roles",
+      "severity": "HIGH",
+      "ttl_minutes": 15
+    },
+    "data_exfiltration": {
+      "description": "Simulate bulk message reading",
+      "severity": "CRITICAL",
+      "ttl_minutes": 12
+    }
+  },
+  "scheduled_emulations": []
+}

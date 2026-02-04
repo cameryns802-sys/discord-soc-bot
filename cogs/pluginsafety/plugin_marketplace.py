@@ -6,6 +6,7 @@ from discord.ext import commands
 import json
 import os
 from datetime import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 DATA_FILE = 'data/plugin_marketplace.json'
 
@@ -62,7 +63,7 @@ class PluginMarketplaceCog(commands.Cog):
                 inline=False
             )
         
-        embed.timestamp = datetime.utcnow()
+        embed.timestamp = get_now_pst()
         await ctx.send(embed=embed)
 
     @commands.command(name='install_plugin')
@@ -78,7 +79,7 @@ class PluginMarketplaceCog(commands.Cog):
         data['installed_plugins'].append({
             "plugin_id": plugin_id,
             "name": plugin_name,
-            "installed_at": datetime.utcnow().isoformat(),
+            "installed_at": get_now_pst().isoformat(),
             "installed_by": str(ctx.author),
             "status": "ACTIVE",
             "signature_verified": True
@@ -93,7 +94,7 @@ class PluginMarketplaceCog(commands.Cog):
         embed.add_field(name="Status", value="🟢 Active", inline=True)
         embed.add_field(name="Signature", value="✅ Verified", inline=True)
         embed.add_field(name="Security Check", value="✅ Passed", inline=True)
-        embed.timestamp = datetime.utcnow()
+        embed.timestamp = get_now_pst()
         await ctx.send(embed=embed)
 
     @commands.command(name='plugin_details')
@@ -112,7 +113,7 @@ class PluginMarketplaceCog(commands.Cog):
         embed.add_field(name="Signature", value="✅ Valid (ED25519)", inline=True)
         embed.add_field(name="Security Audit", value="✅ Passed (2026-01-15)", inline=False)
         embed.add_field(name="Permissions", value="read_messages, send_messages, manage_roles", inline=False)
-        embed.timestamp = datetime.utcnow()
+        embed.timestamp = get_now_pst()
         await ctx.send(embed=embed)
 
     @commands.command(name='verify_plugin_signature')
@@ -127,7 +128,7 @@ class PluginMarketplaceCog(commands.Cog):
         data['plugin_signatures'][plugin_name] = {
             "signature": "0x3a2f1e4d9c8b7f6e5a4d3c2b1a0f9e8d7c6b5a4d",
             "algorithm": "ED25519",
-            "verified_at": datetime.utcnow().isoformat(),
+            "verified_at": get_now_pst().isoformat(),
             "developer_key": "pk_dev_123456",
             "status": "VALID"
         }
@@ -163,7 +164,7 @@ class PluginMarketplaceCog(commands.Cog):
         embed.add_field(name="Total Downloads", value="8,200", inline=True)
         embed.add_field(name="Security Audits Passed", value="5/5 ✅", inline=True)
         embed.add_field(name="Violations", value="0", inline=True)
-        embed.timestamp = datetime.utcnow()
+        embed.timestamp = get_now_pst()
         await ctx.send(embed=embed)
 
 async def setup(bot):

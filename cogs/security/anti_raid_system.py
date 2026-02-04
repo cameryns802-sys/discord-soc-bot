@@ -10,6 +10,7 @@ import json
 import os
 from datetime import datetime, timedelta
 from collections import defaultdict
+from cogs.core.pst_timezone import get_now_pst
 
 class AntiRaidSystem(commands.Cog):
     """Detect and prevent raid attacks"""
@@ -32,7 +33,7 @@ class AntiRaidSystem(commands.Cog):
         """Monitor for mass joins (raid)"""
         guild = member.guild
         guild_key = str(guild.id)
-        now = datetime.utcnow()
+        now = get_now_pst()
         
         self.join_cache[guild_key].append(now)
         

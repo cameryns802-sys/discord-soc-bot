@@ -6,6 +6,7 @@ from discord.ext import commands
 import json
 import os
 from datetime import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 DATA_FILE = 'data/explainable_ai.json'
 
@@ -70,7 +71,7 @@ class ExplainableAICog(commands.Cog):
             inline=False
         )
         embed.add_field(name="Rationale", value=decision.get('plain_language_rationale', 'N/A'), inline=False)
-        embed.timestamp = datetime.utcnow()
+        embed.timestamp = get_now_pst()
         await ctx.send(embed=embed)
 
     @commands.command(name='log_ai_action')
@@ -95,7 +96,7 @@ class ExplainableAICog(commands.Cog):
                 {"factor": "Risk Score", "weight": 20},
                 {"factor": "Context", "weight": 15}
             ],
-            "logged_at": datetime.utcnow().isoformat(),
+            "logged_at": get_now_pst().isoformat(),
             "logged_by": str(ctx.author)
         })
         self.save_data(data)
@@ -114,7 +115,7 @@ class ExplainableAICog(commands.Cog):
         
         audit = {
             "audit_id": audit_id,
-            "run_at": datetime.utcnow().isoformat(),
+            "run_at": get_now_pst().isoformat(),
             "demographic_parity": 0.94,  # % fairness
             "gender_bias_score": 0.08,
             "role_bias_score": 0.12,
@@ -139,7 +140,7 @@ class ExplainableAICog(commands.Cog):
             value="• Increase diversity in training data\n• Monitor role-based decisions more closely",
             inline=False
         )
-        embed.timestamp = datetime.utcnow()
+        embed.timestamp = get_now_pst()
         await ctx.send(embed=embed)
 
     @commands.command(name='fairness_metrics')
@@ -159,7 +160,7 @@ class ExplainableAICog(commands.Cog):
         embed.add_field(name="Decisions Audited", value=len(data.get('decision_logs', [])), inline=True)
         embed.add_field(name="Last Audit", value="1 hour ago", inline=True)
         embed.add_field(name="Demographic Groups Tracked", value="4 (Age, Gender, Role, Tenure)", inline=False)
-        embed.timestamp = datetime.utcnow()
+        embed.timestamp = get_now_pst()
         await ctx.send(embed=embed)
 
     @commands.command(name='appeal_ai_decision')
@@ -175,7 +176,7 @@ class ExplainableAICog(commands.Cog):
             "decision_id": decision_id,
             "appealed_by": str(ctx.author),
             "appeal_reason": appeal_reason,
-            "appealed_at": datetime.utcnow().isoformat(),
+            "appealed_at": get_now_pst().isoformat(),
             "status": "PENDING_REVIEW"
         }
         

@@ -1,0 +1,46 @@
+{
+  "1466863901449785497": [
+    {
+      "timestamp": "2026-02-02T22:03:08.094489",
+      "action": "ROLE_ADD",
+      "actor": "System",
+      "target": "Welcomer#5491",
+      "reason": "Added role: \ud83e\udd16Bot"
+    },
+    {
+      "timestamp": "2026-02-03T14:49:59.822823-08:00",
+      "action": "ROLE_ADD",
+      "actor": "System",
+      "target": "2.3cam",
+      "reason": "Added role: He/him"
+    },
+    {
+      "timestamp": "2026-02-03T14:50:03.769081-08:00",
+      "action": "ROLE_REMOVE",
+      "actor": "System",
+      "target": "2.3cam",
+      "reason": "Removed role: He/him"
+    },
+    {
+      "timestamp": "2026-02-03T14:50:05.821617-08:00",
+      "action": "ROLE_ADD",
+      "actor": "System",
+      "target": "2.3cam",
+      "reason": "Added role: He/him"
+    },
+    {
+      "timestamp": "2026-02-03T14:50:09.713736-08:00",
+      "action": "ROLE_REMOVE",
+      "actor": "System",
+      "target": "2.3cam",
+      "reason": "Removed role: He/him"
+    },
+    {
+      "timestamp": "2026-02-03T14:50:12.821335-08:00",
+      "action": "ROLE_ADD",
+      "actor": "System",
+      "target": "2.3cam",
+      "reason": "Added role: He/him"
+    }
+  ]
+}

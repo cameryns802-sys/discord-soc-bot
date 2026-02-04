@@ -9,6 +9,7 @@ from datetime import datetime, timedelta
 from typing import Optional
 import asyncio
 import re
+from cogs.core.pst_timezone import get_now_pst
 
 class AdvancedModeration(commands.Cog):
     """Advanced moderation commands for mass actions and raid protection"""
@@ -71,7 +72,7 @@ class AdvancedModeration(commands.Cog):
             title="🔨 Mass Ban in Progress",
             description=f"Banning {len(user_ids)} user(s)...",
             color=discord.Color.orange(),
-            timestamp=datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         status_msg = await ctx.send(embed=embed)
         
@@ -92,7 +93,7 @@ class AdvancedModeration(commands.Cog):
         result_embed = discord.Embed(
             title="🔨 Mass Ban Complete",
             color=discord.Color.red(),
-            timestamp=datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         
         if banned:
@@ -165,7 +166,7 @@ class AdvancedModeration(commands.Cog):
             title="👢 Mass Kick in Progress",
             description=f"Kicking {len(members)} member(s)...",
             color=discord.Color.orange(),
-            timestamp=datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         status_msg = await ctx.send(embed=embed)
         
@@ -186,7 +187,7 @@ class AdvancedModeration(commands.Cog):
         result_embed = discord.Embed(
             title="👢 Mass Kick Complete",
             color=discord.Color.orange(),
-            timestamp=datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         
         if kicked:
@@ -246,7 +247,7 @@ class AdvancedModeration(commands.Cog):
                 title="🛡️ Raid Mode Enabled",
                 description="The server is now in raid protection mode",
                 color=discord.Color.red(),
-                timestamp=datetime.now(datetime.UTC)
+                timestamp=get_now_pst()
             )
             embed.add_field(
                 name="Protections Active",
@@ -265,7 +266,7 @@ class AdvancedModeration(commands.Cog):
                 title="🛡️ Raid Mode Disabled",
                 description="Raid protection has been disabled",
                 color=discord.Color.green(),
-                timestamp=datetime.now(datetime.UTC)
+                timestamp=get_now_pst()
             )
             embed.add_field(name="Disabled by", value=ctx.author.mention)
             
@@ -277,7 +278,7 @@ class AdvancedModeration(commands.Cog):
             embed = discord.Embed(
                 title="🛡️ Raid Mode Status",
                 color=discord.Color.red() if is_active else discord.Color.green(),
-                timestamp=datetime.now(datetime.UTC)
+                timestamp=get_now_pst()
             )
             embed.add_field(
                 name="Status",
@@ -336,7 +337,7 @@ class AdvancedModeration(commands.Cog):
             embed = discord.Embed(
                 title="📝 Nickname Reset",
                 color=discord.Color.blue(),
-                timestamp=datetime.now(datetime.UTC)
+                timestamp=get_now_pst()
             )
             embed.add_field(name="Member", value=member.mention, inline=True)
             embed.add_field(name="Old Nickname", value=old_nick, inline=True)
@@ -401,7 +402,7 @@ class AdvancedModeration(commands.Cog):
                 title="🗑️ Roles Stripped",
                 description=f"Removed {len(removable_roles)} role(s) from {member.mention}",
                 color=discord.Color.orange(),
-                timestamp=datetime.now(datetime.UTC)
+                timestamp=get_now_pst()
             )
             embed.add_field(
                 name="Removed Roles",
@@ -450,7 +451,7 @@ class AdvancedModeration(commands.Cog):
             title="🔒 Server Lockdown in Progress",
             description="Locking all channels...",
             color=discord.Color.red(),
-            timestamp=datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         status_msg = await ctx.send(embed=embed)
         
@@ -471,7 +472,7 @@ class AdvancedModeration(commands.Cog):
             title="🔒 Server Lockdown Complete",
             description=f"All text channels have been locked",
             color=discord.Color.red(),
-            timestamp=datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         result_embed.add_field(name="Channels Locked", value=str(locked), inline=True)
         result_embed.add_field(name="Failed", value=str(failed), inline=True)
@@ -511,7 +512,7 @@ class AdvancedModeration(commands.Cog):
             title="🔓 Server Unlock in Progress",
             description="Unlocking all channels...",
             color=discord.Color.green(),
-            timestamp=datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         status_msg = await ctx.send(embed=embed)
         
@@ -532,7 +533,7 @@ class AdvancedModeration(commands.Cog):
             title="🔓 Server Unlock Complete",
             description=f"All text channels have been unlocked",
             color=discord.Color.green(),
-            timestamp=datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         result_embed.add_field(name="Channels Unlocked", value=str(unlocked), inline=True)
         result_embed.add_field(name="Failed", value=str(failed), inline=True)
@@ -542,3 +543,4 @@ class AdvancedModeration(commands.Cog):
 
 async def setup(bot):
     await bot.add_cog(AdvancedModeration(bot))
+

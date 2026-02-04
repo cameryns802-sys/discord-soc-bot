@@ -3,6 +3,7 @@ import discord
 from discord.ext import commands
 import datetime
 import hashlib
+from cogs.core.pst_timezone import get_now_pst
 
 class ForensicsCog(commands.Cog):
     def __init__(self, bot):
@@ -22,7 +23,7 @@ class ForensicsCog(commands.Cog):
             "title": title,
             "status": "open",
             "created_by": ctx.author.id,
-            "created_at": datetime.datetime.utcnow(),
+            "created_at": datetime.get_now_pst(),
             "evidence": [],
             "timeline": [],
             "conclusions": ""
@@ -41,22 +42,22 @@ class ForensicsCog(commands.Cog):
         self.evidence_counter += 1
         ev_id = self.evidence_counter
         # Create hash for evidence integrity
-        ev_hash = hashlib.sha256(f"{ev_id}{description}{datetime.datetime.utcnow()}".encode()).hexdigest()
+        ev_hash = hashlib.sha256(f"{ev_id}{description}{datetime.get_now_pst()}".encode()).hexdigest()
         self.evidence[ev_id] = {
             "id": ev_id,
             "investigation_id": investigation_id,
             "description": description,
             "hash": ev_hash,
             "collected_by": ctx.author.id,
-            "collected_at": datetime.datetime.utcnow(),
+            "collected_at": datetime.get_now_pst(),
             "status": "collected",
-            "chain_of_custody": [{"action": "collected", "by": ctx.author.mention, "at": datetime.datetime.utcnow()}]
+            "chain_of_custody": [{"action": "collected", "by": ctx.author.mention, "at": datetime.get_now_pst()}]
         }
         self.investigations[investigation_id]["evidence"].append(ev_id)
         self.investigations[investigation_id]["timeline"].append({
             "action": f"Evidence #{ev_id} collected",
             "by": ctx.author.mention,
-            "at": datetime.datetime.utcnow()
+            "at": datetime.get_now_pst()
         })
         embed = discord.Embed(title="Evidence Collected", description=description, color=discord.Color.green())
         embed.add_field(name="Evidence ID", value=f"#{ev_id}", inline=True)
@@ -87,7 +88,7 @@ class ForensicsCog(commands.Cog):
         ev["chain_of_custody"].append({
             "action": f"transferred to {user.mention}",
             "by": ctx.author.mention,
-            "at": datetime.datetime.utcnow()
+            "at": datetime.get_now_pst()
         })
         embed = discord.Embed(title="Evidence Transferred", description=f"Evidence #{evidence_id} transferred", color=discord.Color.blue())
         embed.add_field(name="From", value=ctx.author.mention, inline=True)
@@ -120,7 +121,7 @@ class ForensicsCog(commands.Cog):
         inv = self.investigations[investigation_id]
         inv["status"] = "closed"
         inv["conclusions"] = conclusion
-        inv["timeline"].append({"action": "Investigation closed", "by": ctx.author.mention, "at": datetime.datetime.utcnow()})
+        inv["timeline"].append({"action": "Investigation closed", "by": ctx.author.mention, "at": datetime.get_now_pst()})
         embed = discord.Embed(title=f"Investigation #{investigation_id} Closed", description=conclusion, color=discord.Color.green())
         embed.add_field(name="Evidence Collected", value=str(len(inv["evidence"])), inline=True)
         embed.add_field(name="Events", value=str(len(inv["timeline"])), inline=True)

@@ -7,6 +7,7 @@ Part of Sentinel Security Operations Center
 import discord
 from discord.ext import commands
 from datetime import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 class ChannelLockSystem(commands.Cog):
     """Lock and unlock channels"""
@@ -33,7 +34,7 @@ class ChannelLockSystem(commands.Cog):
                 reason=f"Channel locked by {ctx.author}"
             )
             
-            self.locked_channels[channel.id] = datetime.utcnow()
+            self.locked_channels[channel.id] = get_now_pst()
             
             embed = discord.Embed(
                 title="🔒 Channel Locked",
@@ -41,7 +42,7 @@ class ChannelLockSystem(commands.Cog):
                 color=discord.Color.red()
             )
             embed.add_field(name="Status", value="🔴 LOCKED", inline=True)
-            embed.add_field(name="Time", value=datetime.utcnow().strftime('%H:%M:%S'), inline=True)
+            embed.add_field(name="Time", value=get_now_pst().strftime('%H:%M:%S'), inline=True)
             embed.add_field(name="Locked By", value=ctx.author.mention, inline=True)
             
             await ctx.send(embed=embed)
@@ -75,7 +76,7 @@ class ChannelLockSystem(commands.Cog):
                 color=discord.Color.green()
             )
             embed.add_field(name="Status", value="🟢 UNLOCKED", inline=True)
-            embed.add_field(name="Time", value=datetime.utcnow().strftime('%H:%M:%S'), inline=True)
+            embed.add_field(name="Time", value=get_now_pst().strftime('%H:%M:%S'), inline=True)
             embed.add_field(name="Unlocked By", value=ctx.author.mention, inline=True)
             
             await ctx.send(embed=embed)

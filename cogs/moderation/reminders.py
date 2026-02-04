@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands, tasks
 from datetime import datetime, timedelta
+from cogs.core.pst_timezone import get_now_pst
 
 class Reminders(commands.Cog):
 	def __init__(self, bot):
@@ -10,13 +11,13 @@ class Reminders(commands.Cog):
 
 	@commands.command()
 	async def remindme(self, ctx, time: int, *, message: str):
-		remind_at = datetime.utcnow() + timedelta(minutes=time)
+		remind_at = get_now_pst() + timedelta(minutes=time)
 		self.reminders.append({"user": ctx.author.id, "message": message, "remind_at": remind_at})
 		await ctx.send(f"Reminder set for {time} minutes: {message}")
 
 	@tasks.loop(seconds=30)
 	async def check_reminders(self):
-		now = datetime.utcnow()
+		now = get_now_pst()
 		to_remove = []
 		for r in self.reminders:
 			if now >= r["remind_at"]:

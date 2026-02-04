@@ -3,6 +3,7 @@ from discord.ext import commands
 import json
 import os
 import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 DATA_FILE = 'data/auto_reports.json'
 
@@ -52,7 +53,7 @@ class AutoReportGeneratorCog(commands.Cog):
             "id": report_id,
             "type": report_type,
             "description": description,
-            "generated_at": datetime.datetime.utcnow().isoformat(),
+            "generated_at": datetime.get_now_pst().isoformat(),
             "generated_by": str(ctx.author),
             "status": "completed",
             "sections": []
@@ -81,10 +82,10 @@ class AutoReportGeneratorCog(commands.Cog):
             "type": report_type,
             "frequency": frequency,
             "template": template,
-            "scheduled_at": datetime.datetime.utcnow().isoformat(),
+            "scheduled_at": datetime.get_now_pst().isoformat(),
             "scheduled_by": str(ctx.author),
             "active": True,
-            "next_run": datetime.datetime.utcnow().isoformat()
+            "next_run": datetime.get_now_pst().isoformat()
         }
         
         data["scheduled_reports"].append(scheduled)

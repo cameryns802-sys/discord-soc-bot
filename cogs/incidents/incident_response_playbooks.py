@@ -4,6 +4,7 @@ from discord.ext import commands
 import json
 import os
 from datetime import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 DATA_FILE = 'data/playbooks.json'
 
@@ -150,7 +151,7 @@ class IncidentResponsePlaybookCog(commands.Cog):
         embed = discord.Embed(
             title=f"📖 {playbook.get('name')}",
             color=severity_color,
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(

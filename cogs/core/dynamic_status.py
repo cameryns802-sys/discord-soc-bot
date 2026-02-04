@@ -17,6 +17,7 @@ import random
 from datetime import datetime, timedelta
 
 from cogs.core.signal_bus import signal_bus, Signal, SignalType
+from cogs.core.pst_timezone import get_now_pst
 
 class DynamicStatus(commands.Cog):
     """Dynamic threat level status system"""
@@ -100,7 +101,7 @@ class DynamicStatus(commands.Cog):
         if level != self.current_level:
             self.current_level = level
             self.current_message_index = 0
-            self.last_threat_time = datetime.utcnow()
+            self.last_threat_time = get_now_pst()
             
             # Immediately update status
             await self.update_status()
@@ -156,7 +157,7 @@ class DynamicStatus(commands.Cog):
         
         # Check if we should return to normal
         if self.current_level != 'normal' and self.last_threat_time:
-            time_since_threat = (datetime.utcnow() - self.last_threat_time).total_seconds()
+            time_since_threat = (get_now_pst() - self.last_threat_time).total_seconds()
             
             # Return to normal after 5 minutes for elevated, 10 minutes for panic
             if self.current_level == 'elevated' and time_since_threat > 300:
@@ -237,7 +238,7 @@ class DynamicStatus(commands.Cog):
             title="⚫ LOCKDOWN INITIATED",
             description="All systems locked. Security protocols at maximum.",
             color=discord.Color.from_rgb(0, 0, 0),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         embed.add_field(name="Status", value="⚫ LOCKDOWN MODE", inline=True)
         embed.add_field(name="Initiated By", value=ctx.author.mention, inline=True)
@@ -260,7 +261,7 @@ class DynamicStatus(commands.Cog):
             title="🟢 ALL CLEAR",
             description="Threat level returned to normal. All systems nominal.",
             color=discord.Color.green(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         embed.add_field(name="Status", value="🟢 NORMAL", inline=True)
         embed.add_field(name="Cleared By", value=ctx.author.mention, inline=True)

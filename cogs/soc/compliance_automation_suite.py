@@ -10,6 +10,7 @@ import json
 import os
 from datetime import datetime, timedelta
 import uuid
+from cogs.core.pst_timezone import get_now_pst
 
 class ComplianceAutomationSuite(commands.Cog):
     """Compliance automation and framework monitoring"""
@@ -69,7 +70,7 @@ class ComplianceAutomationSuite(commands.Cog):
         assessment = {
             'id': assessment_id,
             'framework': framework,
-            'timestamp': datetime.utcnow().isoformat(),
+            'timestamp': get_now_pst().isoformat(),
             'compliant_controls': fw_data['compliant'],
             'total_controls': fw_data['controls'],
             'compliance_percentage': compliance_pct,
@@ -85,12 +86,12 @@ class ComplianceAutomationSuite(commands.Cog):
             title=f"📋 {fw_data['name']} Compliance Scan",
             description=f"Framework compliance assessment",
             color=color,
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Assessment ID", value=f"`{assessment_id}`", inline=True)
         embed.add_field(name="Framework", value=fw_data['name'], inline=True)
-        embed.add_field(name="Scan Date", value=datetime.utcnow().strftime('%Y-%m-%d'), inline=True)
+        embed.add_field(name="Scan Date", value=get_now_pst().strftime('%Y-%m-%d'), inline=True)
         
         embed.add_field(name="Compliance Status", value="━" * 25, inline=False)
         embed.add_field(name="Compliant Controls", value=f"✅ {fw_data['compliant']}/{fw_data['controls']}", inline=True)
@@ -110,7 +111,7 @@ class ComplianceAutomationSuite(commands.Cog):
             title="📊 Compliance Status Report",
             description="Multi-framework compliance summary",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Overall Compliance", value="━" * 25, inline=False)
@@ -154,7 +155,7 @@ class ComplianceAutomationSuite(commands.Cog):
             title="🔍 Evidence Collection Status",
             description="Compliance evidence tracking",
             color=discord.Color.green(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Evidence Summary", value="━" * 25, inline=False)
@@ -187,7 +188,7 @@ class ComplianceAutomationSuite(commands.Cog):
             title="🛠️ Compliance Gap Remediation",
             description="Tracking remediation progress",
             color=discord.Color.orange(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Remediation Summary", value="━" * 25, inline=False)

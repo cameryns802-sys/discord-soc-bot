@@ -1,0 +1,49 @@
+{
+  "articles": {},
+  "categories": {
+    "incident_response": {
+      "id": "incident_response",
+      "name": "Incident Response Procedures",
+      "article_count": 0,
+      "created_at": "2026-02-01T22:49:58.034886"
+    },
+    "threat_detection": {
+      "id": "threat_detection",
+      "name": "Threat Detection Guides",
+      "article_count": 0,
+      "created_at": "2026-02-01T22:49:58.034936"
+    },
+    "compliance": {
+      "id": "compliance",
+      "name": "Compliance Procedures",
+      "article_count": 0,
+      "created_at": "2026-02-01T22:49:58.034946"
+    },
+    "onboarding": {
+      "id": "onboarding",
+      "name": "Onboarding Guides",
+      "article_count": 0,
+      "created_at": "2026-02-01T22:49:58.034951"
+    },
+    "forensics": {
+      "id": "forensics",
+      "name": "Forensics & Investigation",
+      "article_count": 0,
+      "created_at": "2026-02-01T22:49:58.034955"
+    },
+    "recovery": {
+      "id": "recovery",
+      "name": "Recovery Procedures",
+      "article_count": 0,
+      "created_at": "2026-02-01T22:49:58.034959"
+    },
+    "automation": {
+      "id": "automation",
+      "name": "Automation Recipes",
+      "article_count": 0,
+      "created_at": "2026-02-01T22:49:58.034964"
+    }
+  },
+  "kb_counter": 0,
+  "cat_counter": 7
+}

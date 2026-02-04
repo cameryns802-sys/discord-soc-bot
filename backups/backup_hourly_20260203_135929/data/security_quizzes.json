@@ -1,0 +1,67 @@
+{
+  "phishing_quiz": {
+    "name": "Phishing Awareness Quiz",
+    "questions": [
+      {
+        "question": "What is the most common indicator of a phishing email?",
+        "options": [
+          "Urgent language and threats",
+          "Professional formatting",
+          "Correct spelling",
+          "Company logo"
+        ],
+        "correct": 0,
+        "explanation": "Phishing emails often use urgency and threats to pressure victims into acting quickly."
+      },
+      {
+        "question": "What should you do if you receive a suspicious email?",
+        "options": [
+          "Click links to investigate",
+          "Reply asking if it's legitimate",
+          "Report it to security team",
+          "Delete it immediately"
+        ],
+        "correct": 2,
+        "explanation": "Always report suspicious emails to your security team for analysis."
+      },
+      {
+        "question": "Which is a red flag in an email URL?",
+        "options": [
+          "HTTPS in the URL",
+          "Misspelled domain name",
+          "Short URL length",
+          "Common TLD (.com)"
+        ],
+        "correct": 1,
+        "explanation": "Misspelled or slightly altered domain names (typosquatting) are common phishing tactics."
+      }
+    ]
+  },
+  "password_quiz": {
+    "name": "Password Security Quiz",
+    "questions": [
+      {
+        "question": "What makes a strong password?",
+        "options": [
+          "Dictionary words only",
+          "Personal information",
+          "Long, random, and unique",
+          "Same across all accounts"
+        ],
+        "correct": 2,
+        "explanation": "Strong passwords are long (12+ characters), random, and unique for each account."
+      },
+      {
+        "question": "What is MFA?",
+        "options": [
+          "Multiple Failed Attempts",
+          "Multi-Factor Authentication",
+          "Master File Access",
+          "Manual Firewall Activation"
+        ],
+        "correct": 1,
+        "explanation": "MFA (Multi-Factor Authentication) adds extra security layers beyond passwords."
+      }
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+{
+    "TKT-1451439611766112319-0001": {
+        "ticket_id": "TKT-1451439611766112319-0001",
+        "guild_id": "1451439611766112319",
+        "creator_id": 960995456488448080,
+        "creator_name": "2.3cam",
+        "priority": "high",
+        "status": "open",
+        "description": "",
+        "assigned_to": null,
+        "assigned_name": null,
+        "created_at": "2026-02-03T22:12:15.155240+00:00",
+        "updated_at": "2026-02-03T22:12:15.155276+00:00",
+        "closed_at": null,
+        "closed_by": null,
+        "channel_id": null,
+        "comments": []
+    }
+}

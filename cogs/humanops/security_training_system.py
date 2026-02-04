@@ -10,6 +10,7 @@ import json
 import os
 from datetime import datetime, timedelta
 import random
+from cogs.core.pst_timezone import get_now_pst
 
 class SecurityTrainingSystem(commands.Cog):
     """Security training and awareness management"""
@@ -236,7 +237,7 @@ class SecurityTrainingSystem(commands.Cog):
             title="🎓 Security Training Modules",
             description=f"{len(modules)} module(s) available | {len(completed_modules)} completed",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         # Group by category
@@ -280,7 +281,7 @@ class SecurityTrainingSystem(commands.Cog):
             title=f"🎓 {module['name']}",
             description=module['description'],
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Category", value=module['category'].replace('_', ' ').title(), inline=True)
@@ -354,7 +355,7 @@ class SecurityTrainingSystem(commands.Cog):
         if module_id not in progress['completed']:
             progress['completed'].append(module_id)
         progress['scores'][module_id] = score
-        progress['last_training'] = datetime.utcnow().isoformat()
+        progress['last_training'] = get_now_pst().isoformat()
         self.save_user_progress(ctx.guild.id, ctx.author.id, progress)
         
         # Send completion message
@@ -362,7 +363,7 @@ class SecurityTrainingSystem(commands.Cog):
             title="🎉 Training Complete!",
             description=f"**{module['name']}** - Score: {score}%",
             color=discord.Color.green(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed_complete.add_field(name="Status", value="✅ Passed", inline=True)
@@ -384,7 +385,7 @@ class SecurityTrainingSystem(commands.Cog):
             title=f"📊 Training Statistics - {target_user.display_name}",
             description=f"{len(completed)}/{len(modules)} modules completed",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         # Completion rate

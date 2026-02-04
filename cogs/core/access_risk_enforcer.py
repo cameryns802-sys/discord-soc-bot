@@ -9,6 +9,7 @@ import json
 import os
 from datetime import datetime, timedelta
 from typing import Dict, List, Optional
+from cogs.core.pst_timezone import get_now_pst
 
 class AccessRiskEnforcerCog(commands.Cog):
     """
@@ -89,7 +90,7 @@ class AccessRiskEnforcerCog(commands.Cog):
         
         # Additional risk factors
         # New account (< 7 days)
-        account_age = (datetime.utcnow() - member.created_at).days
+        account_age = (get_now_pst() - member.created_at).days
         if account_age < 7:
             risk_score += 20
         elif account_age < 30:
@@ -97,7 +98,7 @@ class AccessRiskEnforcerCog(commands.Cog):
         
         # New to server (< 3 days)
         if member.joined_at:
-            tenure = (datetime.utcnow() - member.joined_at).days
+            tenure = (get_now_pst() - member.joined_at).days
             if tenure < 3:
                 risk_score += 15
             elif tenure < 7:
@@ -144,9 +145,9 @@ class AccessRiskEnforcerCog(commands.Cog):
             
             self.risk_profiles[user_id][guild_id] = {
                 "risk_score": risk_score,
-                "last_scan": datetime.utcnow().isoformat(),
-                "account_age_days": (datetime.utcnow() - member.created_at).days,
-                "server_tenure_days": (datetime.utcnow() - member.joined_at).days if member.joined_at else 0,
+                "last_scan": get_now_pst().isoformat(),
+                "account_age_days": (get_now_pst() - member.created_at).days,
+                "server_tenure_days": (get_now_pst() - member.joined_at).days if member.joined_at else 0,
                 "roles": [r.name for r in member.roles if r.name != "@everyone"]
             }
             
@@ -167,7 +168,7 @@ class AccessRiskEnforcerCog(commands.Cog):
                 title="⚠️ Access Risk Assessment",
                 description=f"Risk profile for {member.mention}",
                 color=color,
-                timestamp=datetime.utcnow()
+                timestamp=get_now_pst()
             )
             
             embed.add_field(name="Risk Score", value=f"**{risk_score:.1f}/100**", inline=True)
@@ -207,9 +208,9 @@ class AccessRiskEnforcerCog(commands.Cog):
                 
                 self.risk_profiles[user_id][guild_id] = {
                     "risk_score": risk_score,
-                    "last_scan": datetime.utcnow().isoformat(),
-                    "account_age_days": (datetime.utcnow() - mem.created_at).days,
-                    "server_tenure_days": (datetime.utcnow() - mem.joined_at).days if mem.joined_at else 0,
+                    "last_scan": get_now_pst().isoformat(),
+                    "account_age_days": (get_now_pst() - mem.created_at).days,
+                    "server_tenure_days": (get_now_pst() - mem.joined_at).days if mem.joined_at else 0,
                     "roles": [r.name for r in mem.roles if r.name != "@everyone"]
                 }
                 
@@ -226,7 +227,7 @@ class AccessRiskEnforcerCog(commands.Cog):
                 title="✅ Access Risk Scan Complete",
                 description=f"Scanned {len(ctx.guild.members) - len([m for m in ctx.guild.members if m.bot])} members",
                 color=discord.Color.blue(),
-                timestamp=datetime.utcnow()
+                timestamp=get_now_pst()
             )
             
             embed.add_field(name="🔴 High Risk", value=high_risk_count, inline=True)
@@ -265,7 +266,7 @@ class AccessRiskEnforcerCog(commands.Cog):
         
         # Perform enforcement action
         enforcement_record = {
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": get_now_pst().isoformat(),
             "guild_id": guild_id,
             "user_id": user_id,
             "action": action,
@@ -307,7 +308,7 @@ class AccessRiskEnforcerCog(commands.Cog):
             title="✅ Access Policy Enforced",
             description=f"Action taken on {member.mention}",
             color=discord.Color.green(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Action", value=action.upper(), inline=True)
@@ -346,7 +347,7 @@ class AccessRiskEnforcerCog(commands.Cog):
             title="⚙️ Enforcement Configuration Updated",
             description=f"Setting `{setting}` updated",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         embed.add_field(name="Setting", value=setting, inline=True)
         embed.add_field(name="New Value", value=str(value), inline=True)
@@ -374,7 +375,7 @@ class AccessRiskEnforcerCog(commands.Cog):
             title="📋 Access Enforcement Log",
             description=f"Showing {len(recent_logs)} most recent actions",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         if not recent_logs:
@@ -425,14 +426,14 @@ class AccessRiskEnforcerCog(commands.Cog):
         # Recent enforcements
         recent_enforcements = [
             e for e in self.enforcement_log
-            if (datetime.utcnow() - datetime.fromisoformat(e["timestamp"])).days < 7
+            if (get_now_pst() - datetime.fromisoformat(e["timestamp"])).days < 7
         ]
         
         embed = discord.Embed(
             title="🛡️ Access Risk Enforcement Dashboard",
             description="Real-time access control and risk management",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="🔴 High Risk Users", value=len(high_risk), inline=True)

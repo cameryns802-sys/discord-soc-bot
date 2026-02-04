@@ -1,0 +1,1264 @@
+{
+  "1451439611766112319": {
+    "captured_at": "2026-02-02T23:59:27.883193",
+    "roles": {
+      "1451439611766112319": {
+        "name": "@everyone",
+        "permissions": 2248473465835073,
+        "position": 0
+      },
+      "1467997669426335941": {
+        "name": "\ud83d\udd10 Compliance Officer",
+        "permissions": 68736,
+        "position": 1
+      },
+      "1467997667794882563": {
+        "name": "\ud83d\udcca Analyst",
+        "permissions": 68608,
+        "position": 1
+      },
+      "1467997665349599405": {
+        "name": "\ud83d\udc41\ufe0f Monitor",
+        "permissions": 68608,
+        "position": 1
+      },
+      "1467997663822872687": {
+        "name": "\ud83d\udee1\ufe0f Defender",
+        "permissions": 76800,
+        "position": 1
+      },
+      "1467997653852885056": {
+        "name": "\ud83d\udd0d Security Analyst",
+        "permissions": 76928,
+        "position": 1
+      },
+      "1467997652456312886": {
+        "name": "\ud83c\udfaf Incident Commander",
+        "permissions": 142353,
+        "position": 1
+      },
+      "1467997651500011585": {
+        "name": "\ud83d\udee1\ufe0f Sentinel Admin",
+        "permissions": 268443710,
+        "position": 1
+      },
+      "1467990639751725263": {
+        "name": "SOC Sentinel",
+        "permissions": 8,
+        "position": 1
+      },
+      "1451444061419602004": {
+        "name": "Helper Junior",
+        "permissions": 8192,
+        "position": 1
+      },
+      "1451444060043743253": {
+        "name": "Helper",
+        "permissions": 8192,
+        "position": 1
+      },
+      "1451444058831589416": {
+        "name": "Helper Senior",
+        "permissions": 8192,
+        "position": 1
+      },
+      "1451444057573298327": {
+        "name": "Helper Supervisor",
+        "permissions": 8192,
+        "position": 1
+      },
+      "1451444050585583747": {
+        "name": "Helper Lead",
+        "permissions": 8192,
+        "position": 1
+      },
+      "1451444049264251010": {
+        "name": "Moderator Associate",
+        "permissions": 8194,
+        "position": 1
+      },
+      "1451444047897034793": {
+        "name": "Moderator Agent",
+        "permissions": 8194,
+        "position": 1
+      },
+      "1451444045179256842": {
+        "name": "Moderator Officer",
+        "permissions": 8194,
+        "position": 1
+      },
+      "1451444042930847746": {
+        "name": "Moderator Specialist",
+        "permissions": 8194,
+        "position": 1
+      },
+      "1451444034533982320": {
+        "name": "Moderator Sergeant",
+        "permissions": 8194,
+        "position": 1
+      },
+      "1451444033300856975": {
+        "name": "Moderator Lieutenant",
+        "permissions": 8194,
+        "position": 1
+      },
+      "1451444032097091624": {
+        "name": "Moderator Captain",
+        "permissions": 8194,
+        "position": 1
+      },
+      "1451444029827846194": {
+        "name": "Moderator Commander",
+        "permissions": 8194,
+        "position": 1
+      },
+      "1451444028154314774": {
+        "name": "Night Moderator",
+        "permissions": 8198,
+        "position": 1
+      },
+      "1451444024245354627": {
+        "name": "Senior Moderator",
+        "permissions": 8198,
+        "position": 1
+      },
+      "1451444017266036858": {
+        "name": "Quality Manager",
+        "permissions": 8194,
+        "position": 1
+      },
+      "1451442496541556816": {
+        "name": "Level 20",
+        "permissions": 0,
+        "position": 1
+      },
+      "1451442495237132430": {
+        "name": "Level 19",
+        "permissions": 0,
+        "position": 1
+      },
+      "1451442493752086681": {
+        "name": "Level 18",
+        "permissions": 0,
+        "position": 1
+      },
+      "1451442491562918073": {
+        "name": "Level 17",
+        "permissions": 0,
+        "position": 1
+      },
+      "1451442489637474395": {
+        "name": "Level 16",
+        "permissions": 0,
+        "position": 1
+      },
+      "1451442488383504425": {
+        "name": "Level 15",
+        "permissions": 0,
+        "position": 1
+      },
+      "1451442487078948937": {
+        "name": "Level 14",
+        "permissions": 0,
+        "position": 1
+      },
+      "1451442485673988218": {
+        "name": "Level 13",
+        "permissions": 0,
+        "position": 1
+      },
+      "1451442483857723457": {
+        "name": "Level 12",
+        "permissions": 0,
+        "position": 1
+      },
+      "1451442482754617404": {
+        "name": "Level 11",
+        "permissions": 0,
+        "position": 1
+      },
+      "1451442480859054102": {
+        "name": "Level 10",
+        "permissions": 0,
+        "position": 1
+      },
+      "1451442479088926822": {
+        "name": "Level 9",
+        "permissions": 0,
+        "position": 1
+      },
+      "1451442477855936645": {
+        "name": "Level 8",
+        "permissions": 0,
+        "position": 1
+      },
+      "1451442475716579442": {
+        "name": "Level 7",
+        "permissions": 0,
+        "position": 1
+      },
+      "1451442474651226112": {
+        "name": "Level 6",
+        "permissions": 0,
+        "position": 1
+      },
+      "1451442473405644952": {
+        "name": "Level 5",
+        "permissions": 0,
+        "position": 1
+      },
+      "1451442472076054569": {
+        "name": "Level 4",
+        "permissions": 0,
+        "position": 1
+      },
+      "1451442470763364393": {
+        "name": "Level 3",
+        "permissions": 0,
+        "position": 1
+      },
+      "1451442469127589888": {
+        "name": "Level 2",
+        "permissions": 0,
+        "position": 1
+      },
+      "1451442467651190879": {
+        "name": "Level 1",
+        "permissions": 0,
+        "position": 1
+      },
+      "1451442466396835840": {
+        "name": "Muted",
+        "permissions": 0,
+        "position": 1
+      },
+      "1451442465189138442": {
+        "name": "Bot",
+        "permissions": 0,
+        "position": 1
+      },
+      "1451442463385452545": {
+        "name": "Returning Member",
+        "permissions": 0,
+        "position": 1
+      },
+      "1451442461770780797": {
+        "name": "Newcomer",
+        "permissions": 0,
+        "position": 1
+      },
+      "1451442460273410069": {
+        "name": "OG Member",
+        "permissions": 0,
+        "position": 1
+      },
+      "1451442456359866422": {
+        "name": "Server Supporter",
+        "permissions": 0,
+        "position": 1
+      },
+      "1451442455030530091": {
+        "name": "Booster",
+        "permissions": 0,
+        "position": 1
+      },
+      "1451442453470118013": {
+        "name": "Veteran Member",
+        "permissions": 0,
+        "position": 1
+      },
+      "1451442452195049574": {
+        "name": "Trusted Member",
+        "permissions": 0,
+        "position": 1
+      },
+      "1451442450970316871": {
+        "name": "Active Member",
+        "permissions": 0,
+        "position": 1
+      },
+      "1451442449514889320": {
+        "name": "Member",
+        "permissions": 0,
+        "position": 1
+      },
+      "1451442446558036048": {
+        "name": "Verified",
+        "permissions": 0,
+        "position": 1
+      },
+      "1451442443676553337": {
+        "name": "Events Team",
+        "permissions": 8192,
+        "position": 1
+      },
+      "1451442442367668224": {
+        "name": "Audit Team",
+        "permissions": 128,
+        "position": 1
+      },
+      "1451442439679377408": {
+        "name": "Training Team",
+        "permissions": 8192,
+        "position": 1
+      },
+      "1451442438336942080": {
+        "name": "Appeals Team",
+        "permissions": 8192,
+        "position": 1
+      },
+      "1451442436961468489": {
+        "name": "Ticket Team",
+        "permissions": 8192,
+        "position": 1
+      },
+      "1451442435220574361": {
+        "name": "Incident Response Team",
+        "permissions": 8198,
+        "position": 1
+      },
+      "1451442433681526866": {
+        "name": "Trust & Safety Team",
+        "permissions": 8192,
+        "position": 1
+      },
+      "1451442432465174558": {
+        "name": "Anti-Nuke Team",
+        "permissions": 8,
+        "position": 1
+      },
+      "1451442430720213075": {
+        "name": "Anti-Raid Team",
+        "permissions": 8198,
+        "position": 1
+      },
+      "1451442429663252532": {
+        "name": "Automation Team",
+        "permissions": 16,
+        "position": 1
+      },
+      "1451442427280752702": {
+        "name": "Infrastructure Team",
+        "permissions": 16,
+        "position": 1
+      },
+      "1451442425577869404": {
+        "name": "Security Team",
+        "permissions": 8198,
+        "position": 1
+      },
+      "1451442424227303495": {
+        "name": "Support Team",
+        "permissions": 8192,
+        "position": 1
+      },
+      "1451442421782286367": {
+        "name": "Moderation Team",
+        "permissions": 8192,
+        "position": 1
+      },
+      "1451442419882131599": {
+        "name": "Administration Team",
+        "permissions": 268435456,
+        "position": 1
+      },
+      "1451442418313597058": {
+        "name": "Retired Staff",
+        "permissions": 0,
+        "position": 1
+      },
+      "1451442416363241475": {
+        "name": "Probation Staff",
+        "permissions": 0,
+        "position": 1
+      },
+      "1451442415096299560": {
+        "name": "Staff In Training",
+        "permissions": 0,
+        "position": 1
+      },
+      "1451442413855051877": {
+        "name": "Helper Trainee",
+        "permissions": 8192,
+        "position": 1
+      },
+      "1451442409610416290": {
+        "name": "Staff Examiner",
+        "permissions": 0,
+        "position": 1
+      },
+      "1451442408167313568": {
+        "name": "Staff Trainer",
+        "permissions": 0,
+        "position": 1
+      },
+      "1451442406640582859": {
+        "name": "Training Supervisor",
+        "permissions": 0,
+        "position": 1
+      },
+      "1451442405260791910": {
+        "name": "Staff Director",
+        "permissions": 0,
+        "position": 1
+      },
+      "1451442403893444700": {
+        "name": "HR Officer",
+        "permissions": 0,
+        "position": 1
+      },
+      "1451442402572112005": {
+        "name": "Senior HR",
+        "permissions": 0,
+        "position": 1
+      },
+      "1451442401318010910": {
+        "name": "HR Director",
+        "permissions": 0,
+        "position": 1
+      },
+      "1451442256316862594": {
+        "name": "Escalation Moderator",
+        "permissions": 8198,
+        "position": 1
+      },
+      "1451442254911635529": {
+        "name": "Global Moderator",
+        "permissions": 8198,
+        "position": 1
+      },
+      "1451442248830156994": {
+        "name": "Lead Moderator",
+        "permissions": 8198,
+        "position": 1
+      },
+      "1451442247492042774": {
+        "name": "Head Moderator",
+        "permissions": 8198,
+        "position": 1
+      },
+      "1451442246464438354": {
+        "name": "Deputy Chief Moderator",
+        "permissions": 8198,
+        "position": 1
+      },
+      "1451442245025923072": {
+        "name": "Chief Moderator",
+        "permissions": 8198,
+        "position": 1
+      },
+      "1451442243171778715": {
+        "name": "Recruitment Manager",
+        "permissions": 8194,
+        "position": 1
+      },
+      "1451442242035388486": {
+        "name": "HR Manager",
+        "permissions": 8194,
+        "position": 1
+      },
+      "1451442239447498752": {
+        "name": "Automation Manager",
+        "permissions": 8194,
+        "position": 1
+      },
+      "1451442238172303411": {
+        "name": "Appeals Manager",
+        "permissions": 8194,
+        "position": 1
+      },
+      "1451442236805087304": {
+        "name": "Training Manager",
+        "permissions": 8194,
+        "position": 1
+      },
+      "1451442235118981123": {
+        "name": "Event Manager",
+        "permissions": 8194,
+        "position": 1
+      },
+      "1451442233713627361": {
+        "name": "Support Manager",
+        "permissions": 8194,
+        "position": 1
+      },
+      "1451442232446947368": {
+        "name": "Community Manager",
+        "permissions": 8194,
+        "position": 1
+      },
+      "1451442231129935923": {
+        "name": "Moderation Manager",
+        "permissions": 8194,
+        "position": 1
+      },
+      "1451442230098133102": {
+        "name": "Staff Manager",
+        "permissions": 8194,
+        "position": 1
+      },
+      "1451442228525404232": {
+        "name": "Operations Manager",
+        "permissions": 8194,
+        "position": 1
+      },
+      "1451442225572741161": {
+        "name": "Audit Administrator",
+        "permissions": 128,
+        "position": 1
+      },
+      "1451442224679227495": {
+        "name": "Permissions Administrator",
+        "permissions": 268435456,
+        "position": 1
+      },
+      "1451442222930067579": {
+        "name": "Bot Administrator",
+        "permissions": 16,
+        "position": 1
+      },
+      "1451442222095400980": {
+        "name": "Infrastructure Administrator",
+        "permissions": 16,
+        "position": 1
+      },
+      "1451442220673532054": {
+        "name": "Security Administrator",
+        "permissions": 8198,
+        "position": 1
+      },
+      "1451442218416996353": {
+        "name": "Administrator",
+        "permissions": 8,
+        "position": 1
+      },
+      "1451442215518994525": {
+        "name": "Senior Administrator",
+        "permissions": 8,
+        "position": 1
+      },
+      "1451442214247989318": {
+        "name": "Head Administrator",
+        "permissions": 8,
+        "position": 1
+      },
+      "1451442212599631955": {
+        "name": "Director",
+        "permissions": 8,
+        "position": 1
+      },
+      "1451442211320500285": {
+        "name": "Senior Director",
+        "permissions": 8,
+        "position": 1
+      },
+      "1451442209516949556": {
+        "name": "Executive Director",
+        "permissions": 8,
+        "position": 1
+      },
+      "1451442207612735619": {
+        "name": "Chief Executive",
+        "permissions": 8,
+        "position": 1
+      },
+      "1451442206173954219": {
+        "name": "Co-Founder",
+        "permissions": 8,
+        "position": 1
+      },
+      "1451439860937265154": {
+        "name": "Founder",
+        "permissions": 8,
+        "position": 1
+      }
+    },
+    "permissions": {},
+    "channels": {
+      "1451439612869218476": {
+        "name": "Text Channels",
+        "type": "category"
+      },
+      "1451439612869218477": {
+        "name": "Voice Channels",
+        "type": "category"
+      },
+      "1451439612869218478": {
+        "name": "general",
+        "type": "text"
+      },
+      "1451439612869218479": {
+        "name": "General",
+        "type": "voice"
+      },
+      "1467997670739148950": {
+        "name": "\ud83d\udd12 Sentinel SOC",
+        "type": "category"
+      },
+      "1467997671292928124": {
+        "name": "soc-command-center",
+        "type": "text"
+      },
+      "1467997672727122093": {
+        "name": "threat-intelligence",
+        "type": "text"
+      },
+      "1467997674060906497": {
+        "name": "incident-alerts",
+        "type": "text"
+      },
+      "1467997676162515090": {
+        "name": "threat-hunting",
+        "type": "text"
+      },
+      "1467997677873528965": {
+        "name": "vulnerability-management",
+        "type": "text"
+      },
+      "1467997678930628793": {
+        "name": "compliance-tracking",
+        "type": "text"
+      },
+      "1467997680788832359": {
+        "name": "security-metrics",
+        "type": "text"
+      },
+      "1467997689080975621": {
+        "name": "incident-response",
+        "type": "text"
+      },
+      "1467997690922275050": {
+        "name": "false-positives",
+        "type": "text"
+      },
+      "1467997693178548492": {
+        "name": "audit-logs",
+        "type": "text"
+      },
+      "1467997694684561554": {
+        "name": "soc-voice",
+        "type": "voice"
+      }
+    },
+    "verification_level": "none",
+    "explicit_content_filter": "disabled"
+  },
+  "1466863901449785497": {
+    "captured_at": "2026-02-02T23:59:27.898537",
+    "roles": {
+      "1466863901449785497": {
+        "name": "@everyone",
+        "permissions": 2222085186637377,
+        "position": 0
+      },
+      "1468003362627915908": {
+        "name": "Welcomer",
+        "permissions": 1533236735095,
+        "position": 1
+      },
+      "1467651698255200397": {
+        "name": "Unverified",
+        "permissions": 0,
+        "position": 1
+      },
+      "1467651695898001418": {
+        "name": "Verified",
+        "permissions": 0,
+        "position": 2
+      },
+      "1467651479476375687": {
+        "name": "Member",
+        "permissions": 0,
+        "position": 3
+      },
+      "1466875141848961142": {
+        "name": "NotifyMe",
+        "permissions": 805751808,
+        "position": 4
+      },
+      "1466868893472657433": {
+        "name": "LoggerBot",
+        "permissions": 536890544,
+        "position": 5
+      },
+      "1466863901449785498": {
+        "name": "Any",
+        "permissions": 0,
+        "position": 6
+      },
+      "1466863901449785499": {
+        "name": "She/they",
+        "permissions": 0,
+        "position": 7
+      },
+      "1466863901449785500": {
+        "name": "He/they",
+        "permissions": 0,
+        "position": 8
+      },
+      "1466863901449785501": {
+        "name": "They/them",
+        "permissions": 0,
+        "position": 9
+      },
+      "1466863901449785502": {
+        "name": "She/her",
+        "permissions": 0,
+        "position": 10
+      },
+      "1466863901449785503": {
+        "name": "He/him",
+        "permissions": 0,
+        "position": 11
+      },
+      "1466863901449785504": {
+        "name": "25+",
+        "permissions": 0,
+        "position": 12
+      },
+      "1466863901806166211": {
+        "name": "18-25",
+        "permissions": 0,
+        "position": 13
+      },
+      "1466863901806166212": {
+        "name": "13-17",
+        "permissions": 0,
+        "position": 14
+      },
+      "1466863901806166213": {
+        "name": "Under 13",
+        "permissions": 0,
+        "position": 15
+      },
+      "1466863901806166214": {
+        "name": "Alaskan time zone",
+        "permissions": 0,
+        "position": 16
+      },
+      "1466863901806166215": {
+        "name": "Eastern time zone",
+        "permissions": 0,
+        "position": 17
+      },
+      "1466863901806166216": {
+        "name": "Central time zone",
+        "permissions": 0,
+        "position": 18
+      },
+      "1466863901806166217": {
+        "name": "Mountain time zone",
+        "permissions": 0,
+        "position": 19
+      },
+      "1466863901806166218": {
+        "name": "Pacific time zone",
+        "permissions": 0,
+        "position": 20
+      },
+      "1466863901806166219": {
+        "name": "\u22b6\u25ac\u25ac\u22b6\u25ac\u25ac \u2734 \u25ac\u25ac\u22b7\u25ac\u25ac\u22b7",
+        "permissions": 0,
+        "position": 21
+      },
+      "1466863901806166220": {
+        "name": "\ud83d\udd13DM open",
+        "permissions": 0,
+        "position": 22
+      },
+      "1466863901819011335": {
+        "name": "\ud83d\udd12DM close",
+        "permissions": 0,
+        "position": 23
+      },
+      "1466863901819011336": {
+        "name": "\ud83d\udd10Ask for DM",
+        "permissions": 0,
+        "position": 24
+      },
+      "1466863901819011337": {
+        "name": "\u2734 \u22b6\u25ac\u25ac\u22b6\u25acDM Status\u25ac\u22b7\u25ac\u25ac\u22b7 \u2734",
+        "permissions": 0,
+        "position": 25
+      },
+      "1466863901819011338": {
+        "name": "\u2705Verified",
+        "permissions": 6546771521,
+        "position": 26
+      },
+      "1466863901819011339": {
+        "name": "\u2b50Viewer\u3014Level 1\u207a\u3015",
+        "permissions": 6479252545,
+        "position": 27
+      },
+      "1466863901819011340": {
+        "name": "\ud83c\udf1fActive Viewer\u3014Level 10\u207a\u3015",
+        "permissions": 6479531585,
+        "position": 28
+      },
+      "1466863901819011341": {
+        "name": "\u2728Good Viewer\u3014Level 20\u207a\u3015",
+        "permissions": 6546771521,
+        "position": 29
+      },
+      "1466863901819011342": {
+        "name": "\ud83c\udf20Ace Viewer\u3014Level 40\u207a\u3015",
+        "permissions": 6546771521,
+        "position": 30
+      },
+      "1466863901819011343": {
+        "name": "\ud83d\udd31Legend Viewer\u3014Level 60\u207a\u3015",
+        "permissions": 6546771521,
+        "position": 31
+      },
+      "1466863901819011344": {
+        "name": "\u269c\ufe0fMythic Viewer\u3014Level 80\u207a\u3015",
+        "permissions": 6546771521,
+        "position": 32
+      },
+      "1466863901827141966": {
+        "name": "\ud83d\udcaf Godlike Viewer\u3014Level 100\u207a\u3015",
+        "permissions": 6546771521,
+        "position": 33
+      },
+      "1466863901827141967": {
+        "name": "\ud83d\udd07Muted",
+        "permissions": 4294967296,
+        "position": 34
+      },
+      "1466863901827141968": {
+        "name": "\u2734 \u22b6\u25ac\u25ac\u22b6\u25acMember\u25ac\u22b7\u25ac\u25ac\u22b7 \u2734",
+        "permissions": 0,
+        "position": 35
+      },
+      "1466863901827141969": {
+        "name": "\ud83e\udd47First Place\u3014Leaderboard\u3015",
+        "permissions": 6546771521,
+        "position": 36
+      },
+      "1466863901827141970": {
+        "name": "\u2734 \u22b6\u25ac\u25ac\u22b6\u25acLeaderBoard\u25ac\u22b7\u25ac\u25ac\u22b7 \u2734",
+        "permissions": 0,
+        "position": 37
+      },
+      "1466863901827141975": {
+        "name": "\ud83e\udd16Bot",
+        "permissions": 6546771521,
+        "position": 38
+      },
+      "1466863901839720671": {
+        "name": "\u2734 \u22b6\u25ac\u25ac\u22b6\u25acBot\u25ac\u22b7\u25ac\u25ac\u22b7 \u2734",
+        "permissions": 0,
+        "position": 39
+      },
+      "1466863901839720672": {
+        "name": "\ud83d\ude80Server Booster",
+        "permissions": 6546775617,
+        "position": 40
+      },
+      "1466863901839720673": {
+        "name": "\ud83d\udc8eTwitch Subscriber",
+        "permissions": 6546775617,
+        "position": 41
+      },
+      "1466863901839720674": {
+        "name": "\u2734 \u22b6\u25ac\u25ac\u22b6\u25acSpecial\u25ac\u22b7\u25ac\u25ac\u22b7 \u2734",
+        "permissions": 0,
+        "position": 42
+      },
+      "1466863901839720675": {
+        "name": "\ud83c\udfa5Youtuber",
+        "permissions": 6546775617,
+        "position": 43
+      },
+      "1466863901839720676": {
+        "name": "\ud83d\udd34Twitch Streamer",
+        "permissions": 6546775617,
+        "position": 44
+      },
+      "1466863901839720677": {
+        "name": "\u2734 \u22b6\u25ac\u25ac\u22b6\u25acSocial\u25ac\u22b7\u25ac\u25ac\u22b7 \u2734",
+        "permissions": 0,
+        "position": 45
+      },
+      "1466863901839720678": {
+        "name": "\u2699\ufe0fServer Staff",
+        "permissions": 6546771521,
+        "position": 46
+      },
+      "1466863901839720679": {
+        "name": "\u2753Trail Mod",
+        "permissions": 6755406017195591,
+        "position": 47
+      },
+      "1466863901839720680": {
+        "name": "\ud83c\udf00Moderator",
+        "permissions": 6755407225159239,
+        "position": 48
+      },
+      "1466863901856759948": {
+        "name": "\ud83c\udf10Head Moderator",
+        "permissions": 6755407493590599,
+        "position": 49
+      },
+      "1466863901856759949": {
+        "name": "\ud83d\udd25Administrator",
+        "permissions": 6757323585880063,
+        "position": 50
+      },
+      "1466863901856759950": {
+        "name": "\ud83d\udea8Head Administrator",
+        "permissions": 6757598463787007,
+        "position": 51
+      },
+      "1466863901856759951": {
+        "name": "\ud83d\udc51Co Owner",
+        "permissions": 6755408030465791,
+        "position": 52
+      },
+      "1466863901856759952": {
+        "name": "\ud83d\udc51Owner",
+        "permissions": 6755408030465791,
+        "position": 53
+      },
+      "1466863901856759953": {
+        "name": "\ud83d\udd12",
+        "permissions": 4503599627371544,
+        "position": 54
+      },
+      "1466863901856759954": {
+        "name": "\u2734 \u22b6\u25ac\u25ac\u22b6\u25acStaff\u25ac\u22b7\u25ac\u25ac\u22b7 \u2734",
+        "permissions": 0,
+        "position": 55
+      },
+      "1466863901856759955": {
+        "name": "EDIT WHATEVER YOU DON'T LIKE!",
+        "permissions": 6546771521,
+        "position": 56
+      },
+      "1466863901856759956": {
+        "name": "Bot perms",
+        "permissions": 8477226060218367,
+        "position": 57
+      },
+      "1467776741887053868": {
+        "name": "SOC Sentinel",
+        "permissions": 8,
+        "position": 58
+      }
+    },
+    "permissions": {},
+    "channels": {
+      "1466863904977064163": {
+        "name": "\ud83d\ude80\uff5cServer Boosters VC \ud83d\udd12",
+        "type": "voice"
+      },
+      "1466863905233178716": {
+        "name": "\ud83c\udfa7\uff5cMusic VC 2",
+        "type": "voice"
+      },
+      "1466863904167694491": {
+        "name": "\ud83d\udd0c\uff5clink-your-twitch",
+        "type": "text"
+      },
+      "1466863904167694490": {
+        "name": "\u2734|\u3014 CONNECTION \u3015|\u2734",
+        "type": "category"
+      },
+      "1466863904167694494": {
+        "name": "\ud83c\udfc6\uff5cphoto-of-the-week",
+        "type": "text"
+      },
+      "1466863905233178717": {
+        "name": "\ud83c\udfa7\uff5cMusic VC 3",
+        "type": "voice"
+      },
+      "1466863904167694493": {
+        "name": "\ud83c\udfc6\uff5cmeme-of-the-week",
+        "type": "text"
+      },
+      "1466965614034817056": {
+        "name": "owner",
+        "type": "category"
+      },
+      "1468025222212096062": {
+        "name": "audit",
+        "type": "text"
+      },
+      "1466863904977064169": {
+        "name": "\ud83c\udfb6\uff5csong-request",
+        "type": "text"
+      },
+      "1466863904977064161": {
+        "name": "\u2734|\u3014 SERVER BOOSTERS \u3015|\u2734",
+        "type": "category"
+      },
+      "1466863904167694492": {
+        "name": "\u2734|\u3014 HALL OF FAME \u3015|\u2734",
+        "type": "category"
+      },
+      "1466863904524341389": {
+        "name": "economy",
+        "type": "text"
+      },
+      "1466863903916032032": {
+        "name": "\ud83d\udcf0\uff5cannouncements",
+        "type": "text"
+      },
+      "1466870563979919463": {
+        "name": "Logs | LoggerBot",
+        "type": "category"
+      },
+      "1466863902489841930": {
+        "name": "\u2734|\u3014 SERVER STATS \u3015|\u2734",
+        "type": "category"
+      },
+      "1466863903450599559": {
+        "name": "\u2734|\u3014 INFORMATION \u3015|\u2734",
+        "type": "category"
+      },
+      "1466863904524341387": {
+        "name": "\ud83c\udfa8\uff5cfan-art",
+        "type": "text"
+      },
+      "1466863904524341392": {
+        "name": "\ud83d\ude4b\uff5cMeetup",
+        "type": "voice"
+      },
+      "1466863903916032036": {
+        "name": "\ud83d\udce5\uff5cvote",
+        "type": "text"
+      },
+      "1466870566010093643": {
+        "name": "role-logs",
+        "type": "text"
+      },
+      "1467644868141650136": {
+        "name": "verification",
+        "type": "text"
+      },
+      "1466863904767606825": {
+        "name": "\ud83d\udca3\uff5cRaid",
+        "type": "voice"
+      },
+      "1466863905233178718": {
+        "name": "\u2734|\u3014 MODERATION \u3015|\u2734",
+        "type": "category"
+      },
+      "1466863903916032040": {
+        "name": "\ud83c\udfac\uff5ctwitch-clips",
+        "type": "text"
+      },
+      "1466863903450599557": {
+        "name": "\u2b50\uff5cMembers: 5",
+        "type": "voice"
+      },
+      "1466863904977064164": {
+        "name": "\u2734|\u3014 SUBSCRIBERS \u3015|\u2734",
+        "type": "category"
+      },
+      "1466863903916032039": {
+        "name": "\ud83d\udd14\uff5ctwitch",
+        "type": "text"
+      },
+      "1467777152534446201": {
+        "name": "\ud83c\udfab Tickets",
+        "type": "category"
+      },
+      "1466863904977064167": {
+        "name": "\u2734|\u3014 MUSIC\u3015|\u2734",
+        "type": "category"
+      },
+      "1466863904524341386": {
+        "name": "\ud83d\udcfa\uff5cvideos",
+        "type": "text"
+      },
+      "1466863904977064166": {
+        "name": "\ud83d\udc8e\uff5cSubscribers VC \ud83d\udd12",
+        "type": "voice"
+      },
+      "1466863904977064162": {
+        "name": "\ud83c\udf0c\uff5cserver-boosters-chat",
+        "type": "text"
+      },
+      "1466863903916032035": {
+        "name": "\ud83c\udf8a\uff5cevents",
+        "type": "text"
+      },
+      "1466863904167694489": {
+        "name": "\ud83d\udd14\uff5cyoutube",
+        "type": "text"
+      },
+      "1466863904524341393": {
+        "name": "\ud83d\udd34\uff5cStreaming \ud83d\udd12",
+        "type": "voice"
+      },
+      "1467771360368660624": {
+        "name": "help",
+        "type": "text"
+      },
+      "1466863905233178723": {
+        "name": "TEMPVOICE CATEGORY",
+        "type": "category"
+      },
+      "1466863903916032031": {
+        "name": "\u2734|\u3014 IMPORTANT \u3015|\u2734",
+        "type": "category"
+      },
+      "1466863903450599562": {
+        "name": "rules",
+        "type": "text"
+      },
+      "1466863904167694498": {
+        "name": "\ud83e\udd23\uff5cmemes",
+        "type": "text"
+      },
+      "1466863905233178724": {
+        "name": "\u2728\u30fbinterface",
+        "type": "text"
+      },
+      "1466863904767606830": {
+        "name": "\u2734|\u3014 BOTS \u3015|\u2734",
+        "type": "category"
+      },
+      "1466870568992379094": {
+        "name": "message-logs",
+        "type": "text"
+      },
+      "1466863904167694496": {
+        "name": "\u2734|\u3014 MAIN HALL \u3015|\u2734",
+        "type": "category"
+      },
+      "1466863904767606833": {
+        "name": "akinator",
+        "type": "text"
+      },
+      "1466863903916032034": {
+        "name": "\ud83c\udf89\uff5cgiveaways",
+        "type": "text"
+      },
+      "1466863902489841929": {
+        "name": "moderator-only",
+        "type": "text"
+      },
+      "1466863904167694495": {
+        "name": "\ud83c\udfc6\uff5cfan-art-of-the-week",
+        "type": "text"
+      },
+      "1466863904767606832": {
+        "name": "\ud83d\udc7e\uff5clevel",
+        "type": "text"
+      },
+      "1467646649232003339": {
+        "name": "self-roles",
+        "type": "text"
+      },
+      "1466863905233178725": {
+        "name": "\u2795 Creator Channel",
+        "type": "voice"
+      },
+      "1466863904767606831": {
+        "name": "\ud83e\udd16\uff5cbot-commands",
+        "type": "text"
+      },
+      "1466863904524341394": {
+        "name": "\ud83d\udc65\uff5cChilling",
+        "type": "voice"
+      },
+      "1466863904767606828": {
+        "name": "\ud83d\udd34\uff5cstream-advertising",
+        "type": "text"
+      },
+      "1466863904977064170": {
+        "name": "\ud83c\udfa7\uff5cMusic VC",
+        "type": "voice"
+      },
+      "1466863903450599558": {
+        "name": "\ud83e\udd16\uff5cBots: 4",
+        "type": "voice"
+      },
+      "1466863905233178722": {
+        "name": "\ud83d\udcde\uff5cStaff VC \ud83d\udd12",
+        "type": "voice"
+      },
+      "1466863904977064165": {
+        "name": "\ud83d\udcb5\uff5csubscribers-chat",
+        "type": "text"
+      },
+      "1466863904767606829": {
+        "name": "\ud83c\udfa5\uff5cyoutube-advertising",
+        "type": "text"
+      },
+      "1466863904977064168": {
+        "name": "\ud83c\udfb5\uff5cbeat-makers",
+        "type": "text"
+      },
+      "1466863904767606827": {
+        "name": "\ud83d\udce2\uff5cself-advertising",
+        "type": "text"
+      },
+      "1466863903916032033": {
+        "name": "\ud83d\udce8\uff5csuggestions",
+        "type": "text"
+      },
+      "1466863904524341388": {
+        "name": "\ud83c\udf54food-porn",
+        "type": "text"
+      },
+      "1466863904524341390": {
+        "name": "\u2734|\u3014 VOICE CHATS \u3015|\u2734",
+        "type": "category"
+      },
+      "1466863904167694497": {
+        "name": "\ud83d\udc65\uff5cchatting",
+        "type": "text"
+      },
+      "1466863905233178720": {
+        "name": "\ud83d\ude94\uff5cstaff-chat",
+        "type": "text"
+      },
+      "1466965644422414550": {
+        "name": "cams-hq",
+        "type": "text"
+      },
+      "1466863904767606826": {
+        "name": "\u2734|\u3014 ADVERTISEMENTS \u3015|\u2734",
+        "type": "category"
+      },
+      "1466863904524341391": {
+        "name": "\u23f0\uff5cWaiting Room",
+        "type": "voice"
+      },
+      "1466863904767606824": {
+        "name": "\ud83e\udd42\uff5cBar",
+        "type": "voice"
+      },
+      "1467651478444572825": {
+        "name": "\ud83d\udc4b\ud83c\udffc\uff5cwelcome",
+        "type": "text"
+      },
+      "1466863903916032038": {
+        "name": "\u2734|\u3014 NOTIFICATIONS \u3015|\u2734",
+        "type": "category"
+      },
+      "1466870565003333634": {
+        "name": "member-logs",
+        "type": "text"
+      },
+      "1466863903450599561": {
+        "name": "\ud83d\udcac\uff5cfaq",
+        "type": "text"
+      },
+      "1466870567528431618": {
+        "name": "server-logs",
+        "type": "text"
+      },
+      "1466863904524341385": {
+        "name": "\ud83d\udcf7\uff5cphotos",
+        "type": "text"
+      }
+    },
+    "verification_level": "low",
+    "explicit_content_filter": "all_members"
+  }
+}

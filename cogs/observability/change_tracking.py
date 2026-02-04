@@ -4,6 +4,7 @@ from discord.ext import commands
 from datetime import datetime
 import json
 import os
+from cogs.core.pst_timezone import get_now_pst
 
 class ChangeTrackingCog(commands.Cog):
     def __init__(self, bot):
@@ -55,7 +56,7 @@ class ChangeTrackingCog(commands.Cog):
             "type": change_type,
             "description": description,
             "made_by": ctx.author.id,
-            "made_at": datetime.utcnow().isoformat(),
+            "made_at": get_now_pst().isoformat(),
             "status": "completed",
             "impact": "medium",
             "rollback_available": True
@@ -88,7 +89,7 @@ class ChangeTrackingCog(commands.Cog):
         change = self.change_log[change_key]
         change["status"] = "approved"
         change["approved_by"] = ctx.author.id
-        change["approved_at"] = datetime.utcnow().isoformat()
+        change["approved_at"] = get_now_pst().isoformat()
         self.save_changes()
         
         await ctx.send(f"✅ Change #{change_id} approved by {ctx.author.mention}.")
@@ -106,7 +107,7 @@ class ChangeTrackingCog(commands.Cog):
         change["status"] = "rejected"
         change["rejected_by"] = ctx.author.id
         change["rejection_reason"] = reason
-        change["rejected_at"] = datetime.utcnow().isoformat()
+        change["rejected_at"] = get_now_pst().isoformat()
         self.save_changes()
         
         embed = discord.Embed(
@@ -178,7 +179,7 @@ class ChangeTrackingCog(commands.Cog):
             "version_id": version_id,
             "description": description,
             "created_by": ctx.author.id,
-            "created_at": datetime.utcnow().isoformat(),
+            "created_at": get_now_pst().isoformat(),
             "changes_count": len(self.change_log)
         }
         

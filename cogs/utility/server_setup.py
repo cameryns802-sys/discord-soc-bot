@@ -9,6 +9,7 @@ from discord.ext import commands
 from datetime import datetime
 import json
 import os
+from cogs.core.pst_timezone import get_now_pst
 
 class ServerSetupCog(commands.Cog):
     """Create and manage server infrastructure for SOC operations"""
@@ -209,7 +210,7 @@ class ServerSetupCog(commands.Cog):
             title="🚀 Setting Up Sentinel SOC Infrastructure",
             description="Creating roles and channels for security operations",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         await ctx.send(embed=embed)
@@ -275,7 +276,7 @@ class ServerSetupCog(commands.Cog):
         setup_data = {
             "roles_created": created_roles,
             "channels_created": created_channels,
-            "setup_date": datetime.utcnow().isoformat(),
+            "setup_date": get_now_pst().isoformat(),
             "setup_by": str(ctx.author)
         }
         self.save_setup_data(guild.id, setup_data)
@@ -285,7 +286,7 @@ class ServerSetupCog(commands.Cog):
             title="✅ Sentinel SOC Setup Complete",
             description="Infrastructure configured and ready for operations",
             color=discord.Color.green(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         completion_embed.add_field(name="🏷️ Roles Created", value=f"{created_roles} roles", inline=True)
@@ -310,7 +311,7 @@ class ServerSetupCog(commands.Cog):
             title="🛡️ Sentinel SOC Roles",
             description="Available security operation roles",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         for role_name, role_data in self.SENTINEL_ROLES.items():
@@ -329,7 +330,7 @@ class ServerSetupCog(commands.Cog):
             title="📡 Sentinel SOC Channels",
             description="Available security operation channels",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         for channel_name, channel_data in self.SENTINEL_CHANNELS.items():

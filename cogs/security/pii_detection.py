@@ -13,6 +13,7 @@ import json
 import os
 from cogs.core.signal_bus import signal_bus, Signal, SignalType
 from cogs.core.feature_flags import flags
+from cogs.core.pst_timezone import get_now_pst
 
 class PIIDetectionCog(commands.Cog):
     def __init__(self, bot):
@@ -65,7 +66,7 @@ class PIIDetectionCog(commands.Cog):
         result = self.scan_for_pii(text)
         scan_id = str(len(self.scans))
         self.scans[scan_id] = {
-            "timestamp": datetime.datetime.utcnow().isoformat(),
+            "timestamp": datetime.get_now_pst().isoformat(),
             "scanned_by": interaction.user.id,
             "findings": result['count']
         }
@@ -132,7 +133,7 @@ class PIIDetectionCog(commands.Cog):
     async def piistats(self, ctx):
         """View PII scan statistics"""
         total = len(self.scans)
-        recent = len([s for s in self.scans.values() if s.get('timestamp', '')[:10] == datetime.datetime.utcnow().isoformat()[:10]])
+        recent = len([s for s in self.scans.values() if s.get('timestamp', '')[:10] == datetime.get_now_pst().isoformat()[:10]])
         embed = discord.Embed(title="📊 PII Scan Statistics", color=discord.Color.blue())
         embed.add_field(name="Total Scans", value=total, inline=True)
         embed.add_field(name="Today", value=recent, inline=True)

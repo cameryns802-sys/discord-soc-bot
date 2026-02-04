@@ -7,6 +7,7 @@ import json
 import os
 from datetime import datetime, timedelta
 import random
+from cogs.core.pst_timezone import get_now_pst
 
 class ThreatEmulationModuleCog(commands.Cog):
     def __init__(self, bot):
@@ -53,7 +54,7 @@ class ThreatEmulationModuleCog(commands.Cog):
                     # Simulate threat (without actually causing harm)
                     scenario = scheduled["scenario"]
                     self.data["results"][scenario] = {
-                        "last_run": datetime.utcnow().isoformat(),
+                        "last_run": get_now_pst().isoformat(),
                         "detection_time_ms": random.randint(100, 5000),
                         "detected": random.choice([True, True, False])  # 67% detection rate baseline
                     }
@@ -73,17 +74,17 @@ class ThreatEmulationModuleCog(commands.Cog):
             return
         
         guild = ctx.guild
-        simulation_id = f"perm_creep_{datetime.utcnow().timestamp()}"
+        simulation_id = f"perm_creep_{get_now_pst().timestamp()}"
         
         # Simulate the threat (log it, don't execute)
         sim_data = {
             "id": simulation_id,
             "type": "permission_creep",
             "guild": guild.name,
-            "started_at": datetime.utcnow().isoformat(),
+            "started_at": get_now_pst().isoformat(),
             "status": "RUNNING",
             "steps": [
-                {"step": 1, "action": "Target role identified", "timestamp": datetime.utcnow().isoformat()},
+                {"step": 1, "action": "Target role identified", "timestamp": get_now_pst().isoformat()},
                 {"step": 2, "action": "Escalation vector probed", "detected": True}
             ]
         }
@@ -116,14 +117,14 @@ class ThreatEmulationModuleCog(commands.Cog):
             return
         
         guild = ctx.guild
-        simulation_id = f"token_comp_{datetime.utcnow().timestamp()}"
+        simulation_id = f"token_comp_{get_now_pst().timestamp()}"
         
         sim_data = {
             "id": simulation_id,
             "type": "token_compromise",
             "guild": guild.name,
             "severity": "CRITICAL",
-            "started_at": datetime.utcnow().isoformat(),
+            "started_at": get_now_pst().isoformat(),
             "status": "RUNNING",
             "attack_actions": [
                 "Attempt to delete audit logs",
@@ -160,7 +161,7 @@ class ThreatEmulationModuleCog(commands.Cog):
             return
         
         guild = ctx.guild
-        simulation_id = f"phishing_{datetime.utcnow().timestamp()}"
+        simulation_id = f"phishing_{get_now_pst().timestamp()}"
         
         phishing_targets = [m for m in guild.members if not m.bot][:3]
         
@@ -169,7 +170,7 @@ class ThreatEmulationModuleCog(commands.Cog):
             "type": "phishing_simulation",
             "guild": guild.name,
             "targets": len(phishing_targets),
-            "started_at": datetime.utcnow().isoformat(),
+            "started_at": get_now_pst().isoformat(),
             "status": "RUNNING",
             "payloads": [
                 "Discord verification link (fake)",
@@ -204,7 +205,7 @@ class ThreatEmulationModuleCog(commands.Cog):
             return
         
         guild = ctx.guild
-        simulation_id = f"priv_esc_{datetime.utcnow().timestamp()}"
+        simulation_id = f"priv_esc_{get_now_pst().timestamp()}"
         
         high_roles = [r for r in guild.roles if r.permissions.administrator or r.permissions.manage_guild]
         
@@ -213,7 +214,7 @@ class ThreatEmulationModuleCog(commands.Cog):
             "type": "privilege_escalation",
             "guild": guild.name,
             "target_roles": [r.name for r in high_roles[:3]],
-            "started_at": datetime.utcnow().isoformat(),
+            "started_at": get_now_pst().isoformat(),
             "status": "RUNNING"
         }
         
@@ -242,7 +243,7 @@ class ThreatEmulationModuleCog(commands.Cog):
             return
         
         guild = ctx.guild
-        simulation_id = f"data_ex_{datetime.utcnow().timestamp()}"
+        simulation_id = f"data_ex_{get_now_pst().timestamp()}"
         
         message_count = sum(1 for _ in guild.channels)  # Estimate
         
@@ -251,7 +252,7 @@ class ThreatEmulationModuleCog(commands.Cog):
             "type": "data_exfiltration",
             "guild": guild.name,
             "target_data": ["Messages", "User profiles", "Role assignments", "Channel content"],
-            "started_at": datetime.utcnow().isoformat(),
+            "started_at": get_now_pst().isoformat(),
             "status": "RUNNING",
             "messages_attempted": message_count * 100
         }
@@ -288,8 +289,8 @@ class ThreatEmulationModuleCog(commands.Cog):
             "scenario": scenario,
             "enabled": True,
             "frequency": "daily",
-            "created_at": datetime.utcnow().isoformat(),
-            "next_run": (datetime.utcnow() + timedelta(hours=1)).isoformat()
+            "created_at": get_now_pst().isoformat(),
+            "next_run": (get_now_pst() + timedelta(hours=1)).isoformat()
         }
         
         self.data["scheduled_emulations"].append(scheduled)

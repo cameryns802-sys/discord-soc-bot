@@ -9,6 +9,7 @@ from datetime import datetime
 import json
 import os
 import asyncio
+from cogs.core.pst_timezone import get_now_pst
 
 class AutoSyncControlCog(commands.Cog):
     """Auto-sync monitoring and control commands"""
@@ -38,7 +39,7 @@ class AutoSyncControlCog(commands.Cog):
             title="👁️ Auto-Sync Status",
             description="Real-time file monitoring and sync",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         watching_status = "🟢 ACTIVE" if stats['is_watching'] else "🔴 INACTIVE"
@@ -100,7 +101,7 @@ class AutoSyncControlCog(commands.Cog):
             title="✅ Manual Sync Complete",
             description="Files and folders have been synchronized",
             color=discord.Color.green(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(
@@ -151,7 +152,7 @@ class AutoSyncControlCog(commands.Cog):
             title="📋 Auto-Sync Log",
             description=f"Last {len(recent_logs)} events",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         # Group by type

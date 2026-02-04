@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 RETENTION_DAYS = 30
 
@@ -16,7 +17,7 @@ class DataRetention(commands.Cog):
     @commands.command()
     @commands.has_permissions(administrator=True)
     async def pruneold(self, ctx):
-        now = datetime.datetime.utcnow()
+        now = datetime.get_now_pst()
         deleted = 0
         async for msg in ctx.channel.history(limit=1000):
             if (now - msg.created_at).days > RETENTION_DAYS:

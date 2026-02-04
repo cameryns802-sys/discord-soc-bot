@@ -119,6 +119,11 @@ class AutoSyncManager:
         
         loaded_count = 0
         for cog in new_cogs:
+            # Skip if already in bot's extensions (prevents duplicate load errors)
+            if cog in self.bot.extensions:
+                self.loaded_cogs.add(cog)
+                continue
+            
             try:
                 await self.bot.load_extension(cog)
                 self.loaded_cogs.add(cog)
@@ -138,7 +143,7 @@ class AutoSyncManager:
         reloaded_count = 0
         
         for cog in list(self.loaded_cogs):
-            cog_path = self.watch_path / cog.replace('.', os.sep) + '.py'
+            cog_path = (self.watch_path / cog.replace('.', os.sep)).with_suffix('.py')
             
             if not cog_path.exists():
                 continue
@@ -208,10 +213,16 @@ class AutoSyncManager:
         """Perform initial scan of all files"""
         print("[AutoSync] Running initial scan...")
         
-        # Hash all existing cogs
+        # Get all currently loaded extensions from bot
         discovered = await self._discover_cogs()
         for cog in discovered:
-            cog_path = self.watch_path / cog.replace('.', os.sep) + '.py'
+            # Mark as loaded if already in bot's extensions
+            if cog in self.bot.extensions:
+                self.loaded_cogs.add(cog)
+        
+        # Hash all existing cogs
+        for cog in discovered:
+            cog_path = (self.watch_path / cog.replace('.', os.sep)).with_suffix('.py')
             if cog_path.exists():
                 self.file_hashes[cog] = self._get_file_hash(cog_path)
         

@@ -11,6 +11,7 @@ import os
 from datetime import datetime
 import uuid
 import hashlib
+from cogs.core.pst_timezone import get_now_pst
 
 class ThreatActorIntelligence(commands.Cog):
     """Threat actor profiling and TTP tracking"""
@@ -102,8 +103,8 @@ class ThreatActorIntelligence(commands.Cog):
             'description': desc,
             'sophistication': sophistication.lower(),
             'threat_level': threat_level,
-            'first_seen': datetime.utcnow().isoformat(),
-            'last_seen': datetime.utcnow().isoformat(),
+            'first_seen': get_now_pst().isoformat(),
+            'last_seen': get_now_pst().isoformat(),
             'observed_ttps': ttps.split(',') if ttps else [],
             'campaigns': [],
             'targets': [],
@@ -121,7 +122,7 @@ class ThreatActorIntelligence(commands.Cog):
             title=f"{emoji} Threat Actor Profile Created",
             description=f"**{name}** ({actor_id})",
             color=color,
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Actor ID", value=f"`{actor_id}`", inline=True)
@@ -133,7 +134,7 @@ class ThreatActorIntelligence(commands.Cog):
             embed.add_field(name="Observed TTPs", value=ttps, inline=False)
         
         embed.add_field(name="Status", value="🟢 ACTIVE", inline=True)
-        embed.add_field(name="First Seen", value=datetime.utcnow().strftime('%Y-%m-%d'), inline=True)
+        embed.add_field(name="First Seen", value=get_now_pst().strftime('%Y-%m-%d'), inline=True)
         embed.set_footer(text="Sentinel Threat Intelligence | Use !actorlink to associate with campaigns")
         
         await ctx.send(embed=embed)
@@ -161,7 +162,7 @@ class ThreatActorIntelligence(commands.Cog):
             title="🎯 Threat Actor Intelligence",
             description=f"{len(sorted_actors)} {status} threat actor(s)",
             color=discord.Color.red(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         for actor in sorted_actors[:10]:
@@ -205,7 +206,7 @@ class ThreatActorIntelligence(commands.Cog):
             title=f"{emoji} Threat Actor Profile: {actor['name']}",
             description=actor['description'],
             color=color,
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Actor ID", value=f"`{actor['id']}`", inline=True)
@@ -271,7 +272,7 @@ class ThreatActorIntelligence(commands.Cog):
             title="📊 Threat Actor Intelligence Statistics",
             description=f"Total: {total} actors | {total_incidents} incidents | {total_campaigns} campaigns",
             color=discord.Color.red(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         level_str = f"🔴 Critical: {by_level['critical']}\n🟠 High: {by_level['high']}\n🟡 Medium: {by_level['medium']}\n🟢 Low: {by_level['low']}"

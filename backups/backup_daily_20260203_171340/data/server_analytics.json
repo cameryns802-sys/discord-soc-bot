@@ -1,0 +1,66 @@
+{
+  "1451439611766112319": {
+    "metrics": [
+      {
+        "timestamp": "2026-02-03T18:35:50.533554",
+        "members": 3,
+        "bots": 1,
+        "channels": 16,
+        "roles": 114
+      },
+      {
+        "timestamp": "2026-02-03T20:21:19.798304",
+        "members": 3,
+        "bots": 1,
+        "channels": 16,
+        "roles": 114
+      },
+      {
+        "timestamp": "2026-02-03T20:41:51.220186",
+        "members": 3,
+        "bots": 1,
+        "channels": 16,
+        "roles": 114
+      },
+      {
+        "timestamp": "2026-02-03T16:08:50.006572-08:00",
+        "members": 3,
+        "bots": 1,
+        "channels": 16,
+        "roles": 114
+      }
+    ]
+  },
+  "1466863901449785497": {
+    "metrics": [
+      {
+        "timestamp": "2026-02-03T18:35:50.551874",
+        "members": 10,
+        "bots": 4,
+        "channels": 77,
+        "roles": 60
+      },
+      {
+        "timestamp": "2026-02-03T20:21:19.800789",
+        "members": 10,
+        "bots": 4,
+        "channels": 77,
+        "roles": 60
+      },
+      {
+        "timestamp": "2026-02-03T20:41:51.233753",
+        "members": 10,
+        "bots": 4,
+        "channels": 77,
+        "roles": 60
+      },
+      {
+        "timestamp": "2026-02-03T16:08:50.012513-08:00",
+        "members": 10,
+        "bots": 4,
+        "channels": 81,
+        "roles": 60
+      }
+    ]
+  }
+}

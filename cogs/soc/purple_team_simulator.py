@@ -10,6 +10,7 @@ import os
 from datetime import datetime
 import random
 from typing import Dict, List
+from cogs.core.pst_timezone import get_now_pst
 
 class PurpleTeamSimulatorCog(commands.Cog):
     """
@@ -120,7 +121,7 @@ class PurpleTeamSimulatorCog(commands.Cog):
             "id": len(self.simulations) + 1,
             "scenario_id": scenario_id,
             "scenario_name": scenario["name"],
-            "executed_at": datetime.utcnow().isoformat(),
+            "executed_at": get_now_pst().isoformat(),
             "executed_by": str(ctx.author.id),
             "red_team": red_team_results,
             "blue_team": blue_team_results,
@@ -146,7 +147,7 @@ class PurpleTeamSimulatorCog(commands.Cog):
             title="🎯 Purple Team Simulation Results",
             description=f"Scenario: **{scenario['name']}**",
             color=color,
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Simulation ID", value=f"#{simulation['id']}", inline=True)
@@ -251,7 +252,7 @@ class PurpleTeamSimulatorCog(commands.Cog):
             title="🎯 Purple Team Scenarios",
             description=f"Available attack scenarios: {len(self.scenarios)}",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         for scenario in self.scenarios:
@@ -287,7 +288,7 @@ class PurpleTeamSimulatorCog(commands.Cog):
             title="📋 Purple Team Simulation History",
             description=f"Showing {len(recent_sims)} most recent simulations",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         for sim in recent_sims[:5]:
@@ -336,7 +337,7 @@ class PurpleTeamSimulatorCog(commands.Cog):
             title="🎯 Purple Team Dashboard",
             description="Adversarial simulation metrics",
             color=discord.Color.purple(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="📊 Total Simulations", value=total_sims, inline=True)

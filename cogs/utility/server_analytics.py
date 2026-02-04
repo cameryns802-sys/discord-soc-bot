@@ -10,6 +10,7 @@ import json
 import os
 from datetime import datetime, timedelta
 from collections import defaultdict
+from cogs.core.pst_timezone import get_now_pst
 
 class ServerAnalytics(commands.Cog):
     """Track and analyze server metrics"""
@@ -55,7 +56,7 @@ class ServerAnalytics(commands.Cog):
                 analytics["metrics"] = []
             
             metric = {
-                "timestamp": datetime.utcnow().isoformat(),
+                "timestamp": get_now_pst().isoformat(),
                 "members": len(guild.members),
                 "bots": sum(1 for m in guild.members if m.bot),
                 "channels": len(guild.channels),
@@ -80,7 +81,7 @@ class ServerAnalytics(commands.Cog):
             title="📊 Server Analytics",
             description=f"{guild.name} - Statistics",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="👥 Members", value=str(len(guild.members)), inline=True)
@@ -116,7 +117,7 @@ class ServerAnalytics(commands.Cog):
             title="📈 Growth Statistics",
             description="Server growth over time",
             color=discord.Color.green(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         if analytics.get("metrics"):

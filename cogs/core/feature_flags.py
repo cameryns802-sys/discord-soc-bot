@@ -5,6 +5,7 @@ import json
 import os
 from datetime import datetime
 from typing import Dict, Set
+from cogs.core.pst_timezone import get_now_pst
 
 class FeatureFlags:
     """Centralized feature flag management"""
@@ -51,7 +52,7 @@ class FeatureFlags:
                 'flags': self.flags,
                 'killed': list(self.killed_features),
                 'safe_mode': self.safe_mode,
-                'updated_at': datetime.utcnow().isoformat()
+                'updated_at': get_now_pst().isoformat()
             }, f, indent=2)
     
     def is_enabled(self, feature: str) -> bool:

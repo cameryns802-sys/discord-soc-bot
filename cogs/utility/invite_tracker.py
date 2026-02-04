@@ -10,6 +10,7 @@ import json
 import os
 from datetime import datetime
 from collections import defaultdict
+from cogs.core.pst_timezone import get_now_pst
 
 class InviteTracker(commands.Cog):
     """Track and monitor invite usage"""
@@ -70,7 +71,7 @@ class InviteTracker(commands.Cog):
                 data["joins"] = []
             
             join_log = {
-                "timestamp": datetime.utcnow().isoformat(),
+                "timestamp": get_now_pst().isoformat(),
                 "member": str(member),
                 "member_id": member.id,
                 "invite": used_invite.code if used_invite else "Unknown",

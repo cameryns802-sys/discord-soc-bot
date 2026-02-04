@@ -1,0 +1,25 @@
+{
+  "incidents": {
+    "threat_1770105592": {
+      "detected_at": "2026-02-02T23:59:52.945963",
+      "severity": "CRITICAL",
+      "source": "threat_intel_updater",
+      "responded_at": null,
+      "resolved_at": null,
+      "sla_met": null
+    },
+    "threat_1770105593": {
+      "detected_at": "2026-02-02T23:59:53.050649",
+      "severity": "CRITICAL",
+      "source": "threat_intel_updater",
+      "responded_at": null,
+      "resolved_at": null,
+      "sla_met": null
+    }
+  },
+  "config": {
+    "mttd_target_hours": 1,
+    "mttr_target_hours": 4,
+    "critical_mttr_hours": 1
+  }
+}

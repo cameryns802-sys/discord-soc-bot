@@ -9,6 +9,7 @@ import json
 import os
 from datetime import datetime, timedelta
 from typing import Dict, List, Optional
+from cogs.core.pst_timezone import get_now_pst
 
 class AttributionConfidenceModelCog(commands.Cog):
     """
@@ -110,7 +111,7 @@ class AttributionConfidenceModelCog(commands.Cog):
             "actor_name": actor_name,
             "description": description,
             "confidence_score": 0,
-            "created_at": datetime.utcnow().isoformat(),
+            "created_at": get_now_pst().isoformat(),
             "created_by": str(ctx.author.id),
             "status": "investigating"
         }
@@ -122,7 +123,7 @@ class AttributionConfidenceModelCog(commands.Cog):
             title="✅ Attribution Created",
             description=f"New threat actor attribution: **{actor_name}**",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Attribution ID", value=f"#{attribution['id']}", inline=True)
@@ -162,7 +163,7 @@ class AttributionConfidenceModelCog(commands.Cog):
             "type": evidence_type.lower(),
             "quality": max(0, min(100, quality)),
             "description": description,
-            "added_at": datetime.utcnow().isoformat(),
+            "added_at": get_now_pst().isoformat(),
             "added_by": str(ctx.author.id)
         }
         
@@ -178,7 +179,7 @@ class AttributionConfidenceModelCog(commands.Cog):
             title="✅ Evidence Added",
             description=f"Evidence added to attribution **{attribution['actor_name']}**",
             color=discord.Color.green(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Evidence ID", value=f"#{evidence['id']}", inline=True)
@@ -210,7 +211,7 @@ class AttributionConfidenceModelCog(commands.Cog):
             "attribution_id": attribution_id,
             "hypothesis": hypothesis,
             "likelihood": "possible",
-            "created_at": datetime.utcnow().isoformat(),
+            "created_at": get_now_pst().isoformat(),
             "created_by": str(ctx.author.id)
         }
         
@@ -221,7 +222,7 @@ class AttributionConfidenceModelCog(commands.Cog):
             title="💡 Alternative Hypothesis Added",
             description=f"New hypothesis for **{attribution['actor_name']}**",
             color=discord.Color.gold(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Hypothesis ID", value=f"#{alt_hypothesis['id']}", inline=True)
@@ -269,7 +270,7 @@ class AttributionConfidenceModelCog(commands.Cog):
             title=f"🎯 Attribution Analysis: {attribution['actor_name']}",
             description=attribution["description"],
             color=color,
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Attribution ID", value=f"#{attribution['id']}", inline=True)
@@ -321,7 +322,7 @@ class AttributionConfidenceModelCog(commands.Cog):
             title="📋 Threat Actor Attributions",
             description=f"Tracking {len(self.attributions)} threat actor attributions",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         for i, attr in enumerate(sorted_attributions[:10], 1):
@@ -366,7 +367,7 @@ class AttributionConfidenceModelCog(commands.Cog):
             title="🎯 Attribution Analysis Dashboard",
             description="Threat actor attribution tracking",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="📊 Total Attributions", value=total_attributions, inline=True)

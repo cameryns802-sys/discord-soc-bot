@@ -1,0 +1,81 @@
+{
+  "phishing_response": {
+    "name": "Phishing Response",
+    "description": "Response to phishing/malware threat",
+    "trigger_type": "Phishing Attempt",
+    "severity": "high",
+    "steps": [
+      "Identify and isolate affected users",
+      "Delete malicious messages",
+      "Warn guild members in #announcements",
+      "Collect evidence from message history",
+      "Create incident case",
+      "Monitor for similar patterns"
+    ],
+    "estimated_time": "15 minutes"
+  },
+  "account_compromise": {
+    "name": "Account Compromise Response",
+    "description": "Response to compromised user account",
+    "trigger_type": "Unauthorized Access",
+    "severity": "critical",
+    "steps": [
+      "Immediately mute compromised user",
+      "Remove all sensitive roles",
+      "Review recent actions and audit logs",
+      "Notify user via DM to reset password",
+      "Create critical incident",
+      "Monitor account for recovery",
+      "Document all findings"
+    ],
+    "estimated_time": "10 minutes"
+  },
+  "raid_response": {
+    "name": "Raid/Mass Attack Response",
+    "description": "Response to raid or mass disruption attack",
+    "trigger_type": "Mass Action",
+    "severity": "critical",
+    "steps": [
+      "Activate slowmode on all channels",
+      "Ban repeat offenders",
+      "Lockdown guild permissions",
+      "Alert admins immediately",
+      "Save evidence of attack",
+      "Document attacker identities",
+      "Create incident for post-mortem"
+    ],
+    "estimated_time": "5 minutes"
+  },
+  "permission_abuse": {
+    "name": "Permission Abuse Response",
+    "description": "Response to privilege escalation/abuse",
+    "trigger_type": "Unauthorized Access",
+    "severity": "high",
+    "steps": [
+      "Audit all role changes",
+      "Identify unauthorized escalations",
+      "Revoke unauthorized permissions",
+      "Review historical actions",
+      "Create incident case",
+      "Implement permission controls",
+      "Review role hierarchy"
+    ],
+    "estimated_time": "20 minutes"
+  },
+  "data_exfil": {
+    "name": "Data Exfiltration Response",
+    "description": "Response to potential data theft",
+    "trigger_type": "Suspicious User Activity",
+    "severity": "critical",
+    "steps": [
+      "Identify affected data/channels",
+      "Review export/download logs",
+      "Restrict suspect user access",
+      "Analyze what data was accessed",
+      "Notify affected parties",
+      "Create critical incident",
+      "Implement data protection controls"
+    ],
+    "estimated_time": "30 minutes"
+  }
+}

@@ -6,6 +6,7 @@ from discord.ext import commands
 import json
 import os
 from datetime import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 class CaseManagementSystemCog(commands.Cog):
     def __init__(self, bot):
@@ -64,11 +65,11 @@ class CaseManagementSystemCog(commands.Cog):
             "severity": severity.upper(),
             "status": "OPEN",
             "created_by": str(ctx.author.id),
-            "created_at": datetime.utcnow().isoformat(),
+            "created_at": get_now_pst().isoformat(),
             "assigned_to": None,
             "evidence": [],
             "timeline": [{
-                "timestamp": datetime.utcnow().isoformat(),
+                "timestamp": get_now_pst().isoformat(),
                 "action": "CASE_CREATED",
                 "user": str(ctx.author.id),
                 "details": f"Case created with severity {severity.upper()}"
@@ -112,7 +113,7 @@ class CaseManagementSystemCog(commands.Cog):
         case = self.data["cases"][case_id]
         case["assigned_to"] = str(member.id)
         case["timeline"].append({
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": get_now_pst().isoformat(),
             "action": "ASSIGNED",
             "user": str(ctx.author.id),
             "details": f"Case assigned to {member.name}"
@@ -159,7 +160,7 @@ class CaseManagementSystemCog(commands.Cog):
         escalation = {
             "case_id": case_id,
             "escalated_by": str(ctx.author.id),
-            "escalated_at": datetime.utcnow().isoformat(),
+            "escalated_at": get_now_pst().isoformat(),
             "reason": reason,
             "new_severity": case["severity"],
             "escalation_level": case["escalation_level"]
@@ -168,7 +169,7 @@ class CaseManagementSystemCog(commands.Cog):
         self.data["escalations"].append(escalation)
         
         case["timeline"].append({
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": get_now_pst().isoformat(),
             "action": "ESCALATED",
             "user": str(ctx.author.id),
             "details": f"Escalated to level {case['escalation_level']}: {reason}"
@@ -205,11 +206,11 @@ class CaseManagementSystemCog(commands.Cog):
             "type": evidence_type,
             "description": description,
             "submitted_by": str(ctx.author.id),
-            "submitted_at": datetime.utcnow().isoformat(),
+            "submitted_at": get_now_pst().isoformat(),
             "attachments": [att.url for att in ctx.message.attachments],
             "integrity_hash": "SHA256:placeholder",  # Would compute real hash
             "chain_of_custody": [{
-                "timestamp": datetime.utcnow().isoformat(),
+                "timestamp": get_now_pst().isoformat(),
                 "action": "COLLECTED",
                 "user": str(ctx.author.id)
             }]
@@ -219,7 +220,7 @@ class CaseManagementSystemCog(commands.Cog):
         self.data["cases"][case_id]["evidence"].append(evidence_id)
         
         self.data["cases"][case_id]["timeline"].append({
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": get_now_pst().isoformat(),
             "action": "EVIDENCE_ADDED",
             "user": str(ctx.author.id),
             "details": f"Evidence {evidence_id} added: {evidence_type}"
@@ -252,11 +253,11 @@ class CaseManagementSystemCog(commands.Cog):
         case = self.data["cases"][case_id]
         case["status"] = "RESOLVED"
         case["resolved_by"] = str(ctx.author.id)
-        case["resolved_at"] = datetime.utcnow().isoformat()
+        case["resolved_at"] = get_now_pst().isoformat()
         case["resolution"] = resolution
         
         case["timeline"].append({
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": get_now_pst().isoformat(),
             "action": "RESOLVED",
             "user": str(ctx.author.id),
             "details": f"Case resolved: {resolution}"
@@ -265,7 +266,7 @@ class CaseManagementSystemCog(commands.Cog):
         self.data["resolution_notes"][case_id] = {
             "resolution": resolution,
             "resolved_by": str(ctx.author.id),
-            "resolved_at": datetime.utcnow().isoformat()
+            "resolved_at": get_now_pst().isoformat()
         }
         
         self.save_data(self.data)
@@ -377,7 +378,7 @@ class CaseManagementSystemCog(commands.Cog):
             "case2": case_id2,
             "reason": reason,
             "correlated_by": str(ctx.author.id),
-            "correlated_at": datetime.utcnow().isoformat()
+            "correlated_at": get_now_pst().isoformat()
         }
         
         self.data["case_correlations"].append(correlation)

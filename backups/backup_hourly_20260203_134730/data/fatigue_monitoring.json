@@ -1,0 +1,14 @@
+{
+  "mod_activity": {},
+  "on_call_schedule": {},
+  "fatigue_scores": {},
+  "alert_thresholds": {
+    "hours_per_day": 8,
+    "consecutive_hours": 6,
+    "alerts_per_hour": 10,
+    "task_overload": 20
+  },
+  "burnout_signals": {},
+  "throttled_users": {},
+  "health_check_history": []
+}

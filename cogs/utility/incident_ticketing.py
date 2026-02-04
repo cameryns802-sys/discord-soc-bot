@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 class IncidentTicketing(commands.Cog):
     def __init__(self, bot):
@@ -14,7 +15,7 @@ class IncidentTicketing(commands.Cog):
         ticket = {
             "user": user.id,
             "issue": issue,
-            "opened": datetime.datetime.utcnow().isoformat(),
+            "opened": datetime.get_now_pst().isoformat(),
             "status": "open"
         }
         self.tickets.append(ticket)
@@ -30,7 +31,7 @@ class IncidentTicketing(commands.Cog):
         for ticket in self.tickets:
             if ticket["user"] == user.id and ticket["status"] == "open":
                 ticket["status"] = "closed"
-                ticket["closed"] = datetime.datetime.utcnow().isoformat()
+                ticket["closed"] = datetime.get_now_pst().isoformat()
                 embed = discord.Embed(title="Ticket Closed", description=f"Ticket for {user.mention} closed.", color=discord.Color.green())
                 await ctx.send(embed=embed)
                 return

@@ -12,6 +12,7 @@ import json
 import os
 from cogs.core.signal_bus import signal_bus, Signal, SignalType
 from cogs.core.feature_flags import flags
+from cogs.core.pst_timezone import get_now_pst
 
 class IOCManagementCog(commands.Cog):
     def __init__(self, bot):
@@ -59,7 +60,7 @@ class IOCManagementCog(commands.Cog):
         ioc_id = str(self.ioc_counter)
         self.iocs[ioc_id] = {
             "id": ioc_id, "type": ioc_type.lower(), "value": value, "severity": severity.lower(),
-            "added_by": interaction.user.id, "added_at": datetime.datetime.utcnow().isoformat(),
+            "added_by": interaction.user.id, "added_at": datetime.get_now_pst().isoformat(),
             "hits": 0
         }
         self.save_data()

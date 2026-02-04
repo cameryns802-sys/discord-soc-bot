@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 class DataRetentionEnforcer(commands.Cog):
     def __init__(self, bot):
@@ -19,7 +20,7 @@ class DataRetentionEnforcer(commands.Cog):
 
     @commands.command()
     async def requestdeletion(self, ctx):
-        self.deletion_requests.append({"user": ctx.author.id, "timestamp": datetime.datetime.utcnow().isoformat()})
+        self.deletion_requests.append({"user": ctx.author.id, "timestamp": datetime.get_now_pst().isoformat()})
         await ctx.send("Your data deletion request has been recorded.")
 
 async def setup(bot):

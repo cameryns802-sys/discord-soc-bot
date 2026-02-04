@@ -1,0 +1,77 @@
+{
+  "phishing_awareness": {
+    "name": "Phishing Awareness",
+    "category": "social_engineering",
+    "difficulty": "beginner",
+    "duration": 15,
+    "description": "Learn to identify and avoid phishing attacks",
+    "topics": [
+      "What is phishing?",
+      "Common phishing tactics",
+      "Identifying suspicious emails",
+      "Reporting phishing attempts",
+      "Best practices"
+    ],
+    "quiz_id": "phishing_quiz"
+  },
+  "password_security": {
+    "name": "Password Security",
+    "category": "access_control",
+    "difficulty": "beginner",
+    "duration": 10,
+    "description": "Master secure password creation and management",
+    "topics": [
+      "Password strength",
+      "Password managers",
+      "Multi-factor authentication",
+      "Avoiding password reuse",
+      "Passphrase techniques"
+    ],
+    "quiz_id": "password_quiz"
+  },
+  "data_classification": {
+    "name": "Data Classification",
+    "category": "data_protection",
+    "difficulty": "intermediate",
+    "duration": 20,
+    "description": "Understand data sensitivity levels and handling",
+    "topics": [
+      "Data classification levels",
+      "Public vs Private data",
+      "Confidential information",
+      "PII and sensitive data",
+      "Data handling procedures"
+    ],
+    "quiz_id": "data_classification_quiz"
+  },
+  "incident_response": {
+    "name": "Incident Response Basics",
+    "category": "incident_management",
+    "difficulty": "intermediate",
+    "duration": 25,
+    "description": "Learn how to respond to security incidents",
+    "topics": [
+      "Recognizing incidents",
+      "Initial response steps",
+      "Escalation procedures",
+      "Evidence preservation",
+      "Communication protocols"
+    ],
+    "quiz_id": "incident_response_quiz"
+  },
+  "social_engineering": {
+    "name": "Social Engineering Defense",
+    "category": "social_engineering",
+    "difficulty": "advanced",
+    "duration": 30,
+    "description": "Advanced tactics to defend against social engineering",
+    "topics": [
+      "Pretexting attacks",
+      "Baiting and quid pro quo",
+      "Tailgating and impersonation",
+      "Psychological manipulation",
+      "Defense strategies"
+    ],
+    "quiz_id": "social_engineering_quiz"
+  }
+}

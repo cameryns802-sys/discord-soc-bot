@@ -8,6 +8,7 @@ from discord import app_commands
 from datetime import datetime
 import json
 import os
+from cogs.core.pst_timezone import get_now_pst
 
 class SecurityChecklist(commands.Cog):
     """Security setup and configuration checklist"""
@@ -112,7 +113,7 @@ class SecurityChecklist(commands.Cog):
             title="✅ Security Setup Checklist",
             description="Complete these items to secure your server",
             color=discord.Color.blue(),
-            timestamp=datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         
         # Group by priority
@@ -226,7 +227,7 @@ class SecurityChecklist(commands.Cog):
             title="🛡️ Security Setup Wizard",
             description="Step-by-step guide to secure your server",
             color=discord.Color.blue(),
-            timestamp=datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         
         steps = [
@@ -255,3 +256,4 @@ class SecurityChecklist(commands.Cog):
 
 async def setup(bot):
     await bot.add_cog(SecurityChecklist(bot))
+

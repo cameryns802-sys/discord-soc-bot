@@ -1,0 +1,71 @@
+{
+  "credential_stuffing": {
+    "name": "Credential Stuffing Attack",
+    "events": [
+      "failed_login",
+      "failed_login",
+      "failed_login",
+      "successful_login"
+    ],
+    "timeframe": 300,
+    "severity": "high",
+    "description": "Multiple failed logins followed by success"
+  },
+  "privilege_escalation": {
+    "name": "Privilege Escalation",
+    "events": [
+      "role_change",
+      "permission_grant",
+      "admin_action"
+    ],
+    "timeframe": 600,
+    "severity": "critical",
+    "description": "Role changes followed by privileged actions"
+  },
+  "data_exfiltration": {
+    "name": "Data Exfiltration",
+    "events": [
+      "bulk_download",
+      "bulk_download",
+      "external_share"
+    ],
+    "timeframe": 1800,
+    "severity": "critical",
+    "description": "Multiple downloads followed by external sharing"
+  },
+  "account_takeover": {
+    "name": "Account Takeover",
+    "events": [
+      "password_change",
+      "email_change",
+      "suspicious_login"
+    ],
+    "timeframe": 900,
+    "severity": "critical",
+    "description": "Rapid account changes indicating compromise"
+  },
+  "reconnaissance": {
+    "name": "Reconnaissance Activity",
+    "events": [
+      "channel_scan",
+      "member_scan",
+      "permission_scan"
+    ],
+    "timeframe": 600,
+    "severity": "medium",
+    "description": "Systematic information gathering"
+  },
+  "brute_force": {
+    "name": "Brute Force Attack",
+    "events": [
+      "failed_login",
+      "failed_login",
+      "failed_login",
+      "failed_login",
+      "failed_login"
+    ],
+    "timeframe": 180,
+    "severity": "high",
+    "description": "Rapid repeated failed login attempts"
+  }
+}

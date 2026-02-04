@@ -4,6 +4,7 @@ from discord.ext import commands
 import json
 import os
 from datetime import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 DATA_FILE = 'data/threat_intelligence.json'
 
@@ -28,8 +29,8 @@ def get_default_threats():
                 "sources": ["OSINT Feed", "Internal Detection"],
                 "indicators": ["hash_abc123", "IP_10.0.0.5"],
                 "impact": "Credential theft, data exfiltration",
-                "first_seen": datetime.utcnow().isoformat(),
-                "last_updated": datetime.utcnow().isoformat(),
+                "first_seen": get_now_pst().isoformat(),
+                "last_updated": get_now_pst().isoformat(),
                 "status": "active"
             }
         ]
@@ -98,7 +99,7 @@ class ThreatIntelligenceAggregatorCog(commands.Cog):
         embed = discord.Embed(
             title=f"🔴 {threat.get('name')}",
             color=severity_color,
-            timestamp=datetime.fromisoformat(threat.get('first_seen', datetime.utcnow().isoformat()))
+            timestamp=datetime.fromisoformat(threat.get('first_seen', get_now_pst().isoformat()))
         )
         
         embed.add_field(name="Threat ID", value=threat_id, inline=True)
@@ -157,7 +158,7 @@ class ThreatIntelligenceAggregatorCog(commands.Cog):
             threat['indicators'] = []
         
         threat['indicators'].append(indicator)
-        threat['last_updated'] = datetime.utcnow().isoformat()
+        threat['last_updated'] = get_now_pst().isoformat()
         save_threat_intel(data)
         
         embed = discord.Embed(
@@ -200,8 +201,8 @@ class ThreatIntelligenceAggregatorCog(commands.Cog):
             "sources": ["Manual Report"],
             "indicators": [],
             "impact": "To be determined",
-            "first_seen": datetime.utcnow().isoformat(),
-            "last_updated": datetime.utcnow().isoformat(),
+            "first_seen": get_now_pst().isoformat(),
+            "last_updated": get_now_pst().isoformat(),
             "status": "new",
             "reported_by": ctx.author.id
         }

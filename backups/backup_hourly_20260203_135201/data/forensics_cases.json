@@ -1,0 +1,61 @@
+{
+  "cases": {},
+  "evidence": {
+    "1": {
+      "id": "1",
+      "guild_id": 1451439611766112319,
+      "source": "deleted_message",
+      "collected_by": 1449154555479851228,
+      "collected_at": "2026-02-03T21:22:09.586795",
+      "payload": {
+        "message_id": 1468355893698756608,
+        "channel_id": 1451439612869218478,
+        "author_id": 960995456488448080,
+        "content_hash": "719aa6edab33723024e74851240821015cf0b73f724657c4580b1528b0efbf9b",
+        "content_preview": "!timeout <@862083132735225858> 10m test",
+        "created_at": "2026-02-03T21:22:05.791000",
+        "deleted_at": "2026-02-03T21:22:09.586579",
+        "attachments": []
+      },
+      "custody": [
+        {
+          "action": "collected",
+          "timestamp": "2026-02-03T21:22:09.586807",
+          "user_id": 1449154555479851228,
+          "notes": "deleted_message"
+        }
+      ]
+    },
+    "2": {
+      "id": "2",
+      "guild_id": 1451439611766112319,
+      "source": "deleted_message",
+      "collected_by": 1449154555479851228,
+      "collected_at": "2026-02-03T21:22:25.631386",
+      "payload": {
+        "message_id": 1468355965626880144,
+        "channel_id": 1451439612869218478,
+        "author_id": 862083132735225858,
+        "content_hash": "2e70784bca016eefb08728b0fed1531c357c0d78361808ef86013bbd91723f4a",
+        "content_preview": "Nigger nigger nigger nigger nigger",
+        "created_at": "2026-02-03T21:22:22.940000",
+        "deleted_at": "2026-02-03T21:22:25.631355",
+        "attachments": []
+      },
+      "custody": [
+        {
+          "action": "collected",
+          "timestamp": "2026-02-03T21:22:25.631394",
+          "user_id": 1449154555479851228,
+          "notes": "deleted_message"
+        }
+      ]
+    }
+  },
+  "case_counter": 0,
+  "evidence_counter": 2,
+  "unassigned_deleted": [
+    "1",
+    "2"
+  ]
+}

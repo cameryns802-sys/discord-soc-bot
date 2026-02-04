@@ -6,6 +6,7 @@ from discord.ext import commands
 import json
 import os
 from datetime import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 class NaturalLanguageIntentParserCog(commands.Cog):
     def __init__(self, bot):
@@ -112,7 +113,7 @@ class NaturalLanguageIntentParserCog(commands.Cog):
         self.data["learned_intents"][intent_name].append({
             "example": example,
             "taught_by": str(ctx.author.id),
-            "taught_at": datetime.utcnow().isoformat()
+            "taught_at": get_now_pst().isoformat()
         })
         
         self.save_data(self.data)
@@ -138,7 +139,7 @@ class NaturalLanguageIntentParserCog(commands.Cog):
         
         self.data["intent_mappings"][intent].append({
             "command": command_name,
-            "mapped_at": datetime.utcnow().isoformat()
+            "mapped_at": get_now_pst().isoformat()
         })
         
         self.save_data(self.data)

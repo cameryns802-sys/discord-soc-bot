@@ -10,6 +10,7 @@ import json
 import os
 from datetime import datetime
 import uuid
+from cogs.core.pst_timezone import get_now_pst
 
 class AssetManagement(commands.Cog):
     """IT asset management and inventory tracking"""
@@ -53,7 +54,7 @@ class AssetManagement(commands.Cog):
         # Asset age
         deployed_date = asset.get('deployed_date')
         if deployed_date:
-            days_old = (datetime.utcnow() - datetime.fromisoformat(deployed_date)).days
+            days_old = (get_now_pst() - datetime.fromisoformat(deployed_date)).days
             if days_old > 1825:  # 5 years
                 score += 30
             elif days_old > 1095:  # 3 years
@@ -79,7 +80,7 @@ class AssetManagement(commands.Cog):
         
         # Last scan
         if asset.get('last_security_scan'):
-            days_since = (datetime.utcnow() - datetime.fromisoformat(asset['last_security_scan'])).days
+            days_since = (get_now_pst() - datetime.fromisoformat(asset['last_security_scan'])).days
             if days_since > 30:
                 score += 15
         else:
@@ -98,8 +99,8 @@ class AssetManagement(commands.Cog):
             'name': asset_name,
             'type': asset_type.lower(),
             'criticality': criticality.lower(),
-            'registered_at': datetime.utcnow().isoformat(),
-            'deployed_date': datetime.utcnow().isoformat(),
+            'registered_at': get_now_pst().isoformat(),
+            'deployed_date': get_now_pst().isoformat(),
             'status': 'active',
             'patched': True,
             'internet_facing': False,
@@ -121,7 +122,7 @@ class AssetManagement(commands.Cog):
             title="✅ Asset Registered",
             description=f"**{asset_name}**",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Asset ID", value=f"`{asset_id}`", inline=True)
@@ -150,7 +151,7 @@ class AssetManagement(commands.Cog):
             title="📦 Asset Inventory",
             description=f"{len(sorted_assets)} asset(s) tracked",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         # Group by type
@@ -206,7 +207,7 @@ class AssetManagement(commands.Cog):
             title=f"📦 {asset['name']}",
             description=f"Type: {asset['type'].title()}",
             color=color,
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Asset ID", value=f"`{asset['id']}`", inline=True)
@@ -247,7 +248,7 @@ class AssetManagement(commands.Cog):
         # Identify risks
         unpatched = [a for a in assets.values() if not a['patched']]
         exposed = [a for a in assets.values() if a['internet_facing']]
-        old = [a for a in assets.values() if (datetime.utcnow() - datetime.fromisoformat(a['deployed_date'])).days > 1825]
+        old = [a for a in assets.values() if (get_now_pst() - datetime.fromisoformat(a['deployed_date'])).days > 1825]
         vulns = [a for a in assets.values() if a['known_vulnerabilities'] > 0]
         unscan = [a for a in assets.values() if not a['last_security_scan']]
         
@@ -255,7 +256,7 @@ class AssetManagement(commands.Cog):
             title="⚠️ Asset Risk Analysis",
             description="Security risks identified in asset inventory",
             color=discord.Color.orange(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Risk Summary", value="━" * 25, inline=False)

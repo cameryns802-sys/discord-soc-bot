@@ -10,6 +10,7 @@ import json
 import os
 from datetime import datetime, timedelta
 from typing import Dict, List, Any
+from cogs.core.pst_timezone import get_now_pst
 
 class CompliancePolicyEngine(commands.Cog):
     """Automated compliance policy monitoring and enforcement"""
@@ -138,7 +139,7 @@ class CompliancePolicyEngine(commands.Cog):
                     'policy_name': 'Administrator Role Limit',
                     'severity': 'medium',
                     'description': f'{admin_count} admins found (limit: {max_admins})',
-                    'detected_at': datetime.utcnow().isoformat(),
+                    'detected_at': get_now_pst().isoformat(),
                     'status': 'open'
                 })
         
@@ -150,7 +151,7 @@ class CompliancePolicyEngine(commands.Cog):
                     'policy_name': 'Multi-Factor Authentication',
                     'severity': 'high',
                     'description': 'Guild does not require 2FA for moderation',
-                    'detected_at': datetime.utcnow().isoformat(),
+                    'detected_at': get_now_pst().isoformat(),
                     'status': 'open'
                 })
         
@@ -171,7 +172,7 @@ class CompliancePolicyEngine(commands.Cog):
                 title="✅ Compliance Scan Complete",
                 description="No policy violations detected",
                 color=discord.Color.green(),
-                timestamp=datetime.utcnow()
+                timestamp=get_now_pst()
             )
             embed.add_field(name="Status", value="🟢 COMPLIANT", inline=True)
             embed.add_field(name="Policies Checked", value=str(len([p for p in self.policies.values() if p['enabled']])), inline=True)
@@ -183,7 +184,7 @@ class CompliancePolicyEngine(commands.Cog):
             title="⚠️ Policy Violations Found",
             description=f"{len(violations)} violation(s) detected",
             color=discord.Color.orange(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         for violation in violations[:10]:
@@ -209,7 +210,7 @@ class CompliancePolicyEngine(commands.Cog):
             title="📋 Compliance Policies",
             description=f"{len(self.policies)} policies defined | {enabled_count} enabled",
             color=discord.Color.blurple(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         categories = {}
@@ -244,7 +245,7 @@ class CompliancePolicyEngine(commands.Cog):
             title=f"📜 Policy: {policy['name']}",
             description=policy['description'],
             color=discord.Color.blue() if policy['enabled'] else discord.Color.greyple(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Policy ID", value=f"`{policy_id}`", inline=True)
@@ -276,7 +277,7 @@ class CompliancePolicyEngine(commands.Cog):
             title="⚠️ Policy Violations",
             description=f"{len(open_violations)} open violation(s) | {len(violations)} total",
             color=discord.Color.orange(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         for violation in open_violations[:10]:
@@ -316,7 +317,7 @@ class CompliancePolicyEngine(commands.Cog):
             title="📊 Compliance Report",
             description=f"Compliance Score: **{compliance_score}/100**",
             color=color,
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="📋 Active Policies", value=f"`{len(enabled_policies)}`", inline=True)

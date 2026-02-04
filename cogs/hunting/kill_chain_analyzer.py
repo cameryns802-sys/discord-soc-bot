@@ -6,6 +6,7 @@ from discord.ext import commands
 import json
 import os
 from datetime import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 class KillChainAnalyzerCog(commands.Cog):
     def __init__(self, bot):
@@ -71,7 +72,7 @@ class KillChainAnalyzerCog(commands.Cog):
             "tactic": tactic_lower,
             "technique": technique,
             "detected_by": str(ctx.author.id),
-            "detected_at": datetime.utcnow().isoformat(),
+            "detected_at": get_now_pst().isoformat(),
             "stage": self.mitre_tactics[tactic_lower]["stage"]
         }
         

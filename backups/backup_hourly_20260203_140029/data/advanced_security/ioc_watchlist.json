@@ -1,0 +1,14 @@
+{
+  "malicious_ips": [
+    "192.0.2.1",
+    "192.0.2.50"
+  ],
+  "malicious_domains": [
+    "malware.example.com",
+    "phishing.test"
+  ],
+  "file_hashes": [
+    "5d41402abc4b2a76b9719d911017c592"
+  ],
+  "detections": []
+}

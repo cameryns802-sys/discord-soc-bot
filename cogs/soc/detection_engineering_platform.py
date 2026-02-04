@@ -10,6 +10,7 @@ import json
 import os
 from datetime import datetime, timedelta
 import uuid
+from cogs.core.pst_timezone import get_now_pst
 
 class DetectionEngineeringPlatform(commands.Cog):
     """Detection rule engineering and optimization"""
@@ -56,7 +57,7 @@ class DetectionEngineeringPlatform(commands.Cog):
             'name': rule_name,
             'type': detection_type.lower(),
             'severity': severity.lower(),
-            'created_at': datetime.utcnow().isoformat(),
+            'created_at': get_now_pst().isoformat(),
             'status': 'draft',
             'detections': 0,
             'false_positives': 0,
@@ -74,7 +75,7 @@ class DetectionEngineeringPlatform(commands.Cog):
             title="🔍 Detection Rule Created",
             description=f"**{rule_name}**",
             color=color,
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Rule ID", value=f"`{rule_id}`", inline=True)
@@ -106,7 +107,7 @@ class DetectionEngineeringPlatform(commands.Cog):
             title="🧪 Detection Rule Test Results",
             description=f"**{rule['name']}**",
             color=discord.Color.green(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Test Summary", value="━" * 25, inline=False)
@@ -139,7 +140,7 @@ class DetectionEngineeringPlatform(commands.Cog):
             title="📊 Detection Rule Analytics",
             description="Rule effectiveness and coverage",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Rule Inventory", value="━" * 25, inline=False)
@@ -180,7 +181,7 @@ class DetectionEngineeringPlatform(commands.Cog):
             title="⚙️ Rule Tuning & Optimization",
             description=f"**{rule['name']}**",
             color=discord.Color.green(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Current Configuration", value="━" * 25, inline=False)

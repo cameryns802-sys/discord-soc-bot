@@ -10,6 +10,7 @@ import json
 import os
 from datetime import datetime, timedelta
 import uuid
+from cogs.core.pst_timezone import get_now_pst
 
 class SLAMetricsDashboard(commands.Cog):
     """SLA and metrics tracking dashboard"""
@@ -68,7 +69,7 @@ class SLAMetricsDashboard(commands.Cog):
         
         current_metrics = {
             'id': f"SLA-{str(uuid.uuid4())[:8].upper()}",
-            'timestamp': datetime.utcnow().isoformat(),
+            'timestamp': get_now_pst().isoformat(),
             'incident_metrics': {
                 'total': incident_data['total_incidents'],
                 'critical': incident_data['critical'],
@@ -113,7 +114,7 @@ class SLAMetricsDashboard(commands.Cog):
             title="📊 SLA & Metrics Update",
             description="Real-time incident response metrics",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="SLA Compliance", value=f"{sla_compliance}%", inline=True)
@@ -149,7 +150,7 @@ class SLAMetricsDashboard(commands.Cog):
             return
         
         # Filter by days
-        cutoff = (datetime.utcnow() - timedelta(days=days)).isoformat()
+        cutoff = (get_now_pst() - timedelta(days=days)).isoformat()
         recent = [m for m in history if m['timestamp'] >= cutoff]
         
         if not recent:
@@ -160,7 +161,7 @@ class SLAMetricsDashboard(commands.Cog):
             title=f"📈 SLA Trend ({days} Days)",
             description="SLA compliance and metrics progression",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         # Extract SLA compliance over time
@@ -222,7 +223,7 @@ class SLAMetricsDashboard(commands.Cog):
             title="❌ SLA Breaches",
             description="Incidents where SLAs were not met",
             color=discord.Color.red(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(

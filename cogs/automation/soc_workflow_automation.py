@@ -10,6 +10,7 @@ import json
 import os
 from datetime import datetime, timedelta
 import uuid
+from cogs.core.pst_timezone import get_now_pst
 
 class SOCWorkflowAutomation(commands.Cog):
     """Automated SOC incident response workflows"""
@@ -80,7 +81,7 @@ class SOCWorkflowAutomation(commands.Cog):
             'name': workflow_name,
             'trigger': trigger_type.lower(),
             'severity': severity.lower(),
-            'created_at': datetime.utcnow().isoformat(),
+            'created_at': get_now_pst().isoformat(),
             'enabled': True,
             'steps': workflow_steps,
             'auto_escalate': True,
@@ -98,7 +99,7 @@ class SOCWorkflowAutomation(commands.Cog):
             title="⚙️ Workflow Defined",
             description=f"**{workflow_name}**",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Workflow ID", value=f"`{workflow_id}`", inline=True)
@@ -126,7 +127,7 @@ class SOCWorkflowAutomation(commands.Cog):
             title="⚙️ Incident Response Workflows",
             description=f"{len(workflows)} workflow(s) defined",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         # Count by trigger
@@ -180,7 +181,7 @@ class SOCWorkflowAutomation(commands.Cog):
             'id': exec_id,
             'workflow_id': workflow_id,
             'workflow_name': wf['name'],
-            'started_at': datetime.utcnow().isoformat(),
+            'started_at': get_now_pst().isoformat(),
             'status': 'in_progress',
             'steps': {},
             'escalation_level': 0,
@@ -191,12 +192,12 @@ class SOCWorkflowAutomation(commands.Cog):
         for step_name in wf['steps'].keys():
             execution['steps'][step_name] = {
                 'status': 'completed',
-                'timestamp': (datetime.utcnow() + timedelta(minutes=5)).isoformat(),
+                'timestamp': (get_now_pst() + timedelta(minutes=5)).isoformat(),
                 'duration_seconds': 300
             }
         
         execution['status'] = 'completed'
-        execution['completed_at'] = (datetime.utcnow() + timedelta(minutes=25)).isoformat()
+        execution['completed_at'] = (get_now_pst() + timedelta(minutes=25)).isoformat()
         
         # Update workflow stats
         wf['success_count'] = wf.get('success_count', 0) + 1
@@ -209,7 +210,7 @@ class SOCWorkflowAutomation(commands.Cog):
             title="✅ Workflow Executed",
             description=f"**{wf['name']}**",
             color=discord.Color.green(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Execution ID", value=f"`{exec_id}`", inline=True)
@@ -245,7 +246,7 @@ class SOCWorkflowAutomation(commands.Cog):
             title="📊 Workflow Execution Status",
             description=f"{len(executions)} execution(s)",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         # Summary

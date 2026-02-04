@@ -5,6 +5,7 @@ from discord import app_commands
 from datetime import datetime
 import json
 import os
+from cogs.core.pst_timezone import get_now_pst
 
 class WorkflowGroup(app_commands.Group):
     def __init__(self, cog):
@@ -16,7 +17,7 @@ class WorkflowGroup(app_commands.Group):
     async def create(self, interaction: discord.Interaction, name: str, description: str = "No description"):
         self.cog.workflow_counter += 1
         wf_id = self.cog.workflow_counter
-        self.cog.workflows[str(wf_id)] = {"id": wf_id, "name": name, "description": description, "status": "draft", "steps": [], "created_by": interaction.user.id, "created_at": datetime.utcnow().isoformat(), "execution_count": 0}
+        self.cog.workflows[str(wf_id)] = {"id": wf_id, "name": name, "description": description, "status": "draft", "steps": [], "created_by": interaction.user.id, "created_at": get_now_pst().isoformat(), "execution_count": 0}
         self.cog.save_workflows()
         await interaction.response.send_message(f"✅ Created workflow #{wf_id}: {name}")
 
@@ -55,7 +56,7 @@ class WorkflowGroup(app_commands.Group):
         self.cog.execution_counter += 1
         exec_id = self.cog.execution_counter
         self.cog.workflows[wf_key]["execution_count"] += 1
-        self.cog.execution_history[str(exec_id)] = {"id": exec_id, "workflow_id": workflow_id, "executed_by": interaction.user.id, "timestamp": datetime.utcnow().isoformat(), "status": "completed"}
+        self.cog.execution_history[str(exec_id)] = {"id": exec_id, "workflow_id": workflow_id, "executed_by": interaction.user.id, "timestamp": get_now_pst().isoformat(), "status": "completed"}
         self.cog.save_workflows()
         await interaction.response.send_message(f"✅ Executed workflow #{workflow_id} (Execution #{exec_id})")
 

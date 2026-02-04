@@ -10,6 +10,7 @@ import json
 import os
 from datetime import datetime, timedelta
 import uuid
+from cogs.core.pst_timezone import get_now_pst
 
 class IncidentPatternCorrelation(commands.Cog):
     """Incident pattern detection and correlation"""
@@ -103,7 +104,7 @@ class IncidentPatternCorrelation(commands.Cog):
             'type': incident_type.lower(),
             'attack_vector': attack_vector.lower(),
             'target_type': target.lower(),
-            'timestamp': datetime.utcnow().isoformat(),
+            'timestamp': get_now_pst().isoformat(),
             'source_ip_range': '192.168.1.0/24',
             'ttp_category': 'initial_access',
             'severity': 'high',
@@ -117,7 +118,7 @@ class IncidentPatternCorrelation(commands.Cog):
             title="📝 Incident Recorded",
             description=f"Type: {incident_type}",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Incident ID", value=f"`{incident_id}`", inline=True)
@@ -159,7 +160,7 @@ class IncidentPatternCorrelation(commands.Cog):
         # Save correlations
         correlation_record = {
             'incident_id': incident_id,
-            'found_at': datetime.utcnow().isoformat(),
+            'found_at': get_now_pst().isoformat(),
             'related_count': len(related),
             'related_incidents': list(related.keys())
         }
@@ -170,7 +171,7 @@ class IncidentPatternCorrelation(commands.Cog):
             title="🔗 Incident Correlations",
             description=f"Analyzing: {incident_id}",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(
@@ -214,7 +215,7 @@ class IncidentPatternCorrelation(commands.Cog):
             return
         
         # Filter by days
-        cutoff = (datetime.utcnow() - timedelta(days=days)).isoformat()
+        cutoff = (get_now_pst() - timedelta(days=days)).isoformat()
         recent = [i for i in patterns.values() if i['timestamp'] >= cutoff]
         
         # Analyze patterns
@@ -235,7 +236,7 @@ class IncidentPatternCorrelation(commands.Cog):
             title=f"📊 Incident Pattern Analysis ({days}d)",
             description=f"{len(recent)} incident(s) analyzed",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Attack Vector Breakdown", value="━" * 25, inline=False)
@@ -270,7 +271,7 @@ class IncidentPatternCorrelation(commands.Cog):
             title="🚨 Campaign Detection",
             description="Identifying potential coordinated attacks",
             color=discord.Color.red(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         # Find clusters

@@ -2,6 +2,7 @@
 import discord
 from discord.ext import commands
 import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 class EscalationSystemCog(commands.Cog):
     def __init__(self, bot):
@@ -26,7 +27,7 @@ class EscalationSystemCog(commands.Cog):
             "id": chain_id,
             "name": name,
             "levels": [{f"level_{i+1}": None} for i in range(levels)],
-            "created_at": datetime.datetime.utcnow()
+            "created_at": datetime.get_now_pst()
         }
         embed = discord.Embed(title="Escalation Chain Created", description=f"Chain '{name}' with {levels} level(s)", color=discord.Color.green())
         embed.add_field(name="Chain ID", value=f"#{chain_id}", inline=True)
@@ -59,7 +60,7 @@ class EscalationSystemCog(commands.Cog):
             "name": ctx.author.mention,
             "tier": tier.lower(),
             "availability": "available",
-            "registered_at": datetime.datetime.utcnow()
+            "registered_at": datetime.get_now_pst()
         }
         embed = discord.Embed(title="On-Call Registered", description=f"{ctx.author.mention} registered for {tier.upper()}", color=discord.Color.green())
         await ctx.send(embed=embed)
@@ -117,11 +118,11 @@ class EscalationSystemCog(commands.Cog):
                 try:
                     embed = discord.Embed(title=f"[ESCALATION] {severity.upper()}", description=message, color=discord.Color.red())
                     embed.add_field(name="Escalated By", value=ctx.author.mention, inline=True)
-                    embed.add_field(name="Timestamp", value=datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S"), inline=True)
+                    embed.add_field(name="Timestamp", value=datetime.get_now_pst().strftime("%Y-%m-%d %H:%M:%S"), inline=True)
                     await user.send(embed=embed)
                 except:
                     pass
-        self.escalations.append({"severity": severity, "message": message, "by": ctx.author.id, "time": datetime.datetime.utcnow()})
+        self.escalations.append({"severity": severity, "message": message, "by": ctx.author.id, "time": datetime.get_now_pst()})
         embed = discord.Embed(title="Alert Escalated", description=f"Alert escalated to on-call tier1", color=discord.Color.orange())
         await ctx.send(embed=embed)
 

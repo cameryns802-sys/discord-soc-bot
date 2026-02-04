@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 class EscalationMatrix(commands.Cog):
     def __init__(self, bot):
@@ -21,7 +22,7 @@ class EscalationMatrix(commands.Cog):
             await ctx.send(f"Incident for {user.mention} escalated to {role.mention} (severity {severity})")
         else:
             await ctx.send("No appropriate role found for escalation.")
-        self.incidents.append({"user": user.id, "severity": severity, "timestamp": datetime.datetime.utcnow().isoformat()})
+        self.incidents.append({"user": user.id, "severity": severity, "timestamp": datetime.get_now_pst().isoformat()})
 
 async def setup(bot):
     await bot.add_cog(EscalationMatrix(bot))

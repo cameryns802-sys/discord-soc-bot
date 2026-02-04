@@ -1,0 +1,28 @@
+{
+  "status": "healthy",
+  "last_check": "2026-02-02T17:16:47.231783",
+  "checks": {
+    "discord_api": {
+      "status": "degraded",
+      "message": "High latency: 195ms",
+      "checked_at": "2026-02-02T17:16:48.232778"
+    },
+    "database": {
+      "status": "healthy",
+      "message": "DataManager accessible",
+      "checked_at": "2026-02-02T17:16:48.232802"
+    },
+    "memory": {
+      "status": "healthy",
+      "message": "Memory: 61 MB",
+      "checked_at": "2026-02-02T17:16:48.232812"
+    },
+    "cpu": {
+      "status": "healthy",
+      "message": "CPU: 0.0%",
+      "checked_at": "2026-02-02T17:16:48.232816"
+    }
+  },
+  "uptime_checks": 1,
+  "failed_checks": 0
+}

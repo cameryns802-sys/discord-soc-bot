@@ -1,0 +1,42 @@
+[
+  {
+    "timestamp": "2026-02-02T23:59:52.948627",
+    "feed": "abuse_ch",
+    "feed_type": "url_malware",
+    "new_iocs": 0,
+    "total_iocs": 15,
+    "critical_iocs": 3
+  },
+  {
+    "timestamp": "2026-02-02T23:59:53.054784",
+    "feed": "malware_bazaar",
+    "feed_type": "file_hash",
+    "new_iocs": 0,
+    "total_iocs": 10,
+    "critical_iocs": 0
+  },
+  {
+    "timestamp": "2026-02-02T23:59:53.083865",
+    "feed": "phishtank",
+    "feed_type": "phishing_url",
+    "new_iocs": 0,
+    "total_iocs": 25,
+    "critical_iocs": 1
+  },
+  {
+    "timestamp": "2026-02-02T23:59:53.244273",
+    "feed": "abuse_ipbl",
+    "feed_type": "ip_address",
+    "new_iocs": 0,
+    "total_iocs": 10,
+    "critical_iocs": 0
+  },
+  {
+    "timestamp": "2026-02-02T23:59:53.249036",
+    "feed": "cybercriminals",
+    "feed_type": "c2_server",
+    "new_iocs": 0,
+    "total_iocs": 8,
+    "critical_iocs": 2
+  }
+]

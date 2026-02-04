@@ -9,6 +9,7 @@ import json
 import os
 from datetime import datetime, timedelta
 from typing import Dict, List, Optional
+from cogs.core.pst_timezone import get_now_pst
 
 class QuarterlySecurityPostureReportCog(commands.Cog):
     """
@@ -67,7 +68,7 @@ class QuarterlySecurityPostureReportCog(commands.Cog):
     
     def get_current_quarter(self) -> str:
         """Get current quarter in format Q1 2026"""
-        now = datetime.utcnow()
+        now = get_now_pst()
         quarter = (now.month - 1) // 3 + 1
         return f"Q{quarter} {now.year}"
     
@@ -94,7 +95,7 @@ class QuarterlySecurityPostureReportCog(commands.Cog):
         
         if incident_cog and hasattr(incident_cog, 'incidents'):
             # Filter incidents for this quarter
-            start_of_quarter = datetime.utcnow() - timedelta(days=90)
+            start_of_quarter = get_now_pst() - timedelta(days=90)
             quarter_incidents = [
                 i for i in incident_cog.incidents
                 if datetime.fromisoformat(i.get("timestamp", "2020-01-01")) >= start_of_quarter
@@ -137,7 +138,7 @@ class QuarterlySecurityPostureReportCog(commands.Cog):
         # Generate report
         report = {
             "quarter": quarter,
-            "generated_at": datetime.utcnow().isoformat(),
+            "generated_at": get_now_pst().isoformat(),
             "incident_stats": incident_stats,
             "compliance_status": compliance_status,
             "threat_stats": threat_stats,
@@ -152,7 +153,7 @@ class QuarterlySecurityPostureReportCog(commands.Cog):
             title="📊 Quarterly Security Posture Report",
             description=f"Comprehensive Security Assessment - {quarter}",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         # Executive Summary
@@ -259,7 +260,7 @@ class QuarterlySecurityPostureReportCog(commands.Cog):
             return
         
         self.compliance[framework] = is_compliant
-        self.compliance[f"{framework}_updated_at"] = datetime.utcnow().isoformat()
+        self.compliance[f"{framework}_updated_at"] = get_now_pst().isoformat()
         self.compliance[f"{framework}_updated_by"] = str(ctx.author.id)
         self.save_compliance()
         
@@ -267,7 +268,7 @@ class QuarterlySecurityPostureReportCog(commands.Cog):
             title="✅ Compliance Status Updated",
             description=f"{framework.upper()} compliance status updated",
             color=discord.Color.green() if is_compliant else discord.Color.red(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Framework", value=framework.upper(), inline=True)
@@ -292,7 +293,7 @@ class QuarterlySecurityPostureReportCog(commands.Cog):
             "priority": priority.lower(),
             "amount": amount,
             "justification": justification,
-            "added_at": datetime.utcnow().isoformat(),
+            "added_at": get_now_pst().isoformat(),
             "added_by": str(ctx.author.id),
             "status": "proposed"
         }
@@ -311,7 +312,7 @@ class QuarterlySecurityPostureReportCog(commands.Cog):
             title="✅ Investment Recommendation Added",
             description=f"New {priority.upper()} priority investment",
             color=color_map.get(priority.lower(), discord.Color.blue()),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Investment ID", value=f"#{investment['id']}", inline=True)
@@ -343,7 +344,7 @@ class QuarterlySecurityPostureReportCog(commands.Cog):
             title="📊 Quarter-over-Quarter Comparison",
             description=f"{previous['quarter']} vs {current['quarter']}",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         # Incident comparison
@@ -414,7 +415,7 @@ class QuarterlySecurityPostureReportCog(commands.Cog):
             title="📊 Quarterly Reporting Dashboard",
             description=f"Current Period: {current_quarter}",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         # Report statistics

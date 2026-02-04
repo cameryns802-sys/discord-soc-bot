@@ -10,6 +10,7 @@ import json
 import os
 from datetime import datetime
 import uuid
+from cogs.core.pst_timezone import get_now_pst
 
 class SecurityControlFramework(commands.Cog):
     """Security control framework assessment and tracking"""
@@ -137,7 +138,7 @@ class SecurityControlFramework(commands.Cog):
             'framework': framework_upper,
             'control_id': control_id,
             'status': status.lower(),
-            'added_at': datetime.utcnow().isoformat(),
+            'added_at': get_now_pst().isoformat(),
             'implementation_date': None,
             'responsible_team': 'TBD',
             'last_assessed': None,
@@ -158,7 +159,7 @@ class SecurityControlFramework(commands.Cog):
             title="✅ Security Control Added",
             description=f"**{framework_upper}** - {control_id}",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Framework", value=framework_upper, inline=True)
@@ -201,7 +202,7 @@ class SecurityControlFramework(commands.Cog):
             title=f"📊 {framework_upper} Cybersecurity Framework Status",
             description=f"Overall Compliance: **{compliance}%**",
             color=color,
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Framework", value=framework_upper, inline=True)
@@ -249,7 +250,7 @@ class SecurityControlFramework(commands.Cog):
             title=f"📋 {framework_upper} Controls List",
             description=f"{len(framework_controls)}/{len(all_controls)} controls tracked",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         # Show status distribution

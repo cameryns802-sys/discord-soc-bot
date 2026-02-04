@@ -12,6 +12,7 @@ import json
 import os
 from cogs.core.signal_bus import signal_bus, Signal, SignalType
 from cogs.core.feature_flags import flags
+from cogs.core.pst_timezone import get_now_pst
 
 class ThreatHuntingCog(commands.Cog):
     def __init__(self, bot):
@@ -50,7 +51,7 @@ class ThreatHuntingCog(commands.Cog):
         
         self.hunts[hunt_id] = {
             "id": hunt_id, "hypothesis": hypothesis, "scope": scope, "status": "active",
-            "started_by": interaction.user.id, "started_at": datetime.datetime.utcnow().isoformat(),
+            "started_by": interaction.user.id, "started_at": datetime.get_now_pst().isoformat(),
             "findings": []
         }
         self.save_data()
@@ -110,7 +111,7 @@ class ThreatHuntingCog(commands.Cog):
             return
         
         self.hunts[hunt_id]["status"] = "closed"
-        self.hunts[hunt_id]["closed_at"] = datetime.datetime.utcnow().isoformat()
+        self.hunts[hunt_id]["closed_at"] = datetime.get_now_pst().isoformat()
         self.save_data()
         await interaction.response.send_message(f"🏁 Hunt #{hunt_id} closed")
 
@@ -127,7 +128,7 @@ class ThreatHuntingCog(commands.Cog):
         self.hunts[hunt_id]["findings"].append({
             "text": finding,
             "logged_by": ctx.author.id,
-            "timestamp": datetime.datetime.utcnow().isoformat()
+            "timestamp": datetime.get_now_pst().isoformat()
         })
         self.save_data()
         await ctx.send(f"📝 Finding logged for hunt #{hunt_id}")

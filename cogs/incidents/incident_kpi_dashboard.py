@@ -2,6 +2,7 @@
 import discord
 from discord.ext import commands
 import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 class IncidentKPIDashboardCog(commands.Cog):
     def __init__(self, bot):
@@ -30,7 +31,7 @@ class IncidentKPIDashboardCog(commands.Cog):
         embed.add_field(name="SLA Compliance", value="98.5%", inline=True)
         embed.add_field(name="Detection Rate", value="94%", inline=True)
         embed.add_field(name="False Positive Rate", value="2.1%", inline=True)
-        embed.set_footer(text=f"Updated: {datetime.datetime.utcnow().strftime('%H:%M:%S')}")
+        embed.set_footer(text=f"Updated: {datetime.get_now_pst().strftime('%H:%M:%S')}")
         await ctx.send(embed=embed)
 
     @commands.command()

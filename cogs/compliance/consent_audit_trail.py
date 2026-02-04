@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 class ConsentAuditTrail(commands.Cog):
     def __init__(self, bot):
@@ -12,7 +13,7 @@ class ConsentAuditTrail(commands.Cog):
         if before.pending and not after.pending:
             self.audit_trail.append({
                 "user": after.id,
-                "timestamp": datetime.datetime.utcnow().isoformat(),
+                "timestamp": datetime.get_now_pst().isoformat(),
                 "event": "Accepted server rules"
             })
 

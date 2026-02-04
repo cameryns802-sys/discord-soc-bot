@@ -21,6 +21,7 @@ from enum import Enum
 import hashlib
 
 from cogs.core.signal_bus import signal_bus, Signal, SignalType
+from cogs.core.pst_timezone import get_now_pst
 
 class IOCType(Enum):
     """Types of Indicators of Compromise"""
@@ -184,7 +185,7 @@ class ThreatIntelHub(commands.Cog):
     def record_correlation(self, signal: Signal, matches: List[Dict]):
         """Record correlation for analytics"""
         correlation = {
-            'timestamp': datetime.utcnow().isoformat(),
+            'timestamp': get_now_pst().isoformat(),
             'signal_type': str(signal.type),
             'signal_source': signal.source,
             'ioc_count': len(matches),
@@ -215,7 +216,7 @@ class ThreatIntelHub(commands.Cog):
             'attributed_to': attributed_to,
             'description': description,
             'source': source,
-            'added_date': datetime.utcnow().isoformat(),
+            'added_date': get_now_pst().isoformat(),
             'last_seen': None,
             'hit_count': 0
         }
@@ -236,8 +237,8 @@ class ThreatIntelHub(commands.Cog):
             'origin': origin,
             'motivation': motivation,
             'techniques': techniques or [],
-            'first_seen': datetime.utcnow().isoformat(),
-            'last_activity': datetime.utcnow().isoformat(),
+            'first_seen': get_now_pst().isoformat(),
+            'last_activity': get_now_pst().isoformat(),
             'associated_iocs': [],
             'campaigns': []
         }
@@ -256,7 +257,7 @@ class ThreatIntelHub(commands.Cog):
             'name': name,
             'threat_actor': threat_actor,
             'category': category,
-            'start_date': start_date or datetime.utcnow().isoformat(),
+            'start_date': start_date or get_now_pst().isoformat(),
             'end_date': None,
             'targets': targets or [],
             'description': description,
@@ -298,7 +299,7 @@ class ThreatIntelHub(commands.Cog):
     
     def get_correlation_report(self, hours: int = 24) -> Dict:
         """Get correlation report"""
-        cutoff = datetime.utcnow() - timedelta(hours=hours)
+        cutoff = get_now_pst() - timedelta(hours=hours)
         
         recent = [
             c for c in self.correlations
@@ -365,7 +366,7 @@ class ThreatIntelHub(commands.Cog):
             embed = discord.Embed(
                 title="✅ IOC Added",
                 color=discord.Color.green(),
-                timestamp=datetime.utcnow()
+                timestamp=get_now_pst()
             )
             
             embed.add_field(name="IOC ID", value=ioc_id, inline=True)
@@ -400,7 +401,7 @@ class ThreatIntelHub(commands.Cog):
             title=f"🔍 IOC Search Results",
             description=f"Query: `{query or 'all'}`",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         for ioc in results[:5]:
@@ -432,7 +433,7 @@ class ThreatIntelHub(commands.Cog):
         embed = discord.Embed(
             title="📊 Threat Intelligence Statistics",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(
@@ -487,7 +488,7 @@ class ThreatIntelHub(commands.Cog):
             title="🔗 IOC Correlation Report",
             description=f"Analysis over last {hours} hours",
             color=discord.Color.purple(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(

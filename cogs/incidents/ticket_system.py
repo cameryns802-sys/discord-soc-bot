@@ -6,8 +6,9 @@ Features: Create, claim, assign, close, comment, priority levels, status trackin
 
 import discord
 from discord.ext import commands
-from discord import app_commands
-import datetime
+from discord import app_commands, ui
+from datetime import datetime
+from cogs.core.pst_timezone import get_now_pst
 import json
 import os
 from typing import Optional
@@ -18,6 +19,58 @@ try:
     BUTTONS_AVAILABLE = True
 except ImportError:
     BUTTONS_AVAILABLE = False
+
+
+class TicketCreateModal(ui.Modal, title="Create Support Ticket"):
+    """Modal for creating tickets from a button panel"""
+
+    priority = ui.TextInput(
+        label="Priority (low/medium/high/critical)",
+        style=discord.TextStyle.short,
+        placeholder="medium",
+        required=True,
+        max_length=20
+    )
+
+    description = ui.TextInput(
+        label="Describe your issue",
+        style=discord.TextStyle.paragraph,
+        placeholder="What do you need help with?",
+        required=True,
+        max_length=1000
+    )
+
+    def __init__(self, ticket_system):
+        super().__init__()
+        self.ticket_system = ticket_system
+
+    async def on_submit(self, interaction: discord.Interaction):
+        await interaction.response.defer(ephemeral=True)
+
+        class FakeCtx:
+            def __init__(self, interaction):
+                self.author = interaction.user
+                self.guild = interaction.guild
+                self.channel = interaction.channel
+            async def send(self, **kwargs):
+                if isinstance(kwargs.get('embed'), discord.Embed):
+                    await interaction.followup.send(embed=kwargs['embed'])
+                else:
+                    await interaction.followup.send(content=kwargs.get('content', ''))
+
+        ctx = FakeCtx(interaction)
+        await self.ticket_system._create_ticket_logic(ctx, str(self.priority.value), str(self.description.value), is_slash=True)
+
+class TicketCreateView(ui.View):
+    """Button panel for creating tickets"""
+
+    def __init__(self, ticket_system):
+        super().__init__(timeout=None)
+        self.ticket_system = ticket_system
+
+    @ui.button(label="Create Ticket", style=discord.ButtonStyle.green, emoji="??")
+    async def create_ticket(self, interaction: discord.Interaction, button: ui.Button):
+        await interaction.response.send_modal(TicketCreateModal(self.ticket_system))
 
 class TicketSystem(commands.Cog):
     """Full-featured ticketing system for SOC operations"""
@@ -87,16 +140,16 @@ class TicketSystem(commands.Cog):
     # ==================== TICKET COMMANDS ====================
     
     @commands.command(name='createticket', aliases=['newticket', 'ticket'])
-    async def _create_ticket_logic(self, ctx, priority: str, description: str, is_slash: bool = False):
+    async def create_ticket_cmd(self, ctx, priority: str = "medium", *, description: str = ""):
         """
         Create a new ticket
-        
+
         Usage: !createticket <priority> <description>
         Priority: low, medium, high, critical
         Example: !createticket high Suspicious login from unknown IP
         """
         await self._create_ticket_logic(ctx, priority, description, is_slash=False)
-    
+
     @app_commands.command(name="createticket", description="Create a new security ticket")
     @app_commands.describe(priority="Ticket priority level", description="Ticket description")
     async def create_ticket_slash(self, interaction: discord.Interaction, priority: str = "medium", description: str = ""):
@@ -126,6 +179,13 @@ class TicketSystem(commands.Cog):
         if priority not in ['low', 'medium', 'high', 'critical']:
             await ctx.send("❌ Invalid priority. Use: low, medium, high, or critical")
             return
+        settings_cog = self.bot.get_cog('SettingsManager')
+        if settings_cog:
+            settings = settings_cog.get_settings(ctx.guild.id)
+            if not settings.get('tickets_enabled', True):
+                await ctx.send("Tickets are disabled on this server.")
+                return
+
         
         guild_id = str(ctx.guild.id)
         ticket_id = self.get_next_ticket_id(guild_id)
@@ -141,8 +201,8 @@ class TicketSystem(commands.Cog):
             'description': description,
             'assigned_to': None,
             'assigned_name': None,
-            'created_at': datetime.datetime.now(datetime.UTC).isoformat(),
-            'updated_at': datetime.datetime.now(datetime.UTC).isoformat(),
+            'created_at': get_now_pst().isoformat(),
+            'updated_at': get_now_pst().isoformat(),
             'closed_at': None,
             'closed_by': None,
             'channel_id': None,
@@ -179,7 +239,7 @@ class TicketSystem(commands.Cog):
                     title=f"🎫 Ticket {ticket_id}",
                     description=description,
                     color=self.get_priority_color(priority),
-                    timestamp=datetime.datetime.now(datetime.UTC)
+                    timestamp=get_now_pst()
                 )
                 embed.add_field(name="Priority", value=priority.upper(), inline=True)
                 embed.add_field(name="Status", value="🟢 OPEN", inline=True)
@@ -200,7 +260,7 @@ class TicketSystem(commands.Cog):
             title="✅ Ticket Created",
             description=f"Your ticket has been created: **{ticket_id}**",
             color=discord.Color.green(),
-            timestamp=datetime.datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         embed.add_field(name="Priority", value=priority.upper(), inline=True)
         embed.add_field(name="Status", value="Open", inline=True)
@@ -334,14 +394,14 @@ class TicketSystem(commands.Cog):
         ticket['assigned_to'] = ctx.author.id
         ticket['assigned_name'] = str(ctx.author)
         ticket['status'] = 'in_progress'
-        ticket['updated_at'] = datetime.datetime.now(datetime.UTC).isoformat()
+        ticket['updated_at'] = get_now_pst().isoformat()
         
         # Add system comment
         ticket['comments'].append({
             'author_id': self.bot.user.id,
             'author_name': 'System',
             'content': f"Ticket claimed by {ctx.author.mention}",
-            'timestamp': datetime.datetime.now(datetime.UTC).isoformat()
+            'timestamp': get_now_pst().isoformat()
         })
         
         self.save_data()
@@ -350,7 +410,7 @@ class TicketSystem(commands.Cog):
             title="✅ Ticket Claimed",
             description=f"You have claimed ticket **{ticket_id}**",
             color=discord.Color.blue(),
-            timestamp=datetime.datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         embed.add_field(name="Status", value="🟡 IN PROGRESS", inline=True)
         embed.set_footer(text=f"Ticket ID: {ticket_id}")
@@ -389,7 +449,7 @@ class TicketSystem(commands.Cog):
         ticket['assigned_to'] = member.id
         ticket['assigned_name'] = str(member)
         ticket['status'] = 'in_progress'
-        ticket['updated_at'] = datetime.datetime.now(datetime.UTC).isoformat()
+        ticket['updated_at'] = get_now_pst().isoformat()
         
         # Add system comment
         if old_assignee:
@@ -401,7 +461,7 @@ class TicketSystem(commands.Cog):
             'author_id': self.bot.user.id,
             'author_name': 'System',
             'content': message,
-            'timestamp': datetime.datetime.now(datetime.UTC).isoformat()
+            'timestamp': get_now_pst().isoformat()
         })
         
         self.save_data()
@@ -410,7 +470,7 @@ class TicketSystem(commands.Cog):
             title="✅ Ticket Assigned",
             description=f"Ticket **{ticket_id}** assigned to {member.mention}",
             color=discord.Color.blue(),
-            timestamp=datetime.datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         embed.set_footer(text=f"Ticket ID: {ticket_id}")
         
@@ -466,16 +526,16 @@ class TicketSystem(commands.Cog):
         
         # Close ticket
         ticket['status'] = 'closed'
-        ticket['closed_at'] = datetime.datetime.now(datetime.UTC).isoformat()
+        ticket['closed_at'] = get_now_pst().isoformat()
         ticket['closed_by'] = ctx.author.id
-        ticket['updated_at'] = datetime.datetime.now(datetime.UTC).isoformat()
+        ticket['updated_at'] = get_now_pst().isoformat()
         
         # Add system comment
         ticket['comments'].append({
             'author_id': self.bot.user.id,
             'author_name': 'System',
             'content': f"Ticket closed by {ctx.author.mention}: {resolution}",
-            'timestamp': datetime.datetime.now(datetime.UTC).isoformat()
+            'timestamp': get_now_pst().isoformat()
         })
         
         self.save_data()
@@ -484,22 +544,38 @@ class TicketSystem(commands.Cog):
             title="✅ Ticket Closed",
             description=f"Ticket **{ticket_id}** has been closed",
             color=discord.Color.dark_gray(),
-            timestamp=datetime.datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         embed.add_field(name="Resolution", value=resolution, inline=False)
         embed.add_field(name="Closed By", value=ctx.author.mention, inline=True)
         embed.set_footer(text=f"Ticket ID: {ticket_id}")
         
         await ctx.send(embed=embed)
-        
-        # Archive ticket channel
+
+        transcript_channel = self.get_transcript_channel(ctx.guild)
+
+        # Archive ticket channel and save transcript
         if ticket['channel_id']:
             channel = ctx.guild.get_channel(ticket['channel_id'])
             if channel:
-                await channel.send("⚫ This ticket has been closed. Channel will be archived shortly.")
-                # Optionally delete channel after delay
-                # await asyncio.sleep(30)
-                # await channel.delete(reason=f"Ticket {ticket_id} closed")
+                try:
+                    await channel.send("This ticket has been closed. Archiving and saving transcript...")
+                except:
+                    pass
+
+                transcript_path = await self.save_transcript(channel, ticket_id)
+                if transcript_path:
+                    try:
+                        file = discord.File(transcript_path, filename=os.path.basename(transcript_path))
+                        if transcript_channel:
+                            await transcript_channel.send(f"Transcript for {ticket_id}", file=file)
+                        else:
+                            await channel.send("Transcript saved.", file=file)
+                    except:
+                        pass
+
+                await self.archive_ticket_channel(ctx.guild, channel, staff_role)
+
     
     @commands.command(name='commentticket', aliases=['ticketcomment'])
     async def comment_ticket(self, ctx, ticket_id: str, *, comment: str):
@@ -522,9 +598,9 @@ class TicketSystem(commands.Cog):
             'author_id': ctx.author.id,
             'author_name': str(ctx.author),
             'content': comment,
-            'timestamp': datetime.datetime.now(datetime.UTC).isoformat()
+            'timestamp': get_now_pst().isoformat()
         })
-        ticket['updated_at'] = datetime.datetime.now(datetime.UTC).isoformat()
+        ticket['updated_at'] = get_now_pst().isoformat()
         
         self.save_data()
         
@@ -532,7 +608,7 @@ class TicketSystem(commands.Cog):
             title="💬 Comment Added",
             description=comment,
             color=discord.Color.blue(),
-            timestamp=datetime.datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         embed.set_author(name=str(ctx.author), icon_url=ctx.author.avatar.url if ctx.author.avatar else None)
         embed.set_footer(text=f"Ticket ID: {ticket_id}")
@@ -602,7 +678,7 @@ class TicketSystem(commands.Cog):
             title=f"🎫 Tickets - {status.upper().replace('_', ' ')}",
             description=f"Found {len(filtered)} ticket(s)",
             color=discord.Color.blue(),
-            timestamp=datetime.datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         
         # Show first 10 tickets
@@ -674,7 +750,7 @@ class TicketSystem(commands.Cog):
             title="✅ Ticket System Setup Complete",
             description="Ticket system has been configured",
             color=discord.Color.green(),
-            timestamp=datetime.datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         embed.add_field(name="Ticket Category", value=category.mention, inline=True)
         embed.add_field(name="Next Steps", value="Use `!setticketrole @role` to set staff role", inline=False)
@@ -707,8 +783,104 @@ class TicketSystem(commands.Cog):
         embed.set_footer(text="This role will have access to all tickets")
         
         await ctx.send(embed=embed)
-    
+
+    @commands.command(name='ticketpanel')
+    @commands.has_permissions(administrator=True)
+    async def ticket_panel(self, ctx, channel: discord.TextChannel = None):
+        """Post a ticket creation panel with a button"""
+        target = channel or ctx.channel
+        embed = discord.Embed(
+            title="Support Tickets",
+            description="Click the button below to create a private support ticket.",
+            color=discord.Color.blue()
+        )
+        view = TicketCreateView(self)
+        await target.send(embed=embed, view=view)
+        if target != ctx.channel:
+            await ctx.send(f"Ticket panel posted in {target.mention}.")
+
+    @app_commands.command(name="ticketpanel", description="Post a ticket creation panel")
+    @app_commands.describe(channel="Channel to post the panel in")
+    async def ticket_panel_slash(self, interaction: discord.Interaction, channel: discord.TextChannel = None):
+        target = channel or interaction.channel
+        embed = discord.Embed(
+            title="Support Tickets",
+            description="Click the button below to create a private support ticket.",
+            color=discord.Color.blue()
+        )
+        view = TicketCreateView(self)
+        await target.send(embed=embed, view=view)
+        await interaction.response.send_message(f"Ticket panel posted in {target.mention}.", ephemeral=True)
+
+    @commands.command(name='setticketarchive')
+    @commands.has_permissions(administrator=True)
+    async def set_ticket_archive(self, ctx, category: discord.CategoryChannel = None):
+        """Set or clear the archive category for closed tickets"""
+        guild_id = str(ctx.guild.id)
+        if guild_id not in self.config:
+            self.config[guild_id] = {}
+
+        self.config[guild_id]['archive_category'] = category.id if category else None
+        self.save_config()
+
+        embed = discord.Embed(
+            title="Ticket Archive Updated",
+            description=f"Archive category set to {category.mention if category else 'None'}",
+            color=discord.Color.green()
+        )
+        await ctx.send(embed=embed)
+
     # ==================== HELPER METHODS ====================
+
+    def get_transcript_channel(self, guild: discord.Guild) -> Optional[discord.TextChannel]:
+        settings_cog = self.bot.get_cog('SettingsManager')
+        if settings_cog:
+            settings = settings_cog.get_settings(guild.id)
+            channel_id = settings.get('transcript_channel_id')
+            if channel_id:
+                return guild.get_channel(channel_id)
+        return None
+
+    async def save_transcript(self, channel: discord.TextChannel, ticket_id: str) -> Optional[str]:
+        os.makedirs('transcripts', exist_ok=True)
+        lines = []
+        async for message in channel.history(limit=200, oldest_first=True):
+            content = message.content or ''
+            if message.attachments:
+                attachments = ', '.join(a.url for a in message.attachments)
+                content = f"{content} [Attachments: {attachments}]"
+            lines.append(f"{message.created_at.isoformat()} | {message.author} ({message.author.id}) | {content}")
+
+        path = os.path.join('transcripts', f"ticket-{ticket_id}.txt")
+        with open(path, 'w', encoding='utf-8') as f:
+            f.write("\n".join(lines) if lines else "No messages captured.")
+        return path
+
+    async def archive_ticket_channel(self, guild: discord.Guild, channel: discord.TextChannel, staff_role: Optional[discord.Role]):
+        archive_category_id = self.config.get(str(guild.id), {}).get('archive_category')
+        archive_category = guild.get_channel(archive_category_id) if archive_category_id else None
+
+        overwrites = {
+            guild.default_role: discord.PermissionOverwrite(read_messages=False),
+            guild.me: discord.PermissionOverwrite(read_messages=True, send_messages=True)
+        }
+        if staff_role:
+            overwrites[staff_role] = discord.PermissionOverwrite(read_messages=True, send_messages=False, manage_messages=True)
+
+        new_name = channel.name
+        if not new_name.startswith('closed-'):
+            new_name = f"closed-{new_name}"
+
+        try:
+            await channel.edit(
+                name=new_name,
+                category=archive_category or channel.category,
+                overwrites=overwrites,
+                reason="Ticket closed"
+            )
+        except:
+            pass
+
     
     def get_priority_color(self, priority: str) -> discord.Color:
         """Get embed color based on priority"""
@@ -722,3 +894,4 @@ class TicketSystem(commands.Cog):
 
 async def setup(bot):
     await bot.add_cog(TicketSystem(bot))
+

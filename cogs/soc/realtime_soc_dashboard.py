@@ -10,6 +10,7 @@ import json
 import os
 from datetime import datetime, timedelta
 from collections import Counter
+from cogs.core.pst_timezone import get_now_pst
 
 class RealTimeSocDashboard(commands.Cog):
     """Master SOC dashboard with real-time metrics"""
@@ -60,7 +61,7 @@ class RealTimeSocDashboard(commands.Cog):
         alerts = self.get_alert_data(guild_id)
         
         # Threat impact
-        recent_threats = [t for t in threats if datetime.fromisoformat(t.get('timestamp', datetime.utcnow().isoformat())) > (datetime.utcnow() - timedelta(hours=24))]
+        recent_threats = [t for t in threats if datetime.fromisoformat(t.get('timestamp', get_now_pst().isoformat())) > (get_now_pst() - timedelta(hours=24))]
         critical_count = sum(1 for t in recent_threats if t.get('severity') == 'critical')
         high_count = sum(1 for t in recent_threats if t.get('severity') == 'high')
         
@@ -83,7 +84,7 @@ class RealTimeSocDashboard(commands.Cog):
         incidents = self.get_incident_data(ctx.guild.id)
         alerts = self.get_alert_data(ctx.guild.id)
         
-        now = datetime.utcnow()
+        now = get_now_pst()
         recent_threats = [t for t in threats if datetime.fromisoformat(t.get('timestamp', now.isoformat())) > (now - timedelta(hours=24))]
         recent_incidents = [i for i in incidents.values() if datetime.fromisoformat(i.get('created_at', now.isoformat())) > (now - timedelta(hours=24))]
         
@@ -114,7 +115,7 @@ class RealTimeSocDashboard(commands.Cog):
             title="🎯 SENTINEL SOC Dashboard",
             description="Real-time security operations overview",
             color=health_color,
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         # Top metrics
@@ -167,7 +168,7 @@ class RealTimeSocDashboard(commands.Cog):
             inline=False
         )
         
-        embed.set_footer(text=f"Sentinel SOC | Updated {datetime.utcnow().strftime('%H:%M:%S UTC')} | Type: /help for commands")
+        embed.set_footer(text=f"Sentinel SOC | Updated {get_now_pst().strftime('%H:%M:%S UTC')} | Type: /help for commands")
         
         await ctx.send(embed=embed)
     
@@ -178,7 +179,7 @@ class RealTimeSocDashboard(commands.Cog):
         incidents = self.get_incident_data(ctx.guild.id)
         alerts = self.get_alert_data(ctx.guild.id)
         
-        now = datetime.utcnow()
+        now = get_now_pst()
         recent_threats = [t for t in threats if datetime.fromisoformat(t.get('timestamp', now.isoformat())) > (now - timedelta(hours=24))]
         
         issues = []
@@ -208,7 +209,7 @@ class RealTimeSocDashboard(commands.Cog):
             title="🏥 Security Health Check",
             description=f"Health Score: {health_score}/100",
             color=discord.Color.red() if health_score < 40 else discord.Color.orange() if health_score < 60 else discord.Color.green(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         if issues:
@@ -237,21 +238,21 @@ class RealTimeSocDashboard(commands.Cog):
             '30d': 30
         }.get(period.lower(), 1)
         
-        cutoff = datetime.utcnow() - timedelta(days=multiplier)
+        cutoff = get_now_pst() - timedelta(days=multiplier)
         
         threats = self.get_threat_data(ctx.guild.id)
         incidents = self.get_incident_data(ctx.guild.id)
         alerts = self.get_alert_data(ctx.guild.id)
         
-        period_threats = [t for t in threats if datetime.fromisoformat(t.get('timestamp', datetime.utcnow().isoformat())) > cutoff]
-        period_incidents = [i for i in incidents.values() if datetime.fromisoformat(i.get('created_at', datetime.utcnow().isoformat())) > cutoff]
-        period_alerts = [a for a in alerts.values() if datetime.fromisoformat(a.get('created_at', datetime.utcnow().isoformat())) > cutoff]
+        period_threats = [t for t in threats if datetime.fromisoformat(t.get('timestamp', get_now_pst().isoformat())) > cutoff]
+        period_incidents = [i for i in incidents.values() if datetime.fromisoformat(i.get('created_at', get_now_pst().isoformat())) > cutoff]
+        period_alerts = [a for a in alerts.values() if datetime.fromisoformat(a.get('created_at', get_now_pst().isoformat())) > cutoff]
         
         embed = discord.Embed(
             title=f"📊 Security Metrics ({period})",
             description=f"Period: {period}",
             color=discord.Color.blurple(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         # Volume metrics
@@ -277,17 +278,17 @@ class RealTimeSocDashboard(commands.Cog):
         
         await ctx.send(embed=embed)
     
-    @commands.command(name='socdashboard')
+    @commands.command(name='socdash')
     async def socdashboard_prefix(self, ctx):
         """Show master SOC dashboard - Prefix command"""
         await self._socdashboard_logic(ctx)
     
-    @commands.command(name='healthcheck')
+    @commands.command(name='sockealthcheck')
     async def healthcheck_prefix(self, ctx):
         """Run security health check - Prefix command"""
         await self._healthcheck_logic(ctx)
     
-    @commands.command(name='metrics')
+    @commands.command(name='smetrics')
     async def metrics_prefix(self, ctx, period: str = '24h'):
         """Show detailed metrics - Prefix command"""
         if period.lower() not in ['24h', '7d', '30d']:

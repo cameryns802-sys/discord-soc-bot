@@ -3,6 +3,7 @@ from discord.ext import commands
 import json
 import os
 from datetime import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 class IncidentTimelineBuilderCog(commands.Cog):
     def __init__(self, bot):
@@ -32,7 +33,7 @@ class IncidentTimelineBuilderCog(commands.Cog):
         self.timelines[str(incident_id)] = {
             "title": title or f"Incident #{incident_id}",
             "events": [],
-            "created": datetime.utcnow().isoformat()
+            "created": get_now_pst().isoformat()
         }
         self.save_timelines()
         
@@ -53,7 +54,7 @@ class IncidentTimelineBuilderCog(commands.Cog):
         self.timelines[str(incident_id)]["events"].append({
             "timestamp": timestamp,
             "event": event,
-            "added": datetime.utcnow().isoformat()
+            "added": get_now_pst().isoformat()
         })
         self.save_timelines()
         

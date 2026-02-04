@@ -2,6 +2,7 @@
 import discord
 from discord.ext import commands
 import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 class ObservabilityCog(commands.Cog):
     def __init__(self, bot):
@@ -35,7 +36,7 @@ class ObservabilityCog(commands.Cog):
         self.event_stream.append({
             "type": event_type.lower(),
             "description": description,
-            "time": datetime.datetime.utcnow(),
+            "time": datetime.get_now_pst(),
             "source": ctx.author.mention
         })
         self.event_types[event_type.lower()] = self.event_types.get(event_type.lower(), 0) + 1
@@ -72,7 +73,7 @@ class ObservabilityCog(commands.Cog):
             await ctx.send("No event data.")
             return
         total = len(self.event_stream)
-        last_10_min = len([e for e in self.event_stream if (datetime.datetime.utcnow() - e['time']).seconds < 600])
+        last_10_min = len([e for e in self.event_stream if (datetime.get_now_pst() - e['time']).seconds < 600])
         from collections import Counter
         top_events = Counter([e['type'] for e in self.event_stream]).most_common(5)
         desc = "\n".join([f"**{t[0].upper()}**: {t[1]} occurrences" for t in top_events])
@@ -110,7 +111,7 @@ class ObservabilityCog(commands.Cog):
             score = 0
         else:
             # Simple anomaly: rapid events = higher score
-            recent = [e for e in self.event_stream if (datetime.datetime.utcnow() - e['time']).seconds < 300]
+            recent = [e for e in self.event_stream if (datetime.get_now_pst() - e['time']).seconds < 300]
             score = min(100, len(recent) * 5)
         color = discord.Color.red() if score > 70 else discord.Color.orange() if score > 40 else discord.Color.green()
         embed = discord.Embed(title="Anomaly Score", color=color)

@@ -8,6 +8,7 @@ from discord.ext import commands
 import json
 import os
 from datetime import datetime, timedelta
+from cogs.core.pst_timezone import get_now_pst
 
 class SOCFatiguePredictorCog(commands.Cog):
     """SOC Fatigue Predictor - Monitors analyst workload and predicts burnout"""
@@ -78,13 +79,13 @@ class SOCFatiguePredictorCog(commands.Cog):
         self.workload[user_id]["alerts_handled_24h"] = alerts_handled
         self.workload[user_id]["incidents_worked_week"] += incidents
         self.workload[user_id]["consecutive_shifts"] += 1
-        self.workload[user_id]["last_shift"] = datetime.utcnow().isoformat()
+        self.workload[user_id]["last_shift"] = get_now_pst().isoformat()
         self.save_workload()
         
         fatigue_risk = self.calculate_fatigue_risk(user_id)
         
         color = discord.Color.green() if fatigue_risk < 40 else discord.Color.gold() if fatigue_risk < 70 else discord.Color.red()
-        embed = discord.Embed(title="✅ Shift Logged", color=color, timestamp=datetime.utcnow())
+        embed = discord.Embed(title="✅ Shift Logged", color=color, timestamp=get_now_pst())
         embed.add_field(name="Analyst", value=member.mention, inline=True)
         embed.add_field(name="Alerts Handled", value=alerts_handled, inline=True)
         embed.add_field(name="Incidents", value=incidents, inline=True)
@@ -120,14 +121,14 @@ class SOCFatiguePredictorCog(commands.Cog):
             "user_id": user_id,
             "fatigue_risk": fatigue_risk,
             "risk_level": risk_level,
-            "prediction_time": datetime.utcnow().isoformat(),
+            "prediction_time": get_now_pst().isoformat(),
             "predicted_by": str(ctx.author.id)
         }
         
         self.predictions.append(prediction)
         self.save_predictions()
         
-        embed = discord.Embed(title="🔮 Fatigue Risk Prediction", color=color, timestamp=datetime.utcnow())
+        embed = discord.Embed(title="🔮 Fatigue Risk Prediction", color=color, timestamp=get_now_pst())
         embed.add_field(name="Analyst", value=member.mention, inline=True)
         embed.add_field(name="Risk Score", value=f"**{fatigue_risk:.1f}%**", inline=True)
         embed.add_field(name="Risk Level", value=risk_level, inline=True)
@@ -149,7 +150,7 @@ class SOCFatiguePredictorCog(commands.Cog):
             await ctx.send("📊 No analyst data recorded")
             return
         
-        embed = discord.Embed(title="👥 SOC Team Fatigue Status", color=discord.Color.blue(), timestamp=datetime.utcnow())
+        embed = discord.Embed(title="👥 SOC Team Fatigue Status", color=discord.Color.blue(), timestamp=get_now_pst())
         
         high_risk = []
         moderate_risk = []
@@ -183,7 +184,7 @@ class SOCFatiguePredictorCog(commands.Cog):
         
         high_risk_count = sum(1 for uid in self.workload if self.calculate_fatigue_risk(uid) >= 70)
         
-        embed = discord.Embed(title="📊 SOC Fatigue Dashboard", color=discord.Color.blue(), timestamp=datetime.utcnow())
+        embed = discord.Embed(title="📊 SOC Fatigue Dashboard", color=discord.Color.blue(), timestamp=get_now_pst())
         embed.add_field(name="👥 Tracked Analysts", value=total_analysts, inline=True)
         embed.add_field(name="🔮 Total Predictions", value=total_predictions, inline=True)
         embed.add_field(name="🔴 High Risk", value=high_risk_count, inline=True)

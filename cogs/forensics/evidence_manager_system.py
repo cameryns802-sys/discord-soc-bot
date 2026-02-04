@@ -4,6 +4,7 @@ from discord.ext import commands
 from datetime import datetime
 import json
 import os
+from cogs.core.pst_timezone import get_now_pst
 
 class EvidenceManagerCog(commands.Cog):
     def __init__(self, bot):
@@ -60,7 +61,7 @@ class EvidenceManagerCog(commands.Cog):
             "type": evidence_type.lower(),
             "description": description,
             "created_by": ctx.author.id,
-            "created_at": datetime.utcnow().isoformat(),
+            "created_at": get_now_pst().isoformat(),
             "chain_id": chain_id,
             "hash": f"hash_{evidence_id}",
             "size_bytes": len(description),
@@ -68,7 +69,7 @@ class EvidenceManagerCog(commands.Cog):
             "access_log": [{
                 "user_id": ctx.author.id,
                 "action": "created",
-                "timestamp": datetime.utcnow().isoformat()
+                "timestamp": get_now_pst().isoformat()
             }],
             "tags": [],
             "related_incidents": []
@@ -79,11 +80,11 @@ class EvidenceManagerCog(commands.Cog):
             "evidence_id": evidence_id,
             "case": case_name,
             "custodian": ctx.author.id,
-            "created_at": datetime.utcnow().isoformat(),
+            "created_at": get_now_pst().isoformat(),
             "transfers": [{
                 "from": "collection",
                 "to": ctx.author.id,
-                "timestamp": datetime.utcnow().isoformat(),
+                "timestamp": get_now_pst().isoformat(),
                 "notes": "Initial collection"
             }],
             "status": "active"
@@ -139,7 +140,7 @@ class EvidenceManagerCog(commands.Cog):
         evidence["access_log"].append({
             "user_id": ctx.author.id,
             "action": "transferred",
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": get_now_pst().isoformat(),
             "notes": notes
         })
         
@@ -147,7 +148,7 @@ class EvidenceManagerCog(commands.Cog):
         chain["transfers"].append({
             "from": ctx.author.id,
             "to": recipient.id,
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": get_now_pst().isoformat(),
             "notes": notes
         })
         chain["custodian"] = recipient.id
@@ -179,7 +180,7 @@ class EvidenceManagerCog(commands.Cog):
         evidence["access_log"].append({
             "user_id": ctx.author.id,
             "action": "viewed",
-            "timestamp": datetime.utcnow().isoformat()
+            "timestamp": get_now_pst().isoformat()
         })
         self.save_evidence()
         

@@ -10,6 +10,7 @@ import json
 import os
 from datetime import datetime
 import uuid
+from cogs.core.pst_timezone import get_now_pst
 
 class BreachImpactAssessment(commands.Cog):
     """Breach impact quantification and damage assessment"""
@@ -81,7 +82,7 @@ class BreachImpactAssessment(commands.Cog):
         assessment = {
             'id': assessment_id,
             'name': incident_name,
-            'created_at': datetime.utcnow().isoformat(),
+            'created_at': get_now_pst().isoformat(),
             'records_exposed': records_exposed,
             'downtime_hours': downtime_hours,
             'impact_scores': {
@@ -108,12 +109,12 @@ class BreachImpactAssessment(commands.Cog):
             title="📊 Breach Impact Assessment",
             description=f"**{incident_name}**",
             color=discord.Color.red(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Assessment ID", value=f"`{assessment_id}`", inline=True)
         embed.add_field(name="Status", value="🔴 ACTIVE", inline=True)
-        embed.add_field(name="Created", value=datetime.utcnow().strftime('%Y-%m-%d %H:%M'), inline=True)
+        embed.add_field(name="Created", value=get_now_pst().strftime('%Y-%m-%d %H:%M'), inline=True)
         
         embed.add_field(name="Impact Summary", value="━" * 25, inline=False)
         embed.add_field(name="Records Exposed", value=f"👥 {records_exposed:,}", inline=True)
@@ -156,7 +157,7 @@ class BreachImpactAssessment(commands.Cog):
             title=f"📊 {assessment['name']}",
             description=f"Assessment ID: {assessment_id}",
             color=discord.Color.red(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Status", value=assessment['status'].upper(), inline=True)
@@ -209,7 +210,7 @@ class BreachImpactAssessment(commands.Cog):
             title="📊 Breach Assessment History",
             description=f"{len(sorted_assessments)} assessment(s)",
             color=discord.Color.red(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         # Summary

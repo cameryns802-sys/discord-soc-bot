@@ -2,6 +2,7 @@
 import discord
 from discord.ext import commands
 import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 class NetworkSegmentationMonitorCog(commands.Cog):
     def __init__(self, bot):
@@ -30,7 +31,7 @@ class NetworkSegmentationMonitorCog(commands.Cog):
         if not ctx.author.guild_permissions.administrator:
             await ctx.send("Admin only")
             return
-        self.isolation_events.append({"segment": segment, "time": datetime.datetime.utcnow()})
+        self.isolation_events.append({"segment": segment, "time": datetime.get_now_pst()})
         embed = discord.Embed(title=f"🔒 Isolating {segment.upper()}", color=0xFF0000)
         embed.add_field(name="Status", value="Ingress/Egress blocked", inline=True)
         embed.add_field(name="ETA", value="3 minutes", inline=True)

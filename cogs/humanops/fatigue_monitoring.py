@@ -6,6 +6,7 @@ from discord.ext import commands, tasks
 import json
 import os
 from datetime import datetime, timedelta
+from cogs.core.pst_timezone import get_now_pst
 
 class FatigueMonitoringCog(commands.Cog):
     def __init__(self, bot):
@@ -54,7 +55,7 @@ class FatigueMonitoringCog(commands.Cog):
                 
                 if fatigue_score > 0.7:
                     if user_id not in self.data["burnout_signals"]:
-                        self.data["burnout_signals"][user_id] = {"level": "WARNING", "detected_at": datetime.utcnow().isoformat()}
+                        self.data["burnout_signals"][user_id] = {"level": "WARNING", "detected_at": get_now_pst().isoformat()}
             
             self.save_data(self.data)
         except Exception as e:
@@ -103,14 +104,14 @@ class FatigueMonitoringCog(commands.Cog):
                 "commands_executed": 0,
                 "consecutive_hours": 0,
                 "last_break": None,
-                "shift_start": datetime.utcnow().isoformat()
+                "shift_start": get_now_pst().isoformat()
             }
         
         activity = self.data["mod_activity"][user_id]
         activity["hours_today"] += hours_worked
         activity["alerts_handled"] += alerts
         activity["commands_executed"] += commands
-        activity["last_update"] = datetime.utcnow().isoformat()
+        activity["last_update"] = get_now_pst().isoformat()
         
         fatigue_score = self.calculate_fatigue(activity)
         self.data["fatigue_scores"][user_id] = fatigue_score
@@ -199,7 +200,7 @@ class FatigueMonitoringCog(commands.Cog):
         
         on_call_assignment = {
             "user": str(user),
-            "assigned_at": datetime.utcnow().isoformat(),
+            "assigned_at": get_now_pst().isoformat(),
             "duration_hours": hours,
             "status": "ACTIVE",
             "alerts_responded": 0
@@ -275,7 +276,7 @@ class FatigueMonitoringCog(commands.Cog):
         self.data["throttled_users"][user_id] = {
             "user": str(user),
             "throttle_reason": "FATIGUE_BREAK",
-            "throttle_until": (datetime.utcnow() + timedelta(minutes=minutes)).isoformat(),
+            "throttle_until": (get_now_pst() + timedelta(minutes=minutes)).isoformat(),
             "tasks_blocked": 0
         }
         

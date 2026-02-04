@@ -6,6 +6,7 @@ import os
 from datetime import datetime
 from typing import Dict, List, Optional
 import asyncio
+from cogs.core.pst_timezone import get_now_pst
 
 class HumanOverrideTracker:
     """Track all human overrides of AI decisions for bias detection and explainability"""
@@ -41,7 +42,7 @@ class HumanOverrideTracker:
                           user_id: int, reason: str, confidence: float = 0.0):
         """Log a human override of an AI decision"""
         override = {
-            'timestamp': datetime.utcnow().isoformat(),
+            'timestamp': get_now_pst().isoformat(),
             'system': system_name,
             'ai_decision': decision,
             'human_decision': human_decision,

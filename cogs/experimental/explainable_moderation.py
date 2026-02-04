@@ -8,6 +8,7 @@ import json
 import os
 from datetime import datetime
 import hashlib
+from cogs.core.pst_timezone import get_now_pst
 
 class ExplainableModerationCog(commands.Cog):
     def __init__(self, bot):
@@ -23,7 +24,7 @@ class ExplainableModerationCog(commands.Cog):
                 json.dump({"audit_log": [], "action_count": 0}, f, indent=2)
 
     def _generate_audit_id(self):
-        timestamp = datetime.utcnow().isoformat()
+        timestamp = get_now_pst().isoformat()
         hash_obj = hashlib.sha256(timestamp.encode())
         return f"AUDIT-{hash_obj.hexdigest()[:12].upper()}"
 
@@ -31,7 +32,7 @@ class ExplainableModerationCog(commands.Cog):
         audit_id = self._generate_audit_id()
         log_entry = {
             "audit_id": audit_id,
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": get_now_pst().isoformat(),
             "action_type": action_type,
             "actor_id": actor.id,
             "actor_name": str(actor),
@@ -61,7 +62,7 @@ class ExplainableModerationCog(commands.Cog):
             await user.send(f"⚠️ You received a warning: {reason}")
         except discord.Forbidden:
             pass
-        embed = discord.Embed(title=f"⚠️ Warning Issued - {audit_id}", description=f"**User:** {user.mention}\n**Reason:** {reason}", color=discord.Color.orange(), timestamp=datetime.utcnow())
+        embed = discord.Embed(title=f"⚠️ Warning Issued - {audit_id}", description=f"**User:** {user.mention}\n**Reason:** {reason}", color=discord.Color.orange(), timestamp=get_now_pst())
         embed.add_field(name="Moderator", value=interaction.user.mention, inline=True)
         embed.set_footer(text=f"Audit ID: {audit_id}")
         await interaction.response.send_message(embed=embed)
@@ -74,7 +75,7 @@ class ExplainableModerationCog(commands.Cog):
             await user.send(f"🔇 You have been muted: {reason}")
         except discord.Forbidden:
             pass
-        embed = discord.Embed(title=f"🔇 User Muted - {audit_id}", description=f"**User:** {user.mention}\n**Reason:** {reason}", color=discord.Color.yellow(), timestamp=datetime.utcnow())
+        embed = discord.Embed(title=f"🔇 User Muted - {audit_id}", description=f"**User:** {user.mention}\n**Reason:** {reason}", color=discord.Color.yellow(), timestamp=get_now_pst())
         embed.add_field(name="Moderator", value=interaction.user.mention, inline=True)
         embed.set_footer(text=f"Audit ID: {audit_id}")
         await interaction.response.send_message(embed=embed)
@@ -88,7 +89,7 @@ class ExplainableModerationCog(commands.Cog):
         except discord.Forbidden:
             pass
         await interaction.guild.ban(user, reason=reason)
-        embed = discord.Embed(title=f"🔨 User Banned - {audit_id}", description=f"**User:** {user.mention}\n**Reason:** {reason}", color=discord.Color.red(), timestamp=datetime.utcnow())
+        embed = discord.Embed(title=f"🔨 User Banned - {audit_id}", description=f"**User:** {user.mention}\n**Reason:** {reason}", color=discord.Color.red(), timestamp=get_now_pst())
         embed.add_field(name="Moderator", value=interaction.user.mention, inline=True)
         embed.set_footer(text=f"Audit ID: {audit_id}")
         await interaction.response.send_message(embed=embed)
@@ -101,7 +102,7 @@ class ExplainableModerationCog(commands.Cog):
         if not data["audit_log"]:
             await interaction.response.send_message("No audit logs found.", ephemeral=True)
             return
-        embed = discord.Embed(title="📋 Audit Trail", color=discord.Color.blue(), timestamp=datetime.utcnow())
+        embed = discord.Embed(title="📋 Audit Trail", color=discord.Color.blue(), timestamp=get_now_pst())
         recent = data["audit_log"][-10:]
         for log in recent:
             embed.add_field(name=f"{log['action_type']} - {log['audit_id']}", value=f"Target: {log['target_name']}\nReason: {log['reason']}", inline=False)
@@ -116,7 +117,7 @@ class ExplainableModerationCog(commands.Cog):
         if not entry:
             await interaction.response.send_message(f"Audit ID {audit_id} not found.", ephemeral=True)
             return
-        embed = discord.Embed(title=f"🔍 Audit - {audit_id}", color=discord.Color.blue(), timestamp=datetime.utcnow())
+        embed = discord.Embed(title=f"🔍 Audit - {audit_id}", color=discord.Color.blue(), timestamp=get_now_pst())
         embed.add_field(name="Action", value=entry["action_type"], inline=True)
         embed.add_field(name="Target", value=entry["target_name"], inline=True)
         embed.add_field(name="Moderator", value=entry["actor_name"], inline=True)
@@ -137,7 +138,7 @@ class ExplainableModerationCog(commands.Cog):
                 mods[actor] = {"total": 0, "WARN": 0, "MUTE": 0, "BAN": 0}
             mods[actor]["total"] += 1
             mods[actor][log["action_type"]] = mods[actor].get(log["action_type"], 0) + 1
-        embed = discord.Embed(title="📊 Mod Report", color=discord.Color.blue(), timestamp=datetime.utcnow())
+        embed = discord.Embed(title="📊 Mod Report", color=discord.Color.blue(), timestamp=get_now_pst())
         for mod, stats in mods.items():
             embed.add_field(name=mod, value=f"Total: {stats['total']} | W:{stats['WARN']} M:{stats['MUTE']} B:{stats['BAN']}", inline=False)
         await interaction.response.send_message(embed=embed)

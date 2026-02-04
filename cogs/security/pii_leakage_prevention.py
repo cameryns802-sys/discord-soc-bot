@@ -7,6 +7,7 @@ import json
 import os
 import re
 from datetime import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 class PIILeakagePreventionCog(commands.Cog):
     def __init__(self, bot):
@@ -94,7 +95,7 @@ class PIILeakagePreventionCog(commands.Cog):
                 "channel": str(message.channel),
                 "content_sample": message.content[:100],
                 "pii_types": list(set(p["type"] for p in pii_detected)),
-                "timestamp": datetime.utcnow().isoformat(),
+                "timestamp": get_now_pst().isoformat(),
                 "message_id": message.id
             }
             
@@ -105,7 +106,7 @@ class PIILeakagePreventionCog(commands.Cog):
                 self.data["user_warnings"][str(message.author.id)] = {"count": 0, "last_incident": None}
             
             self.data["user_warnings"][str(message.author.id)]["count"] += 1
-            self.data["user_warnings"][str(message.author.id)]["last_incident"] = datetime.utcnow().isoformat()
+            self.data["user_warnings"][str(message.author.id)]["last_incident"] = get_now_pst().isoformat()
             
             self.save_data(self.data)
             
@@ -186,7 +187,7 @@ class PIILeakagePreventionCog(commands.Cog):
                         "user_id": message.author.id,
                         "channel": str(channel),
                         "pii_types": list(set(p["type"] for p in pii)),
-                        "timestamp": datetime.utcnow().isoformat(),
+                        "timestamp": get_now_pst().isoformat(),
                         "message_id": message.id
                     }
                     self.data["detected_leaks"].append(leak_record)
@@ -218,7 +219,7 @@ class PIILeakagePreventionCog(commands.Cog):
                 "author": str(message.author),
                 "content": message.content[:200],
                 "reason": reason,
-                "quarantined_at": datetime.utcnow().isoformat(),
+                "quarantined_at": get_now_pst().isoformat(),
                 "status": "QUARANTINED"
             }
             

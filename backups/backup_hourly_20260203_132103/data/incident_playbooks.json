@@ -1,0 +1,341 @@
+{
+  "phishing_response": {
+    "name": "Phishing Email Response",
+    "category": "email_security",
+    "severity": "medium",
+    "description": "Standard response to reported phishing emails",
+    "steps": [
+      {
+        "step": 1,
+        "action": "Initial Assessment",
+        "description": "Review reported email for indicators of phishing",
+        "checklist": [
+          "Verify sender address",
+          "Check for urgency/threats",
+          "Inspect links and attachments",
+          "Look for branding inconsistencies"
+        ],
+        "responsible": "SOC Analyst",
+        "sla": 15
+      },
+      {
+        "step": 2,
+        "action": "Containment",
+        "description": "Prevent further exposure to phishing email",
+        "checklist": [
+          "Block sender domain/email",
+          "Quarantine similar emails",
+          "Remove from all mailboxes",
+          "Update email filters"
+        ],
+        "responsible": "Email Admin",
+        "sla": 30
+      },
+      {
+        "step": 3,
+        "action": "Investigation",
+        "description": "Determine scope and impact",
+        "checklist": [
+          "Identify recipients who opened email",
+          "Check if links were clicked",
+          "Review attachments if downloaded",
+          "Search for IOCs"
+        ],
+        "responsible": "SOC Analyst",
+        "sla": 60
+      },
+      {
+        "step": 4,
+        "action": "Communication",
+        "description": "Notify affected users and stakeholders",
+        "checklist": [
+          "Alert affected users",
+          "Provide guidance on next steps",
+          "Update security team",
+          "Log incident details"
+        ],
+        "responsible": "Communications Lead",
+        "sla": 30
+      },
+      {
+        "step": 5,
+        "action": "Recovery",
+        "description": "Restore normal operations",
+        "checklist": [
+          "Verify threat is eliminated",
+          "Monitor for recurrence",
+          "Update security awareness training",
+          "Document lessons learned"
+        ],
+        "responsible": "SOC Manager",
+        "sla": 120
+      }
+    ]
+  },
+  "ransomware_response": {
+    "name": "Ransomware Incident Response",
+    "category": "malware",
+    "severity": "critical",
+    "description": "Critical response procedures for ransomware infections",
+    "steps": [
+      {
+        "step": 1,
+        "action": "Immediate Isolation",
+        "description": "Isolate infected systems immediately",
+        "checklist": [
+          "Disconnect from network",
+          "Disable wireless connections",
+          "Power off if actively encrypting",
+          "Preserve evidence"
+        ],
+        "responsible": "Incident Commander",
+        "sla": 5
+      },
+      {
+        "step": 2,
+        "action": "Scope Assessment",
+        "description": "Determine extent of infection",
+        "checklist": [
+          "Identify patient zero",
+          "Map lateral movement",
+          "Check backup systems",
+          "Identify encrypted files"
+        ],
+        "responsible": "Forensics Team",
+        "sla": 30
+      },
+      {
+        "step": 3,
+        "action": "Executive Notification",
+        "description": "Inform leadership and stakeholders",
+        "checklist": [
+          "Brief executive team",
+          "Notify legal counsel",
+          "Contact cyber insurance",
+          "Prepare public statement if needed"
+        ],
+        "responsible": "CISO",
+        "sla": 60
+      },
+      {
+        "step": 4,
+        "action": "Eradication",
+        "description": "Remove malware from environment",
+        "checklist": [
+          "Identify malware variant",
+          "Deploy detection rules",
+          "Remove from all systems",
+          "Patch vulnerabilities"
+        ],
+        "responsible": "Security Engineering",
+        "sla": 240
+      },
+      {
+        "step": 5,
+        "action": "Recovery",
+        "description": "Restore systems and data",
+        "checklist": [
+          "Restore from clean backups",
+          "Rebuild compromised systems",
+          "Verify integrity",
+          "Monitor for reinfection"
+        ],
+        "responsible": "IT Operations",
+        "sla": 480
+      }
+    ]
+  },
+  "data_breach_response": {
+    "name": "Data Breach Response",
+    "category": "data_protection",
+    "severity": "critical",
+    "description": "Response to unauthorized data access or exfiltration",
+    "steps": [
+      {
+        "step": 1,
+        "action": "Breach Confirmation",
+        "description": "Verify and classify the breach",
+        "checklist": [
+          "Confirm unauthorized access",
+          "Identify data types affected",
+          "Determine sensitivity level",
+          "Assess regulatory implications"
+        ],
+        "responsible": "SOC Lead",
+        "sla": 15
+      },
+      {
+        "step": 2,
+        "action": "Containment",
+        "description": "Stop ongoing data exposure",
+        "checklist": [
+          "Close access vectors",
+          "Revoke compromised credentials",
+          "Block attacker infrastructure",
+          "Secure affected systems"
+        ],
+        "responsible": "Incident Response Team",
+        "sla": 30
+      },
+      {
+        "step": 3,
+        "action": "Legal & Compliance",
+        "description": "Assess legal obligations",
+        "checklist": [
+          "Notify legal team",
+          "Determine breach notification requirements",
+          "Document for regulatory compliance",
+          "Contact law enforcement if needed"
+        ],
+        "responsible": "Legal Counsel",
+        "sla": 60
+      },
+      {
+        "step": 4,
+        "action": "Notification",
+        "description": "Notify affected parties",
+        "checklist": [
+          "Prepare notification letters",
+          "Notify affected individuals",
+          "Report to regulators (GDPR: 72hrs)",
+          "Offer credit monitoring if applicable"
+        ],
+        "responsible": "Privacy Officer",
+        "sla": 2880
+      },
+      {
+        "step": 5,
+        "action": "Post-Incident",
+        "description": "Review and improve",
+        "checklist": [
+          "Conduct post-mortem",
+          "Update security controls",
+          "Enhance monitoring",
+          "Train staff on lessons learned"
+        ],
+        "responsible": "CISO",
+        "sla": 10080
+      }
+    ]
+  },
+  "account_compromise": {
+    "name": "Account Compromise Response",
+    "category": "access_control",
+    "severity": "high",
+    "description": "Response to compromised user accounts",
+    "steps": [
+      {
+        "step": 1,
+        "action": "Account Lockout",
+        "description": "Immediately secure compromised account",
+        "checklist": [
+          "Disable account access",
+          "Terminate active sessions",
+          "Revoke API tokens",
+          "Block password reset"
+        ],
+        "responsible": "Identity Team",
+        "sla": 10
+      },
+      {
+        "step": 2,
+        "action": "Scope Analysis",
+        "description": "Determine what attacker accessed",
+        "checklist": [
+          "Review account activity logs",
+          "Check data access",
+          "Identify privilege usage",
+          "Look for persistence mechanisms"
+        ],
+        "responsible": "SOC Analyst",
+        "sla": 30
+      },
+      {
+        "step": 3,
+        "action": "Credential Reset",
+        "description": "Reset credentials securely",
+        "checklist": [
+          "Force password change",
+          "Re-enroll MFA",
+          "Issue new API keys",
+          "Verify identity before restore"
+        ],
+        "responsible": "Help Desk",
+        "sla": 60
+      },
+      {
+        "step": 4,
+        "action": "Recovery",
+        "description": "Restore account safely",
+        "checklist": [
+          "Verify no backdoors",
+          "Re-enable account",
+          "Monitor for anomalies",
+          "Brief user on incident"
+        ],
+        "responsible": "Account Owner",
+        "sla": 120
+      }
+    ]
+  },
+  "ddos_mitigation": {
+    "name": "DDoS Attack Mitigation",
+    "category": "availability",
+    "severity": "high",
+    "description": "Response to distributed denial of service attacks",
+    "steps": [
+      {
+        "step": 1,
+        "action": "Attack Detection",
+        "description": "Confirm DDoS attack",
+        "checklist": [
+          "Verify abnormal traffic patterns",
+          "Identify attack vector (L3/L4/L7)",
+          "Determine attack source",
+          "Measure impact"
+        ],
+        "responsible": "NOC Team",
+        "sla": 10
+      },
+      {
+        "step": 2,
+        "action": "Mitigation Activation",
+        "description": "Enable DDoS protection",
+        "checklist": [
+          "Activate DDoS protection service",
+          "Apply rate limiting",
+          "Enable geo-blocking if needed",
+          "Adjust firewall rules"
+        ],
+        "responsible": "Network Security",
+        "sla": 15
+      },
+      {
+        "step": 3,
+        "action": "Traffic Analysis",
+        "description": "Analyze attack characteristics",
+        "checklist": [
+          "Capture traffic samples",
+          "Identify attack signatures",
+          "Tune mitigation rules",
+          "Block malicious IPs"
+        ],
+        "responsible": "Security Analyst",
+        "sla": 30
+      },
+      {
+        "step": 4,
+        "action": "Service Restoration",
+        "description": "Restore normal operations",
+        "checklist": [
+          "Verify attack subsided",
+          "Gradually restore services",
+          "Monitor for resurgence",
+          "Document attack details"
+        ],
+        "responsible": "Incident Commander",
+        "sla": 120
+      }
+    ]
+  }
+}

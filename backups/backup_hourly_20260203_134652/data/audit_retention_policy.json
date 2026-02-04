@@ -1,0 +1,16 @@
+{
+  "default_retention_days": 365,
+  "category_retention": {
+    "authentication": 365,
+    "authorization": 365,
+    "data_access": 730,
+    "configuration_change": 730,
+    "security_event": 730,
+    "administrative_action": 365,
+    "compliance": 2555,
+    "financial": 2555
+  },
+  "auto_archive": true,
+  "archive_after_days": 90,
+  "compliance_mode": true
+}

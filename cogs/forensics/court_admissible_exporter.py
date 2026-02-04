@@ -9,6 +9,7 @@ import json
 import os
 from datetime import datetime
 import hashlib
+from cogs.core.pst_timezone import get_now_pst
 
 class CourtAdmissibleExporterCog(commands.Cog):
     """Court Admissible Exporter - Export forensic evidence for legal proceedings"""
@@ -53,7 +54,7 @@ class CourtAdmissibleExporterCog(commands.Cog):
             "timestamp": evidence["timestamp"],
             "chain_of_custody": evidence["chain_of_custody"],
             "metadata": {
-                "exported_at": datetime.utcnow().isoformat(),
+                "exported_at": get_now_pst().isoformat(),
                 "exported_by": str(ctx.author.id),
                 "export_format": export_format,
                 "version": "1.0",
@@ -70,20 +71,20 @@ class CourtAdmissibleExporterCog(commands.Cog):
             "case_number": evidence["case_number"],
             "format": export_format,
             "export_hash": export_hash,
-            "exported_at": datetime.utcnow().isoformat(),
+            "exported_at": get_now_pst().isoformat(),
             "exported_by": str(ctx.author.id)
         }
         
         self.exports.append(export_record)
         self.save_exports()
         
-        export_filename = f"evidence_{evidence_id}_{datetime.utcnow().strftime('%Y%m%d_%H%M%S')}.{export_format}"
+        export_filename = f"evidence_{evidence_id}_{get_now_pst().strftime('%Y%m%d_%H%M%S')}.{export_format}"
         export_path = os.path.join(self.data_dir, export_filename)
         
         with open(export_path, 'w') as f:
             json.dump(export_data, f, indent=4)
         
-        embed = discord.Embed(title="✅ Court-Admissible Export Complete", color=discord.Color.green(), timestamp=datetime.utcnow())
+        embed = discord.Embed(title="✅ Court-Admissible Export Complete", color=discord.Color.green(), timestamp=get_now_pst())
         embed.add_field(name="Export ID", value=f"#{export_record['id']}", inline=True)
         embed.add_field(name="Evidence ID", value=f"#{evidence_id}", inline=True)
         embed.add_field(name="Format", value=export_format.upper(), inline=True)
@@ -101,7 +102,7 @@ class CourtAdmissibleExporterCog(commands.Cog):
             await ctx.send(f"❌ Export #{export_id} not found")
             return
         
-        embed = discord.Embed(title="🔍 Export Verification", color=discord.Color.blue(), timestamp=datetime.utcnow())
+        embed = discord.Embed(title="🔍 Export Verification", color=discord.Color.blue(), timestamp=get_now_pst())
         embed.add_field(name="Export ID", value=f"#{export_id}", inline=True)
         embed.add_field(name="Case Number", value=export["case_number"], inline=True)
         embed.add_field(name="Integrity", value="✅ VERIFIED", inline=True)
@@ -123,7 +124,7 @@ class CourtAdmissibleExporterCog(commands.Cog):
             await ctx.send(f"❌ Evidence #{evidence_id} not found")
             return
         
-        embed = discord.Embed(title="📋 Chain of Custody", description=f"Evidence #{evidence_id}", color=discord.Color.blue(), timestamp=datetime.utcnow())
+        embed = discord.Embed(title="📋 Chain of Custody", description=f"Evidence #{evidence_id}", color=discord.Color.blue(), timestamp=get_now_pst())
         embed.add_field(name="Case Number", value=evidence["case_number"], inline=True)
         embed.add_field(name="Type", value=evidence["type"], inline=True)
         embed.add_field(name="Evidence Hash", value=f"`{evidence['hash'][:32]}...`", inline=False)
@@ -143,7 +144,7 @@ class CourtAdmissibleExporterCog(commands.Cog):
         """View court export dashboard\nUsage: !court_dashboard"""
         total_exports = len(self.exports)
         
-        embed = discord.Embed(title="⚖️ Court Export Dashboard", color=discord.Color.blue(), timestamp=datetime.utcnow())
+        embed = discord.Embed(title="⚖️ Court Export Dashboard", color=discord.Color.blue(), timestamp=get_now_pst())
         embed.add_field(name="📊 Total Exports", value=total_exports, inline=True)
         embed.add_field(name="Status", value="🟢 OPERATIONAL", inline=False)
         

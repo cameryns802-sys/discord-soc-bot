@@ -1,10 +1,11 @@
 import discord
 from discord.ext import commands
 import json
-import datetime
+from datetime import datetime, timedelta
 import time
 from pathlib import Path
 from collections import defaultdict
+from cogs.core.pst_timezone import get_now_pst
 
 class RateLimiting(commands.Cog):
     """Rate limiting and anti-abuse system"""
@@ -190,7 +191,7 @@ class RateLimiting(commands.Cog):
         embed = discord.Embed(
             title=f"⏱️ Rate Limit Status: {user.name}",
             color=discord.Color.blue(),
-            timestamp=datetime.datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         
         embed.set_thumbnail(url=user.display_avatar.url)
@@ -284,7 +285,7 @@ class RateLimiting(commands.Cog):
         embed = discord.Embed(
             title="📊 Rate Limiting Statistics",
             color=discord.Color.blue(),
-            timestamp=datetime.datetime.now(datetime.UTC)
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Users Tracked", value=str(total_users_tracked), inline=True)
@@ -303,3 +304,4 @@ class RateLimiting(commands.Cog):
 
 async def setup(bot):
     await bot.add_cog(RateLimiting(bot))
+

@@ -1,0 +1,17 @@
+{
+  "enabled": true,
+  "hourly_enabled": true,
+  "daily_enabled": true,
+  "weekly_enabled": true,
+  "retention_hourly": 24,
+  "retention_daily": 7,
+  "retention_weekly": 4,
+  "paths": [
+    "data/",
+    "transcripts/",
+    "cogs/data_manager.py"
+  ],
+  "last_hourly": "2026-02-03T18:23:30.771103",
+  "last_daily": "2026-02-03T17:13:41.195729",
+  "last_weekly": "2026-02-02T15:48:48.371643"
+}

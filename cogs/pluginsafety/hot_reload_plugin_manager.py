@@ -7,6 +7,7 @@ import json
 import os
 from datetime import datetime
 import importlib
+from cogs.core.pst_timezone import get_now_pst
 
 class HotReloadPluginManagerCog(commands.Cog):
     def __init__(self, bot):
@@ -49,14 +50,14 @@ class HotReloadPluginManagerCog(commands.Cog):
             
             self.data["installed_plugins"][cog_path] = {
                 "status": "loaded",
-                "loaded_at": datetime.utcnow().isoformat(),
+                "loaded_at": get_now_pst().isoformat(),
                 "loaded_by": str(ctx.author.id)
             }
             
             self.data["load_history"].append({
                 "action": "load",
                 "cog": cog_path,
-                "timestamp": datetime.utcnow().isoformat()
+                "timestamp": get_now_pst().isoformat()
             })
             
             self.save_data(self.data)
@@ -67,7 +68,7 @@ class HotReloadPluginManagerCog(commands.Cog):
                 color=discord.Color.green()
             )
             embed.add_field(name="Status", value="Loaded", inline=True)
-            embed.add_field(name="Time", value=datetime.utcnow().strftime("%H:%M:%S"), inline=True)
+            embed.add_field(name="Time", value=get_now_pst().strftime("%H:%M:%S"), inline=True)
             
             await ctx.send(embed=embed)
         except Exception as e:
@@ -94,7 +95,7 @@ class HotReloadPluginManagerCog(commands.Cog):
             self.data["load_history"].append({
                 "action": "unload",
                 "cog": cog_path,
-                "timestamp": datetime.utcnow().isoformat()
+                "timestamp": get_now_pst().isoformat()
             })
             
             self.save_data(self.data)
@@ -126,14 +127,14 @@ class HotReloadPluginManagerCog(commands.Cog):
             
             self.data["installed_plugins"][cog_path] = {
                 "status": "reloaded",
-                "last_reload": datetime.utcnow().isoformat(),
+                "last_reload": get_now_pst().isoformat(),
                 "reloaded_by": str(ctx.author.id)
             }
             
             self.data["load_history"].append({
                 "action": "reload",
                 "cog": cog_path,
-                "timestamp": datetime.utcnow().isoformat()
+                "timestamp": get_now_pst().isoformat()
             })
             
             self.save_data(self.data)

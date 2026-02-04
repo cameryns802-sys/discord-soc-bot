@@ -5,6 +5,7 @@ from discord import app_commands
 from datetime import datetime, timedelta
 import json
 import os
+from cogs.core.pst_timezone import get_now_pst
 
 class OnCallGroup(app_commands.Group):
     def __init__(self, cog):
@@ -16,7 +17,7 @@ class OnCallGroup(app_commands.Group):
     async def create_rotation(self, interaction: discord.Interaction, name: str, shift_hours: int = 24):
         self.cog.schedule_counter += 1
         schedule_id = self.cog.schedule_counter
-        self.cog.schedules[str(schedule_id)] = {"id": schedule_id, "name": name, "shift_hours": shift_hours, "created_at": datetime.utcnow().isoformat(), "active": True, "members": [], "current_on_call": None, "current_shift_start": None, "shift_count": 0}
+        self.cog.schedules[str(schedule_id)] = {"id": schedule_id, "name": name, "shift_hours": shift_hours, "created_at": get_now_pst().isoformat(), "active": True, "members": [], "current_on_call": None, "current_shift_start": None, "shift_count": 0}
         self.cog.save_schedules()
         await interaction.response.send_message(f"✅ Created rotation #{schedule_id}: {name}")
 
@@ -48,7 +49,7 @@ class OnCallGroup(app_commands.Group):
         current_idx = schedule["members"].index(schedule["current_on_call"]) if schedule["current_on_call"] in schedule["members"] else -1
         next_idx = (current_idx + 1) % len(schedule["members"])
         schedule["current_on_call"] = schedule["members"][next_idx]
-        schedule["current_shift_start"] = datetime.utcnow().isoformat()
+        schedule["current_shift_start"] = get_now_pst().isoformat()
         schedule["shift_count"] += 1
         self.cog.save_schedules()
         await interaction.response.send_message(f"📞 Shift #{schedule['shift_count']} started - On-call: <@{schedule['current_on_call']}>")
@@ -101,7 +102,7 @@ class WarRoomGroup(app_commands.Group):
         overwrites = {interaction.guild.default_role: discord.PermissionOverwrite(read_messages=False), interaction.user: discord.PermissionOverwrite(read_messages=True, send_messages=True, manage_channels=True), interaction.guild.me: discord.PermissionOverwrite(read_messages=True, send_messages=True)}
         channel_name = f"war-room-{room_id}-{severity}"
         channel = await interaction.guild.create_text_channel(channel_name, category=category, overwrites=overwrites, topic=f"Incident Response: {title}")
-        self.cog.war_rooms[str(room_id)] = {"id": room_id, "title": title, "severity": severity, "channel_id": channel.id, "created_by": interaction.user.id, "created_at": datetime.utcnow().isoformat(), "status": "active", "participants": [interaction.user.id], "messages_count": 0, "resolution": None}
+        self.cog.war_rooms[str(room_id)] = {"id": room_id, "title": title, "severity": severity, "channel_id": channel.id, "created_by": interaction.user.id, "created_at": get_now_pst().isoformat(), "status": "active", "participants": [interaction.user.id], "messages_count": 0, "resolution": None}
         await interaction.response.send_message(f"🚨 War Room #{room_id} created: {channel.mention}")
         await channel.send(embed=discord.Embed(title="War Room Initialized", description=f"**Incident**: {title}\n**Severity**: {severity.upper()}", color=color_map[severity]))
 

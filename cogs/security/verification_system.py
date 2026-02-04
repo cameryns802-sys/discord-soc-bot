@@ -9,6 +9,7 @@ from discord.ext import commands
 import json
 import os
 from datetime import datetime
+from cogs.core.pst_timezone import get_now_pst
 
 class VerificationSystem(commands.Cog):
     """Handle user verification and role assignment"""
@@ -107,7 +108,7 @@ class VerificationSystem(commands.Cog):
             "enabled": True,
             "role_name": "Unverified",
             "verified_role": "Verified",
-            "setup_date": datetime.utcnow().isoformat()
+            "setup_date": get_now_pst().isoformat()
         }
         self.save_verify_data(guild.id, data)
         
@@ -150,7 +151,7 @@ class VerificationSystem(commands.Cog):
                 color=discord.Color.green()
             )
             embed.add_field(name="Status", value="🟢 Verified", inline=True)
-            embed.add_field(name="Timestamp", value=datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S'), inline=True)
+            embed.add_field(name="Timestamp", value=get_now_pst().strftime('%Y-%m-%d %H:%M:%S'), inline=True)
             
             await ctx.send(embed=embed)
         except Exception as e:

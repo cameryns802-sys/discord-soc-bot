@@ -10,6 +10,7 @@ import json
 import os
 from datetime import datetime, timedelta
 import uuid
+from cogs.core.pst_timezone import get_now_pst
 
 class BreachResponseOrchestration(commands.Cog):
     """Breach response orchestration and automation"""
@@ -86,12 +87,12 @@ class BreachResponseOrchestration(commands.Cog):
         """Detect and initiate breach response"""
         incidents = self.get_incidents(ctx.guild.id)
         
-        incident_id = f"BRH-{datetime.utcnow().strftime('%Y%m%d%H%M%S')}"
+        incident_id = f"BRH-{get_now_pst().strftime('%Y%m%d%H%M%S')}"
         
         incident = {
             'id': incident_id,
             'type': breach_type.lower(),
-            'detected_at': datetime.utcnow().isoformat(),
+            'detected_at': get_now_pst().isoformat(),
             'status': 'active',
             'data_compromised': data_affected.split(','),
             'records_affected': records,
@@ -117,7 +118,7 @@ class BreachResponseOrchestration(commands.Cog):
             title=f"{severity_emoji} BREACH DETECTED - Response Initiated",
             description=f"**{breach_type.title()}**",
             color=severity_color,
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Incident ID", value=f"`{incident_id}`", inline=True)
@@ -148,7 +149,7 @@ class BreachResponseOrchestration(commands.Cog):
             title="🚨 Breach Incident Status",
             description=f"{len(active)} active incident(s)",
             color=discord.Color.red() if active else discord.Color.green(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         contained = sum(1 for i in incidents.values() if i['contained'])
@@ -185,7 +186,7 @@ class BreachResponseOrchestration(commands.Cog):
             title=f"🚨 Breach Incident: {incident_id}",
             description=f"{incident['type'].title()}",
             color=color,
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Severity", value=f"{severity}/100", inline=True)
@@ -249,7 +250,7 @@ class BreachResponseOrchestration(commands.Cog):
             title=f"✅ Response Action Executed",
             description=f"**{action.replace('_', ' ').title()}**",
             color=discord.Color.green(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Incident ID", value=f"`{incident_id}`", inline=True)

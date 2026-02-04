@@ -2,7 +2,7 @@
 import discord
 from discord.ext import commands
 from discord import app_commands
-import datetime
+from cogs.core.pst_timezone import get_now_pst
 import random
 import json
 import os
@@ -36,7 +36,7 @@ class ThreatIntelFeedCog(commands.Cog):
     async def threatfeed_add(self, ctx, feed_name: str, source_url: str):
         self.feed_counter += 1
         feed_id = str(self.feed_counter)
-        self.threat_feeds[feed_id] = {"id": feed_id, "name": feed_name, "source_url": source_url, "status": "active", "added_by": ctx.author.id, "added_at": datetime.datetime.now(datetime.UTC).isoformat(), "last_update": None, "total_indicators": 0}
+        self.threat_feeds[feed_id] = {"id": feed_id, "name": feed_name, "source_url": source_url, "status": "active", "added_by": ctx.author.id, "added_at": get_now_pst().isoformat(), "last_update": None, "total_indicators": 0}
         self.save_data()
         embed = discord.Embed(title="Threat Feed Added", description=feed_name, color=discord.Color.green())
         embed.add_field(name="Feed ID", value=f"#{feed_id}", inline=True)
@@ -60,10 +60,10 @@ class ThreatIntelFeedCog(commands.Cog):
             return
         feed = self.threat_feeds[feed_id]
         new_indicators = random.randint(5, 50)
-        feed["last_update"] = datetime.datetime.now(datetime.UTC).isoformat()
+        feed["last_update"] = get_now_pst().isoformat()
         feed["total_indicators"] += new_indicators
         for _ in range(new_indicators):
-            self.indicators.append({"type": random.choice(["ip", "domain", "hash", "url"]), "value": f"indicator_{random.randint(1000, 9999)}", "severity": random.choice(["low", "medium", "high", "critical"]), "feed_id": feed_id, "timestamp": datetime.datetime.now(datetime.UTC).isoformat()})
+            self.indicators.append({"type": random.choice(["ip", "domain", "hash", "url"]), "value": f"indicator_{random.randint(1000, 9999)}", "severity": random.choice(["low", "medium", "high", "critical"]), "feed_id": feed_id, "timestamp": get_now_pst().isoformat()})
         self.save_data()
         embed = discord.Embed(title="🔄 Feed Updated", description=f"{feed['name']} synchronized", color=discord.Color.green())
         embed.add_field(name="New Indicators", value=str(new_indicators), inline=True)
@@ -88,3 +88,4 @@ class ThreatIntelFeedCog(commands.Cog):
 
 async def setup(bot):
     await bot.add_cog(ThreatIntelFeedCog(bot))
+

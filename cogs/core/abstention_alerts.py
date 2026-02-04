@@ -19,6 +19,7 @@ from typing import Dict, List, Optional
 
 # Import core systems
 from cogs.core.signal_bus import signal_bus, Signal, SignalType
+from cogs.core.pst_timezone import get_now_pst
 # Lazy imports to avoid circular dependencies
 # from cogs.core.abstention_policy import abstention_policy
 # from cogs.core.human_override_tracker import human_override_tracker
@@ -52,7 +53,7 @@ class AbstentionAlert(commands.Cog):
     def add_alert(self, system: str, confidence: float, reason: str, severity: str = "MEDIUM") -> Dict:
         """Record an abstention alert"""
         alert = {
-            'timestamp': datetime.utcnow().isoformat(),
+            'timestamp': get_now_pst().isoformat(),
             'system': system,
             'confidence': confidence,
             'reason': reason,
@@ -77,7 +78,7 @@ class AbstentionAlert(commands.Cog):
                 'reason': reason,
                 'escalation_type': 'LOW_CONFIDENCE_ABSTENTION'
             },
-            timestamp=datetime.utcnow().isoformat()
+            timestamp=get_now_pst().isoformat()
         )
         await signal_bus.emit(signal)
     
@@ -100,7 +101,7 @@ class AbstentionAlert(commands.Cog):
             title=f"🚨 AI System Abstention Alert",
             description=f"System **{system}** abstained due to low confidence",
             color=color,
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(
@@ -153,7 +154,7 @@ class AbstentionAlert(commands.Cog):
     
     def get_recent_alerts(self, minutes: int = 60, system: str = None) -> List[Dict]:
         """Get recent abstention alerts"""
-        cutoff_time = datetime.utcnow() - timedelta(minutes=minutes)
+        cutoff_time = get_now_pst() - timedelta(minutes=minutes)
         recent = [
             a for a in self.alerts
             if datetime.fromisoformat(a['timestamp']) > cutoff_time
@@ -190,7 +191,7 @@ class AbstentionAlert(commands.Cog):
         
         # By hour (last 24 hours)
         by_hour = {}
-        cutoff = datetime.utcnow() - timedelta(hours=24)
+        cutoff = get_now_pst() - timedelta(hours=24)
         for alert in self.alerts:
             ts = datetime.fromisoformat(alert['timestamp'])
             if ts > cutoff:
@@ -245,7 +246,7 @@ class AbstentionAlert(commands.Cog):
             title="🚨 Recent Abstention Alerts",
             description=f"Showing {len(recent)} alerts from the last {hours} hours",
             color=discord.Color.orange(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         # Group by severity for visualization
@@ -314,7 +315,7 @@ class AbstentionAlert(commands.Cog):
             title="📈 Abstention Trends",
             description=f"Analysis of {stats['total_alerts']} total abstention events",
             color=discord.Color.orange(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         # By severity
@@ -394,7 +395,7 @@ class AbstentionAlert(commands.Cog):
             title=f"📋 Abstention Recap ({hours}h)",
             description=f"Summary of system abstentions and escalations",
             color=discord.Color.orange(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         # Summary

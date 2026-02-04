@@ -10,6 +10,7 @@ import json
 import os
 from datetime import datetime, timedelta
 import uuid
+from cogs.core.pst_timezone import get_now_pst
 
 class RiskRegisterSystem(commands.Cog):
     """Enterprise risk tracking and mitigation management"""
@@ -105,8 +106,8 @@ class RiskRegisterSystem(commands.Cog):
             'risk_level': risk_level,
             'status': 'open',
             'owner': ctx.author.id,
-            'created_at': datetime.utcnow().isoformat(),
-            'last_updated': datetime.utcnow().isoformat(),
+            'created_at': get_now_pst().isoformat(),
+            'last_updated': get_now_pst().isoformat(),
             'mitigation_plan': None,
             'mitigation_status': 'not_started',
             'review_date': None,
@@ -122,7 +123,7 @@ class RiskRegisterSystem(commands.Cog):
             title=f"{risk_emoji} Risk Registered",
             description=f"**{title}**",
             color=color,
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Risk ID", value=f"`{risk_id}`", inline=True)
@@ -160,7 +161,7 @@ class RiskRegisterSystem(commands.Cog):
             title="📊 Risk Register",
             description=f"{len(sorted_risks)} risk(s) tracked" + (f" in category: {category}" if category else ""),
             color=discord.Color.orange(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         for risk in sorted_risks[:10]:
@@ -199,7 +200,7 @@ class RiskRegisterSystem(commands.Cog):
             title=f"{emoji} Risk Details: {risk['title']}",
             description=risk['description'],
             color=color,
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Risk ID", value=f"`{risk['id']}`", inline=True)
@@ -264,7 +265,7 @@ class RiskRegisterSystem(commands.Cog):
             title="📊 Risk Register Statistics",
             description=f"Total: {total} risks | Avg Score: {avg_score:.1f}/25",
             color=discord.Color.orange(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         level_str = f"🔴 Critical: {by_level['critical']}\n🟠 High: {by_level['high']}\n🟡 Medium: {by_level['medium']}\n🟢 Low: {by_level['low']}\n🟦 Very Low: {by_level['very_low']}"

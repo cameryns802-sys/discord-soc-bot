@@ -9,6 +9,7 @@ import json
 import os
 from datetime import datetime
 from typing import Dict, List, Optional
+from cogs.core.pst_timezone import get_now_pst
 
 class FalseFlagDetectionCog(commands.Cog):
     """
@@ -126,7 +127,7 @@ class FalseFlagDetectionCog(commands.Cog):
             title=f"🎭 False Flag Analysis: {attribution['actor_name']}",
             description=f"Deception analysis for attribution #{attribution_id}",
             color=color,
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="False Flag Probability", value=f"**{false_flag_prob:.1f}%**", inline=True)
@@ -182,7 +183,7 @@ class FalseFlagDetectionCog(commands.Cog):
             "type": indicator_type,
             "strength": max(0, min(100, strength)),
             "description": description,
-            "added_at": datetime.utcnow().isoformat(),
+            "added_at": get_now_pst().isoformat(),
             "added_by": str(ctx.author.id)
         }
         
@@ -196,7 +197,7 @@ class FalseFlagDetectionCog(commands.Cog):
             title="🚩 False Flag Indicator Added",
             description=f"New deception indicator for attribution #{attribution_id}",
             color=discord.Color.orange(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Indicator ID", value=f"#{indicator['id']}", inline=True)
@@ -224,7 +225,7 @@ class FalseFlagDetectionCog(commands.Cog):
             "confidence": confidence.lower(),
             "analysis": analysis,
             "false_flag_probability": self.calculate_false_flag_probability(attribution_id),
-            "created_at": datetime.utcnow().isoformat(),
+            "created_at": get_now_pst().isoformat(),
             "created_by": str(ctx.author.id),
             "status": "active"
         }
@@ -242,7 +243,7 @@ class FalseFlagDetectionCog(commands.Cog):
             title="🎭 False Flag Detection Created",
             description=f"New detection for attribution #{attribution_id}",
             color=color_map.get(confidence.lower(), discord.Color.blue()),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Detection ID", value=f"#{detection['id']}", inline=True)
@@ -277,7 +278,7 @@ class FalseFlagDetectionCog(commands.Cog):
             title="🎭 False Flag Detections",
             description=f"Tracking {len(self.detections)} potential false flag operations",
             color=discord.Color.orange(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         for i, detection in enumerate(sorted_detections[:10], 1):
@@ -323,7 +324,7 @@ class FalseFlagDetectionCog(commands.Cog):
             title="🎭 False Flag Detection Dashboard",
             description="Deception analysis and false flag tracking",
             color=discord.Color.orange(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="📊 Total Detections", value=total_detections, inline=True)

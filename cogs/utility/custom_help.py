@@ -8,6 +8,7 @@ from discord.ext import commands
 from discord import app_commands
 from typing import Optional
 import os
+from cogs.core.pst_timezone import get_now_pst
 
 class CustomHelp(commands.HelpCommand):
     """Custom help command with enhanced embeds and categorization"""
@@ -33,7 +34,7 @@ class CustomHelp(commands.HelpCommand):
             title="🤖 SOC Bot Command Center",
             description="**Advanced Security Operations Center Bot**\n\nUse `!help <category>` for detailed commands\nUse `!help <command>` for specific command info",
             color=discord.Color.blue(),
-            timestamp=discord.utils.utcnow()
+            timestamp=get_now_pst()
         )
         
         # Categorize cogs

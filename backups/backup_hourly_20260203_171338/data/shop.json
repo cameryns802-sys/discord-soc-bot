@@ -1,0 +1,47 @@
+{
+  "roles": [
+    {
+      "id": "vip",
+      "name": "VIP",
+      "price": 5000,
+      "role_name": "VIP",
+      "description": "VIP role with special perks"
+    },
+    {
+      "id": "supporter",
+      "name": "Supporter",
+      "price": 2500,
+      "role_name": "Supporter",
+      "description": "Support the server!"
+    }
+  ],
+  "items": [
+    {
+      "id": "boost",
+      "name": "XP Boost",
+      "price": 1000,
+      "duration_hours": 24,
+      "description": "2x XP for 24 hours"
+    },
+    {
+      "id": "badge",
+      "name": "Custom Badge",
+      "price": 3000,
+      "description": "Get a custom badge on your profile"
+    }
+  ],
+  "perks": [
+    {
+      "id": "color",
+      "name": "Custom Color",
+      "price": 1500,
+      "description": "Custom role color"
+    },
+    {
+      "id": "nickname",
+      "name": "Custom Nickname",
+      "price": 500,
+      "description": "Change your nickname anytime"
+    }
+  ]
+}

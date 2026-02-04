@@ -10,6 +10,7 @@ import json
 import os
 from datetime import datetime, timedelta
 import uuid
+from cogs.core.pst_timezone import get_now_pst
 
 class AlertManagement(commands.Cog):
     """Enterprise alert management and escalation system"""
@@ -52,7 +53,7 @@ class AlertManagement(commands.Cog):
             'description': description,
             'source': source,
             'status': 'open',
-            'created_at': datetime.utcnow().isoformat(),
+            'created_at': get_now_pst().isoformat(),
             'acknowledged': False,
             'acknowledged_by': None,
             'acknowledged_at': None,
@@ -102,7 +103,7 @@ class AlertManagement(commands.Cog):
             title=f"{self.get_severity_emoji(severity)} Alert Created",
             description=f"**{title}**",
             color=self.get_severity_color(severity),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         embed.add_field(name="Alert ID", value=f"`{alert['id']}`", inline=True)
         embed.add_field(name="Severity", value=severity.upper(), inline=True)
@@ -165,7 +166,7 @@ class AlertManagement(commands.Cog):
             title=f"🚨 {status.upper()} Alerts",
             description=f"{len(filtered)} alert(s) found",
             color=discord.Color.greyple(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         for alert in list(filtered.values())[:10]:  # Max 10 per message
@@ -190,14 +191,14 @@ class AlertManagement(commands.Cog):
         alert = alerts[alert_id]
         alert['acknowledged'] = True
         alert['acknowledged_by'] = ctx.author.id
-        alert['acknowledged_at'] = datetime.utcnow().isoformat()
+        alert['acknowledged_at'] = get_now_pst().isoformat()
         self.save_alerts(ctx.guild.id, alerts)
         
         embed = discord.Embed(
             title="✅ Alert Acknowledged",
             description=f"**{alert['title']}**",
             color=discord.Color.green(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         embed.add_field(name="Alert ID", value=f"`{alert['id']}`", inline=True)
         embed.add_field(name="Acknowledged By", value=ctx.author.mention, inline=True)
@@ -227,7 +228,7 @@ class AlertManagement(commands.Cog):
             title="⬆️ Alert Escalated",
             description=f"**{alert['title']}**",
             color=discord.Color.red(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         embed.add_field(name="Alert ID", value=f"`{alert['id']}`", inline=True)
         embed.add_field(name="Previous Level", value=str(old_level), inline=True)
@@ -248,14 +249,14 @@ class AlertManagement(commands.Cog):
         alert['status'] = 'resolved'
         alert['resolved'] = True
         alert['resolved_by'] = ctx.author.id
-        alert['resolved_at'] = datetime.utcnow().isoformat()
+        alert['resolved_at'] = get_now_pst().isoformat()
         self.save_alerts(ctx.guild.id, alerts)
         
         embed = discord.Embed(
             title="✔️ Alert Resolved",
             description=f"**{alert['title']}**",
             color=discord.Color.green(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         embed.add_field(name="Alert ID", value=f"`{alert['id']}`", inline=True)
         embed.add_field(name="Resolved By", value=ctx.author.mention, inline=True)
@@ -277,7 +278,7 @@ class AlertManagement(commands.Cog):
             title=f"{self.get_severity_emoji(alert['severity'])} Alert Details",
             description=f"**{alert['title']}**",
             color=self.get_severity_color(alert['severity']),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         embed.add_field(name="Alert ID", value=f"`{alert['id']}`", inline=True)
         embed.add_field(name="Status", value=alert['status'].upper(), inline=True)

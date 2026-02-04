@@ -10,6 +10,7 @@ import json
 import os
 from datetime import datetime
 import uuid
+from cogs.core.pst_timezone import get_now_pst
 
 class APISecurityGovernance(commands.Cog):
     """API security management and governance"""
@@ -82,7 +83,7 @@ class APISecurityGovernance(commands.Cog):
         # Last security audit
         if api.get('last_security_audit'):
             last = datetime.fromisoformat(api['last_security_audit'])
-            days_since = (datetime.utcnow() - last).days
+            days_since = (get_now_pst() - last).days
             if days_since > 180:
                 score += 25
         else:
@@ -104,7 +105,7 @@ class APISecurityGovernance(commands.Cog):
             'id': api_id,
             'name': api_name,
             'endpoint': endpoint,
-            'added_at': datetime.utcnow().isoformat(),
+            'added_at': get_now_pst().isoformat(),
             'authentication': auth_type.lower(),
             'rate_limiting_enabled': True,
             'uses_https': True,
@@ -128,7 +129,7 @@ class APISecurityGovernance(commands.Cog):
             title="🔌 API Registered",
             description=f"**{api_name}**",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="API ID", value=f"`{api_id}`", inline=True)
@@ -157,7 +158,7 @@ class APISecurityGovernance(commands.Cog):
             title="🔌 API Inventory",
             description=f"{len(sorted_apis)} API(s) tracked",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         public_apis = sum(1 for a in apis.values() if a['public_access'])
@@ -202,7 +203,7 @@ class APISecurityGovernance(commands.Cog):
             title=f"🔌 {api['name']}",
             description=f"Endpoint: `{api['endpoint']}`",
             color=color,
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="API ID", value=f"`{api['id']}`", inline=True)
@@ -256,7 +257,7 @@ class APISecurityGovernance(commands.Cog):
             title="🔍 API Security Scan",
             description=f"Scanned {len(apis)} API(s)",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         secure = sum(1 for a in apis.values() if a['risk_score'] < 50)

@@ -10,6 +10,7 @@ import json
 import os
 from datetime import datetime, timedelta
 import statistics
+from cogs.core.pst_timezone import get_now_pst
 
 class SecurityPostureDashboard(commands.Cog):
     """Continuous security posture monitoring and scoring"""
@@ -183,7 +184,7 @@ class SecurityPostureDashboard(commands.Cog):
         return {
             'overall_score': max(0, min(100, score)),
             'dimensions': dimensions,
-            'timestamp': datetime.utcnow().isoformat()
+            'timestamp': get_now_pst().isoformat()
         }
     
     async def _posture_logic(self, ctx):
@@ -225,7 +226,7 @@ class SecurityPostureDashboard(commands.Cog):
             title="🛡️ Security Posture Dashboard",
             description=f"**Overall Score: {score}/100** - {status}",
             color=color,
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         # Show dimensions
@@ -289,7 +290,7 @@ class SecurityPostureDashboard(commands.Cog):
             title="📊 Security Posture Trend Analysis",
             description=f"{len(scores)} data points | {trend}",
             color=trend_color,
-            timestamp=datetime.utcnow()
+            timestamp=get_now_pst()
         )
         
         embed.add_field(name="Current Score", value=f"{current_score}/100", inline=True)
@@ -322,7 +323,7 @@ class SecurityPostureDashboard(commands.Cog):
     
     def _relative_time(self, dt):
         """Get relative time string"""
-        now = datetime.utcnow()
+        now = get_now_pst()
         delta = now - dt
         
         if delta.days > 0:
