@@ -1,6 +1,6 @@
 """Action Logging System - comprehensive Discord server audit logging"""
 import discord
-from discord.ext import commands
+from discord.ext import commands, tasks
 from datetime import datetime, timedelta
 import json
 import os
@@ -16,7 +16,8 @@ MODULES = {
     "server": "Server/guild updates",
     "voice": "Voice state changes",
     "invites": "Invite create/delete",
-    "webhooks": "Webhook changes"
+    "webhooks": "Webhook changes",
+    "audit": "Audit log stream"
 }
 
 class ActionLoggingCog(commands.Cog):
@@ -24,7 +25,12 @@ class ActionLoggingCog(commands.Cog):
         self.bot = bot
         self.data_file = "data/action_logging.json"
         self.data = {"guilds": {}}
+        self.audit_cursor: Dict[str, int] = {}
         self._load_data()
+        self.audit_stream.start()
+
+    def cog_unload(self):
+        self.audit_stream.cancel()
 
     def _load_data(self):
         if os.path.exists(self.data_file):
@@ -45,7 +51,8 @@ class ActionLoggingCog(commands.Cog):
             self.data["guilds"][gkey] = {
                 "enabled": True,
                 "channel_id": None,
-                "modules": {k: True for k in MODULES.keys()}
+                "modules": {k: True for k in MODULES.keys()},
+                "audit_last_id": None
             }
         return self.data["guilds"][gkey]
 
@@ -53,11 +60,21 @@ class ActionLoggingCog(commands.Cog):
         cfg = self._get_guild_cfg(guild_id)
         return cfg.get("enabled", True) and cfg.get("modules", {}).get(module, True)
 
+    def _get_log_channel(self, guild: discord.Guild) -> Optional[discord.TextChannel]:
+        cfg = self._get_guild_cfg(guild.id)
+        channel_id = cfg.get("channel_id")
+        if not channel_id:
+            env_channel = os.getenv("AUDIT_CHANNEL_ID", "0")
+            try:
+                channel_id = int(env_channel)
+            except ValueError:
+                channel_id = 0
+        return guild.get_channel(channel_id) if channel_id else None
+
     async def _send_log(self, guild: discord.Guild, embed: discord.Embed, module: str):
         if not self._is_enabled(guild.id, module):
             return
-        cfg = self._get_guild_cfg(guild.id)
-        channel = guild.get_channel(cfg.get("channel_id")) if cfg.get("channel_id") else None
+        channel = self._get_log_channel(guild)
         if channel and channel.permissions_for(guild.me).send_messages:
             try:
                 await channel.send(embed=embed)
@@ -213,42 +230,60 @@ class ActionLoggingCog(commands.Cog):
 
     @commands.Cog.listener()
     async def on_guild_channel_create(self, channel: discord.abc.GuildChannel):
+        entry = await self._get_audit_entry(channel.guild, discord.AuditLogAction.channel_create)
         embed = discord.Embed(title="?? Channel Created", color=discord.Color.green(), timestamp=get_now_pst())
         embed.add_field(name="Channel", value=channel.name, inline=True)
+        if entry:
+            embed.add_field(name="By", value=f"{entry.user}", inline=True)
         await self._send_log(channel.guild, embed, "channels")
 
     @commands.Cog.listener()
     async def on_guild_channel_delete(self, channel: discord.abc.GuildChannel):
+        entry = await self._get_audit_entry(channel.guild, discord.AuditLogAction.channel_delete)
         embed = discord.Embed(title="??? Channel Deleted", color=discord.Color.red(), timestamp=get_now_pst())
         embed.add_field(name="Channel", value=channel.name, inline=True)
+        if entry:
+            embed.add_field(name="By", value=f"{entry.user}", inline=True)
         await self._send_log(channel.guild, embed, "channels")
 
     @commands.Cog.listener()
     async def on_guild_channel_update(self, before: discord.abc.GuildChannel, after: discord.abc.GuildChannel):
         if before.name != after.name:
+            entry = await self._get_audit_entry(after.guild, discord.AuditLogAction.channel_update)
             embed = discord.Embed(title="?? Channel Updated", color=discord.Color.orange(), timestamp=get_now_pst())
             embed.add_field(name="Before", value=before.name, inline=True)
             embed.add_field(name="After", value=after.name, inline=True)
+            if entry:
+                embed.add_field(name="By", value=f"{entry.user}", inline=True)
             await self._send_log(after.guild, embed, "channels")
 
     @commands.Cog.listener()
     async def on_guild_role_create(self, role: discord.Role):
+        entry = await self._get_audit_entry(role.guild, discord.AuditLogAction.role_create)
         embed = discord.Embed(title="? Role Created", color=discord.Color.green(), timestamp=get_now_pst())
         embed.add_field(name="Role", value=role.name, inline=True)
+        if entry:
+            embed.add_field(name="By", value=f"{entry.user}", inline=True)
         await self._send_log(role.guild, embed, "roles")
 
     @commands.Cog.listener()
     async def on_guild_role_delete(self, role: discord.Role):
+        entry = await self._get_audit_entry(role.guild, discord.AuditLogAction.role_delete)
         embed = discord.Embed(title="? Role Deleted", color=discord.Color.red(), timestamp=get_now_pst())
         embed.add_field(name="Role", value=role.name, inline=True)
+        if entry:
+            embed.add_field(name="By", value=f"{entry.user}", inline=True)
         await self._send_log(role.guild, embed, "roles")
 
     @commands.Cog.listener()
     async def on_guild_role_update(self, before: discord.Role, after: discord.Role):
         if before.name != after.name:
+            entry = await self._get_audit_entry(after.guild, discord.AuditLogAction.role_update)
             embed = discord.Embed(title="?? Role Updated", color=discord.Color.orange(), timestamp=get_now_pst())
             embed.add_field(name="Before", value=before.name, inline=True)
             embed.add_field(name="After", value=after.name, inline=True)
+            if entry:
+                embed.add_field(name="By", value=f"{entry.user}", inline=True)
             await self._send_log(after.guild, embed, "roles")
 
     @commands.Cog.listener()
@@ -300,6 +335,46 @@ class ActionLoggingCog(commands.Cog):
         embed.add_field(name="Channel", value=channel.mention, inline=True)
         embed.add_field(name="By", value=f"{entry.user}", inline=True)
         await self._send_log(channel.guild, embed, "webhooks")
+
+    @tasks.loop(seconds=60.0)
+    async def audit_stream(self):
+        for guild in self.bot.guilds:
+            cfg = self._get_guild_cfg(guild.id)
+            if not self._is_enabled(guild.id, "audit"):
+                continue
+            if not guild.me.guild_permissions.view_audit_log:
+                continue
+
+            last_id = cfg.get("audit_last_id")
+            try:
+                async for entry in guild.audit_logs(limit=20):
+                    if last_id and entry.id <= last_id:
+                        break
+
+                    embed = discord.Embed(
+                        title="Audit Log Entry",
+                        color=discord.Color.blue(),
+                        timestamp=get_now_pst()
+                    )
+                    embed.add_field(name="Action", value=str(entry.action).replace("AuditLogAction.", ""), inline=True)
+                    embed.add_field(name="User", value=f"{entry.user} ({entry.user.id})", inline=True)
+                    if entry.target:
+                        embed.add_field(name="Target", value=str(entry.target), inline=False)
+                    if entry.reason:
+                        embed.add_field(name="Reason", value=entry.reason[:500], inline=False)
+                    await self._send_log(guild, embed, "audit")
+
+                if guild.audit_logs is not None:
+                    latest = [e async for e in guild.audit_logs(limit=1)]
+                    if latest:
+                        cfg["audit_last_id"] = latest[0].id
+                        self._save_data()
+            except Exception:
+                continue
+
+    @audit_stream.before_loop
+    async def before_audit_stream(self):
+        await self.bot.wait_until_ready()
 
 async def setup(bot):
     await bot.add_cog(ActionLoggingCog(bot))
