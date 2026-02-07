@@ -13,6 +13,13 @@
       "notify_user": true,
       "notify_mods": true,
       "whitelist_enabled": false
+    },
+    "1466977512147128598": {
+      "enabled": true,
+      "action": "delete",
+      "notify_user": true,
+      "notify_mods": true,
+      "whitelist_enabled": false
     }
   },
   "whitelisted": {},

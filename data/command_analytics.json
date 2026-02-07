@@ -1,6 +1,6 @@
 {
   "total_commands": 7,
-  "total_errors": 7,
+  "total_errors": 11,
   "commands": {
     "ping": {
       "count": 1,

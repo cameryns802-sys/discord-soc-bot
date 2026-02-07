@@ -1,25 +1,41 @@
 {
   "active_challenges": {
     "1466863901449785497": [
-      "give_5_rep",
-      "spend_1000_coins",
-      "react_20_times"
+      "react_20_times",
+      "help_member",
+      "send_10_messages"
     ],
     "1451439611766112319": [
-      "send_10_messages",
+      "give_5_rep",
       "help_member",
-      "send_50_messages"
+      "react_20_times"
+    ],
+    "1466977512147128598": [
+      "send_50_messages",
+      "spend_1000_coins",
+      "send_10_messages"
     ]
   },
   "user_progress": {
-    "960995456488448080": {
-      "send_10_messages": 6,
-      "send_50_messages": 6
+    "1149841240897114154": {
+      "send_10_messages": 1
     },
-    "862083132735225858": {
-      "send_10_messages": 6,
-      "send_50_messages": 6
+    "960995456488448080": {
+      "send_10_messages": 8,
+      "send_50_messages": 7
+    },
+    "1466974910751571968": {
+      "send_10_messages": 5,
+      "send_50_messages": 5
+    },
+    "796132123530100736": {
+      "send_10_messages": 2,
+      "send_50_messages": 2
+    },
+    "998363754154700870": {
+      "send_10_messages": 2,
+      "send_50_messages": 2
     }
   },
-  "last_reset": "2026-02-03"
+  "last_reset": "2026-02-07"
 }

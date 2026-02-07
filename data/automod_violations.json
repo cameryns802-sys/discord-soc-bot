@@ -18,5 +18,16 @@
         "message": "NIGGERRSSSS"
       }
     }
+  ],
+  "1466977512147128598": [
+    {
+      "timestamp": "2026-02-07T12:52:09.118060-08:00",
+      "user_id": 998363754154700870,
+      "type": "emoji_spam",
+      "severity": "low",
+      "details": {
+        "emoji_count": 6
+      }
+    }
   ]
 }

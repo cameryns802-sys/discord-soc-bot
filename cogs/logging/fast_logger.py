@@ -5,7 +5,7 @@ Features: Async operations, event batching, smart caching, minimal latency
 """
 
 import discord
-from discord.ext import commands
+from discord.ext import commands, tasks
 from discord import app_commands
 import asyncio
 from datetime import timedelta
@@ -33,6 +33,7 @@ class FastLogger(commands.Cog):
         self.load_config()
         
         # Start background tasks
+        self.batch_processor.change_interval(seconds=self.config.get('batch_interval', 2.0))
         self.batch_processor.start()
         self.cache_cleanup.start()
     
@@ -131,6 +132,54 @@ class FastLogger(commands.Cog):
         })
         
         self.stats['logs_queued'] += 1
+
+    async def log_command(self, ctx: commands.Context, command_name: str, args: str, status: str):
+        """Log command execution to moderation logs"""
+        if not ctx.guild:
+            return
+        
+        embed = discord.Embed(
+            title="⚡ Command Executed",
+            color=discord.Color.blurple(),
+            timestamp=get_now_pst()
+        )
+        embed.add_field(name="User", value=f"{ctx.author.mention}", inline=True)
+        embed.add_field(name="Channel", value=ctx.channel.mention, inline=True)
+        embed.add_field(name="Command", value=f"`{command_name}`", inline=True)
+        
+        args_value = args[:900] if args else "*None*"
+        embed.add_field(name="Args", value=args_value, inline=False)
+        embed.add_field(name="Status", value=status, inline=True)
+        embed.set_footer(text=f"User ID: {ctx.author.id}")
+        
+        await self.queue_log(ctx.guild, 'moderation', embed)
+
+    async def log_event(self, event_type: str, data: Dict, guild: Optional[discord.Guild] = None, log_type: Optional[str] = None):
+        """Generic event logger for custom events"""
+        if not guild:
+            return
+        
+        log_type_map = {
+            "MESSAGE_CREATED": "messages",
+            "MEMBER_JOIN": "members",
+            "MEMBER_LEAVE": "members",
+            "COMMAND": "moderation"
+        }
+        resolved_type = log_type or log_type_map.get(event_type, "server")
+        
+        embed = discord.Embed(
+            title=f"📌 {event_type.replace('_', ' ').title()}",
+            color=discord.Color.blue(),
+            timestamp=get_now_pst()
+        )
+        
+        for key, value in data.items():
+            val = str(value)
+            if len(val) > 1024:
+                val = val[:1020] + "..."
+            embed.add_field(name=key.replace('_', ' ').title(), value=val, inline=True)
+        
+        await self.queue_log(guild, resolved_type, embed)
     
     @commands.Cog.listener()
     async def on_ready(self):
@@ -140,70 +189,66 @@ class FastLogger(commands.Cog):
     
     # ==================== BACKGROUND TASKS ====================
     
-    @commands.Cog.listener()
-    async def batch_processor(self):
-        """Process log queue in batches (PERFORMANCE)"""
-        await self.bot.wait_until_ready()
+@tasks.loop(seconds=2.0)
+async def batch_processor(self):
+    """Process log queue in batches (PERFORMANCE)"""
+    try:
+        batch_size = self.config.get('batch_size', 5)
         
-        while not self.bot.is_closed():
-            try:
-                batch_size = self.config.get('batch_size', 5)
-                
-                if len(self.log_queue) > 0:
-                    # Process batch
-                    batch = []
-                    for _ in range(min(batch_size, len(self.log_queue))):
-                        if self.log_queue:
-                            batch.append(self.log_queue.popleft())
-                    
-                    # Send logs concurrently
-                    tasks = []
-                    for log_entry in batch:
-                        task = self.send_log_entry(log_entry)
-                        tasks.append(task)
-                    
-                    if tasks:
-                        await asyncio.gather(*tasks, return_exceptions=True)
-                
-                # Wait before next batch
-                await asyncio.sleep(self.config.get('batch_interval', 2.0))
-                
-            except Exception as e:
-                print(f"[FastLogger] ❌ Batch processor error: {e}")
-                await asyncio.sleep(5)
-    
-    @commands.Cog.listener()
-    async def cache_cleanup(self):
-        """Clean expired cache entries"""
-        await self.bot.wait_until_ready()
-        
-        while not self.bot.is_closed():
-            try:
-                now = get_now_pst()
-                expired = [k for k, v in self.channel_cache.items() if v['expires'] < now]
-                for key in expired:
-                    del self.channel_cache[key]
-                
-                await asyncio.sleep(300)  # Clean every 5 minutes
-            except:
-                await asyncio.sleep(300)
-    
-    async def send_log_entry(self, log_entry: Dict):
-        """Send single log entry"""
-        try:
-            guild = log_entry['guild']
-            log_type = log_entry['log_type']
-            embed = log_entry['embed']
+        if len(self.log_queue) > 0:
+            # Process batch
+            batch = []
+            for _ in range(min(batch_size, len(self.log_queue))):
+                if self.log_queue:
+                    batch.append(self.log_queue.popleft())
             
-            channel = self.get_log_channel(guild, log_type)
-            if channel:
-                await channel.send(embed=embed)
-                self.stats['logs_sent'] += 1
-        except discord.Forbidden:
-            self.stats['errors'] += 1
-        except Exception as e:
-            self.stats['errors'] += 1
-            print(f"[FastLogger] ❌ Error sending log: {e}")
+            # Send logs concurrently
+            tasks_list = []
+            for log_entry in batch:
+                task = self.send_log_entry(log_entry)
+                tasks_list.append(task)
+            
+            if tasks_list:
+                await asyncio.gather(*tasks_list, return_exceptions=True)
+        
+    except Exception as e:
+        print(f"[FastLogger] ??? Batch processor error: {e}")
+
+@batch_processor.before_loop
+async def before_batch_processor(self):
+    await self.bot.wait_until_ready()
+
+@tasks.loop(minutes=5.0)
+async def cache_cleanup(self):
+    """Clean expired cache entries"""
+    try:
+        now = get_now_pst()
+        expired = [k for k, v in self.channel_cache.items() if v['expires'] < now]
+        for key in expired:
+            del self.channel_cache[key]
+    except Exception:
+        pass
+
+@cache_cleanup.before_loop
+async def before_cache_cleanup(self):
+    await self.bot.wait_until_ready()
+
+async def send_log_entry(self, log_entry: Dict):
+    """Send single log entry"""
+    try:
+        guild = log_entry['guild']
+        log_type = log_entry['log_type']
+        embed = log_entry['embed']
+        
+        channel = self.get_log_channel(guild, log_type)
+        if channel:
+            await channel.send(embed=embed)
+            self.stats['logs_sent'] += 1
+    except discord.Forbidden:
+        self.stats['errors'] += 1
+    except Exception as e:
+        self.stats['errors'] += 1
+        print(f"[FastLogger] ❌ Error sending log: {e}")
     
     # ==================== MESSAGE EVENTS ====================
     

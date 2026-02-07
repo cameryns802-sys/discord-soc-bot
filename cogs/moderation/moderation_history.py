@@ -156,7 +156,7 @@ class ModerationHistory(commands.Cog):
     
     # ==================== APPEALS ====================
     
-    @commands.command(name='appeal')
+    @commands.command(name='mod_appeal')
     async def appeal(self, ctx, *, reason: str = None):
         """Submit a ban/mute appeal"""
         await self._appeal_logic(ctx, reason)
@@ -249,7 +249,7 @@ class ModerationHistory(commands.Cog):
     
     # ==================== REVIEW APPEAL ====================
     
-    @commands.command(name='reviewappeal')
+    @commands.command(name='mod_reviewappeal')
     @commands.has_permissions(manage_guild=True)
     async def reviewappeal(self, ctx, appeal_id: int, decision: str, *, note: str = "No note provided"):
         """Review a pending appeal"""

@@ -172,7 +172,7 @@ class CustomAutomod(commands.Cog):
             self.log_violation(message.guild.id, rule['id'], message.author.id, 
                               message.id, 'muted')
     
-    @commands.command(name='addrule')
+    @commands.command(name='automod_addrule')
     @commands.has_permissions(manage_guild=True)
     async def add_custom_rule(self, ctx, rule_type: str, pattern: str, 
                              action: str, duration: Optional[int] = None):
@@ -207,7 +207,7 @@ class CustomAutomod(commands.Cog):
         
         await ctx.send(embed=embed)
     
-    @commands.command(name='rules')
+    @commands.command(name='automod_rules')
     @commands.has_permissions(manage_guild=True)
     async def list_rules(self, ctx):
         """List all custom rules"""
@@ -241,7 +241,7 @@ class CustomAutomod(commands.Cog):
         
         await ctx.send(embed=embed)
     
-    @commands.command(name='deleterule')
+    @commands.command(name='automod_deleterule')
     @commands.has_permissions(manage_guild=True)
     async def delete_rule(self, ctx, rule_id: str):
         """Delete a custom rule"""

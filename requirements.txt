@@ -1,8 +1,0 @@
-discord.py
-python-dotenv
-aiohttp
-requests
-pydantic
-psutil
-uvicorn
-fastapi

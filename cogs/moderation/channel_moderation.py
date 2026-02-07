@@ -37,7 +37,7 @@ class ChannelModeration(commands.Cog):
                 pass
     
     # ==================== MODERATION COMMANDS ====================
-    @commands.command(name='purge', aliases=['clear', 'clean'])
+    @commands.command(name='channel_purge', aliases=['channel_clear', 'channel_clean'])
     @commands.has_permissions(manage_messages=True)
     async def purge(self, ctx, amount: int = 10, member: discord.Member = None):
         """Delete messages from the channel"""
@@ -64,7 +64,7 @@ class ChannelModeration(commands.Cog):
         except discord.Forbidden:
             await ctx.send("❌ I don't have permission to delete messages", delete_after=5)
     
-    @commands.command(name='lock')
+    @commands.command(name='channel_lock')
     @commands.has_permissions(manage_channels=True)
     async def lock(self, ctx, channel: discord.TextChannel = None):
         """Lock a channel (disable message sending)"""
@@ -81,7 +81,7 @@ class ChannelModeration(commands.Cog):
         except discord.Forbidden:
             await ctx.send("❌ I don't have permission to lock this channel")
     
-    @commands.command(name='unlock')
+    @commands.command(name='channel_unlock')
     @commands.has_permissions(manage_channels=True)
     async def unlock(self, ctx, channel: discord.TextChannel = None):
         """Unlock a channel (enable message sending)"""
@@ -98,7 +98,7 @@ class ChannelModeration(commands.Cog):
         except discord.Forbidden:
             await ctx.send("❌ I don't have permission to unlock this channel")
     
-    @commands.command(name='slowmode')
+    @commands.command(name='channel_slowmode')
     @commands.has_permissions(manage_channels=True)
     async def slowmode(self, ctx, seconds: int = 0):
         """Set slowmode for the channel"""
@@ -119,7 +119,7 @@ class ChannelModeration(commands.Cog):
         except discord.Forbidden:
             await ctx.send("❌ I don't have permission to change slowmode")
     
-    @commands.command(name='kick')
+    @commands.command(name='channel_kick')
     @commands.has_permissions(kick_members=True)
     async def kick(self, ctx, member: discord.Member, *, reason: str = "No reason provided"):
         """Kick a member from the server"""
@@ -145,7 +145,7 @@ class ChannelModeration(commands.Cog):
         except discord.Forbidden:
             await ctx.send("❌ I don't have permission to kick members")
     
-    @commands.command(name='ban')
+    @commands.command(name='channel_ban')
     @commands.has_permissions(ban_members=True)
     async def ban(self, ctx, member: discord.Member, *, reason: str = "No reason provided"):
         """Ban a member from the server"""
@@ -171,7 +171,7 @@ class ChannelModeration(commands.Cog):
         except discord.Forbidden:
             await ctx.send("❌ I don't have permission to ban members")
     
-    @commands.command(name='unban')
+    @commands.command(name='channel_unban')
     @commands.has_permissions(ban_members=True)
     async def unban(self, ctx, user_id: int):
         """Unban a user by ID"""
@@ -190,7 +190,7 @@ class ChannelModeration(commands.Cog):
         except discord.Forbidden:
             await ctx.send("❌ I don't have permission to unban")
     
-    @commands.command(name='timeout', aliases=['mute'])
+    @commands.command(name='channel_timeout', aliases=['channel_mute'])
     @commands.has_permissions(moderate_members=True)
     async def timeout(self, ctx, member: discord.Member, duration: str = "1h", *, reason: str = "No reason provided"):
         """Timeout a member (mute them)"""
@@ -214,7 +214,7 @@ class ChannelModeration(commands.Cog):
         except Exception as e:
             await ctx.send(f"❌ Failed to timeout member: {str(e)[:100]}")
     
-    @commands.command(name='untimeout', aliases=['unmute'])
+    @commands.command(name='channel_untimeout', aliases=['channel_unmute'])
     @commands.has_permissions(moderate_members=True)
     async def untimeout(self, ctx, member: discord.Member):
         """Remove timeout from a member (unmute them)"""
@@ -230,7 +230,7 @@ class ChannelModeration(commands.Cog):
         except discord.Forbidden:
             await ctx.send("❌ I don't have permission to modify timeouts")
     
-    @commands.command(name='warn')
+    @commands.command(name='channel_warn')
     @commands.has_permissions(moderate_members=True)
     async def warn(self, ctx, member: discord.Member, *, reason: str = "No reason provided"):
         """Warn a member"""

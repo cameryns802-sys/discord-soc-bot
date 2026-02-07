@@ -540,6 +540,369 @@ class AdvancedModeration(commands.Cog):
         result_embed.add_field(name="Moderator", value=ctx.author.mention, inline=True)
         
         await status_msg.edit(embed=result_embed)
+    
+    # ==================== MASS TIMEOUT ====================
+    
+    @commands.command(name='masstimeout')
+    @commands.has_permissions(moderate_members=True)
+    async def masstimeout(self, ctx, duration_minutes: int, *members: discord.Member):
+        """Timeout multiple members for a specified duration"""
+        await self._masstimeout_logic(ctx, duration_minutes, list(members))
+    
+    @app_commands.command(name="masstimeout", description="Timeout multiple members")
+    @app_commands.describe(
+        role="Role to timeout all members from",
+        duration_minutes="Duration in minutes (max 40320)"
+    )
+    @app_commands.checks.has_permissions(moderate_members=True)
+    async def masstimeout_slash(self, interaction: discord.Interaction, role: discord.Role, duration_minutes: int):
+        """Mass timeout using slash command"""
+        await interaction.response.defer()
+        
+        class FakeCtx:
+            def __init__(self, interaction):
+                self.channel = interaction.channel
+                self.author = interaction.user
+                self.guild = interaction.guild
+            
+            async def send(self, **kwargs):
+                if isinstance(kwargs.get('embed'), discord.Embed):
+                    return await interaction.followup.send(embed=kwargs['embed'])
+                return await interaction.followup.send(content=kwargs.get('content', ''))
+        
+        ctx = FakeCtx(interaction)
+        await self._masstimeout_logic(ctx, duration_minutes, role.members)
+    
+    async def _masstimeout_logic(self, ctx, duration_minutes: int, members: list):
+        if duration_minutes < 1 or duration_minutes > 40320:
+            await ctx.send("❌ Duration must be between 1 and 40320 minutes (28 days)")
+            return
+        
+        if len(members) == 0:
+            await ctx.send("❌ No members provided")
+            return
+        
+        if len(members) > 100:
+            await ctx.send("❌ Cannot timeout more than 100 members at once")
+            return
+        
+        timed_out = []
+        failed = []
+        timeout_duration = timedelta(minutes=duration_minutes)
+        
+        embed = discord.Embed(
+            title="⏱️ Mass Timeout in Progress",
+            description=f"Timing out {len(members)} member(s) for {duration_minutes} minutes...",
+            color=discord.Color.orange(),
+            timestamp=get_now_pst()
+        )
+        status_msg = await ctx.send(embed=embed)
+        
+        for member in members:
+            try:
+                if member.top_role >= ctx.guild.me.top_role:
+                    failed.append(f"❌ {member} (Role too high)")
+                    continue
+                
+                await member.timeout(timeout_duration, reason=f"Mass timeout by {ctx.author}")
+                timed_out.append(str(member))
+                await asyncio.sleep(0.3)
+            except discord.Forbidden:
+                failed.append(f"❌ {member} (Permission denied)")
+            except discord.HTTPException as e:
+                failed.append(f"❌ {member} ({str(e)[:40]})")
+        
+        result_embed = discord.Embed(
+            title="⏱️ Mass Timeout Complete",
+            color=discord.Color.orange(),
+            timestamp=get_now_pst()
+        )
+        
+        if timed_out:
+            result_embed.add_field(
+                name=f"✅ Timed Out ({len(timed_out)})",
+                value="\n".join(timed_out[:10]) + (f"\n... and {len(timed_out) - 10} more" if len(timed_out) > 10 else ""),
+                inline=False
+            )
+        
+        if failed:
+            result_embed.add_field(
+                name=f"❌ Failed ({len(failed)})",
+                value="\n".join(failed[:10]),
+                inline=False
+            )
+        
+        result_embed.add_field(name="Duration", value=f"{duration_minutes} minutes", inline=True)
+        result_embed.add_field(name="Moderator", value=ctx.author.mention, inline=True)
+        result_embed.set_footer(text=f"Total: {len(timed_out)} timed out, {len(failed)} failed")
+        
+        await status_msg.edit(embed=result_embed)
+    
+    # ==================== WARN TRACKER ====================
+    
+    @commands.command(name='warnlist')
+    @commands.has_permissions(moderate_members=True)
+    async def warnlist(self, ctx, member: discord.Member = None):
+        """View warnings for a member or all members"""
+        await self._warnlist_logic(ctx, member)
+    
+    @app_commands.command(name="warnlist", description="View warnings for a member")
+    @app_commands.describe(member="Member to check warnings for (leave empty for all)")
+    @app_commands.checks.has_permissions(moderate_members=True)
+    async def warnlist_slash(self, interaction: discord.Interaction, member: discord.Member = None):
+        """View warnings using slash command"""
+        await interaction.response.defer()
+        
+        class FakeCtx:
+            def __init__(self, interaction):
+                self.channel = interaction.channel
+                self.author = interaction.user
+                self.guild = interaction.guild
+            
+            async def send(self, **kwargs):
+                if isinstance(kwargs.get('embed'), discord.Embed):
+                    return await interaction.followup.send(embed=kwargs['embed'])
+                return await interaction.followup.send(content=kwargs.get('content', ''))
+        
+        ctx = FakeCtx(interaction)
+        await self._warnlist_logic(ctx, member)
+    
+    async def _warnlist_logic(self, ctx, member: discord.Member = None):
+        data_manager = self.bot.get_cog('DataManager')
+        if not data_manager:
+            await ctx.send("❌ Data manager not available")
+            return
+        
+        if member:
+            # Show warnings for specific member
+            warns = data_manager.get_warns(member.id)
+            
+            if not warns:
+                await ctx.send(f"✅ {member.mention} has no warnings")
+                return
+            
+            embed = discord.Embed(
+                title=f"⚠️ Warnings for {member}",
+                description=f"Total warnings: {len(warns)}",
+                color=discord.Color.orange(),
+                timestamp=get_now_pst()
+            )
+            
+            for i, warn in enumerate(warns[-10:], 1):
+                warn_date = warn.get('timestamp', 'Unknown')
+                reason = warn.get('reason', 'No reason provided')
+                moderator = warn.get('moderator', 'Unknown')
+                
+                embed.add_field(
+                    name=f"Warning #{len(warns) - 10 + i}",
+                    value=f"**Reason:** {reason}\n**Moderator:** {moderator}\n**Date:** {warn_date}",
+                    inline=False
+                )
+            
+            if len(warns) > 10:
+                embed.set_footer(text=f"Showing last 10 of {len(warns)} warnings")
+            
+            await ctx.send(embed=embed)
+        else:
+            # Show members with most warnings
+            all_warns = {}
+            for member_obj in ctx.guild.members:
+                warns = data_manager.get_warns(member_obj.id)
+                if warns:
+                    all_warns[member_obj] = len(warns)
+            
+            if not all_warns:
+                await ctx.send("✅ No warnings recorded in this server")
+                return
+            
+            sorted_warns = sorted(all_warns.items(), key=lambda x: x[1], reverse=True)
+            
+            embed = discord.Embed(
+                title="⚠️ Server Warning Leaderboard",
+                description="Members with the most warnings",
+                color=discord.Color.red(),
+                timestamp=get_now_pst()
+            )
+            
+            for i, (member_obj, warn_count) in enumerate(sorted_warns[:10], 1):
+                emoji = "🥇" if i == 1 else "🥈" if i == 2 else "🥉" if i == 3 else f"{i}️⃣"
+                embed.add_field(
+                    name=f"{emoji} {member_obj}",
+                    value=f"**Warnings:** {warn_count}",
+                    inline=True
+                )
+            
+            embed.set_footer(text=f"Total members with warnings: {len(all_warns)}")
+            
+            await ctx.send(embed=embed)
+    
+    # ==================== PURGE WITH FILTER ====================
+    
+    @commands.command(name='purgefilter')
+    @commands.has_permissions(manage_messages=True)
+    async def purgefilter(self, ctx, limit: int, filter_type: str, *args):
+        """
+        Purge messages with filters
+        
+        Filters:
+        - user @mention : purge messages from user
+        - contains text : purge messages containing text
+        - keyword word : purge messages with keyword
+        - bots : purge bot messages
+        - links : purge messages with links
+        """
+        await self._purgefilter_logic(ctx, limit, filter_type, args)
+    
+    async def _purgefilter_logic(self, ctx, limit: int, filter_type: str, args):
+        if limit < 1 or limit > 1000:
+            await ctx.send("❌ Limit must be between 1 and 1000")
+            return
+        
+        filter_type = filter_type.lower()
+        
+        embed = discord.Embed(
+            title="🗑️ Purge in Progress",
+            description=f"Filtering up to {limit} messages...",
+            color=discord.Color.orange(),
+            timestamp=get_now_pst()
+        )
+        status_msg = await ctx.send(embed=embed)
+        
+        purged = 0
+        
+        try:
+            if filter_type == "user" and args:
+                # Parse mentioned user
+                user_id = int(args[0].strip('<@!>'))
+                user = self.bot.get_user(user_id)
+                
+                async for message in ctx.channel.history(limit=limit):
+                    if message.author.id == user_id:
+                        await message.delete()
+                        purged += 1
+                        await asyncio.sleep(0.1)
+            
+            elif filter_type == "contains" and args:
+                search_text = " ".join(args).lower()
+                
+                async for message in ctx.channel.history(limit=limit):
+                    if search_text in message.content.lower():
+                        await message.delete()
+                        purged += 1
+                        await asyncio.sleep(0.1)
+            
+            elif filter_type == "keyword" and args:
+                keyword = args[0].lower()
+                
+                async for message in ctx.channel.history(limit=limit):
+                    if keyword in message.content.lower():
+                        await message.delete()
+                        purged += 1
+                        await asyncio.sleep(0.1)
+            
+            elif filter_type == "bots":
+                async for message in ctx.channel.history(limit=limit):
+                    if message.author.bot:
+                        await message.delete()
+                        purged += 1
+                        await asyncio.sleep(0.1)
+            
+            elif filter_type == "links":
+                link_pattern = r'https?://\S+'
+                
+                async for message in ctx.channel.history(limit=limit):
+                    if re.search(link_pattern, message.content):
+                        await message.delete()
+                        purged += 1
+                        await asyncio.sleep(0.1)
+            
+            else:
+                await ctx.send(f"❌ Unknown filter type: {filter_type}")
+                return
+        
+        except Exception as e:
+            await ctx.send(f"❌ Error during purge: {str(e)[:100]}")
+            return
+        
+        result_embed = discord.Embed(
+            title="🗑️ Purge Complete",
+            description=f"Deleted {purged} message(s)",
+            color=discord.Color.green(),
+            timestamp=get_now_pst()
+        )
+        result_embed.add_field(name="Filter Type", value=filter_type.title(), inline=True)
+        result_embed.add_field(name="Searched", value=f"up to {limit} messages", inline=True)
+        result_embed.add_field(name="Purged", value=str(purged), inline=True)
+        result_embed.add_field(name="Moderator", value=ctx.author.mention, inline=True)
+        
+        await status_msg.edit(embed=result_embed)
+    
+    # ==================== SLOWMODE ADVANCED ====================
+    
+    @commands.command(name='slowmode')
+    @commands.has_permissions(manage_channels=True)
+    async def slowmode(self, ctx, seconds: int):
+        """Set slowmode for current channel"""
+        await self._slowmode_logic(ctx, seconds)
+    
+    @app_commands.command(name="slowmode", description="Set slowmode for current channel")
+    @app_commands.describe(seconds="Slowmode duration in seconds (0 to disable, max 21600)")
+    @app_commands.checks.has_permissions(manage_channels=True)
+    async def slowmode_slash(self, interaction: discord.Interaction, seconds: int):
+        """Set slowmode using slash command"""
+        await interaction.response.defer()
+        
+        class FakeCtx:
+            def __init__(self, interaction):
+                self.channel = interaction.channel
+                self.author = interaction.user
+                self.guild = interaction.guild
+            
+            async def send(self, **kwargs):
+                if isinstance(kwargs.get('embed'), discord.Embed):
+                    return await interaction.followup.send(embed=kwargs['embed'])
+                return await interaction.followup.send(content=kwargs.get('content', ''))
+        
+        ctx = FakeCtx(interaction)
+        await self._slowmode_logic(ctx, seconds)
+    
+    async def _slowmode_logic(self, ctx, seconds: int):
+        if seconds < 0 or seconds > 21600:
+            await ctx.send("❌ Slowmode must be between 0 and 21600 seconds (6 hours)")
+            return
+        
+        try:
+            await ctx.channel.edit(slowmode_delay=seconds)
+            
+            if seconds == 0:
+                embed = discord.Embed(
+                    title="⏱️ Slowmode Disabled",
+                    description=f"Slowmode has been disabled in {ctx.channel.mention}",
+                    color=discord.Color.green(),
+                    timestamp=get_now_pst()
+                )
+            else:
+                minutes = seconds // 60
+                remaining_seconds = seconds % 60
+                time_str = f"{minutes}m {remaining_seconds}s" if minutes > 0 else f"{seconds}s"
+                
+                embed = discord.Embed(
+                    title="⏱️ Slowmode Enabled",
+                    description=f"Users must wait {time_str} between messages in {ctx.channel.mention}",
+                    color=discord.Color.orange(),
+                    timestamp=get_now_pst()
+                )
+                embed.add_field(name="Duration", value=time_str, inline=True)
+            
+            embed.add_field(name="Channel", value=ctx.channel.mention, inline=True)
+            embed.add_field(name="Set by", value=ctx.author.mention, inline=True)
+            
+            await ctx.send(embed=embed)
+            
+        except discord.Forbidden:
+            await ctx.send("❌ I don't have permission to manage this channel")
+        except discord.HTTPException as e:
+            await ctx.send(f"❌ Failed to set slowmode: {e}")
 
 async def setup(bot):
     await bot.add_cog(AdvancedModeration(bot))

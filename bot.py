@@ -26,29 +26,103 @@ logging.basicConfig(
 )
 
 load_dotenv()
+
+# ==================== CORE BOT CONFIGURATION ====================
 TOKEN = os.getenv('DISCORD_TOKEN')
 OWNER_ID = int(os.getenv('BOT_OWNER_ID', '0'))
-AUDIT_CHANNEL_ID = int(os.getenv('AUDIT_CHANNEL_ID', '0'))
+BOT_NAME = os.getenv('BOT_NAME', 'Sentinel')
+BOT_DESCRIPTION = os.getenv('BOT_DESCRIPTION', 'Security Operations Center Bot')
+PREFIX = os.getenv('PREFIX', '!')
 
-# API Configuration
+# ==================== CHANNEL CONFIGURATION ====================
+AUDIT_CHANNEL_ID = int(os.getenv('AUDIT_CHANNEL_ID', '0'))
+ALERT_CHANNEL_ID = int(os.getenv('ALERT_CHANNEL_ID', '0'))
+INCIDENTS_CHANNEL_ID = int(os.getenv('INCIDENTS_CHANNEL_ID', '0'))
+
+# ==================== API SERVER CONFIGURATION ====================
 API_HOST = os.getenv('API_HOST', '127.0.0.1')
 API_PORT = int(os.getenv('API_PORT', '8000'))
 API_ENVIRONMENT = os.getenv('API_ENVIRONMENT', 'development')
 API_DEBUG = os.getenv('API_DEBUG', 'false').lower() == 'true'
+API_LOG_LEVEL = os.getenv('API_LOG_LEVEL', 'INFO')
+API_MAX_CONNECTIONS = int(os.getenv('API_MAX_CONNECTIONS', '100'))
 
-# TIER-1 System Configuration
+# ==================== LOGGING CONFIGURATION ====================
+LOG_LEVEL = os.getenv('LOG_LEVEL', 'INFO')
+LOG_FILE = os.getenv('LOG_FILE', 'logs/bot.log')
+LOG_MAX_SIZE_MB = int(os.getenv('LOG_MAX_SIZE_MB', '100'))
+LOG_BACKUP_COUNT = int(os.getenv('LOG_BACKUP_COUNT', '10'))
+AUDIT_LOG_ENABLED = os.getenv('AUDIT_LOG_ENABLED', 'true').lower() == 'true'
+AUDIT_LOG_FILE = os.getenv('AUDIT_LOG_FILE', 'logs/audit.log')
+
+# ==================== SECURITY SETTINGS ====================
+MAX_WARNINGS = int(os.getenv('MAX_WARNINGS', '3'))
+WARNING_TIMEOUT_DAYS = int(os.getenv('WARNING_TIMEOUT_DAYS', '30'))
+SECURITY_LEVEL = os.getenv('SECURITY_LEVEL', 'high')
+REQUIRE_2FA_FOR_ADMINS = os.getenv('REQUIRE_2FA_FOR_ADMINS', 'true').lower() == 'true'
+VERIFICATION_LEVEL = os.getenv('VERIFICATION_LEVEL', 'medium')
+
+# ==================== TIER-1 SYSTEM CONFIGURATION ====================
+# AI Governance
 AI_GOVERNANCE_ENABLED = os.getenv('AI_GOVERNANCE_ENABLED', 'true').lower() == 'true'
+AI_CONFIDENCE_THRESHOLD_CRITICAL = float(os.getenv('AI_CONFIDENCE_THRESHOLD_CRITICAL', '0.95'))
+AI_CONFIDENCE_THRESHOLD_SECURITY = float(os.getenv('AI_CONFIDENCE_THRESHOLD_SECURITY', '0.85'))
+AI_CONFIDENCE_THRESHOLD_MODERATION = float(os.getenv('AI_CONFIDENCE_THRESHOLD_MODERATION', '0.75'))
+AI_CONFIDENCE_THRESHOLD_LOW_RISK = float(os.getenv('AI_CONFIDENCE_THRESHOLD_LOW_RISK', '0.60'))
+AI_KILL_SWITCH_EMERGENCY_ONLY = os.getenv('AI_KILL_SWITCH_EMERGENCY_ONLY', 'true').lower() == 'true'
+
+# Resilience Engineering
 RESILIENCE_ENABLED = os.getenv('RESILIENCE_ENABLED', 'true').lower() == 'true'
+CHAOS_ENGINEERING_ENABLED = os.getenv('CHAOS_ENGINEERING_ENABLED', 'false').lower() == 'true'
+GRACEFUL_DEGRADATION_ENABLED = os.getenv('GRACEFUL_DEGRADATION_ENABLED', 'true').lower() == 'true'
+DEGRADATION_THRESHOLD_PERCENT = int(os.getenv('DEGRADATION_THRESHOLD_PERCENT', '85'))
+MTTR_TARGET_HOURS = int(os.getenv('MTTR_TARGET_HOURS', '2'))
+MTTF_TARGET_HOURS = int(os.getenv('MTTF_TARGET_HOURS', '240'))
+
+# Cryptography & Secrets
 CRYPTO_ENABLED = os.getenv('CRYPTO_ENABLED', 'true').lower() == 'true'
+KEY_ROTATION_ENABLED = os.getenv('KEY_ROTATION_ENABLED', 'true').lower() == 'true'
+KEY_ROTATION_API_DAYS = int(os.getenv('KEY_ROTATION_API_DAYS', '90'))
+KEY_ROTATION_SIGNING_DAYS = int(os.getenv('KEY_ROTATION_SIGNING_DAYS', '180'))
+KEY_ROTATION_ENCRYPTION_DAYS = int(os.getenv('KEY_ROTATION_ENCRYPTION_DAYS', '365'))
+SECRET_LIFECYCLE_ENABLED = os.getenv('SECRET_LIFECYCLE_ENABLED', 'true').lower() == 'true'
+ENCRYPTION_AT_REST_ALGORITHM = os.getenv('ENCRYPTION_AT_REST_ALGORITHM', 'AES-256-GCM')
+ENCRYPTION_IN_TRANSIT_PROTOCOL = os.getenv('ENCRYPTION_IN_TRANSIT_PROTOCOL', 'TLS1.3')
+CREDENTIAL_EXPOSURE_SCANNING_ENABLED = os.getenv('CREDENTIAL_EXPOSURE_SCANNING_ENABLED', 'true').lower() == 'true'
 
-# Feature Flags
+# ==================== FEATURE FLAGS ====================
 FEATURE_SIGNAL_BUS = os.getenv('FEATURE_SIGNAL_BUS', 'true').lower() == 'true'
+FEATURE_HUMAN_OVERRIDE_TRACKER = os.getenv('FEATURE_HUMAN_OVERRIDE_TRACKER', 'true').lower() == 'true'
+FEATURE_ABSTENTION_ALERTS = os.getenv('FEATURE_ABSTENTION_ALERTS', 'true').lower() == 'true'
 FEATURE_THREAT_INTEL = os.getenv('FEATURE_THREAT_INTEL_HUB', 'true').lower() == 'true'
+FEATURE_IOC_MANAGER = os.getenv('FEATURE_IOC_MANAGER', 'true').lower() == 'true'
 FEATURE_SECURITY_DASHBOARD = os.getenv('FEATURE_SECURITY_DASHBOARD', 'true').lower() == 'true'
+FEATURE_EXECUTIVE_RISK_DASHBOARD = os.getenv('FEATURE_EXECUTIVE_RISK_DASHBOARD', 'true').lower() == 'true'
+FEATURE_INCIDENT_FORECASTING = os.getenv('FEATURE_INCIDENT_FORECASTING', 'true').lower() == 'true'
 
-# System Behavior
+# ==================== SYSTEM BEHAVIOR ====================
+ENABLE_GPT_RESPONSES = os.getenv('ENABLE_GPT_RESPONSES', 'true').lower() == 'true'
+COMMAND_COOLDOWN = int(os.getenv('COMMAND_COOLDOWN', '5'))
+TIMEZONE = os.getenv('TIMEZONE', 'PST8PDT')
 SAFE_MODE = os.getenv('SAFE_MODE', 'false').lower() == 'true'
 AUTO_SYNC_ENABLED = os.getenv('AUTO_SYNC_ENABLED', 'false').lower() == 'true'
+SYNC_INTERVAL_HOURS = int(os.getenv('SYNC_INTERVAL_HOURS', '12'))
+MAINTENANCE_MODE = os.getenv('MAINTENANCE_MODE', 'false').lower() == 'true'
+MAINTENANCE_SCHEDULE = os.getenv('MAINTENANCE_SCHEDULE', 'Sunday 02:00-04:00')
+NOTIFICATION_PREFERENCES = os.getenv('NOTIFICATION_PREFERENCES', 'discord').split(',')
+
+# ==================== ADVANCED FEATURES ====================
+ENABLE_BULK_OPERATIONS = os.getenv('ENABLE_BULK_OPERATIONS', 'true').lower() == 'true'
+ENABLE_DETAILED_LOGGING = os.getenv('ENABLE_DETAILED_LOGGING', 'false').lower() == 'true'
+ENABLE_PERIODIC_REVIEWS = os.getenv('ENABLE_PERIODIC_REVIEWS', 'true').lower() == 'true'
+REVIEW_INTERVAL_DAYS = int(os.getenv('REVIEW_INTERVAL_DAYS', '30'))
+ENABLE_USER_FEEDBACK_LOOP = os.getenv('ENABLE_USER_FEEDBACK_LOOP', 'true').lower() == 'true'
+FEEDBACK_ANALYSIS_ENABLED = os.getenv('FEEDBACK_ANALYSIS_ENABLED', 'true').lower() == 'true'
+FEEDBACK_ANALYSIS_INTERVAL_DAYS = int(os.getenv('FEEDBACK_ANALYSIS_INTERVAL_DAYS', '7'))
+ENABLE_ADVANCED_METRICS = os.getenv('ENABLE_ADVANCED_METRICS', 'true').lower() == 'true'
+METRICS_COLLECTION_INTERVAL_MINUTES = int(os.getenv('METRICS_COLLECTION_INTERVAL_MINUTES', '15'))
+ENABLE_CUSTOM_REPORTS = os.getenv('ENABLE_CUSTOM_REPORTS', 'true').lower() == 'true'
+REPORT_GENERATION_SCHEDULE = os.getenv('REPORT_GENERATION_SCHEDULE', 'monthly')
 
 # Track bot start time for uptime
 bot_start_time = PST.localize(datetime.datetime.now())
@@ -127,6 +201,8 @@ async def load_cogs():
     essential_cogs = {
         # ========== CORE INFRASTRUCTURE (ALWAYS REQUIRED) ==========
         'signal_bus',                    # Central signal pipeline
+        'fast_logger',                   # High-performance logging system
+        'command_sync',                  # Sync slash commands (owner only)
         'feature_flags',                 # Feature flag & kill switch system
         'human_override_tracker',        # Track AI overrides and disagreements
         'abstention_policy',             # AI abstention & escalation logic
@@ -135,6 +211,7 @@ async def load_cogs():
         'abstention_alerts',             # Abstention alert & escalation system
         'data_manager',                  # Data persistence layer
         'automated_playbook_executor',   # SOAR playbook automation
+        'signal_correlation_rules',      # Signal correlation rule engine
         'ml_anomaly_detector',           # ML-based anomaly detection
         'threat_scorer',                 # Dynamic threat risk scoring
         'on_call_manager',               # On-call and escalation management
@@ -230,6 +307,7 @@ async def load_cogs():
         # Note: threat_intelligence_synthesizer in cogs/threatintel (not soc duplicate)
         'live_event_search_engine',      # Full-text search across all events
         'forensics_evidence_manager',    # Forensic evidence chain of custody
+        'evidence_vault',                # Evidence vault capture and hashing
         'digital_forensics_case_manager',# Digital forensics case manager
         'automated_response_playbooks',  # SOAR playbook automation
         'threat_hunting_campaigns',      # Proactive threat hunting
@@ -256,16 +334,16 @@ async def load_cogs():
         'post_mortem_workflow',         # Post-mortem workflow automation
         
         # ========== ENGAGEMENT SYSTEMS (NEW) ==========
-        'reputation_system',             # Reputation system with giving/receiving
+        # 'reputation_system',             # Disabled: CommandLimitReached
         'giveaway_system',               # Giveaway management with reaction-based entry
         'currency_system',               # Virtual economy with wallets and transactions
         'marketplace_system',            # Shop for items, roles, and perks with currency
         'achievement_system',            # Unlock achievements for milestones
-        'reaction_roles',                # Reaction-based role assignment
-        'starboard',                     # Message highlighting system
+        # 'reaction_roles',                # Disabled: CommandLimitReached
+        # 'starboard',                     # Disabled: CommandLimitReached
         'daily_challenges',              # Daily tasks for bonus rewards
         'advanced_suggestion_feedback',  # Advanced suggestions & feedback workflow
-        'sentiment_trend_analysis',      # Sentiment analysis and trending
+        # 'sentiment_trend_analysis',      # Disabled: CommandLimitReached
         'dynamic_faq_ai',                # Dynamic FAQ / knowledge AI
         
         # ========== SOC TRAINING & DRILLS ==========
@@ -491,6 +569,27 @@ async def on_ready():
     except Exception as e:
         print(f"[Sync] ❌ Failed to sync commands: {e}")
     
+    # Print configuration summary
+    print("\n" + "="*70)
+    print("[Configuration] TIER-1 SYSTEMS STATUS")
+    print("="*70)
+    print(f"  ✅ AI Governance: {'ENABLED' if AI_GOVERNANCE_ENABLED else 'DISABLED'}")
+    print(f"     └─ Critical Threshold: {AI_CONFIDENCE_THRESHOLD_CRITICAL}")
+    print(f"     └─ Security Threshold: {AI_CONFIDENCE_THRESHOLD_SECURITY}")
+    print(f"  ✅ Resilience: {'ENABLED' if RESILIENCE_ENABLED else 'DISABLED'} | Chaos: {'ENABLED' if CHAOS_ENGINEERING_ENABLED else 'DISABLED'} | Graceful Degradation: {'ENABLED' if GRACEFUL_DEGRADATION_ENABLED else 'DISABLED'}")
+    print(f"  ✅ Cryptography: {'ENABLED' if CRYPTO_ENABLED else 'DISABLED'} | Key Rotation: {'ENABLED' if KEY_ROTATION_ENABLED else 'DISABLED'}")
+    print("="*70)
+    print("[Configuration] FEATURE FLAGS STATUS")
+    print("="*70)
+    print(f"  {'✅' if FEATURE_SIGNAL_BUS else '❌'} Signal Bus | {'✅' if FEATURE_THREAT_INTEL else '❌'} Threat Intel | {'✅' if FEATURE_IOC_MANAGER else '❌'} IOC Manager")
+    print(f"  {'✅' if FEATURE_SECURITY_DASHBOARD else '❌'} Security Dashboard | {'✅' if FEATURE_EXECUTIVE_RISK_DASHBOARD else '❌'} Executive Dashboard | {'✅' if FEATURE_INCIDENT_FORECASTING else '❌'} Forecasting")
+    print("="*70)
+    print("[Configuration] SECURITY & COMPLIANCE")
+    print("="*70)
+    print(f"  Level: {SECURITY_LEVEL.upper()} | 2FA: {'REQUIRED' if REQUIRE_2FA_FOR_ADMINS else 'OPTIONAL'} | Verification: {VERIFICATION_LEVEL.upper()} | Audit: {'✅' if AUDIT_LOG_ENABLED else '❌'}")
+    print(f"  Credential Scanning: {'✅' if CREDENTIAL_EXPOSURE_SCANNING_ENABLED else '❌'} | Safe Mode: {'⚠️ ACTIVE' if SAFE_MODE else '🟢 NORMAL'}")
+    print("="*70)
+    
     # Send startup embed to owner
     if OWNER_ID:
         try:
@@ -512,7 +611,11 @@ async def on_ready():
             embed.add_field(name="� API Server", value=f"http://{API_HOST}:{API_PORT}", inline=True)
             embed.add_field(name="📚 API Docs", value=f"http://{API_HOST}:{API_PORT}/docs", inline=True)
             embed.add_field(name="⚙️ TIER-1 Systems", value=f"Governance: {'✅' if AI_GOVERNANCE_ENABLED else '❌'} | Resilience: {'✅' if RESILIENCE_ENABLED else '❌'} | Crypto: {'✅' if CRYPTO_ENABLED else '❌'}", inline=False)
-            embed.add_field(name="�🆕 New Systems (Latest)", value="SOAR Playbook | Search | On-Call | Reports | Alerts | KB | Teams | Evidence | API | Slack", inline=False)
+            embed.add_field(name="🔐 Security Configuration", value=f"Security Level: {SECURITY_LEVEL.upper()} | 2FA Required: {'✅' if REQUIRE_2FA_FOR_ADMINS else '❌'} | Verification: {VERIFICATION_LEVEL.upper()}", inline=False)
+            embed.add_field(name="📊 Feature Flags", value=f"Signal Bus: {'✅' if FEATURE_SIGNAL_BUS else '❌'} | Threat Intel: {'✅' if FEATURE_THREAT_INTEL else '❌'} | Dashboard: {'✅' if FEATURE_SECURITY_DASHBOARD else '❌'} | IOC Manager: {'✅' if FEATURE_IOC_MANAGER else '❌'}", inline=False)
+            embed.add_field(name="🎛️ System Behavior", value=f"Safe Mode: {'⚠️ ACTIVE' if SAFE_MODE else '🟢 NORMAL'} | Chaos Testing: {'🔴 ENABLED' if CHAOS_ENGINEERING_ENABLED else '✅ DISABLED'} | Graceful Degradation: {'✅' if GRACEFUL_DEGRADATION_ENABLED else '❌'}", inline=False)
+            embed.add_field(name="📈 Advanced Metrics", value=f"Bulk Operations: {'✅' if ENABLE_BULK_OPERATIONS else '❌'} | Periodic Reviews: {'✅' if ENABLE_PERIODIC_REVIEWS else '❌'} | Advanced Metrics: {'✅' if ENABLE_ADVANCED_METRICS else '❌'} | Custom Reports: {'✅' if ENABLE_CUSTOM_REPORTS else '❌'}", inline=False)
+            embed.add_field(name="🆕 New Systems (Latest)", value="SOAR Playbook | Search | On-Call | Reports | Alerts | KB | Teams | Evidence | API | Slack", inline=False)
             embed.set_footer(text=f"Bot User ID: {bot.user.id}")
             await owner.send(embed=embed)
             print(f"[Startup] ✅ DM sent successfully to owner")
@@ -531,9 +634,9 @@ async def on_command(ctx):
     logger.info(f"[COMMAND] {ctx.author} -> {ctx.command.name} in {ctx.guild}")
     
     # Get logging cog if available
-    logging_cog = bot.get_cog('AdvancedLoggingCog')
+    logging_cog = bot.get_cog('FastLogger')
     if logging_cog:
-        logging_cog.log_command(ctx, ctx.command.name, str(ctx.args), "success")
+        await logging_cog.log_command(ctx, ctx.command.name, str(ctx.args), "success")
 
 @bot.event
 async def on_member_join(member):
@@ -541,30 +644,12 @@ async def on_member_join(member):
     logger = logging.getLogger('soc_bot')
     logger.info(f"[MEMBER_JOIN] {member} joined {member.guild}")
     
-    # Log via logging cog
-    logging_cog = bot.get_cog('AdvancedLoggingCog')
-    if logging_cog:
-        logging_cog.log_event("MEMBER_JOIN", {
-            "user": str(member),
-            "user_id": member.id,
-            "guild": str(member.guild),
-            "account_age": (PST.localize(datetime.datetime.now()) - member.created_at).days
-        })
-
 @bot.event
 async def on_member_remove(member):
     """Global member leave logging"""
     logger = logging.getLogger('soc_bot')
     logger.info(f"[MEMBER_LEAVE] {member} left {member.guild}")
     
-    logging_cog = bot.get_cog('AdvancedLoggingCog')
-    if logging_cog:
-        logging_cog.log_event("MEMBER_LEAVE", {
-            "user": str(member),
-            "user_id": member.id,
-            "guild": str(member.guild)
-        })
-
 @bot.event
 async def on_message(message):
     """Global message logging"""
@@ -574,14 +659,14 @@ async def on_message(message):
     logger = logging.getLogger('soc_bot')
     logger.debug(f"[MESSAGE] {message.author} in {message.channel}: {message.content[:50]}")
     
-    logging_cog = bot.get_cog('AdvancedLoggingCog')
+    logging_cog = bot.get_cog('FastLogger')
     if logging_cog:
-        logging_cog.log_event("MESSAGE_CREATED", {
+        await logging_cog.log_event("MESSAGE_CREATED", {
             "user": str(message.author),
             "user_id": message.author.id,
             "channel": str(message.channel),
             "content_length": len(message.content)
-        })
+        }, message.guild)
     
     await bot.process_commands(message)
 

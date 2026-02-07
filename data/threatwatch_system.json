@@ -1,0 +1,30 @@
+{
+  "threats": [
+    {
+      "id": 1,
+      "type": "member_removal",
+      "actor": "awesomegamer849.",
+      "severity": "medium",
+      "timestamp": "2026-02-07T12:58:27.264376-08:00",
+      "details": {
+        "user": "\ud83d\udee1 Sentinel#2586",
+        "guild": "Awesomegamer849 server"
+      }
+    }
+  ],
+  "threat_actors": {
+    "awesomegamer849.": {
+      "threat_count": 1,
+      "first_seen": "2026-02-07T12:58:27.264461-08:00",
+      "last_seen": "2026-02-07T12:58:27.264508-08:00"
+    }
+  },
+  "config": {
+    "enabled": true,
+    "track_mass_actions": true,
+    "track_permission_changes": true,
+    "track_deletion_patterns": true,
+    "alert_on_threat": true,
+    "threat_threshold": 3
+  }
+}

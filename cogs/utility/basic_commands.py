@@ -146,7 +146,7 @@ class BasicCommands(commands.Cog):
         choice = random.choice(parts)
         await ctx.send(f"✅ I choose: **{choice}**")
 
-    @commands.command(name="poll")
+    @commands.command(name="basic_poll", aliases=["poll_basic"])
     async def poll(self, ctx, *, question: str):
         embed = discord.Embed(
             title="📊 Poll",
@@ -160,7 +160,7 @@ class BasicCommands(commands.Cog):
         except discord.Forbidden:
             pass
 
-    @commands.command(name="say", aliases=["echo", "announce"])
+    @commands.command(name="say", aliases=["echo"])
     @commands.has_permissions(manage_messages=True)
     async def say(self, ctx, *, message: str):
         """
@@ -684,7 +684,6 @@ class BasicCommands(commands.Cog):
         
         result = random.randint(1, sides)
         await ctx.send(f"🎲 Rolled **d{sides}**: **{result}**")
-
 
 async def setup(bot):
     await bot.add_cog(BasicCommands(bot))

@@ -1,8 +1,19 @@
 {
-  "nightwatch_active": true,
-  "last_activation": "2026-02-03T19:00:28.567144",
-  "last_deactivation": null,
-  "sessions": [],
+  "nightwatch_active": false,
+  "last_activation": "2026-02-05T03:07:51.813370",
+  "last_deactivation": "2026-02-06T10:33:53.380639",
+  "sessions": [
+    {
+      "activation": "2026-02-03T19:00:28.567144",
+      "deactivation": "2026-02-04T09:47:57.540039",
+      "alerts": 0
+    },
+    {
+      "activation": "2026-02-05T03:07:51.813370",
+      "deactivation": "2026-02-06T10:33:53.380639",
+      "alerts": 0
+    }
+  ],
   "alerts_tonight": 0,
   "monitored_users": [],
   "blackout_channels": [],

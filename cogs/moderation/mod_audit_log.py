@@ -232,7 +232,7 @@ class ModAuditLog(commands.Cog):
         
         await ctx.send(embed=embed)
     
-    @commands.command(name='modstats')
+    @commands.command(name='audit_modstats')
     @commands.has_permissions(manage_guild=True)
     async def mod_statistics(self, ctx):
         """View moderation team statistics"""
